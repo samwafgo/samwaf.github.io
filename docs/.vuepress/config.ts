@@ -9,12 +9,15 @@ export default {
       lang: 'en-US',
       title: 'SamWaf',
       description: 'Web Application Firewall'
+	  
     },
     '/': {
       lang: 'zh-CN',
       title: 'SamWaf',
-      description: 'Sam网站应用入侵防御系统'
+      description: 'Sam网站应用入侵防御系统',
+	  
     },
+	 
   },
   theme: defaultTheme({
     // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
@@ -24,6 +27,8 @@ export default {
     docsBranch: 'main',
     // 默认是 false, 设置为 true 来启用
     editLinks: true,
+	// Public 文件路径
+    //logo: '/images/logo.svg',
     locales: {
       '/': {
         selectLanguageName: '简体中文',
@@ -32,6 +37,29 @@ export default {
 		editLinkText: '在 GitHub 上编辑此页',
 		contributorsText: '贡献者',
 		lastUpdatedText: '最近更新时间',
+		navbar: [ 
+		  {
+			text: '首页',
+			link: '/',
+		  }, 
+		  {
+			text: '操作手册',
+			link: '/guide/',
+		  }, 
+		],
+		sidebar: {
+		   '/': [
+			{
+			  text: '首页',
+			  children: ['/README.md'],
+			}, ],
+           '/guide/': [
+			{
+			  text: '操作手册',
+			  children: ['/guide/README.md', '/guide/HOST.md'],
+			},
+		  ],
+        }
       },
       '/en/': {
         selectLanguageName: 'English',
@@ -40,6 +68,16 @@ export default {
 		editLinkText: 'Edit this page on GitHub', 
 		contributorsText: 'contributors',
 		lastUpdatedText: 'LastUpdateTime',
+		navbar: [ 
+		  {
+			text: 'Home',
+			link: '/',
+		  }, 
+		  {
+			text: 'Guide',
+			link: '/guide/',
+		  }, 
+		],
       },
     },
   }),
