@@ -7,8 +7,9 @@
   "author": "samwaf <samwafgo@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "vue": "^3.3.13",
     "vuepress": "^2.0.0-rc.0"
-  }, 
+  },
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
