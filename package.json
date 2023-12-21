@@ -1,6 +1,6 @@
 {
   "name": "SamWafDoc",
-  "version": "1.0.0",
+  "version": "v3.6.4",
   "description": "SamWafDoc Content",
   "main": "index.js",
   "repository": "git@github.com:samwafgo/samwaf.github.io.git",
@@ -18,5 +18,6 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
-  }
+  },
+  "dependencies": {}
 }
