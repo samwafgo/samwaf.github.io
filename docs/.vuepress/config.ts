@@ -1,5 +1,9 @@
 import { defaultTheme } from 'vuepress'
 import { gitPlugin } from '@vuepress/plugin-git'
+import { mdEnhancePlugin } from "vuepress-plugin-md-enhance";
+
+
+
 
 export default {
 	locales: { 
@@ -84,6 +88,10 @@ export default {
    plugins: [
     gitPlugin({
       // options
+    }),
+	mdEnhancePlugin({
+      // Enable flowchart
+      flowchart: true,
     }),
   ],
 }
