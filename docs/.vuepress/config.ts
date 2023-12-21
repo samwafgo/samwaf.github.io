@@ -60,7 +60,7 @@ export default {
            '/guide/': [
 			{
 			  text: '操作手册',
-			  children: ['/guide/README.md', '/guide/HOST.md'],
+			  children: ['/guide/README.md', '/guide/HOST.md', '/guide/Question.md'],
 			},
 		  ],
         }
@@ -92,6 +92,10 @@ export default {
 	mdEnhancePlugin({
       // Enable flowchart
       flowchart: true,
+	  // Enable hint box
+      hint: true,
+	  // 启用 mermaid
+      mermaid: true,
     }),
   ],
 }
