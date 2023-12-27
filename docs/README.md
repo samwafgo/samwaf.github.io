@@ -1,5 +1,5 @@
 # SamWaf网站防火墙
-SamWaf是一款轻量级网站防火墙，一键启动，支持Linux，Windows 64位
+SamWaf是一款适用于小公司、工作室和个人网站的免费轻量级网站防火墙，一键启动，支持Linux，Windows 64位
 
 ![SamWaf网站防火墙概览](/images/overview.png)
 

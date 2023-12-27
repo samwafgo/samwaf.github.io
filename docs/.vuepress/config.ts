@@ -60,7 +60,7 @@ export default {
            '/guide/': [
 			{
 			  text: '操作手册',
-			  children: ['/guide/README.md', '/guide/HOST.md', '/guide/Rule.md', '/guide/Question.md'],
+			  children: ['/guide/README.md', '/guide/HOST.md', '/guide/Rule.md','/guide/IPWhite.md','/guide/IPBlack.md','/guide/UrlWhite.md','/guide/UrlBlack.md','/guide/Ldp.md', '/guide/Question.md'],
 			},
 		  ],
         }
