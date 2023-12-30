@@ -55,7 +55,7 @@ export default {
 		   '/': [
 			{
 			  text: '首页',
-			  children: ['/README.md'],
+			  children: ['/README.md','/guide/Update.md'],
 			}, ],
            '/guide/': [
 			{
