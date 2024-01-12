@@ -1,0 +1,1 @@
+import{_ as a,o as t,c as o,b as e,d as s}from"./app-8Ta4oyvC.js";const c={},n=e("h1",{id:"hello-samwaf",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#hello-samwaf","aria-hidden":"true"},"#"),s(" Hello SamWaf")],-1),r=[n];function d(l,_){return t(),o("div",null,r)}const h=a(c,[["render",d],["__file","index.html.vue"]]);export{h as default};
