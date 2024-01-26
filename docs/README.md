@@ -1,5 +1,5 @@
 # 介绍
-SamWaf网站防火墙是一款适用于小公司、工作室和个人网站的免费轻量级网站防火墙，一键启动，支持Linux，Windows 64位
+SamWaf网站防火墙是一款适用于小公司、工作室和个人网站的免费轻量级网站防火墙，完全私有化部署，数据加密且仅保存本地，一键启动，支持Linux，Windows 64位
 
 ![SamWaf网站防火墙概览](/images/overview.png)
 
@@ -81,5 +81,5 @@ http://127.0.0.1:26666
 默认帐号：admin  默认密码：admin868 (注意首次进入请把默认密码改掉)
 
 ## 问题反馈
-- github issues访问
-- 邮件反馈
+- [github issues访问](https://github.com/samwafgo/SamWaf/issues)
+- 邮件反馈 samwafgo@gmail.com
