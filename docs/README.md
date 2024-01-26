@@ -20,9 +20,16 @@ SamWaf网站防火墙是一款适用于小公司、工作室和个人网站的�
 - Windows 2008r2 64位
 - Windows10 64位
 
-## 软件下载
-- Liunx平台下载
-- Windows平台下载
+## 下载最新版本
+
+[https://github.com/samwafgo/SamWaf/releases](https://github.com/samwafgo/SamWaf/releases)
+- Windows 
+
+SamWaf64.exe
+
+- Linux
+
+SamWafLinux64
 
 ## 快速启动
 启动方式分为后台服务形式启动和非后台服务启动

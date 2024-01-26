@@ -23,10 +23,17 @@ SamWaf Website Firewall is a free lightweight website firewall suitable for smal
 - Windows 2008r2 64-bit
 - Windows 10 64-bit
 
-## Software Download:
+## Download Latest Version:
 
-- Download for Linux platform
-- Download for Windows platform
+[https://github.com/samwafgo/SamWaf/releases](https://github.com/samwafgo/SamWaf/releases)
+
+- Windows 
+
+SamWaf64.exe
+
+- Linux
+
+SamWafLinux64
 
 ## Quick Start:
 
@@ -92,5 +99,5 @@ Default account: admin Default password: admin868 (Note: Please change the defau
 
 ## Issue Feedback:
 
-- Access[GitHub issues](https://github.com/samwafgo/SamWaf/issues)
+- Access GitHub issues [here](https://github.com/samwafgo/SamWaf/issues)
 - Email feedback: samwafgo@gmail.com
