@@ -24,6 +24,62 @@ SamWaf网站防火墙是一款适用于小公司、工作室和个人网站的�
 - Liunx平台下载
 - Windows平台下载
 
+## 快速启动
+启动方式分为后台服务形式启动和非后台服务启动
+### 服务形式
+服务方式可以自动注册重启自动启动
+
+1.安装
+
+如果是windows环境
+```shell script
+SamWaf64.exe install
+```
+
+如果是linux环境
+```shell script
+SamWafLinux64 install
+```
+2.启动
+
+如果是windows环境
+```shell script
+SamWaf64.exe start
+```
+
+如果是linux环境
+```shell script
+SamWafLinux64 start
+```
+
+3.停止
+
+如果是windows环境
+```shell script
+SamWaf64.exe stop
+```
+如果是linux环境
+```shell script
+SamWafLinux64 stop
+```
+### 非服务形式
+
+如果是windows环境 双击启动
+```shell script
+ SamWaf64.exe
+```
+如果是linux环境 执行
+```shell script
+./SamWafLinux64 
+```
+
+
+## 启动访问
+
+http://127.0.0.1:26666
+
+默认帐号：admin  默认密码：admin868 (注意首次进入请把默认密码改掉)
+
 ## 问题反馈
 - github issues访问
 - 邮件反馈
