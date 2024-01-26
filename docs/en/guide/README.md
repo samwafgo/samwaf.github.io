@@ -1,7 +1,4 @@
-# User Manual
-
-## Feature Navigation:
-
+# Main Features
 - [Host Configuration](./Host.md)
 - [Protection Rules](./Rule.md)
 - [IP Whitelist](./IPWhite.md)
