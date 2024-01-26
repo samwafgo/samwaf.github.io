@@ -1,1 +1,0 @@
-const a=JSON.parse('{"key":"v-2d0a870d","path":"/en/","title":"Hello SamWaf","lang":"en-US","frontmatter":{},"headers":[],"filePathRelative":"en/README.md","git":{"createdTime":1703052021000,"updatedTime":1703052021000,"contributors":[{"name":"samwaf","email":"samwafgo@gmail.com","commits":1}]}}');export{a as data};
