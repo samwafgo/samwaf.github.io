@@ -1,6 +1,6 @@
 import { hopeTheme } from "vuepress-theme-hope";
 import { enNavbar, zhNavbar } from "./navbar/index.js";
-import { enSidebar, zhSidebar } from "./sidebar/index.js";
+import { enSidebar, zhSidebar } from "./sidebar/index.js"; 
 
 export default hopeTheme({
   //hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
@@ -74,7 +74,7 @@ export default hopeTheme({
     },
   },
 
-  plugins: {
+  plugins: { 
     // You should generate and use your own comment service
     comment: {
      /* provider: "Giscus",
@@ -117,7 +117,10 @@ export default hopeTheme({
       sup: true,
       tabs: true,
       vPre: true,
-
+	  // install flowchart.ts before enabling it
+      flowchart: true,
+	  // install mermaid before enabling it
+      mermaid: true,
       // install chart.js before enabling it
       // chart: true,
 
@@ -126,8 +129,7 @@ export default hopeTheme({
       // install echarts before enabling it
       // echarts: true,
 
-      // install flowchart.ts before enabling it
-      // flowchart: true,
+      
 
       // gfm requires mathjax-full to provide tex support
       // gfm: true,
@@ -138,8 +140,7 @@ export default hopeTheme({
       // install mathjax-full before enabling it
       // mathjax: true,
 
-      // install mermaid before enabling it
-      // mermaid: true,
+      
 
       // playground: {
       //   presets: ["ts", "vue"],
