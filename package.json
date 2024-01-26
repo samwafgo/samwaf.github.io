@@ -1,26 +1,21 @@
 {
-  "name": "SamWafDoc",
-  "version": "1.0.0",
+  "name": "samwafdoc",
+  "version": "2.0.0",
   "description": "SamWafDoc Content",
-  "main": "index.js",
   "repository": "git@github.com:samwafgo/samwaf.github.io.git",
   "author": "samwaf <samwafgo@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "@vuepress/client": "^2.0.0-rc.0",
-    "@vuepress/plugin-git": "^2.0.0-rc.0",
-    "@vuepress/plugin-register-components": "^1.9.10",
-    "@vuepress/theme-default": "^1.9.10",
-    "@vuepress/utils": "^2.0.0-rc.0",
-    "flowchart.ts": "^3.0.0",
-    "mermaid": "^10.6.1",
-    "vue": "^3.3.13",
-    "vuepress": "^2.0.0-rc.0",
-    "vuepress-plugin-md-enhance": "^2.0.0-rc.5"
-  },
+  "type": "module",
   "scripts": {
+    "build": "vuepress build docs",
+    "clean-dev": "vuepress dev docs --clean-cache",
     "dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "update-package": "pnpm dlx vp-update"
   },
-  "packageManager": "yarn@4.0.2"
+  "devDependencies": {
+    "@vuepress/client": "2.0.0-rc.0",
+    "vue": "^3.4.15",
+    "vuepress": "2.0.0-rc.0",
+    "vuepress-theme-hope": "2.0.0-rc.12"
+  }
 }
