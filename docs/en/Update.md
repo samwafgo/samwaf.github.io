@@ -1,9 +1,9 @@
 # Version Releases
  
 ## 20240506 (v1.1.6)
-- Independent control of host for search engine bot detection, XSS, RCE, scanning, and SQL injection
-- Adjustment of Linux upgrade logic
+- Independent control of host for search engine bot detection, XSS, RCE, scanning, and SQL injection 
 - Added request information desensitization preservation
+- Fixed CIDR judgment issue
  
 ## 20240124 (v1.1.5)
 - Windows upgrade logic adjustment.
