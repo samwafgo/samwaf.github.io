@@ -1,4 +1,5 @@
-Current Version: 20240603 (v1.1.7)
+ SamWaf Website Firewall 
+[![Release](https://img.shields.io/github/release/samwafgo/SamWaf.svg)](https://github.com/samwafgo/SamWaf/releases)
 
 # Introduction
 
