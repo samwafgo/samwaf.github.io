@@ -1,3 +1,5 @@
+Current Version: 20240603 (v1.1.7)
+
 # Introduction
 
 SamWaf Website Firewall is a free lightweight website firewall suitable for small companies, studios, and individual websites. It features complete private deployment, data encryption, and local storage only. It can be launched with a single click and supports Linux and Windows 64-bit.
