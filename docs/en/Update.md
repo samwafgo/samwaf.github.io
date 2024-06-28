@@ -1,5 +1,9 @@
 # Version Releases
- 
+
+ ## 20240603 (v1.1.7)
+- Fixed the issue of Ubuntu 20.04 LTS not running on Tencent Cloud
+- Optimized some code
+- 
 ## 20240506 (v1.1.6)
 - Independent control of host for search engine bot detection, XSS, RCE, scanning, and SQL injection 
 - Added request information desensitization preservation
