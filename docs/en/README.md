@@ -1,4 +1,4 @@
- SamWaf Website Firewall 
+
 [![Release](https://img.shields.io/github/release/samwafgo/SamWaf.svg)](https://github.com/samwafgo/SamWaf/releases)
 
 # Introduction
