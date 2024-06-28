@@ -1,4 +1,4 @@
-SamWaf网站防火墙
+
 [![Release](https://img.shields.io/github/release/samwafgo/SamWaf.svg)](https://github.com/samwafgo/SamWaf/releases)
 
 # 介绍 
