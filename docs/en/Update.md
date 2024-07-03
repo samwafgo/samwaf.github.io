@@ -1,9 +1,13 @@
 # Version Releases
 
+ ## 20240703 (v1.1.8)
+- Added a one-click option to modify the default web port of Nginx installed by BT
+- Simplified operations to remove unnecessary content from the host
+
  ## 20240603 (v1.1.7)
 - Fixed the issue of Ubuntu 20.04 LTS not running on Tencent Cloud
 - Optimized some code
-- 
+
 ## 20240506 (v1.1.6)
 - Independent control of host for search engine bot detection, XSS, RCE, scanning, and SQL injection 
 - Added request information desensitization preservation
