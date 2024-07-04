@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 [![SamWaf Website Firewall](https://img.shields.io/github/release/samwafgo/SamWaf.svg)](https://github.com/samwafgo/SamWaf/releases)
 SamWaf Website Firewall is a free lightweight website firewall suitable for small companies, studios, and individual websites. It features complete private deployment, data encryption, and local storage only. It can be launched with a single click and supports Linux and Windows 64-bit.
 
