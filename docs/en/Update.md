@@ -4,7 +4,7 @@
  - Issue with buttons being too close when adding a host
 - Added functionality for hosts to configure and exclude certain URLs from logging
 - Corrected the problem of incorrect content being returned during host addition validation
-- 
+
  ## 20240704 (v1.1.9)
 - Enhanced program stability
 - Optimized operational procedures
