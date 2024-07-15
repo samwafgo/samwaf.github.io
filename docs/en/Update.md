@@ -1,4 +1,9 @@
 # Version Releases
+ ## 20240712 (v1.2.1)
+ 
+- Fixed important security issues
+- Added centralized management
+
  ## 20240705 (v1.1.10)
  
  - Issue with buttons being too close when adding a host
