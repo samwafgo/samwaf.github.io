@@ -1,4 +1,8 @@
 # Version Releases
+
+ ## 20240729(v1.2.2)
+- Fixed the issue in ThinkPHP where the message "This form is not secure, therefore, the system has disabled the auto-fill feature" was displayed.
+ 
  ## 20240712 (v1.2.1)
  
 - Fixed important security issues
