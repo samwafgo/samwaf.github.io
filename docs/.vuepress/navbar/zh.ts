@@ -6,7 +6,15 @@ export const zhNavbar = navbar([
 			link: '/',
 	},
 	{
+			text: '快速上手',
+			link: '/quickstart',
+	},
+	{
 			text: '操作手册',
 			link: '/guide/',
+	},
+	{
+			text: '常见问题',
+			link: '/faq/',
 	},
 ]);

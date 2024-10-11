@@ -13,11 +13,10 @@ export default hopeTheme({
   //iconAssets: "fontawesome-with-brands",
 
   //logo: "https://theme-hope-assets.vuejs.press/logo.svg",
-
+  logo: "/images/logo.png", 
   repo: "https://github.com/samwafgo/samwaf.github.io",
-
-  docsDir: "docs",
-  
+  iconAssets: "iconfont",
+  docsDir: "docs", 
   docsBranch: 'main',
   locales: {
    

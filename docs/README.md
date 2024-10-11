@@ -1,94 +1,105 @@
-# 介绍
-[![SamWaf网站防火墙最新版](https://img.shields.io/github/release/samwafgo/SamWaf.svg)](https://github.com/samwafgo/SamWaf/releases)
+---
+home: true
+heroImage: /images/overview.png
+heroText: SamWaf
+tagline: 一款开源轻量级的网站应用防火墙
+actions:
+  - text: 快速上手 💡
+    link: /quickstart
+    type: primary
+  - text: 软件下载
+    link: /download
+    type: secondary 	
+	
+features:
+  - title: 开源
+    icon: github
+    details: 基于 Apache 2.0 License 代码完全开源,用的放心
+	
+  - title: 轻量化
+    icon: light
+    details: 轻量化不依赖三方服务
+	
+  - title: 私有化部署
+    icon: customize
+    details: 可部署在Windows、Linux 64位系统
 
-SamWaf网站防火墙是一款适用于小公司、工作室和个人网站的免费轻量级网站防火墙，完全私有化部署，数据加密且仅保存本地，一键启动，支持Linux，Windows 64位
+  - title: 独立引擎
+    icon: engine
+    details: 防护功能不依赖IIS,Nginx插件形式,摆脱安装复杂兼容等问题
+	
+  - title: 容器化
+    icon: OS
+    details: 支持容器化部署 
+	
+  - title: Bot检测
+    icon: check
+    details: 百度、谷歌、Bing、搜狗、360搜索、Yisou和字节爬虫
+	
+  - title: Sql注入检测
+    icon: mysql
+    details: 识别常规Sql注入
 
-![SamWaf网站防火墙概览](/images/overview.png)
+  - title: XSS检测
+    icon: javascript
+    details: 识别XSS攻击
 
-## 主要功能：
-- 完全独立引擎，防护功能不依赖IIS,Nginx
-- 自定义防护规则，支持脚本和界面编辑
-- 支持白名单访问
-- 支持IP黑名单
-- 支持URL白名单
-- 支持限制URL访问
-- 支持指定界面数据隐私输出
-- 支持CC频率访问
-- 支持全局一键配置
-- 支持分网站单独防护策略
+  - title: 扫描工具检测
+    icon: actions
+    details: 扫描工具检测
 
-## 已测试支持的平台
-- Centos 64位
-- Windows 2008r2 64位
-- Windows10 64位
+  - title: RCE检测
+    icon: interact
+    details: RCE检测  
+	
+  - title: 自定义防护规则
+    icon: edit
+    details: 支持脚本和界面编辑
+	
+  - title: 支持IP白名单访问
+    icon: back-stage
+    details: 白名单内IP可以直接放行	
 
-## 下载最新版本
+  - title: 支持IP黑名单访问
+    icon: back-stage
+    details: 黑名单内IP可以直接封禁
 
-[https://github.com/samwafgo/SamWaf/releases](https://github.com/samwafgo/SamWaf/releases)
-- Windows 
+  - title: 支持URL白名单
+    icon: back-stage
+    details: 白名单内URL可以单独不进行防护过滤
 
-SamWaf64.exe
+  - title: 支持限制URL访问
+    icon: safe
+    details: 限制URL不允许外部访问
 
-- Linux
+  - title: 数据脱敏
+    icon: storage
+    details: 可定义指定URL的输出进行数据脱敏处理
 
-SamWafLinux64
+  - title: CC防护
+    icon: compare
+    details: 可针对访问频率高的IP进行封禁处理					
 
-## 快速启动
-启动方式分为后台服务形式启动和非后台服务启动
-### 服务形式
-服务方式可以自动注册重启自动启动
+  - title: 灵活性
+    icon: ability
+    details: 防护可以灵活设置是全网站应用或者特定网站
 
-1.安装
+  - title: 安全性
+    icon: lock
+    details: 程序自动化生成,日志加密保存,管理访问加密访问,数据脱敏保存
 
-如果是windows环境
-```shell script
-SamWaf64.exe install
-```
+  - title: 敏感词检测
+    icon: filter
+    details: 支持敏感词检测直接封禁
+	
+  - title: SSL文件夹
+    icon: folder
+    details: 支持SSL文件自动部署
+	
+  - title: 负载均衡
+    icon: proxy
+    details: 支持权重负载均衡,ip负载均衡模式
 
-如果是linux环境
-```shell script
-SamWafLinux64 install
-```
-2.启动
-
-如果是windows环境
-```shell script
-SamWaf64.exe start
-```
-
-如果是linux环境
-```shell script
-SamWafLinux64 start
-```
-
-3.停止
-
-如果是windows环境
-```shell script
-SamWaf64.exe stop
-```
-如果是linux环境
-```shell script
-SamWafLinux64 stop
-```
-### 非服务形式
-
-如果是windows环境 双击启动
-```shell script
- SamWaf64.exe
-```
-如果是linux环境 执行
-```shell script
-./SamWafLinux64 
-```
-
-
-## 启动访问
-
-http://127.0.0.1:26666
-
-默认帐号：admin  默认密码：admin868 (注意首次进入请把默认密码改掉)
-
-## 问题反馈
-- [github issues访问](https://github.com/samwafgo/SamWaf/issues)
-- 邮件反馈 samwafgo@gmail.com
+  - title: 自定义IP库
+    icon: tool
+    details: IP归属库可自行替换完成更新 
