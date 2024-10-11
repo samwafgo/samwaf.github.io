@@ -8,7 +8,7 @@ actions:
     link: /quickstart
     type: primary
   - text: 软件下载
-    link: /download
+    link: https://gitee.com/samwaf/SamWaf/releases
     type: secondary 	
 	
 features:
