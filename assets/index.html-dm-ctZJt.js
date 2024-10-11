@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-7445cd33","path":"/dev/","title":"开发手册","lang":"zh-CN","frontmatter":{},"headers":[],"git":{"createdTime":1728637619000,"updatedTime":1728637619000,"contributors":[{"name":"samwaf","email":"samwafgo@gmail.com","commits":1}]},"readingTime":{"minutes":0.01,"words":4},"filePathRelative":"dev/readme.md","localizedDate":"2024年10月11日"}');export{e as data};
