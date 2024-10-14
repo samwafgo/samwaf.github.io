@@ -103,3 +103,10 @@ features:
   - title: 自定义IP库
     icon: tool
     details: IP归属库可自行替换完成更新 
+---	
+## 项目源码
+- gitee
+[https://gitee.com/samwaf/SamWaf](https://gitee.com/samwaf/SamWaf)
+- github
+[https://github.com/samwafgo/SamWaf](https://github.com/samwafgo/SamWaf)
+ 

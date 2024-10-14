@@ -15,7 +15,10 @@ export const zhSidebar = sidebar(
 					'/guide/UrlBlack.md',
 					'/guide/Ldp.md',
 					'/guide/CC.md',
-					'/guide/AttackLog.md']
+					'/guide/AttackLog.md',
+					'/guide/Sensitive.md',
+					'/guide/SSLConfig.md',
+					]
 			}
 		],	
 		"/quickstart/": [
