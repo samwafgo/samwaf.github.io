@@ -7,3 +7,5 @@
 - [URL Access Restriction](./UrlBlack.md)
 - [URL Privacy Protection](./Ldp.md)
 - [CC Protection (Data Desensitization)](./CC.md)
+- [Sensitive Words Management](./Sensitive.md)
+- [Certificate Folder](./SSLConfig.md)

@@ -1,5 +1,68 @@
 # Version Releases
+## 20241011 (v1.3.6)
+- Added IP database definition 
+[https://gitee.com/samwaf/SamWaf/blob/main/docs/ipmodify.md](https://gitee.com/samwaf/SamWaf/blob/main/docs/ipmodify.md)
+- Added SSL certificate folder and automatic loading of the latest certificate information
 
+![Certificate Loading Location](/images/sslconfig_auto.png)
+
+- Added Docker script for SSL folder directory mapping 
+- Fixed background color issue in data analysis
+- Fixed select all issue in data analysis
+- Fixed page size loss issue in attack logs
+
+## 20241008 (v1.3.5)
+- Fixed access issue when upstream is CDN or NGINX
+You can enable or disable strict source port in host editing as needed.
+
+## 20241006 (v1.3.4)
+- 1. Added load balancing
+
+![Load Balancing List](/images/loadbalanceindex.png)
+
+- 2. Running supports Windows 2008r2 environment
+## 20240925 (v1.3.3)
+- 1. Feedback information will be written back after the service is installed, started, stopped, or uninstalled.
+- 2. Display management endpoint address after SamWaf starts.
+- 3. Custom upstream Proxy IP retrieval
+- 4. Fixed click page closure logic issue
+- 5. Performed UPX compression to reduce file size
+
+## 20240920 (v1.3.2)
+- 1. Fixed several multilingual issues
+- 2. Adapted for pipeline compilation
+- 3. Added interception of sensitive words
+
+![Sensitive Words](/images/Sensitive.png)
+
+- 4. Added log export to SQLite DB file
+
+ ![Log Export](/images/export_log_db.png)
+ 
+- 5. Officially open-sourced
+
+## 20240903(v1.3.1)
+- 1. Added multilingual environment
+- 2. Added Docker environment
+```
+https://hub.docker.com/r/samwaf/samwaf
+```
+- 3. Refactored to provide normal feedback when upstream server fails
+- 4. Fixed abnormal issues when writing fails
+- 5. Added administrator reset password feature in command line
+
+```
+If the login password is lost, you can use the command line to reset it;
+
+
+SamWaf64.exe resetpwd
+
+SamWafLinux64 resetpwd
+```
+- 6. Fixed issue where no 403 was returned for denied cases
+- 7. Fixed issue where SSL must be restarted to take effect
+- 8. Fixed issue where internal modified weblog detection is invalid
+ 
  ## 20240729(v1.2.2)
 - Fixed the issue in ThinkPHP where the message "This form is not secure, therefore, the system has disabled the auto-fill feature" was displayed.
  

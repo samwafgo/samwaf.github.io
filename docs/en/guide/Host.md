@@ -1,16 +1,18 @@
+ 
 # Website Configuration
 
 ## 1 Deployment Architecture:
 Please layout the SamWaf firewall according to the architecture below.
 
-### 1.1 Deployment on the Same Server (Common)
+### 1.1 Deployed on the Same Server (Common)
 ::: important
-Important: Deploying on the same server may result in port 80 and 443 being occupied. Please perform the operation when the local machine or website is not busy. [Modify and view common issues](./Question.md#_1-端口80-被占用情况)
+Important: Deploying on the same server may encounter situations where ports 80 and 443 are already in use. Please perform operations when the machine or website business is not busy. [Modify and view common issues](./Question.md#_1-端口80-被占用情况)
+
 :::
 
 ```mermaid
 ---
-title: Deployment on the Same Server
+title: Deployed on the Same Server
 ---
 flowchart TB
     A[Client Browser]
@@ -18,62 +20,96 @@ flowchart TB
 	C(Web Server)
 	A --> B  
 	B --> A
-	subgraph Server 1
+	subgraph Server1
     B --> C
     C --> B
     end
 ```
 
-### 1.2 Deployment on Different Servers
-This deployment method is suitable for servers with abundant resources. SamWaf is deployed separately, and the domain is resolved to the server where SamWaf is located. Subsequently, various website servers are connected, exposing only the server where SamWaf is located.
+### 1.2 Deployed on Different Servers
+This deployment method is suitable for servers with abundant resources, allowing SamWaf to be deployed separately, and the domain name should be resolved to the server where SamWaf is located. Other website servers can then be connected, exposing only the server where SamWaf is located.
 
 ```mermaid
 ---
-title: Deployment on Different Servers
+title: Deployed on Different Servers
 ---
 flowchart TB
     A[Client Browser]
 	B(SamWaf)
 	C(Web Server)
 	A --> B  
-	subgraph Server 1
+	subgraph Server1
     B 
     end  
 	B --> C
-	subgraph Server 2 
+	subgraph Server2 
     C
     end
 	C --> B
 	B --> A 
 ```
 
-## 2 Adding a Website Protected by the Firewall:
-![Add a website protected by SamWaf Firewall](/images/add_host.png)
-Configure once and use it anytime.
+## 2 Adding Websites Protected by the Firewall:
 
-1. Website:
-    - Simply fill in the website domain, pay attention to the prefixes such as https, http. Do not include / or other suffixes.
-	
+Key configuration; set it up once for future use.
+
+### 2.1 Add Website
+![Add a website protected by SamWaf firewall](/images/add_host.png)
+- Website:
+    - Enter the website domain name correctly, avoiding prefixes like https, http, or suffixes like /.
+    
 	For example: www.baidu.com, pan.baidu.com
 	
-2. Port:
-    - Enter the port of the website that needs protection. HTTP is 80, and HTTPS is 443 (if you have installed control panels like Baota, Nginx, IIS, you need to manually change the port to a non-80 or non-443 port). [Modify and view common issues](./Question.md#_1-端口80-被占用情况)
-3. Encryption Certificate:
-    - If it is HTTPS, choose the encryption certificate; port 80 does not require it.
-	- Key String
+- Port:
+    - Enter the port of the website that needs protection.
+	http is 80 and https is 443. (If you have already installed Baota, Nginx, IIS, etc., you need to manually change the port to a non-80 or non-443 port.) [Modify and view common issues](./Question.md#_1-端口80-被占用情况) 
+- Encryption Certificate:
+    1. If it's https, you need to select an encryption certificate. The 80 port does not require one.
+	You need to click "Add New Certificate" to add a new certificate.
+	
+	![Add SSL Certificate](/images/add_ssl.png)
 	```
-	Usually file name: *.key. The content format is like: -----BEGIN RSA PRIVATE KEY----- ... Copy and paste the entire content.
+	Typical filename: *.key Content format: -----BEGIN RSA PRIVATE KEY----- ... Copy and paste all the contents here.
 	```
 	- Certificate String
 	```
-	Usually file name: *.crt. The content format is like: -----BEGIN CERTIFICATE----- ... Copy and paste the entire content.
+	Typical filename: *.crt Content format: -----BEGIN CERTIFICATE----- ... Copy and paste all the contents here.
 	```
 	
-4. Backend System Type, Backend Application Type:
-    - Not necessary; you can choose the same as the actual system, or leave it as default (adaptations may be made later for different backend integrations).
-5. Backend Domain:
-    - The backend domain is usually the same as the first item, the website domain.
-6. Backend IP:
-    - If SamWaf and the website are on the same server, enter 127.0.0.1. If they are on different servers, enter the actual IP.
-7. Backend Port:
-    - Scenario 1: If SamWaf and the website are on the same server, the port should be set to a different value like 81. Scenario 2: If they are on different servers, use the original port here.
+	2. Select the corresponding certificate from the certificate folder.
+
+     ![Select Certificate](/images/add_host_select_ssl.png)
+	
+- Startup Status:
+	Automatic startup: After adding, it normally provides services; manual startup: after adding, it will not occupy ports and will not provide services.
+
+- Strict Source Port:
+    The strict source port is enabled by default. If disabled, it is suitable for outer Nginx or CDN situations.
+	
+- Backend System Type and Backend Application Type:
+     Not necessary; you can select the actual type or keep the default (adaptations may be made for different backend access later).
+ 
+- Backend IP:
+     If SamWaf and the website are on the same server, fill in 127.0.0.1. If on different servers, please fill in the actual IP.	
+- Backend Port:
+     Situation 1: If SamWaf and the website are on the same server, then the port needs to be changed to something like 81 or other ports. Situation 2: If they are on different servers, you can keep the original port.
+	
+## 3 Load Balancing:
+Load balancing supports: Weighted Round Robin (WRR), IP Hash.
+ 
+- Weighted Round Robin (WRR): Distributes requests to different servers in order based on the weights of the backend servers. Servers with higher weights are polled more frequently (higher probability).
+
+- IP Hash: Uses the source IP address of the request to find the corresponding server from a hash table, ensuring that the same IP always accesses the same server.
+
+### 3.1 Load Balancing Configuration
+Click on the protected website to enable "Load Balancing."
+
+![Load Balancing List](/images/loadbalanceindex.png).
+
+### 3.2 Add Backend Load
+![Load Configuration](/images/loadbalance_edit.png).
+
+- IP: Enter the backend IP that can be accessed.
+- Port: Enter the backend port that can be accessed.
+- Weight: Enter the weight; for the Weighted Round Robin (WRR) mode, this increases the chance of customer access to that server.
+ 

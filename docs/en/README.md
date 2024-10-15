@@ -1,103 +1,117 @@
-# Introduction
-[![SamWaf Website Firewall](https://img.shields.io/github/release/samwafgo/SamWaf.svg)](https://github.com/samwafgo/SamWaf/releases)
-SamWaf Website Firewall is a free lightweight website firewall suitable for small companies, studios, and individual websites. It features complete private deployment, data encryption, and local storage only. It can be launched with a single click and supports Linux and Windows 64-bit.
+---
+home: true
+heroImage: /images_en/overview.png
+heroText: SamWaf
+tagline: An open-source lightweight web application firewall
+actions:
+  - text: Quick Start 💡
+    link: /quickstart
+    type: primary
+  - text: Download Software
+    link: https://github.com/samwafgo/SamWaf/releases
+    type: secondary
 
-![SamWaf Website Firewall Overview](/images/overview.png)
+features:
+  - title: Open Source
+    icon: github
+    details: Fully open-source under Apache 2.0 License, safe to use
 
-## Key Features:
+  - title: Lightweight
+    icon: light
+    details: Lightweight with no reliance on third-party services
 
-- Fully independent engine, protection functions do not depend on IIS, Nginx
-- Customizable protection rules, supports script and interface editing
-- Supports whitelist access
-- Supports IP blacklist
-- Supports URL whitelist
-- Supports restricting URL access
-- Supports specifying interface data privacy output
-- Supports CC frequency access
-- Supports global one-click configuration
-- Supports separate protection strategies for different websites
+  - title: Private Deployment
+    icon: customize
+    details: Can be deployed on Windows and Linux 64-bit systems
 
-## Tested Supported Platforms:
+  - title: Independent Engine
+    icon: engine
+    details: Protection functionality does not rely on IIS or Nginx plugins, avoiding installation complexity and compatibility issues
 
-- CentOS 64-bit
-- Windows 2008r2 64-bit
-- Windows 10 64-bit
+  - title: Containerization
+    icon: OS
+    details: Supports containerized deployment
 
-## Download Latest Version:
+  - title: Bot Detection
+    icon: check
+    details: Detects crawlers from Baidu, Google, Bing, Sogou, 360 Search, Yisou, and ByteDance
 
-[https://github.com/samwafgo/SamWaf/releases](https://github.com/samwafgo/SamWaf/releases)
+  - title: SQL Injection Detection
+    icon: mysql
+    details: Identifies common SQL injection attacks
 
-- Windows 
+  - title: XSS Detection
+    icon: javascript
+    details: Detects XSS attacks
 
-SamWaf64.exe
+  - title: Scanner Tool Detection
+    icon: actions
+    details: Detects scanner tools
 
-- Linux
+  - title: RCE Detection
+    icon: interact
+    details: Detects RCE attacks
 
-SamWafLinux64
+  - title: Custom Protection Rules
+    icon: edit
+    details: Supports script and interface editing
 
-## Quick Start:
+  - title: IP Allow List Access
+    icon: back-stage
+    details: IPs in the allow list can bypass the firewall
 
-The startup can be done in the background service mode and non-background service mode.
+  - title: IP Block List Access
+    icon: back-stage
+    details: IPs in the block list are directly blocked
 
-### Service Mode:
+  - title: URL Allow List
+    icon: back-stage
+    details: URLs in the allow list can be exempted from protection filtering
 
-Service mode can automatically register for restart and start automatically.
+  - title: URL Access Restrictions
+    icon: safe
+    details: Restricts external access to certain URLs
 
-1. **Install:**
+  - title: Data Masking
+    icon: storage
+    details: Allows data masking for outputs of specific URLs
 
-For Windows environment:
-```shell script
-SamWaf64.exe install
-```
+  - title: CC Protection
+    icon: compare
+    details: Blocks IPs with high request frequency
 
-For Linux environment:
-```shell script
-SamWafLinux64 install
-```
+  - title: Flexibility
+    icon: ability
+    details: Protection can be flexibly set for the entire website or specific sites
 
-2. **Start:**
+  - title: Security
+    icon: lock
+    details: Automatically generated program, encrypted log storage, encrypted management access, and data masking
 
-For Windows environment:
-```shell script
-SamWaf64.exe start
-```
+  - title: Sensitive Word Detection
+    icon: filter
+    details: Supports sensitive word detection with automatic blocking
 
-For Linux environment:
-```shell script
-SamWafLinux64 start
-```
+  - title: SSL Folder
+    icon: folder
+    details: Supports automatic deployment of SSL files
 
-3. **Stop:**
+  - title: Load Balancing
+    icon: proxy
+    details: Supports weighted load balancing and IP load balancing modes
 
-For Windows environment:
-```shell script
-SamWaf64.exe stop
-```
+  - title: Custom IP Library
+    icon: tool
+    details: Allows updating the IP location database
+---
+## Project Source Code
 
-For Linux environment:
-```shell script
-SamWafLinux64 stop
-```
+[![Release](https://img.shields.io/github/release/samwafgo/SamWaf.svg)](https://github.com/samwafgo/SamWaf/releases)
+[![Gitee](https://img.shields.io/badge/Gitee-blue?style=flat-square&logo=Gitee)](https://gitee.com/samwaf/SamWaf)
+[![GitHub stars](https://img.shields.io/github/stars/samwafgo/SamWaf?style=flat-square&logo=Github)](https://github.com/samwafgo/SamWaf)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](LICENSE)
 
-### Non-Service Mode:
-
-For Windows environment, double-click to start:
-```shell script
- SamWaf64.exe
-```
-
-For Linux environment, execute:
-```shell script
-./SamWafLinux64 
-```
-
-## Access After Start:
-
-http://127.0.0.1:26666
-
-Default account: admin Default password: admin868 (Note: Please change the default password on first login)
-
-## Issue Feedback:
-
-- Access GitHub issues [here](https://github.com/samwafgo/SamWaf/issues)
-- Email feedback: samwafgo@gmail.com
+- Gitee
+[https://gitee.com/samwaf/SamWaf](https://gitee.com/samwaf/SamWaf)
+- GitHub
+[https://github.com/samwafgo/SamWaf](https://github.com/samwafgo/SamWaf)

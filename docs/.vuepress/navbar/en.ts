@@ -1,12 +1,20 @@
 import { navbar } from "vuepress-theme-hope";
 
-export const enNavbar = navbar([
-  {
+export const enNavbar = navbar([ 
+	{
 			text: 'Home',
-			link: '/',
-		  },
-		  {
+			link: '/en/',
+	},
+	{
+			text: 'QuickStart',
+			link: '/en/quickstart',
+	},
+	{
 			text: 'Manual',
-			link: '/guide/',
-		  },
+			link: '/en/guide/',
+	},
+	{
+			text: 'Faq',
+			link: '/en/faq/',
+	},
 ]);
