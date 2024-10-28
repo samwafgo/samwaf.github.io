@@ -61,7 +61,7 @@ SamWaf64.exe uninstall
 
 ::: warning
 PS:
-Note that starting from version v1.3.7-beta.1, if your system is Windows Server 2008 R2, please download SamWaf64Win7Win8Win2008.exe to use.
+Note that starting from version v1.3.7-beta.1, if your system is Windows Server 2008 R2, please download SamWaf64ForWin7Win8Win2008.exe to use.
 :::
 
 ## 3. Start and Access

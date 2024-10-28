@@ -52,7 +52,7 @@ SamWaf64.exe uninstall
 ```
 ::: warning
 PS:
-注意从v1.3.7-beta.1 开始如果是windows server 2008r2 的系统请下载 SamWaf64Win7Win8Win2008.exe 使用。
+注意从v1.3.7-beta.1 开始如果是windows server 2008r2 的系统请下载 SamWaf64ForWin7Win8Win2008.exe 使用。
 :::
 ## 3.启动访问
 
