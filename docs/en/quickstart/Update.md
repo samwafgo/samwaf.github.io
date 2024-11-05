@@ -23,7 +23,7 @@ SamWaf64ForWin7Win8Win2008.exe
 - Fixed the issue where Docker timezone settings do not take effect
 - Fixed the issue of not being able to distinguish between the same domain but different ports when viewing logs
 - Added default forced redirection from 80 to 443
-![80 jump 443](/images_en/jumpsslen.png.png)
+![80 jump 443](/images_en/jumpsslen.png)
 ```
 System Settings -> Parameter Settings added 1 configuration:
 redirect_https_code Default HTTP redirect code: 301.
