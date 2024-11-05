@@ -1,4 +1,41 @@
 # Version Releases
+## 20241105 (v1.3.7)
+- Improved stability
+- Added restrictions on incorrect login passwords and log recording.
+```
+System Settings -> Parameter Settings added 1 configuration:
+login_max_error_time Maximum number of errors allowed during the login period: default 3
+login_limit_minutes Login error recording period in minutes: default 1 minute
+```
+- Added WebLog access records can be sent to Kafka
+```
+System Settings -> Parameter Settings added 3 configurations:
+kafka_enable Whether to activate Kafka transfer (0: not activated; 1: activated)
+kafka_url   Kafka URL address
+kafka_topic   Kafka topic  
+```
+- Added Windows 2008 R2 dedicated version release
+```
+SamWaf64ForWin7Win8Win2008.exe
+```
+- Added log library indexing to improve log viewing speed
+- Added default robots.txt to block crawlers for the management side
+- Fixed the issue where Docker timezone settings do not take effect
+- Fixed the issue of not being able to distinguish between the same domain but different ports when viewing logs
+- Added default forced redirection from 80 to 443
+![80 jump 443](/images_en/jumpsslen.png.png)
+```
+System Settings -> Parameter Settings added 1 configuration:
+redirect_https_code Default HTTP redirect code: 301.
+```
+- Fixed the issue of not being able to access the site properly when the backend is HTTPS
+- Optimized the SSL certificate loading mechanism
+- Optimized the custom locations for SSL certificate and key files
+
+- Fixed the issue of not staying on the current page after modifying or deleting a website
+- Fixed the issue where the website could still be accessed if the startup status was closed
+
+
 ## 20241011 (v1.3.6)
 - Added IP database definition 
 [https://gitee.com/samwaf/SamWaf/blob/main/docs/ipmodify.md](https://gitee.com/samwaf/SamWaf/blob/main/docs/ipmodify.md)

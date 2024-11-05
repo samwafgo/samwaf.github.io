@@ -1,4 +1,44 @@
 # 版本发布
+## 20241105 (v1.3.7)
+- 提升稳定性
+- 新增登录密码错误限制并记录日志。
+```
+系统设置 ->参数设置 新增1个配置： 
+login_max_error_time   登录周期里错误最大次数 默认3
+login_limit_mintutes   登录错误记录周期 单位分钟数，默认1分钟
+```
+- 新增WebLog访问记录可传送到kafka
+```
+系统设置 ->参数设置 新增3个配置：
+kafka_enable 是否激活传送kafka( 0 不激活; 1 激活状态 ) 
+kafka_url   kafka url地址
+kafka_topic   kafka 主题  
+```
+- 新增Windows2008r2进行专版发布
+```
+SamWaf64ForWin7Win8Win2008.exe
+```
+
+- 新增日志库索引,提升日志查看速度
+- 新增管理端默认robots.txt屏蔽爬虫
+- 修正Docker设置时区不生效问题
+- 修正查看日志时相同域名不同端口无法区分问题
+- 新增80默认强制跳转443功能
+
+![80强制跳转443](/images/jumphttps.png)
+
+```
+
+系统设置 ->参数设置 新增1个配置： 
+redirect_https_code  默认跳转HTTP CODE代码为:301。
+```
+- 修正后端是https的情况无法正常访问的问题
+- 优化SSL证书加载机制
+- 优化SSL证书夹证书文件和密钥文件位置自定义
+- 修正网站修改或者删除完后没有停留再当前页面的问题
+- 修正网站启动状态如果关闭情况还能访问的问题
+
+
 ## 20241011 (v1.3.6)
 - 新增定义IP数据库 
 [https://gitee.com/samwaf/SamWaf/blob/main/docs/ipmodify.md](https://gitee.com/samwaf/SamWaf/blob/main/docs/ipmodify.md)
