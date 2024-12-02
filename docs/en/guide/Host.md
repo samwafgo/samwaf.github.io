@@ -6,7 +6,7 @@ Please layout the SamWaf firewall according to the architecture below.
 
 ### 1.1 Deployed on the Same Server (Common)
 ::: important
-Important: Deploying on the same server may encounter situations where ports 80 and 443 are already in use. Please perform operations when the machine or website business is not busy. [Modify and view common issues](./Question.md#_1-端口80-被占用情况)
+Important: Deploying on the same server may encounter situations where ports 80 and 443 are already in use. Please perform operations when the machine or website business is not busy. [Modify and view common issues](../faq/readme.md#_1-端口80-被占用情况)
 
 :::
 
@@ -62,7 +62,7 @@ Key configuration; set it up once for future use.
 	
 - Port:
     - Enter the port of the website that needs protection.
-	http is 80 and https is 443. (If you have already installed Baota, Nginx, IIS, etc., you need to manually change the port to a non-80 or non-443 port.) [Modify and view common issues](./Question.md#_1-端口80-被占用情况) 
+	http is 80 and https is 443. (If you have already installed Baota, Nginx, IIS, etc., you need to manually change the port to a non-80 or non-443 port.) [Modify and view common issues](../faq/readme.md#_1-端口80-被占用情况) 
 - Encryption Certificate:
     1. If it's https, you need to select an encryption certificate. The 80 port does not require one.
 	You need to click "Add New Certificate" to add a new certificate.

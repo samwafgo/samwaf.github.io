@@ -103,6 +103,11 @@ features:
   - title: Custom IP Library
     icon: tool
     details: Allows updating the IP location database
+	
+  - title: OWASP Ruleset
+    icon: tool
+    details: Supports translation of the latest OWASP ruleset
+	
 ---
 ## Project Source Code
 
