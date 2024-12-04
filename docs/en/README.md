@@ -22,7 +22,7 @@ features:
 
   - title: Private Deployment
     icon: customize
-    details: Can be deployed on Windows and Linux 64-bit systems
+    details: Can be deployed on Windows and Linux 64-bit ,Linux Arm64 systems
 
   - title: Independent Engine
     icon: engine
@@ -106,8 +106,11 @@ features:
 	
   - title: OWASP Ruleset
     icon: tool
-    details: Supports translation of the latest OWASP ruleset
+    details: Supports translation of the latest OWASP ruleset 
 	
+  - title: IPv6  
+    icon: tool  
+    details: Support for IPv6	
 ---
 ## Project Source Code
 

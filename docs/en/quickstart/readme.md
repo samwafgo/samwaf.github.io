@@ -5,7 +5,7 @@
 **It is strongly recommended to fully test in a staging environment before deploying to production. Please report any issues promptly.**
 :::
 
-## 1. Download the latest version <Badge text="v1.3.7" type="tip" />
+## 1. Download the latest version <Badge text="v1.3.8" type="tip" />
 Gitee: [https://gitee.com/samwaf/SamWaf/releases](https://gitee.com/samwaf/SamWaf/releases)
 
 GitHub: [https://github.com/samwafgo/SamWaf/releases](https://github.com/samwafgo/SamWaf/releases)
@@ -63,6 +63,10 @@ SamWaf64.exe uninstall
 PS:
 Note that starting from version v1.3.7-beta.1, if your system is Windows Server 2008 R2, please download SamWaf64ForWin7Win8Win2008.exe to use.
 :::
+
+### For Linux Arm64 architecture, please download the corresponding file
+
+### For Docker, please pull the latest version from Docker Hub
 
 ## 3. Start and Access
 

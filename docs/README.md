@@ -22,7 +22,7 @@ features:
 	
   - title: 私有化部署
     icon: customize
-    details: 可部署在Windows、Linux 64位,LinuxArm64架构系统
+    details: 可部署在Windows、Linux 64位,Linux Arm64架构系统
 
   - title: 独立引擎
     icon: engine
@@ -107,6 +107,10 @@ features:
   - title: owasp 规则集
     icon: tool
     details: 支持最新owasp 规则集
+	
+  - title: IPv6
+    icon: tool
+    details: 支持IPv6
 ---	
 ## 项目源码
 

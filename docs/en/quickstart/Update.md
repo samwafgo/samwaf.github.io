@@ -1,4 +1,35 @@
-# Version Releases
+# Version Releases 
+## 20241205 (v1.3.8)
+- Enhanced stability
+- Added IP ranking display on the homepage
+
+![Homepage IP Ranking Display](/images/iprank.png)
+
+- Added CC defense lock time
+
+![CC Defense Lock Time](/images/cclocktime.png)
+
+![CC Unlock IP Restriction](/images/ccunlock.png)
+
+- Added wildcard domain support for protected websites
+- Added backend IP support for domain names to solve the issue of frequently changing DDNS public IP addresses
+- Added option to hide SamWaf identification
+- Added support for Linux Arm64 architecture/Docker Arm64 architecture
+- Added bulk import of IPs from files or remote URLs to the IP whitelist
+- Added OWASP rule set
+```
+System Settings -> Parameter Settings: Added a new configuration:
+enable_owasp Enable OWASP data detection (1 to enable, 0 to disable)
+```
+- Added real-time viewing of website QPS/active connections
+- Added support for IPv6 country-level recognition
+- Fixed issue where IP country recognition showed as 0
+- Fixed multi-language issue with URLs
+- Fixed issue preventing the deletion of newly added management accounts
+- Fixed logic issue with IP whitelist and URL whitelist
+- Fixed frontend search layout display issue
+- Optimized PHP URL decoding function
+
 ## 20241105 (v1.3.7)
 - Improved stability
 - Added restrictions on incorrect login passwords and log recording.
