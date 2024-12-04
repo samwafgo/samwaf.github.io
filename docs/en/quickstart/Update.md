@@ -1,5 +1,5 @@
 # Version Releases 
-## 20241205 (v1.3.8)
+## 20241204 (v1.3.8)
 - Enhanced stability
 - Added IP ranking display on the homepage
 
