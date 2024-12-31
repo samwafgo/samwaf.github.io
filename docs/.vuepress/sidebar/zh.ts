@@ -18,6 +18,7 @@ export const zhSidebar = sidebar(
 					'/guide/AttackLog.md',
 					'/guide/Sensitive.md',
 					'/guide/SSLConfig.md',
+					'/guide/SSLOrder.md',
 					]
 			}
 		],	
