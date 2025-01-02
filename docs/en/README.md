@@ -5,7 +5,7 @@ heroText: SamWaf
 tagline: An open-source lightweight web application firewall
 actions:
   - text: Quick Start 💡
-    link: /quickstart/
+    link: /en/quickstart/
     type: primary
   - text: Download Software
     link: https://github.com/samwafgo/SamWaf/releases
