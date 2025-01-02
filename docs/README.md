@@ -5,7 +5,7 @@ heroText: SamWaf
 tagline: 一款开源轻量级的网站应用防火墙
 actions:
   - text: 快速上手 💡
-    link: /quickstart
+    link: /quickstart/
     type: primary
   - text: 软件下载
     link: https://gitee.com/samwaf/SamWaf/releases
