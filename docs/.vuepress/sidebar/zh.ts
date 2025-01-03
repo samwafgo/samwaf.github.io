@@ -19,6 +19,7 @@ export const zhSidebar = sidebar(
 					'/guide/Sensitive.md',
 					'/guide/SSLConfig.md',
 					'/guide/SSLOrder.md',
+					'/guide/SslExpire.md',
 					]
 			}
 		],	
