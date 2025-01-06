@@ -112,4 +112,16 @@ Click on the protected website to enable "Load Balancing."
 - IP: Enter the backend IP that can be accessed.
 - Port: Enter the backend port that can be accessed.
 - Weight: Enter the weight; for the Weighted Round Robin (WRR) mode, this increases the chance of customer access to that server.
- 
+
+## 4 Website Password Access  
+Supported since v1.3.9-beta.11 , Add or edit the last tab for website password access.  
+Website password access is disabled by default and can be enabled manually.
+### 4.1 Website Password Access List
+
+![Website Password Access List](/images/password_visit.png)
+
+Here, you can view, add, edit, or delete.
+
+The effect is as follows:
+
+![Website Password Access Effect](/images/password_visit2.png)
