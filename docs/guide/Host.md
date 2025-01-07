@@ -133,3 +133,15 @@ flowchart TB
 效果如下：
 
 ![网站密码访问效果如下](/images/password_visit2.png)，
+
+## 5.其他配置
+
+### 5.1 记录日志时排除URL
+
+一行一个日志url
+
+### 5.2 访问超时设置
+
+自v1.3.9-beta.13 支持自定义设置,默认60s,单位秒，如果填写0则是不限制
+
+![访问超时设置](/images/response_timeout.png)

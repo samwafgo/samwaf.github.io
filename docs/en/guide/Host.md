@@ -125,3 +125,15 @@ Here, you can view, add, edit, or delete.
 The effect is as follows:
 
 ![Website Password Access Effect](/images/password_visit2.png)
+
+## 5. Other Configurations  
+
+### 5.1 Exclude URLs When Logging  
+
+Enter one URL per line.
+
+### 5.2 Access Timeout Settings  
+
+Supported since v1.3.9-beta.13, Default is 60 seconds. Unit: seconds. If set to 0, there is no limit.  
+
+![Access Timeout Settings](/images/response_timeout.png)   
