@@ -137,3 +137,19 @@ Enter one URL per line.
 Supported since v1.3.9-beta.13, Default is 60 seconds. Unit: seconds. If set to 0, there is no limit.  
 
 ![Access Timeout Settings](/images/response_timeout.png)   
+
+Here is the translation:
+
+## 6. Export and Import  
+### 6.1 Export  
+The export function allows you to export all host information. If this is your first time, it can be used as the template for initialization imports.
+
+### 6.2 Import  
+There are two options for importing host information:
+- Import new host codes (for new data)
+- Import retained host codes (for old data)  
+![Import Parameters](/images/import_host.png)
+
+PS: SamWaf is lightweight. For migrating old data, we recommend shutting down the service and directly copying all the data from the directories to the new server.
+
+Let me know if you need any changes!
