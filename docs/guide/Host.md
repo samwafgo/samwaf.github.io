@@ -157,3 +157,9 @@ flowchart TB
 ![导入参数](/images/import_host.png)
 
 PS:SamWaf是轻量级的，对于老数据迁移我们推荐方式是，关闭服务，直接拷贝所有目录下的数据到新服务器即可。
+
+## 7.同时绑定多个域名
+
+可以支持多个域名一行一个。支持泛域名
+
+![同时绑定多个域名](/images/bind_more_domain.png)

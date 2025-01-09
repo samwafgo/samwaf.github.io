@@ -151,5 +151,9 @@ There are two options for importing host information:
 ![Import Parameters](/images/import_host.png)
 
 PS: SamWaf is lightweight. For migrating old data, we recommend shutting down the service and directly copying all the data from the directories to the new server.
+  
+## 7. Bind Multiple Domains Simultaneously
 
-Let me know if you need any changes!
+Multiple domains can be supported, one per line. Wildcard domains are also supported.
+
+![Bind Multiple Domains Simultaneously](/images/bind_more_domain.png) 
