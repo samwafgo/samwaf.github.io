@@ -37,6 +37,12 @@ export const enSidebar = sidebar(
 				text: "Faq",
 				link: "/en/faq/readme.md"
 			}
+		],
+		"/en/dev/": [
+			{
+				text: "Dev Manual",
+				link: "/en/dev/readme.md"
+			}
 		]
 	}
 );

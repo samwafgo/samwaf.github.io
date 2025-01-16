@@ -17,4 +17,8 @@ export const enNavbar = navbar([
 			text: 'Faq',
 			link: '/en/faq/',
 	},
+	{
+			text: 'Dev Manual',
+			link: '/en/dev/',
+	},
 ]);

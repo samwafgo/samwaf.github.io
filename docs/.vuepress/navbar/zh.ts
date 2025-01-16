@@ -17,4 +17,8 @@ export const zhNavbar = navbar([
 			text: '常见问题',
 			link: '/faq/',
 	},
+	{
+			text: '开发手册',
+			link: '/dev/',
+	},
 ]);

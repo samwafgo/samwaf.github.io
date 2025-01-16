@@ -38,6 +38,12 @@ export const zhSidebar = sidebar(
 				text: "常见问题",
 				link: "/faq/readme.md"
 			}
+		],
+		"/dev/": [
+			{
+				text: "开发手册",
+				link: "/dev/readme.md"
+			}
 		]
 	}
 );
