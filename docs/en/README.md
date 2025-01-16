@@ -110,7 +110,12 @@ features:
 	
   - title: IPv6  
     icon: tool  
-    details: Support for IPv6	
+    details: Support for IPv6
+	
+  - title: Automatic SSL Renewal
+    icon: folder
+    details: Supports automatic SSL certificate renewal
+
 ---
 ## Project Source Code
 

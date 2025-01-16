@@ -1,4 +1,27 @@
 # Version Releases 
+## 20250116 (v1.3.9)  
+::: warning  
+**Important Update:** v1.3.9 introduces access timeout control. Previously, there was no limit, allowing for infinite waits, which could lead to resource locking issues. The new version defaults to 60 seconds. If set to 0, there will be no limit. Please adjust according to your needs.  
+:::  
+
+- Enhanced stability.  
+- Added support for binding multiple domains simultaneously.  
+  ![Bind Multiple Domains](/images/bind_more_domain.png)  
+- Added the ability to sort protected hosts by creation time.  
+- Added the option to copy logs with sensitive data masked.  
+- Added support for automatic SSL certificate requests and renewal before expiration.  
+  [SSL Auto Request Operation Manual](https://doc.samwaf.com/guide/SSLOrder.html)  
+- Added bulk SSL certificate expiration checks.  
+  [Bulk SSL Certificate Expiration Check](https://doc.samwaf.com/guide/SslExpire.html)  
+- Added support for website account and password access.  
+  ![Website Account and Password Access](/images/password_visit.png)  
+- Added support for timeout configuration.  
+  ![Timeout Configuration](/images/response_timeout.png)  
+- Added internal task management interface.  
+- Fixed website import and export functionality.  
+  ![Website Import](/images/import_host.png)  
+- Optimized Docker release strategy: latest for stable releases, separate tags for the latest test versions.  
+
 ## 20241204 (v1.3.8)
 - Enhanced stability
 - Added IP ranking display on the homepage

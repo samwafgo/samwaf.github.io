@@ -111,6 +111,10 @@ features:
   - title: IPv6
     icon: tool
     details: 支持IPv6
+	
+  - title: SSL自动申请延期
+    icon: folder
+    details: 支持SSL自动申请延期
 ---	
 ## 项目源码
 

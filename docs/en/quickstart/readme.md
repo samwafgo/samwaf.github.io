@@ -5,7 +5,7 @@
 **It is strongly recommended to fully test in a staging environment before deploying to production. Please report any issues promptly.**
 :::
 
-## 1. Download the latest version <Badge text="v1.3.8" type="tip" />
+## 1. Download the latest version <Badge text="v1.3.9" type="tip" />
 Gitee: [https://gitee.com/samwaf/SamWaf/releases](https://gitee.com/samwaf/SamWaf/releases)
 
 GitHub: [https://github.com/samwafgo/SamWaf/releases](https://github.com/samwafgo/SamWaf/releases)

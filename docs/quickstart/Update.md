@@ -1,4 +1,27 @@
-# 版本发布
+# 版本发布 
+
+## 20250116 (v1.3.9)
+::: warning
+  重要修改: v1.3.9 新增了超时访问时长控制，之前没有限制，无限等待，可能存在尝试占用不释放资源的问题，新版本默认是60秒，如果修改成0则是不限制，请依据情况进行修改
+:::
+- 提升稳定性
+- 新增支持同时绑定多个域名
+![绑定多个域名](/images/bind_more_domain.png) 
+- 新增防护主机可以按照创建时间排序
+- 新增日志可进行脱敏拷贝
+- 新增支持SSL免费证书自动申请，到期提前自动延期
+[自动申请SSL操作手册](https://doc.samwaf.com/guide/SSLOrder.html) 
+- 新增SSL证书批量检测
+[SSL证书批量检测](https://doc.samwaf.com/guide/SslExpire.html) 
+- 新增支持网站帐号密码访问
+![网站帐号密码访问](/images/password_visit.png) 
+- 新增支持超时配置
+![超时配置](/images/response_timeout.png)  
+- 新增内部任务管理界面
+- 修正网站导入、导出功能
+![网站导入](/images/import_host.png)
+- 优化Docker发布策略正式版本latest,最新测试版本单独发标签
+
 ## 20241204 (v1.3.8)
 - 提升稳定性 
 - 新增首页IP排名显示
