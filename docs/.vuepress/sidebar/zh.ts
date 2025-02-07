@@ -20,6 +20,7 @@ export const zhSidebar = sidebar(
 					'/guide/SSLConfig.md',
 					'/guide/SSLOrder.md',
 					'/guide/SslExpire.md',
+					'/guide/BlockingPage.md',
 					]
 			}
 		],	
