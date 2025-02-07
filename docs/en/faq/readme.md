@@ -33,3 +33,20 @@ Change 80 or 443 to another port.
 ```
 SamWaf64.exe resetpwd  
 ```
+ 
+
+### 2.2 Token Expiration  
+For security reasons, starting from v1.3.10-beta.4, the token has an expiration time.
+
+You can modify it according to your needs:  
+```
+Menu Path: System Settings -> Parameter Settings
+
+token_expire_time  
+The validity period of the management platform token, in minutes (default is 5 minutes)
+```
+
+There are two scenarios for token expiration:  
+1. The token expires after the set time.  
+2. The token becomes invalid when the account is logged in from a different IP address.  
+ 
