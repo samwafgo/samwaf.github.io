@@ -12,4 +12,3 @@
 - [SSL证书批量过期检测](./SslExpire.md)
 - [SSL证书自动申请](./SSLOrder.md)
 - [自定义拦截响应界面](./BlockingPage.md)
-- [批量任务](./BatchTask.md)
