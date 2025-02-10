@@ -1,8 +1,7 @@
- # Batch Tasks
-
-Batch tasks are executed automatically at 5 AM every day, but can also be triggered manually.
-
+# Batch Tasks
+ 
 ## 1. Batch Task Interface  
+Batch tasks are executed automatically at 5 AM every day, but can also be triggered manually.
 You can batch add local or remote files into the system.  
 
 ![Batch Task Interface](/images/batchtask_1.png)
