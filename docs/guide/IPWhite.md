@@ -8,4 +8,6 @@
 
 ![IP白名单](/images/ipwhite.png)
  
- 
+### 1.2 批量添加白名单IP
+见：网站管理->批量任务
+![批量添加白名单IP](./BatchTask.md)

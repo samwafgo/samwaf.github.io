@@ -21,6 +21,7 @@ export const zhSidebar = sidebar(
 					'/guide/SSLOrder.md',
 					'/guide/SslExpire.md',
 					'/guide/BlockingPage.md',
+					'/guide/BatchTask.md',
 					]
 			}
 		],	

@@ -21,6 +21,7 @@ export const enSidebar = sidebar(
 					'/en/guide/SSLOrder.md',
 					'/en/guide/SslExpire.md',
 					'/en/guide/BlockingPage.md',
+					'/en/guide/BatchTask.md',
 					]
 			}
 		],	

@@ -6,3 +6,7 @@ The protective wall will ignore IPs within the whitelist.
 Support IP or CIDR
 
 ![IP Whitelist](/images/ipwhite.png)
+
+### 1.2 Batch Add Whitelist IP  
+See: Website Management -> Batch Tasks  
+[Batch Add Whitelist IP](./BatchTask.md)

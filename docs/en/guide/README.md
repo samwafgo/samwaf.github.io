@@ -12,3 +12,4 @@
 - [SSL Certificate Bulk Expiration Check](./SslExpire.md)
 - [Automatic Certificate Application](./SSLOrder.md)
 - [Custom BlockIng Response Page](./BlockingPage.md)
+- [Batch Task](./BatchTask.md)
