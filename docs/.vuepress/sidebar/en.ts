@@ -18,6 +18,7 @@ export const enSidebar = sidebar(
 					'/en/guide/AttackLog.md',
 					'/en/guide/Sensitive.md',
 					'/en/guide/SSLConfig.md',
+					'/en/guide/SSLOrder.md',
 					'/en/guide/SslExpire.md',
 					'/en/guide/BlockingPage.md',
 					]
