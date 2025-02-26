@@ -48,3 +48,9 @@ token_expire_time
  
 
 令牌有两种失效情况：第一种是令牌到期失效， 第二种是帐号使用不同IP登录
+
+### 2.3 2FA安全码无法登录
+
+```
+SamWaf64.exe resetotp  
+```

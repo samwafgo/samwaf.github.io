@@ -49,4 +49,10 @@ The validity period of the management platform token, in minutes (default is 5 m
 There are two scenarios for token expiration:  
 1. The token expires after the set time.  
 2. The token becomes invalid when the account is logged in from a different IP address.  
- 
+
+
+### 2.3 2FA Secret Code cannot Login
+
+```
+SamWaf64.exe resetotp  
+```

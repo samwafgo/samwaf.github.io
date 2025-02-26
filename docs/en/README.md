@@ -116,6 +116,13 @@ features:
     icon: folder
     details: Supports automatic SSL certificate renewal
 
+  - title: Supports Custom Interception Interface
+    icon: folder
+    details: Supports custom interception interface
+
+  - title: Supports Two-Factor Authentication (2FA)
+    icon: folder
+    details: Supports Two-Factor Authentication (2FA)
 ---
 ## Project Source Code
 

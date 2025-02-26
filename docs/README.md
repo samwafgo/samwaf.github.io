@@ -115,6 +115,14 @@ features:
   - title: SSL自动申请延期
     icon: folder
     details: 支持SSL自动申请延期
+	
+  - title: 支持自定义拦击界面
+    icon: folder
+    details: 支持自定义拦击界面
+
+  - title: 支持双因素认证(2FA)
+    icon: folder
+    details: 支持双因素认证(2FA)
 ---	
 ## 项目源码
 
