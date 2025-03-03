@@ -1,4 +1,32 @@
 # Version Releases 
+## 20250303 (v1.3.10)
+::: warning
+  Important Update: v1.3.10 introduces security enhancements - 
+  1. Default token validity period set to 5 minutes (adjustable)
+  2. Added Two-Factor Authentication (2FA) for login
+:::
+- Enhanced security
+- Added attack log page
+- Added token expiration time configuration
+```
+System Settings - Parameter Configuration
+
+token_expire_time Management console token validity period, in minutes (default 5 minutes)
+```
+- Added Two-Factor Authentication (2FA)
+![Two-Factor Authentication Binding](/images/otp_bind.png)
+- Added online debugging toggle
+- Added custom interception interface
+![Custom Blocking Page](/images/blocking_page.png)
+- Added bulk import of IP blacklist
+- Initial integration with Deepseek
+- Added sensitive word filtering for request/response content (block/replace)
+- Fixed inaccurate statistics on the dashboard
+- Resolved compilation issues
+- Optimized crawler handling logic
+- Improved log query performance
+- Upgraded to latest libinjection library
+
 ## 20250116 (v1.3.9)  
 ::: warning  
 **Important Update:** v1.3.9 introduces access timeout control. Previously, there was no limit, allowing for infinite waits, which could lead to resource locking issues. The new version defaults to 60 seconds. If set to 0, there will be no limit. Please adjust according to your needs.  
