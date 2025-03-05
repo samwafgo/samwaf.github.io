@@ -4,6 +4,7 @@
 
 ### Backend  
 - Go version: 1.22.9  
+- windows need install mingw(https://www.mingw-w64.org/downloads/)
 
 ### Frontend  
 - Node version: 18.20.4  
@@ -72,3 +73,18 @@ Start: `main.go`
    ```  
 
 At this point, both the backend and frontend development codes are running, allowing collaborative debugging.  
+
+
+## Common Compilation Issues
+### 1. wafdb\localdb.go:380:32: destSQLiteConn.Backup undefined
+
+```
+# SamWaf/wafdb
+wafdb\localdb.go:380:32: destSQLiteConn.Backup undefined (type *sqlite3.SQLiteConn has no field or method Backup)
+```
+
+This error indicates that the SQLite implementation requires installing the compiler. For Windows systems: 
+1. Install MinGW (https://www.mingw-w64.org/downloads/)
+2. Add the MinGW bin directory to system environment variables. Example:
+![sqlite](/images/sqlite_mingw.png)
+Remember to restart your development tools after configuration changes.

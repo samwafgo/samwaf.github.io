@@ -3,6 +3,8 @@
 
 ### 后端
 - go 版本为1.22.9
+- windows 需要安装 mingw(https://www.mingw-w64.org/downloads/)
+
 ### 前端
 - Node 版本为18.20.4
 
@@ -68,3 +70,15 @@ npm run dev
 
 到此位置，后端和前端的开发代码就都启动了，可以进行协同调试了。
 
+
+## 编译常见问题
+### 1. wafdb\localdb.go:380:32: destSQLiteConn.Backup undefined
+
+```
+# SamWaf/wafdb
+wafdb\localdb.go:380:32: destSQLiteConn.Backup undefined (type *sqlite3.SQLiteConn has no field or method Backup)
+
+```
+
+这个是提示由于我们本地是用的sqlite，需要安装编译器，windows 下安装 mingw(https://www.mingw-w64.org/downloads/)，在windows环境下把mingw的bin目录添加到环境变量里面。示例如下：
+![sqlite](/images/sqlite_mingw.png)。改完后记着把开发工具重启一下
