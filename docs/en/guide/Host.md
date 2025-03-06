@@ -157,3 +157,20 @@ PS: SamWaf is lightweight. For migrating old data, we recommend shutting down th
 Multiple domains can be supported, one per line. Wildcard domains are also supported.
 
 ![Bind Multiple Domains Simultaneously](/images/bind_more_domain.png) 
+
+## 8. Health Check
+The system performs health checks every 5 seconds. Invalid connections will be removed when load balancing is configured.
+
+### 8.1 Custom Configuration
+![Custom Configuration](/images/healthy_config.png)
+
+- Enable Health Check (manually configurable)
+- Detection Methods: GET/HEAD (confirm backend supports HEAD)
+- Check Path: Default root directory /
+- Expected Status Code: 200 (customizable HTTP response codes)
+- Response Timeout: 5 seconds
+- Consecutive Failure Threshold: 3
+- Consecutive Success Threshold: 3
+
+### 8.2 Health Status Display
+![Status Display](/images/healthy_loadbalance.png)
