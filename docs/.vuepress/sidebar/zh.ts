@@ -7,7 +7,7 @@ export const zhSidebar = sidebar(
 				text: '操作手册',
 				children: [
 					'/guide/README.md',
-					'/guide/HOST.md',
+					'/guide/Host.md',
 					'/guide/Rule.md',
 					'/guide/IPWhite.md',
 					'/guide/IPBlack.md',

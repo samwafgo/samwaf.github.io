@@ -7,7 +7,7 @@ export const enSidebar = sidebar(
 				text: 'Manual',
 				children: [
 					'/en/guide/README.md',
-					'/en/guide/HOST.md',
+					'/en/guide/Host.md',
 					'/en/guide/Rule.md',
 					'/en/guide/IPWhite.md',
 					'/en/guide/IPBlack.md',
