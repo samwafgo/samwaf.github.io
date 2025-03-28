@@ -54,3 +54,13 @@ token_expire_time
 ```
 SamWaf64.exe resetotp  
 ```
+
+## 3 管理端相关
+
+### 3.1 如何切换默认的端口端口
+
+根目录 conf，文件config.yml
+```
+local_port: 26666 // 本地管理端口 
+```
+ 

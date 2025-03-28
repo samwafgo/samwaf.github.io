@@ -6,4 +6,5 @@ Defend against CC attacks.
 
 ![CC Protection](/images/cc.png)
 
-- Rate: 1, Limit: 100. This means that access exceeding 100 times per second will be restricted.
+- rate: Average Rate Mode: Evenly distributes requests across each second, suitable for preventing sudden traffic spikes
+- window: Sliding Window Mode: Strictly enforces "up to M requests within N seconds" rate limits, aligning with intuitive time-bound control

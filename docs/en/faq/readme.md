@@ -56,3 +56,11 @@ There are two scenarios for token expiration:
 ```
 SamWaf64.exe resetotp  
 ```
+
+## 3 Admin Console  
+
+### 3.1 How to Change the Default Port  
+
+Go to the `config.yml` file in the root directory's `conf` folder:  
+```yaml
+local_port: 26666  // Local management port  
