@@ -88,7 +88,10 @@ Key configuration; set it up once for future use.
 	
 - Backend System Type and Backend Application Type:
      Not necessary; you can select the actual type or keep the default (adaptations may be made for different backend access later).
- 
+
+- Backend Domain:
+     Defaults to the same as the primary domain (requires http/https protocol prefix). Exception: If the frontend domain and backend domain configured in samwaf differ, you must enable the "Pass Backend Domain" option to ensure proper access.
+	  
 - Backend IP:
      If SamWaf and the website are on the same server, fill in 127.0.0.1. If on different servers, please fill in the actual IP.	
 - Backend Port:
