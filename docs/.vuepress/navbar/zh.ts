@@ -7,7 +7,7 @@ export const zhNavbar = navbar([
 	},
 	{
 			text: '快速上手',
-			link: '/quickstart',
+			link: '/quickstart/',
 	},
 	{
 			text: '操作手册',

@@ -7,7 +7,7 @@ export const enNavbar = navbar([
 	},
 	{
 			text: 'QuickStart',
-			link: '/en/quickstart',
+			link: '/en/quickstart/',
 	},
 	{
 			text: 'Manual',
