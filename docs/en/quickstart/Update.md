@@ -1,4 +1,31 @@
-# Version Releases 
+# Version Releases
+
+## 20250407 (v1.3.11)
+**Important Update: v1.3.11 fixes a certificate application bug. Please check your site. If the bound certificate appears as a string of code instead of a valid certificate, please reissue or reapply for the certificate.**
+
+- Added human-machine graphical verification (adaptive to Chinese and English)
+- Added website health check
+- Added logging of time consumption for each processing stage
+- Added configuration to hide the Server response header (1 to hide, 0 to show)
+- Added directory traversal vulnerability detection
+- Added configuration for mandatory 2Fa binding
+- Added option to enable or disable backend HTTPS certificate validity verification (no validation of backend certificate)
+- Added one-click bulk switch to enable website defense
+- Added logging of response header information
+- Fixed SSL certificate application issue
+- Fixed SQL detection issue
+- Fixed slow single IP query issue
+- Fixed issue with handling 301 and 302 redirects from backend during automatic certificate request (well-known)
+- Fixed misleading success message when default port is already in use
+- Fixed response encoding issue
+- Fixed case-sensitivity issue when detecting URLs in whitelist, blacklist, and privacy protection
+- Fixed frontend parameter passing error with AI assistant feature in Firefox
+- Fixed abnormal traffic statistics issue
+- Optimized unified log display
+- Optimized rule code and added automatic rule generation by bot
+- Optimized Docker with new `beta` tag to indicate the latest version
+
+
 ## 20250303 (v1.3.10)
 ::: warning
   Important Update: v1.3.10 introduces security enhancements - 

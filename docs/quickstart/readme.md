@@ -4,7 +4,7 @@
 **强烈建议您在测试环境测试充分在上生产，如遇到问题请及时反馈**
 :::
 
-## 1.下载最新版本 <Badge text="v1.3.10" type="tip" />
+## 1.下载最新版本 <Badge text="v1.3.11" type="tip" />
 gitee:  [https://gitee.com/samwaf/SamWaf/releases](https://gitee.com/samwaf/SamWaf/releases)
 
 github: [https://github.com/samwafgo/SamWaf/releases](https://github.com/samwafgo/SamWaf/releases)
