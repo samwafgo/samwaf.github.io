@@ -1,4 +1,10 @@
 # Version Releases
+## 20250423 (v1.3.12)
+- Added anti-leech (hotlink protection) feature  
+- Fixed issue with host editing not working properly  
+- Fixed WebSocket communication failure  
+- Fixed conflict between CAPTCHA and certificate application  
+- Fixed issue with certificate selection for hosts  
 
 ## 20250407 (v1.3.11)
 **Important Update: v1.3.11 fixes a certificate application bug. Please check your site. If the bound certificate appears as a string of code instead of a valid certificate, please reissue or reapply for the certificate.**
