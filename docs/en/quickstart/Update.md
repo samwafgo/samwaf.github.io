@@ -1,4 +1,9 @@
 # Version Releases
+## 20250504 (v1.3.13)  
+- Added crawler access analysis  
+- Added whitelist processing for WeChat Pay and Alipay  
+- Optimized upgrade strategy: added beta version, reduced engine restart time, and enabled automatic backup of old versions
+
 ## 20250423 (v1.3.12)
 - Added anti-leech (hotlink protection) feature  
 - Fixed issue with host editing not working properly  
