@@ -23,6 +23,7 @@ export const enSidebar = sidebar(
 					'/en/guide/BlockingPage.md',
 					'/en/guide/BatchTask.md',
 					'/en/guide/Otp.md',
+					'/en/guide/Tunnel.md',
 					]
 			}
 		],	

@@ -23,6 +23,7 @@ export const zhSidebar = sidebar(
 					'/guide/BlockingPage.md',
 					'/guide/BatchTask.md',
 					'/guide/Otp.md',
+					'/guide/Tunnel.md',
 					]
 			}
 		],	
