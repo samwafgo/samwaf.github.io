@@ -64,3 +64,13 @@ SamWaf64.exe resetotp
 local_port: 26666 // 本地管理端口 
 ```
  
+### 3.2 如果Waf加白名单错误导致无法访问
+
+如果配置不正确导致无法正常访问的，可以在conf/config.yml （修改前请备份）
+
+```
+security:
+    ip_whitelist: 0.0.0.0/0,::/0
+
+```
+修改。重启程序即可。

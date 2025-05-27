@@ -1,4 +1,41 @@
 # Version Releases
+## 20250527 (v1.3.14) 
+- Added WAF management interface whitelist access  
+You can add whitelist access control in System Settings -> Management Configuration. By default, all access is allowed. If specific IPs or IP ranges are configured, only those will be allowed access.  
+![Management Interface Whitelist Access](/images/management_whiteip.png)
+
+- Added DNS-based SSL certificate application method  
+![DNS-based SSL Certificate Application](/images/dns_apply.png)
+
+- Added cache support for both memory and file  
+![Cache Configuration](/images/cacheconfig.png)
+
+- Added whitelist and blacklist support for tunnel management  
+![Tunnel](/images/tunnel1.png)  
+![Tunnel Connection](/images/tunnel3.png)
+
+- Added log library partitioning by size
+
+- Added support for wildcard domains without specific domain IPs  
+![Wildcard Domain without Specific IP](/images/unhost.png)
+
+- Added meta encoding extraction
+
+- Added default encoding setting  
+![Default Encoding Setting](/images/default_encoding.png)
+
+- Added Alipay payment callback IP
+
+- Fixed logic handling for health check disable
+
+- Fixed slow performance issue when importing over 100,000+ IPs in batch
+
+- Fixed delayed index creation for new user databases
+
+- Optimized configuration file writing logic
+
+- Optimized import for latest Excel library
+
 ## 20250504 (v1.3.13)  
 - Added crawler access analysis  
 - Added whitelist processing for WeChat Pay and Alipay  
