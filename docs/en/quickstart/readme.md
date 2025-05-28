@@ -19,44 +19,25 @@ GitHub: [https://github.com/samwafgo/SamWaf/releases](https://github.com/samwafg
 SamWaf64.exe
 ```
 
-- As a service:
-
+- As a service As Administration
 ```
-// Install
-SamWaf64.exe install 
+//Install & Start
+SamWaf64.exe install && SamWaf64.exe start
 
-// Start
-SamWaf64.exe start
-
-// Stop
-SamWaf64.exe stop
-
-// Uninstall
-SamWaf64.exe uninstall
-```
+//Stop &  Uninstall 
+SamWaf64.exe stop && SamWaf64.exe uninstall
+``` 
 
 ### Linux
 
-- Direct start:
-
+- install
 ```
-./SamWafLinux64
+curl -sSO http://update.samwaf.com/latest/install_samwaf.sh && bash install_samwaf.sh install 
+``` 
+
+- uninstall
 ```
-
-- As a service:
-
-```
-// Install
-./SamWafLinux64 install 
-
-// Start
-./SamWafLinux64 start
-
-// Stop
-./SamWafLinux64 stop
-
-// Uninstall
-./SamWafLinux64 uninstall
+curl -sSO http://update.samwaf.com/latest/install_samwaf.sh && bash install_samwaf.sh uninstall 
 ```
 
 ::: warning
