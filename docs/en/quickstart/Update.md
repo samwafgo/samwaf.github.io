@@ -1,4 +1,20 @@
 # Version Releases
+## 20250623 (v1.3.15) 
+- Added support for applying SSL certificates under the same provider with different accounts  
+- Added batch import functionality for sensitive words  
+- Added support for pure static web sites  
+- Added configuration option to enable debug logs  
+- Added support for importing `.crt` and `.key` files from certificate folders  
+- Added ability to delete large log files online  
+- Added support for HTTP to HTTPS redirection on the same port  
+- Fixed issue where `event_stream` could not respond properly  
+- Fixed memory leak issue in health check  
+- Fixed corrupted attachment download issue  
+- Fixed issue where forced HTTP to HTTPS redirection used default port 80  
+- Optimized SSL certificate file verification method  
+- Optimized quick Linux deployment process  
+- Optimized batch import with manual and scheduled execution support  
+
 ## 20250527 (v1.3.14) 
 - Added WAF management interface whitelist access  
 You can add whitelist access control in System Settings -> Management Configuration. By default, all access is allowed. If specific IPs or IP ranges are configured, only those will be allowed access.  
