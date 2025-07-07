@@ -30,9 +30,20 @@
 ## 2 登录相关
 ### 2.1 密码忘记了
 
+::: tabs
+
+@tab Linux
+
+```
+./SamWaf64 resetpwd  
+```
+
+@tab Windows
+
 ```
 SamWaf64.exe resetpwd  
 ```
+:::
 
 ### 2.2 口令失效
 为了安全自v1.3.10-beta.4版本，将token增加实效性。
@@ -51,9 +62,22 @@ token_expire_time
 
 ### 2.3 2FA安全码无法登录
 
+
+::: tabs
+
+@tab Linux
+
+```
+./SamWaf64 resetotp  
+```
+
+@tab Windows
+
 ```
 SamWaf64.exe resetotp  
 ```
+:::
+
 
 ## 3 管理端相关
 

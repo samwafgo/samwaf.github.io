@@ -30,9 +30,21 @@ Change 80 or 443 to another port.
 ## 2 Login-related  
 ### 2.1 Forgot Password
 
+
+::: tabs
+
+@tab Linux
+
+```
+./SamWaf64 resetpwd  
+```
+
+@tab Windows
+
 ```
 SamWaf64.exe resetpwd  
 ```
+:::
  
 
 ### 2.2 Token Expiration  
@@ -53,9 +65,20 @@ There are two scenarios for token expiration:
 
 ### 2.3 2FA Secret Code cannot Login
 
+::: tabs
+
+@tab Linux
+
+```
+./SamWaf64 resetotp  
+```
+
+@tab Windows
+
 ```
 SamWaf64.exe resetotp  
 ```
+:::
 
 ## 3 Admin Console  
 
