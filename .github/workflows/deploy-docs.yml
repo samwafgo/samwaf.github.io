@@ -27,13 +27,11 @@ jobs:
           run_install: true
           version: 8
 
-
       - name: 设置 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
-
 
       - name: 构建文档
         env:
@@ -41,6 +39,24 @@ jobs:
         run: |-
           pnpm run build
           > docs/.vuepress/dist/.nojekyll
+
+      # 新增：打包构建产物
+      - name: 打包文档构建产物
+        run: |
+          cd docs/.vuepress/dist
+          tar -czf ../../../samwaf-docs-build.tar.gz .
+          cd ../../../
+          zip -r samwaf-docs-build.zip docs/.vuepress/dist/
+
+      # 新增：上传构建产物作为artifact
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: samwaf-docs-build
+          path: |
+            samwaf-docs-build.tar.gz
+            samwaf-docs-build.zip
+          retention-days: 30
 
       - name: 部署文档
         uses: JamesIves/github-pages-deploy-action@v4
