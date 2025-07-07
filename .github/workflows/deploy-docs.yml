@@ -33,6 +33,14 @@ jobs:
           node-version: 20
           cache: pnpm
 
+      # 生成版本号（当前时间）
+      - name: 生成版本号
+        id: version
+        run: |
+          VERSION=$(date +"%Y%m%d%H%M%S")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Generated version: $VERSION"
+
       - name: 构建文档
         env:
           NODE_OPTIONS: --max_old_space_size=8192
@@ -40,23 +48,46 @@ jobs:
           pnpm run build
           > docs/.vuepress/dist/.nojekyll
 
-      # 新增：打包构建产物
+      # 打包构建产物
       - name: 打包文档构建产物
         run: |
           cd docs/.vuepress/dist
-          tar -czf ../../../samwaf-docs-build.tar.gz .
+          # 带版本号的文件
+          tar -czf ../../../samwaf-docs-${{ steps.version.outputs.version }}.tar.gz .
+          # 不带版本号的文件
+          tar -czf ../../../samwaf-docs-latest.tar.gz .
           cd ../../../
-          zip -r samwaf-docs-build.zip docs/.vuepress/dist/
+          # 带版本号的文件
+          zip -r samwaf-docs-${{ steps.version.outputs.version }}.zip docs/.vuepress/dist/
+          # 不带版本号的文件
+          zip -r samwaf-docs-latest.zip docs/.vuepress/dist/
 
-      # 新增：上传构建产物作为artifact
-      - name: 上传构建产物
-        uses: actions/upload-artifact@v4
+      # 创建Release并上传文件
+      - name: 创建Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: samwaf-docs-build
-          path: |
-            samwaf-docs-build.tar.gz
-            samwaf-docs-build.zip
-          retention-days: 30
+          tag_name: v${{ steps.version.outputs.version }}
+          name: SamWaf文档构建 v${{ steps.version.outputs.version }}
+          body: |
+            ## SamWaf文档构建产物
+            
+            构建时间: ${{ steps.version.outputs.version }}
+            提交: ${{ github.sha }}
+            
+            ### 下载说明
+            - `samwaf-docs-*.tar.gz`: Linux/Mac 用户推荐
+            - `samwaf-docs-*.zip`: Windows 用户推荐
+            
+            解压后可直接部署到任何静态文件服务器。
+          files: |
+            samwaf-docs-${{ steps.version.outputs.version }}.tar.gz
+            samwaf-docs-${{ steps.version.outputs.version }}.zip
+            samwaf-docs-latest.tar.gz
+            samwaf-docs-latest.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 部署文档
         uses: JamesIves/github-pages-deploy-action@v4
