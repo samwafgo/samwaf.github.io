@@ -4,7 +4,7 @@
 
 ### Backend  
 - Go version: 1.22.9  
-- windows need install mingw(https://www.mingw-w64.org/downloads/)
+- windows need install mingw(https://www.mingw-w64.org/downloads/) MinGW-W64-builds x86_64-15.2.0-release-win32-seh-ucrt-rt_v13-rev0.7z
 
 ### Frontend  
 - Node version: 18.20.4  

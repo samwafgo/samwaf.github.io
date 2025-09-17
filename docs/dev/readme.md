@@ -3,7 +3,8 @@
 
 ### 后端
 - go 版本为1.22.9
-- windows 需要安装 mingw(https://www.mingw-w64.org/downloads/)
+- windows 需要安装 mingw(https://www.mingw-w64.org/downloads/) MinGW-W64-builds x86_64-15.2.0-release-win32-seh-ucrt-rt_v13-rev0.7z
+
 
 ### 前端
 - Node 版本为18.20.4
