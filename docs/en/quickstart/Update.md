@@ -1,4 +1,70 @@
-# Version Releases
+# Version Releases 
+
+## 2025-09-28 (v1.3.16)
+
+- Optimized access performance
+
+- Added support for customizing SSL maximum and minimum versions
+
+- Added support for custom title and content in capjs
+
+- Added batch deletion of disabled IPs
+
+- Added display of CPU, memory, and disk usage
+
+- Added option to show remarks in host list
+
+- Added batch deletion of sensitive words
+
+- Added batch deletion of whitelist entries
+
+- Added batch deletion of URL access restrictions
+
+- Added batch deletion of rules
+
+- Added support for custom ACME Endpoint to be compatible with ZeroSSL and self-hosted ACME-compatible CAs such as StepCA
+
+- Added “log-only mode” to test protection effectiveness without blocking
+
+- Added query by access identifier
+
+- Added option to store access logs into the database
+
+```
+New config parameter:  
+
+log_persist_enable   Enable log persistence (1 = enabled, 0 = disabled)  
+```
+
+- Added rule engine support to extract and evaluate specific header values
+
+- Added support for Proxy Protocol v1/v2
+
+```
+New config parameter:  
+
+enable_proxy_protocol   Enable Proxy Protocol (1 = enabled, 0 = disabled)  
+```
+
+- Fixed issue with `Content-Encoding: br`
+
+- Fixed backend login detection logic
+
+```
+New config parameters:  
+
+enable_device_fingerprint   Enable device fingerprint authentication (1 = enabled, 0 = disabled)  
+enable_strict_ip_binding    Enable strict IP binding (1 = enabled, 0 = disabled; recommended disabled when fingerprint is enabled)  
+```
+
+- Fixed timestamp display issue in attack logs
+
+- Fixed abnormal APK download issue
+
+- Fixed TCP connection closing bug
+
+- Fixed handling of `Content-Encoding` in requests (thanks to @Cycloctane)
+ 
 ## 20250623 (v1.3.15) 
 - Added support for applying SSL certificates under the same provider with different accounts  
 - Added batch import functionality for sensitive words  
