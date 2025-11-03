@@ -139,3 +139,6 @@ features:
 - github
 [https://github.com/samwafgo/SamWaf](https://github.com/samwafgo/SamWaf)
  
+## 公众号
+
+<img src="/images/mp_samwaf.png" alt="SamWaf 公众号" width="350" />

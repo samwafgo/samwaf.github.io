@@ -1,5 +1,28 @@
 # Version Releases 
 
+## 20251103 (v1.3.17)
+
+- Optimized performance and stability. Thanks to @wangpenga999
+- Added official WeChat account **SamWaf Open Source Firewall**
+  ![SamWaf Open Source Firewall](/images/mp_samwaf.png)
+- Added Baidu Cloud DNS validation support for SSL certificate requests. Thanks to @Lostxsawyer
+- Added per-site OWASP control configuration. Thanks to @systemctl529
+- Added backend IP and port logging in load balancing mode. Thanks to @minc-nice-100
+- Added generation of **DEBUG builds** starting from v1.3.17-beta.8
+- Added compatibility for **mobile version login** (testing)
+- Added batch cache copy function to replicate cache settings across multiple sites. Thanks to @Lostxsawyero
+- Added direct log query from **homepage IP ranking**. Thanks to @raychan239
+- Added **macOS Intel/ARM** builds
+- Added automatic **daily GC cleanup at 1:00 AM**
+- Added **system performance monitoring** (CPU, memory, disk)
+- Fixed potential errors when stopping services under specific conditions
+- Fixed content-size mismatch issue during compressed data transfer
+- Fixed attachment download type validation. Thanks to @954437801
+- Fixed issue where unbound but resolved domains returned HTTP 200 instead of 403. Thanks to @wangpenga999
+- Fixed SSL handshake error with wildcard domains. Thanks to @robincodex
+- Fixed possible concurrency issue during built-in cache cleanup
+
+
 ## 2025-09-28 (v1.3.16)
 
 - Optimized access performance

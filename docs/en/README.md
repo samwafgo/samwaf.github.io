@@ -138,3 +138,7 @@ features:
 [https://gitee.com/samwaf/SamWaf](https://gitee.com/samwaf/SamWaf)
 - GitHub
 [https://github.com/samwafgo/SamWaf](https://github.com/samwafgo/SamWaf)
+
+## WeChat Official Account
+
+<img src="/images/mp_samwaf.png" alt="SamWaf WeChat" width="350" />
