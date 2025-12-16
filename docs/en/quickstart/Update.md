@@ -1,5 +1,39 @@
 # Version Releases 
 
+## 20251216 (v1.3.18)
+- Added: CC defense now supports rule condition activation. Thanks to @blue991989
+- Added: One-click modification with file restore functionality. Thanks to @SONGjiemo
+- Added: Query analyzer
+- Added: HTTPS certificate configuration for WAF management interface, enabling HTTPS access to SamWaf
+- Added: One-click add IP to blacklist from risk and access log data lists
+- Added: Display of visitor IP port and service port correspondence in tunnel logs. Thanks to (一只喵鱼)
+- Added: Main database and log database switched to gormigrate management
+- Added: Detect error count within specified time range to ban IP. Thanks to @SONGjiemo
+- Added: IP blacklist export functionality. Thanks to @tuokang
+- Added: Message notifications to Feishu and DingTalk can subscribe to different message types
+- Added: Control option to check for beta version updates. Thanks to @netcns
+- Added: Command line support for execsql command execution
+- Added: HTTP/3 support. Thanks to @qiulaidongfeng
+- Added: Enhanced custom response code interface functionality
+- Added: System firewall IP management functionality
+- Added: Proactive deletion of risk tags. Thanks to @Sky-Sparkle
+- Added: New log-related configuration panel
+- Added: Rule detection for search crawler bots. Thanks to Lucky
+- Added: Tunnel functionality supports configurable access time periods
+- Fixed: Debian system runtime error issue. Thanks to @apibits
+- Fixed: Firewall IP ban not taking effect on Linux
+- Fixed: Certificate folder certificate association with hosts not taking effect after update. Thanks to @netcns
+- Fixed: Wildcard domain binding renewal not synchronizing properly. Thanks to @Think-Me
+- Fixed: AI assistant returning "remote server returned non-json data" when entering random content. Thanks to @Sky-Sparkle
+- Fixed: Backend IP and port changes not taking effect in real-time (thanks to 10828**)
+- Fixed: HTTP certificate application failure when backend has gzip enabled (thanks to 10828**)
+- Fixed: AI assistant interface color scheme in dark mode making text invisible. Thanks to @scavin
+- Fixed: stat library index may be lost after service restart
+- Optimized: Database merge operations now provide data prompts if exceptions occur. Thanks to @wangpenga999
+- Optimized: Reduced heap allocation for header string concatenation. Thanks to @qiulaidongfeng
+- Optimized: IP failure ban functionality. Thanks to @SONGjiemo
+For more details, please check the SamWaf official WeChat account
+
 ## 20251103 (v1.3.17)
 
 - Optimized performance and stability. Thanks to @wangpenga999
