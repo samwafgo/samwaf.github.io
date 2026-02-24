@@ -1,4 +1,47 @@
 # Version Releases 
+## 20260224 (v1.3.19)
+v1.3.19
+
+## 20260224 (v1.3.19)
+- Added: Display associated host information within the certificate folder
+- Added: Rules can now be enabled or disabled
+- Added: Email notification support (Thanks to zisain)
+- Added: Server酱 notification support (Thanks to Tea-NT)
+- Added: Custom authentication prefix for password verification and CAPTCHA (Thanks to wenjiamian)
+- Added: Tasks can now have custom modification times (Thanks to wjw479)
+- Added: Support for Let's Encrypt free IP certificate issuance and automatic renewal (Thanks to nankaine)
+- Added: Support for custom backend header forwarding (Thanks to GiriNeko)
+- Added: Request header desensitization toggle (Thanks to 3757***)
+- Added: Custom interception page supports different handling methods by interception type (Thanks to LockiJiang)
+- Added: CC protection supports 444 to directly close the connection (Thanks to echs-top)
+- Added: Two-Factor Authentication (2FA) supports custom issuer configuration and display
+- Added: Custom X-Forwarded-For header supports modifying chained IPs (Thanks to GiriNeko)
+- Added: Support for ZeroSSL domain certificate issuance (Thanks to dabaibai)
+- Added: Tunnel supports IPv4 and IPv6 selection (Thanks to 王**)
+- Added: Rule list now includes rule ID
+- Added: Email notification channel allows custom recipient addresses for subscriptions
+- Added: Frontend configuration selections are automatically saved
+- Added: Enterprise WeChat notification support (Thanks to Drqf)
+- Added: Rule effectiveness testing interface
+- Added: Additional custom functions for rules
+- Added: Support for writing access logs to nginx, apache, or custom log files (Thanks to Neillll)
+- Added: Support for the latest version of Ip2region with upload capability (Thanks to echs-top)
+- Added: Support for custom response headers (Thanks to echs-top)
+- Fixed: Custom login page for account/password authentication and resolved conflict when backend systems also use Authorization (Thanks to xihefeng)
+- Fixed: Certificate binding information was not cleared when duplicating a site (Thanks to a1403951401)
+- Fixed: HTTP/3 restart port occupation issue (Thanks to echs-top)
+- Fixed: Bug in dark mode (Thanks to lifetin)
+- Fixed: When real IP extraction was enabled and two IPs were passed via X-Forwarded-For, it could cause the website to become unresponsive (Thanks to rzorzo)
+- Fixed: HTTP did not automatically redirect to HTTPS when reverse proxying wildcard domains (Thanks to CHD073)
+- Fixed: Merged notification frequency and notification content
+- Fixed: Potential resource leak in backend health checks (Thanks to yypts, EvianTian)
+- Optimized: Website selection now supports input filtering
+- Optimized: Refactored IP extraction settings interface
+- Optimized: When custom X-Forwarded-For value is not empty, the filled value will be used (Thanks to GiriNeko)
+- Optimized: Notification subscription interface (Thanks to zisain)
+- Optimized: Non-standard 443 port HTTP to HTTPS redirection requires enabling redirect service
+- Optimized: Unified IP extraction sources (Thanks to SONGjiemo)
+- Security: Management interface hides SamWaf signature information (Thanks to wenjiamian)
 
 ## 20251216 (v1.3.18)
 - Added: CC defense now supports rule condition activation. Thanks to @blue991989
