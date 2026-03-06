@@ -1,0 +1,825 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "SamWaf Web Application Firewall 开放平台 API 文档。需要在请求头携带 X-API-Key 进行鉴权。",
+        "title": "SamWaf Open API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/sysinfo/version": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "返回当前 SamWaf 的版本号、版本名称及发布状态",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统信息"
+                ],
+                "summary": "获取系统版本信息",
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.VersionInfo"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/host/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "新增一个网站防护主机配置",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-主机管理"
+                ],
+                "summary": "新增网站防护主机",
+                "parameters": [
+                    {
+                        "description": "主机配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.WafHostAddReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功，返回主机code",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/host/detail": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据 code 获取单个主机的详细配置",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-主机管理"
+                ],
+                "summary": "获取网站防护主机详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "主机唯一编码",
+                        "name": "code",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.Hosts"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/host/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页查询网站防护主机列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-主机管理"
+                ],
+                "summary": "获取网站防护主机列表",
+                "parameters": [
+                    {
+                        "description": "分页查询参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.WafHostSearchReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/response.PageResult"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/waflog/attack/detail": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据 req_uuid 获取单条攻击日志详情（含请求体、响应体）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "日志-攻击日志"
+                ],
+                "summary": "获取攻击日志详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "请求UUID",
+                        "name": "req_uuid",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "数据库名称，默认 local_log",
+                        "name": "current_db_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "输出格式：raw 或 curl",
+                        "name": "output_format",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/waflog/attack/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页查询攻击日志，支持按主机码、规则、IP、时间范围等过滤",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "日志-攻击日志"
+                ],
+                "summary": "获取攻击日志列表",
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.WafAttackLogSearch"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/response.PageResult"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.Hosts": {
+            "type": "object",
+            "properties": {
+                "anti_leech_json": {
+                    "description": "防盗链配置 json",
+                    "type": "string"
+                },
+                "auto_jump_https": {
+                    "description": "是否自动跳转https  0 不自动 1 强制80跳转https",
+                    "type": "integer"
+                },
+                "bind_more_host": {
+                    "description": "绑定多域名",
+                    "type": "string"
+                },
+                "bind_more_port": {
+                    "description": "是否绑定多个端口",
+                    "type": "string"
+                },
+                "bind_ssl_id": {
+                    "description": "绑定SSL的ID",
+                    "type": "string"
+                },
+                "cache_json": {
+                    "description": "缓存配置 json",
+                    "type": "string"
+                },
+                "captcha_json": {
+                    "description": "验证码配置 json",
+                    "type": "string"
+                },
+                "certfile": {
+                    "description": "证书文件",
+                    "type": "string"
+                },
+                "code": {
+                    "description": "唯一码",
+                    "type": "string"
+                },
+                "create_time": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "custom_headers_json": {
+                    "description": "自定义头信息配置 json",
+                    "type": "string"
+                },
+                "custom_response_headers_json": {
+                    "description": "自定义响应头信息配置 json",
+                    "type": "string"
+                },
+                "default_encoding": {
+                    "description": "默认编码 utf-8 或者 gbk  auto字符串自动选择",
+                    "type": "string"
+                },
+                "defense_json": {
+                    "description": "自身防御 json",
+                    "type": "string"
+                },
+                "exclude_url_log": {
+                    "description": "排除的url开头的数据 换行隔开",
+                    "type": "string"
+                },
+                "global_host": {
+                    "description": "默认全局 1 全局 0非全局",
+                    "type": "integer"
+                },
+                "guard_status": {
+                    "description": "防御状态 1 是开启防御 0 是防御关闭",
+                    "type": "integer"
+                },
+                "healthy_json": {
+                    "description": "后端健康度检测 json",
+                    "type": "string"
+                },
+                "host": {
+                    "description": "域名",
+                    "type": "string"
+                },
+                "http_auth_base_type": {
+                    "description": "认证类型 authorization(默认Basic Auth) custom(自定义页面)",
+                    "type": "string"
+                },
+                "http_auth_path_prefix": {
+                    "description": "HTTP认证路径前缀，用于隐藏系统特征，默认为随机生成",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "insecure_skip_verify": {
+                    "description": "是否开启后端https证书有效性验证 默认 0 是校验 1 是不校验",
+                    "type": "integer"
+                },
+                "ip_mode": {
+                    "description": "IP提取模式: \"nic\" 网卡模式 或 \"proxy\" 代理模式",
+                    "type": "string"
+                },
+                "is_enable_http_auth_base": {
+                    "description": "是否 HTTPAuthBase  1 激活  非1 没有激活",
+                    "type": "integer"
+                },
+                "is_enable_load_balance": {
+                    "description": "是否激活负载  1 激活  非1 没有激活",
+                    "type": "integer"
+                },
+                "is_trans_back_domain": {
+                    "description": "是否传递后端域名到后端服务器侧",
+                    "type": "integer"
+                },
+                "keyfile": {
+                    "description": "密钥文件",
+                    "type": "string"
+                },
+                "load_balance_stage": {
+                    "description": "负载策略",
+                    "type": "integer"
+                },
+                "log_only_mode": {
+                    "description": "仅记录模式 1开启 0关闭",
+                    "type": "integer"
+                },
+                "port": {
+                    "description": "端口",
+                    "type": "integer"
+                },
+                "remarks": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "remote_app": {
+                    "description": "是什么类型的应用",
+                    "type": "string"
+                },
+                "remote_host": {
+                    "description": "远端域名",
+                    "type": "string"
+                },
+                "remote_ip": {
+                    "description": "远端指定IP",
+                    "type": "string"
+                },
+                "remote_port": {
+                    "description": "远端端口",
+                    "type": "integer"
+                },
+                "remote_system": {
+                    "description": "是宝塔 phpstudy等",
+                    "type": "string"
+                },
+                "response_time_out": {
+                    "description": "响应超时时间 默认60秒,为0则无限等待",
+                    "type": "integer"
+                },
+                "ssl": {
+                    "description": "是否是ssl",
+                    "type": "integer"
+                },
+                "start_status": {
+                    "description": "启动状态 如果是0 启动  ; 如果是1 不启动",
+                    "type": "integer"
+                },
+                "static_site_json": {
+                    "description": "静态站点配置 json",
+                    "type": "string"
+                },
+                "tenant_id": {
+                    "description": "租户ID",
+                    "type": "string"
+                },
+                "transport_json": {
+                    "description": "传输配置 json",
+                    "type": "string"
+                },
+                "unrestricted_port": {
+                    "description": "不限来源匹配端口 0 限制 1，不限制",
+                    "type": "integer"
+                },
+                "update_time": {
+                    "description": "更新时间",
+                    "type": "string"
+                },
+                "user_code": {
+                    "description": "用户码（主要键）",
+                    "type": "string"
+                }
+            }
+        },
+        "model.VersionInfo": {
+            "type": "object",
+            "properties": {
+                "need_update": {
+                    "type": "boolean"
+                },
+                "version": {
+                    "type": "string"
+                },
+                "version_desc": {
+                    "type": "string"
+                },
+                "version_name": {
+                    "type": "string"
+                },
+                "version_new": {
+                    "type": "string"
+                },
+                "version_release": {
+                    "type": "string"
+                }
+            }
+        },
+        "request.WafAttackLogSearch": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "description": "状态",
+                    "type": "string"
+                },
+                "current_db_name": {
+                    "type": "string"
+                },
+                "filter_by": {
+                    "description": "筛选字段",
+                    "type": "string"
+                },
+                "filter_value": {
+                    "description": "筛选值",
+                    "type": "string"
+                },
+                "host_code": {
+                    "description": "主机码",
+                    "type": "string"
+                },
+                "keyWord": {
+                    "description": "关键字",
+                    "type": "string"
+                },
+                "log_only_mode": {
+                    "description": "日志模式",
+                    "type": "string"
+                },
+                "method": {
+                    "description": "访问方法",
+                    "type": "string"
+                },
+                "pageIndex": {
+                    "description": "当前页面索引",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "description": "每页大小",
+                    "type": "integer"
+                },
+                "req_uuid": {
+                    "description": "请求UUID",
+                    "type": "string"
+                },
+                "rule": {
+                    "description": "规则名",
+                    "type": "string"
+                },
+                "sort_by": {
+                    "description": "排序字段",
+                    "type": "string"
+                },
+                "sort_descending": {
+                    "description": "排序方式",
+                    "type": "string"
+                },
+                "src_ip": {
+                    "description": "请求IP",
+                    "type": "string"
+                },
+                "status_code": {
+                    "description": "响应码",
+                    "type": "string"
+                },
+                "unix_add_time_begin": {
+                    "description": "开始时间",
+                    "type": "string"
+                },
+                "unix_add_time_end": {
+                    "description": "结束时间",
+                    "type": "string"
+                }
+            }
+        },
+        "request.WafHostAddReq": {
+            "type": "object",
+            "properties": {
+                "anti_leech_json": {
+                    "description": "防盗链配置 json",
+                    "type": "string"
+                },
+                "auto_jump_https": {
+                    "description": "是否自动跳转https  0 不自动 1 强制80跳转https",
+                    "type": "integer"
+                },
+                "bind_more_host": {
+                    "description": "绑定多域名",
+                    "type": "string"
+                },
+                "bind_more_port": {
+                    "description": "是否绑定多个端口",
+                    "type": "string"
+                },
+                "bind_ssl_id": {
+                    "description": "绑定SSL的ID",
+                    "type": "string"
+                },
+                "cache_json": {
+                    "description": "缓存配置 json",
+                    "type": "string"
+                },
+                "captcha_json": {
+                    "description": "验证码配置 json",
+                    "type": "string"
+                },
+                "certfile": {
+                    "description": "证书文件",
+                    "type": "string"
+                },
+                "code": {
+                    "description": "唯一编码",
+                    "type": "string"
+                },
+                "custom_headers_json": {
+                    "description": "自定义头信息配置 json",
+                    "type": "string"
+                },
+                "custom_response_headers_json": {
+                    "description": "自定义响应头信息配置 json",
+                    "type": "string"
+                },
+                "default_encoding": {
+                    "description": "默认编码 utf-8 或者 gbk auto字符串自动选择",
+                    "type": "string"
+                },
+                "defense_json": {
+                    "description": "自身防御 json",
+                    "type": "string"
+                },
+                "exclude_url_log": {
+                    "description": "排除的url开头的数据 换行隔开",
+                    "type": "string"
+                },
+                "healthy_json": {
+                    "description": "后端健康度检测 json",
+                    "type": "string"
+                },
+                "host": {
+                    "description": "域名",
+                    "type": "string"
+                },
+                "http_auth_base_type": {
+                    "description": "认证类型 authorization(默认Basic Auth) custom(自定义页面)",
+                    "type": "string"
+                },
+                "http_auth_path_prefix": {
+                    "description": "HTTP认证路径前缀，用于隐藏系统特征，默认为随机生成",
+                    "type": "string"
+                },
+                "insecure_skip_verify": {
+                    "description": "是否开启后端https证书有效性验证 默认 0 是校验 1 是不校验",
+                    "type": "integer"
+                },
+                "ip_mode": {
+                    "description": "IP提取模式: \"nic\" 网卡模式 或 \"proxy\" 代理模式",
+                    "type": "string"
+                },
+                "is_enable_http_auth_base": {
+                    "description": "是否 HTTPAuthBase  1 激活  非1 没有激活",
+                    "type": "integer"
+                },
+                "is_enable_load_balance": {
+                    "description": "是否激活负载  1 激活  非1 没有激活",
+                    "type": "integer"
+                },
+                "is_trans_back_domain": {
+                    "description": "是否传递后端域名到后端服务器侧",
+                    "type": "integer"
+                },
+                "keyfile": {
+                    "description": "密钥文件",
+                    "type": "string"
+                },
+                "load_balance_stage": {
+                    "description": "负载策略",
+                    "type": "integer"
+                },
+                "log_only_mode": {
+                    "description": "是否只记录日志 1 是 0 不是",
+                    "type": "integer"
+                },
+                "port": {
+                    "description": "端口",
+                    "type": "integer"
+                },
+                "remarks": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "remote_app": {
+                    "description": "是什么类型的应用",
+                    "type": "string"
+                },
+                "remote_host": {
+                    "description": "远端域名",
+                    "type": "string"
+                },
+                "remote_ip": {
+                    "description": "远端指定IP",
+                    "type": "string"
+                },
+                "remote_port": {
+                    "description": "远端端口",
+                    "type": "integer"
+                },
+                "remote_system": {
+                    "description": "是宝塔 phpstudy等",
+                    "type": "string"
+                },
+                "response_time_out": {
+                    "description": "响应超时时间",
+                    "type": "integer"
+                },
+                "ssl": {
+                    "description": "是否是ssl",
+                    "type": "integer"
+                },
+                "start_status": {
+                    "description": "启动状态",
+                    "type": "integer"
+                },
+                "static_site_json": {
+                    "description": "静态站点配置 json",
+                    "type": "string"
+                },
+                "transport_json": {
+                    "description": "Transport配置 json",
+                    "type": "string"
+                },
+                "unrestricted_port": {
+                    "description": "不限来源匹配端口 0 限制 1，不限制",
+                    "type": "integer"
+                }
+            }
+        },
+        "request.WafHostSearchReq": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "主机码",
+                    "type": "string"
+                },
+                "filter_by": {
+                    "description": "筛选字段",
+                    "type": "string"
+                },
+                "filter_value": {
+                    "description": "筛选值",
+                    "type": "string"
+                },
+                "keyWord": {
+                    "description": "关键字",
+                    "type": "string"
+                },
+                "pageIndex": {
+                    "description": "当前页面索引",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "description": "每页大小",
+                    "type": "integer"
+                },
+                "remarks": {
+                    "description": "备注",
+                    "type": "string"
+                },
+                "sort_by": {
+                    "description": "排序字段",
+                    "type": "string"
+                },
+                "sort_descending": {
+                    "description": "排序方式",
+                    "type": "string"
+                }
+            }
+        },
+        "response.PageResult": {
+            "type": "object",
+            "properties": {
+                "list": {},
+                "pageIndex": {
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "response.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "X-API-Key",
+            "in": "header"
+        }
+    }
+}
