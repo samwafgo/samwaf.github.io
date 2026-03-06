@@ -52,4 +52,10 @@ export const enSidebar = sidebar({
             link: "/en/dev/readme.md",
         },
     ],
+    "/en/api/": [
+        {
+            text: "API Interface",
+            link: "/en/api/",
+        },
+    ],
 });

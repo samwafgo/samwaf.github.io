@@ -21,4 +21,8 @@ export const enNavbar = navbar([
 			text: 'Dev Manual',
 			link: '/en/dev/',
 	},
+	{
+			text: 'API Docs',
+			link: '/en/api/',
+	},
 ]);

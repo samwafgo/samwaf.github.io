@@ -21,4 +21,8 @@ export const zhNavbar = navbar([
 			text: '开发手册',
 			link: '/dev/',
 	},
+	{
+			text: 'API文档',
+			link: '/api/',
+	},
 ]);
