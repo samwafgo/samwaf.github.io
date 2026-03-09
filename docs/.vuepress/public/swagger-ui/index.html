@@ -9,23 +9,120 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #fff; }
     #swagger-ui { min-height: 100vh; }
+
+    #server-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #f6f8fa;
+      border-bottom: 1px solid #d0d7de;
+      flex-wrap: wrap;
+    }
+    #server-bar label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #24292f;
+      white-space: nowrap;
+    }
+    #server-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 5px 10px;
+      font-size: 13px;
+      border: 1px solid #d0d7de;
+      border-radius: 4px;
+      outline: none;
+      color: #24292f;
+      background: #fff;
+    }
+    #server-input:focus {
+      border-color: #0969da;
+      box-shadow: 0 0 0 2px rgba(9,105,218,0.2);
+    }
+    .bar-btn {
+      padding: 5px 14px;
+      font-size: 13px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      color: #fff;
+    }
+    #btn-apply  { background: #0969da; }
+    #btn-apply:hover  { background: #0757ba; }
+    #btn-reset  { background: #6e7781; }
+    #btn-reset:hover  { background: #57606a; }
   </style>
 </head>
 <body>
+  <div id="server-bar">
+    <label for="server-input">API 服务地址：</label>
+    <input id="server-input" type="text" placeholder="例如：http://127.0.0.1:26666" />
+    <button class="bar-btn" id="btn-apply">应用</button>
+    <button class="bar-btn" id="btn-reset">重置</button>
+  </div>
   <div id="swagger-ui"></div>
+
   <script src="swagger-ui-bundle.js"></script>
   <script>
+    var defaultOrigin = window.location.origin
+
+    function parseHostAndScheme(val) {
+      val = (val || '').trim().replace(/\/$/, '')
+      var scheme = 'http'
+      var host = val
+      if (val.indexOf('https://') === 0) {
+        scheme = 'https'
+        host = val.slice(8)
+      } else if (val.indexOf('http://') === 0) {
+        scheme = 'http'
+        host = val.slice(7)
+      } else {
+        scheme = window.location.protocol === 'https:' ? 'https' : 'http'
+      }
+      return { scheme: scheme, host: host }
+    }
+
+    function initSwagger(origin) {
+      fetch('/swagger.json')
+        .then(function (r) { return r.json() })
+        .then(function (spec) {
+          var parsed = parseHostAndScheme(origin)
+          spec.host = parsed.host
+          spec.schemes = [parsed.scheme]
+
+          document.getElementById('swagger-ui').innerHTML = ''
+          SwaggerUIBundle({
+            spec: spec,
+            dom_id: '#swagger-ui',
+            deepLinking: true,
+            presets: [
+              SwaggerUIBundle.presets.apis,
+              SwaggerUIBundle.SwaggerUIStandalonePreset
+            ],
+            layout: 'BaseLayout'
+          })
+        })
+        .catch(function (e) { console.error('加载 swagger.json 失败', e) })
+    }
+
+    document.getElementById('btn-apply').addEventListener('click', function () {
+      initSwagger(document.getElementById('server-input').value)
+    })
+
+    document.getElementById('btn-reset').addEventListener('click', function () {
+      document.getElementById('server-input').value = defaultOrigin
+      initSwagger(defaultOrigin)
+    })
+
+    document.getElementById('server-input').addEventListener('keyup', function (e) {
+      if (e.key === 'Enter') initSwagger(this.value)
+    })
+
     window.onload = function () {
-      SwaggerUIBundle({
-        url: '/swagger.json',
-        dom_id: '#swagger-ui',
-        deepLinking: true,
-        presets: [
-          SwaggerUIBundle.presets.apis,
-          SwaggerUIBundle.SwaggerUIStandalonePreset
-        ],
-        layout: 'BaseLayout'
-      })
+      document.getElementById('server-input').value = defaultOrigin
+      initSwagger(defaultOrigin)
     }
   </script>
 </body>
