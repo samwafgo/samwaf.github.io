@@ -57,6 +57,7 @@ Linux Arm64架构请下载对应的文件 SamWaf_Linux_arm64.v*.tar.gz
 
 ```
 docker run -d --name=samwaf-instance \
+           --restart always \
            -p 26666:26666 \
            -p 80:80 \
            -p 443:443 \

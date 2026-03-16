@@ -57,6 +57,7 @@ For Docker, please pull the latest version from Docker Hub (https://hub.docker.c
 
 ```
 docker run -d --name=samwaf-instance \
+           --restart always \
            -p 26666:26666 \
            -p 80:80 \
            -p 443:443 \
