@@ -930,6 +930,86 @@
                 }
             }
         },
+        "/stat/sitedetail": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "查询指定站点的趋势数据（24h走小时聚合，7d/30d走天聚合），完全基于预聚合表",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "统计-数据统计"
+                ],
+                "summary": "站点详情趋势查询",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "网站唯一码",
+                        "name": "host_code",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "时间范围:  24h | 7d | 30d",
+                        "name": "time_range",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/stat/siteoverview": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "按日期范围查询各站点的综合访问数据（PV/UV/IP/流量/攻击），完全基于预聚合表",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "统计-数据统计"
+                ],
+                "summary": "站点综合概览统计",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "开始日期 如 20260301",
+                        "name": "start_day",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "结束日期 如 20260310",
+                        "name": "end_day",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/stat/sysinfo": {
             "get": {
                 "security": [
@@ -6521,6 +6601,10 @@
                     "description": "是宝塔 phpstudy等",
                     "type": "string"
                 },
+                "response_compress_json": {
+                    "description": "响应压缩配置 json",
+                    "type": "string"
+                },
                 "response_time_out": {
                     "description": "响应超时时间",
                     "type": "integer"
@@ -6679,6 +6763,10 @@
                 },
                 "remote_system": {
                     "description": "是宝塔 phpstudy等",
+                    "type": "string"
+                },
+                "response_compress_json": {
+                    "description": "响应压缩配置 json",
                     "type": "string"
                 },
                 "response_time_out": {
@@ -7707,6 +7795,18 @@
                 "remote_port": {
                     "type": "integer"
                 },
+                "ssl_certificate": {
+                    "type": "string"
+                },
+                "ssl_certificate_key": {
+                    "type": "string"
+                },
+                "ssl_protocols": {
+                    "type": "string"
+                },
+                "ssl_status": {
+                    "type": "integer"
+                },
                 "start_status": {
                     "type": "integer"
                 },
@@ -7764,6 +7864,18 @@
                     "type": "string"
                 },
                 "remote_port": {
+                    "type": "integer"
+                },
+                "ssl_certificate": {
+                    "type": "string"
+                },
+                "ssl_certificate_key": {
+                    "type": "string"
+                },
+                "ssl_protocols": {
+                    "type": "string"
+                },
+                "ssl_status": {
                     "type": "integer"
                 },
                 "start_status": {
@@ -7970,6 +8082,10 @@
                 },
                 "remote_system": {
                     "description": "是宝塔 phpstudy等",
+                    "type": "string"
+                },
+                "response_compress_json": {
+                    "description": "响应压缩配置 json（Gzip/Brotli）",
                     "type": "string"
                 },
                 "response_time_out": {
