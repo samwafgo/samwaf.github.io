@@ -322,7 +322,7 @@
                 }
             }
         },
-        "/monitor/info": {
+        "/monitor/system_info": {
             "get": {
                 "security": [
                     {

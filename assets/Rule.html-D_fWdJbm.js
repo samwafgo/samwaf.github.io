@@ -1,0 +1,35 @@
+import{_ as s,a,b as e,c as i}from"./manual_rule-C7Fj_Jrb.js";import{_ as l}from"./plugin-vue_export-helper-DlAUqK2U.js";import{c as p,a as c,o as r}from"./app-_fTQqoyk.js";const t={};function d(u,n){return r(),p("div",null,[...n[0]||(n[0]=[c('<h1 id="protection-rules" tabindex="-1"><a class="header-anchor" href="#protection-rules"><span>Protection Rules</span></a></h1><h2 id="_1-script-editing" tabindex="-1"><a class="header-anchor" href="#_1-script-editing"><span>1 Script Editing</span></a></h2><h3 id="_1-1-quick-handling-from-logs" tabindex="-1"><a class="header-anchor" href="#_1-1-quick-handling-from-logs"><span>1.1 Quick Handling from Logs</span></a></h3><p><img src="'+s+'" alt="Log Details" loading="lazy"> Select the desired feature value, turn on the &quot;Quick Add Rule&quot; switch, and click on a blank space.</p><h3 id="_1-2-selecting-feature-values" tabindex="-1"><a class="header-anchor" href="#_1-2-selecting-feature-values"><span>1.2 Selecting Feature Values</span></a></h3><figure><img src="'+a+'" alt="Selecting Feature Values" tabindex="0" loading="lazy"><figcaption>Selecting Feature Values</figcaption></figure><h3 id="_1-3-automatically-create-rule-script" tabindex="-1"><a class="header-anchor" href="#_1-3-automatically-create-rule-script"><span>1.3 Automatically Create Rule Script</span></a></h3><figure><img src="'+e+`" alt="Automatically Create Rule Script" tabindex="0" loading="lazy"><figcaption>Automatically Create Rule Script</figcaption></figure><p>Currently, the following data can be identified:</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code class="language-"><span class="line"><span>Host</span></span>
+<span class="line"><span>HOST</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>URL</span></span>
+<span class="line"><span>URL</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Referrer</span></span>
+<span class="line"><span>REFERER</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>User-Agent</span></span>
+<span class="line"><span>USER_AGENT</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Request Method</span></span>
+<span class="line"><span>METHOD</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Access COOKIES</span></span>
+<span class="line"><span>COOKIES</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Access BODY</span></span>
+<span class="line"><span>BODY</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Request Port</span></span>
+<span class="line"><span>PORT</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Visitor IP</span></span>
+<span class="line"><span>SRC_IP</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Visitor Country</span></span>
+<span class="line"><span>COUNTRY</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Visitor Province</span></span>
+<span class="line"><span>PROVINCE</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Visitor City</span></span>
+<span class="line"><span>CITY</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="_2-interface-editing" tabindex="-1"><a class="header-anchor" href="#_2-interface-editing"><span>2 Interface Editing</span></a></h2><p>The current ease of use is not very convenient, it is recommended to use the script method. <img src="`+i+'" alt="Interface Editing" loading="lazy"></p><h2 id="_3-deep-learning-engine" tabindex="-1"><a class="header-anchor" href="#_3-deep-learning-engine"><span>3 Deep Learning Engine</span></a></h2><p>To be developed.</p>',14)])])}const h=l(t,[["render",d]]),g=JSON.parse('{"path":"/en/guide/Rule.html","title":"Protection Rules","lang":"en-US","frontmatter":{},"git":{"createdTime":1706232245000,"updatedTime":1706232245000,"contributors":[{"name":"samwaf","username":"samwaf","email":"samwafgo@gmail.com","commits":1,"url":"https://github.com/samwaf"}]},"readingTime":{"minutes":0.4,"words":119},"filePathRelative":"en/guide/Rule.md"}');export{h as comp,g as data};
