@@ -85,7 +85,7 @@
     }
 
     function initSwagger(origin) {
-      fetch('/swagger.json')
+      fetch('/swagger.json?t=' + Date.now())
         .then(function (r) { return r.json() })
         .then(function (spec) {
           var parsed = parseHostAndScheme(origin)
