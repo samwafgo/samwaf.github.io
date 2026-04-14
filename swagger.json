@@ -8,7 +8,7 @@
     },
     "basePath": "/api/v1",
     "paths": {
-        "/firewallipblock/add": {
+        "/firewall/ipblock/add": {
             "post": {
                 "security": [
                     {
@@ -47,7 +47,7 @@
                 }
             }
         },
-        "/firewallipblock/del": {
+        "/firewall/ipblock/del": {
             "get": {
                 "security": [
                     {
@@ -84,7 +84,7 @@
                 }
             }
         },
-        "/firewallipblock/edit": {
+        "/firewall/ipblock/edit": {
             "post": {
                 "security": [
                     {
@@ -123,7 +123,7 @@
                 }
             }
         },
-        "/firewallipblock/list": {
+        "/firewall/ipblock/list": {
             "post": {
                 "security": [
                     {
@@ -802,63 +802,24 @@
                 }
             }
         },
-        "/stat/dayrangecount": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "按指定日期范围查询每日访问量和拦截量",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "统计-数据统计"
-                ],
-                "summary": "按日期范围统计访问量",
-                "parameters": [
-                    {
-                        "description": "日期范围参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafStatsDayRangeReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/stat/daytotal": {
+        "/resetWAF": {
             "get": {
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "获取今日访问总量和拦截总量统计",
+                "description": "重启WAF引擎，重新加载所有规则和配置",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "统计-数据统计"
+                    "引擎-WAF引擎"
                 ],
-                "summary": "获取今日访问统计",
+                "summary": "重启WAF引擎",
                 "responses": {
                     "200": {
-                        "description": "获取成功",
+                        "description": "重启指令发起成功",
                         "schema": {
                             "$ref": "#/definitions/SamWaf_model_common_response.Response"
                         }
@@ -866,14 +827,14 @@
                 }
             }
         },
-        "/stat/ipcount": {
+        "/sslconfig/add": {
             "post": {
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "按日期范围统计攻击IP排行（Top N）",
+                "description": "上传并保存SSL证书（PEM格式的证书和私钥）",
                 "consumes": [
                     "application/json"
                 ],
@@ -881,18 +842,92 @@
                     "application/json"
                 ],
                 "tags": [
-                    "统计-数据统计"
+                    "SSL-证书配置"
                 ],
-                "summary": "统计攻击IP排行",
+                "summary": "新增SSL证书",
                 "parameters": [
                     {
-                        "description": "日期范围参数",
+                        "description": "SSL证书配置",
                         "name": "data",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafStatsDayRangeReq"
+                            "$ref": "#/definitions/SamWaf_model_request.SslConfigAddReq"
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/sslconfig/del": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID删除SSL证书",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SSL-证书配置"
+                ],
+                "summary": "删除SSL证书",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "证书ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/sslconfig/detail": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID获取SSL证书详情",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SSL-证书配置"
+                ],
+                "summary": "获取SSL证书详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "证书ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -905,7 +940,97 @@
                 }
             }
         },
-        "/stat/runtimesysinfo": {
+        "/sslconfig/edit": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改SSL证书内容",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SSL-证书配置"
+                ],
+                "summary": "编辑SSL证书",
+                "parameters": [
+                    {
+                        "description": "SSL证书配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.SslConfigEditReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "编辑成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/sslconfig/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页查询SSL证书列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "SSL-证书配置"
+                ],
+                "summary": "获取SSL证书列表",
+                "parameters": [
+                    {
+                        "description": "分页查询参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.SslConfigSearchReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/SamWaf_model_common_response.PageResult"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/statrumtimesysinfo": {
             "get": {
                 "security": [
                     {
@@ -930,87 +1055,7 @@
                 }
             }
         },
-        "/stat/sitedetail": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "查询指定站点的趋势数据（24h走小时聚合，7d/30d走天聚合），完全基于预聚合表",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "统计-数据统计"
-                ],
-                "summary": "站点详情趋势查询",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "网站唯一码",
-                        "name": "host_code",
-                        "in": "query",
-                        "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "时间范围:  24h | 7d | 30d",
-                        "name": "time_range",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/stat/siteoverview": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "按日期范围查询各站点的综合访问数据（PV/UV/IP/流量/攻击），完全基于预聚合表",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "统计-数据统计"
-                ],
-                "summary": "站点综合概览统计",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "开始日期 如 20260301",
-                        "name": "start_day",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "结束日期 如 20260310",
-                        "name": "end_day",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/stat/sysinfo": {
+        "/statsysinfo": {
             "get": {
                 "security": [
                     {
@@ -1035,44 +1080,7 @@
                 }
             }
         },
-        "/sysinfo/version": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "返回当前 SamWaf 的版本号、版本名称及发布状态",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "系统信息"
-                ],
-                "summary": "获取系统版本信息",
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/model.VersionInfo"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/syslog/detail": {
+        "/sys_log/detail": {
             "get": {
                 "security": [
                     {
@@ -1109,8 +1117,8 @@
                 }
             }
         },
-        "/syslog/list": {
-            "post": {
+        "/sys_log/list": {
+            "get": {
                 "security": [
                     {
                         "ApiKeyAuth": []
@@ -1160,6 +1168,43 @@
                 }
             }
         },
+        "/sysinfo/version": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "返回当前 SamWaf 的版本号、版本名称及发布状态",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统信息"
+                ],
+                "summary": "获取系统版本信息",
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.VersionInfo"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/systemconfig/edit": {
             "post": {
                 "security": [
@@ -1186,6 +1231,45 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/SamWaf_model_request.WafSystemConfigEditReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "编辑成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/systemconfig/editByItem": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "通过配置项的 item 键名修改对应的 value 值",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "系统配置"
+                ],
+                "summary": "通过item更新系统配置",
+                "parameters": [
+                    {
+                        "description": "配置参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafSystemConfigEditByItemReq"
                         }
                     }
                 ],
@@ -1245,45 +1329,6 @@
                                     }
                                 }
                             ]
-                        }
-                    }
-                }
-            }
-        },
-        "/systemconfig/updateitem": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "通过配置项的 item 键名修改对应的 value 值",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "系统配置"
-                ],
-                "summary": "通过item更新系统配置",
-                "parameters": [
-                    {
-                        "description": "配置参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafSystemConfigEditByItemReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "编辑成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
                         }
                     }
                 }
@@ -1557,6 +1602,34 @@
                 }
             }
         },
+        "/vipconfig/getSecurityEntry": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "获取当前安全路径入口的启用状态及访问码",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理端配置"
+                ],
+                "summary": "获取安全路径入口配置",
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/vipconfig/getSslStatus": {
             "get": {
                 "security": [
@@ -1652,6 +1725,45 @@
                 }
             }
         },
+        "/vipconfig/updateSecurityEntry": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "开启/关闭安全路径入口，路径为空时自动生成18位随机码，立即生效无需重启",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理端配置"
+                ],
+                "summary": "更新安全路径入口配置",
+                "parameters": [
+                    {
+                        "description": "安全路径配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafVpConfigSecurityEntryUpdateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/vipconfig/updateSslEnable": {
             "post": {
                 "security": [
@@ -1725,412 +1837,6 @@
                         "description": "上传SSL证书成功",
                         "schema": {
                             "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/allowip/add": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "为指定网站新增一条IP白名单记录（白名单IP绕过WAF检测）",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-IP白名单"
-                ],
-                "summary": "新增IP白名单",
-                "parameters": [
-                    {
-                        "description": "IP白名单配置",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafAllowIpAddReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "添加成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/allowip/del": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据ID删除IP白名单记录",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-IP白名单"
-                ],
-                "summary": "删除IP白名单",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "记录ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "删除成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/allowip/detail": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据ID获取IP白名单记录详情",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-IP白名单"
-                ],
-                "summary": "获取IP白名单详情",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "记录ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/allowip/edit": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "修改IP白名单记录",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-IP白名单"
-                ],
-                "summary": "编辑IP白名单",
-                "parameters": [
-                    {
-                        "description": "IP白名单配置",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafAllowIpEditReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "编辑成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/allowip/list": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "分页查询IP白名单列表",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-IP白名单"
-                ],
-                "summary": "获取IP白名单列表",
-                "parameters": [
-                    {
-                        "description": "分页查询参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafAllowIpSearchReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/SamWaf_model_common_response.PageResult"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/allowurl/add": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "为指定网站新增一条URL白名单记录（白名单URL绕过WAF检测）",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-URL白名单"
-                ],
-                "summary": "新增URL白名单",
-                "parameters": [
-                    {
-                        "description": "URL白名单配置",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafAllowUrlAddReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "添加成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/allowurl/del": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据ID删除URL白名单记录",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-URL白名单"
-                ],
-                "summary": "删除URL白名单",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "记录ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "删除成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/allowurl/detail": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据ID获取URL白名单记录详情",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-URL白名单"
-                ],
-                "summary": "获取URL白名单详情",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "记录ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/allowurl/edit": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "修改URL白名单记录",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-URL白名单"
-                ],
-                "summary": "编辑URL白名单",
-                "parameters": [
-                    {
-                        "description": "URL白名单配置",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafAllowUrlEditReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "编辑成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/allowurl/list": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "分页查询URL白名单列表",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-URL白名单"
-                ],
-                "summary": "获取URL白名单列表",
-                "parameters": [
-                    {
-                        "description": "分页查询参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafAllowUrlSearchReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/SamWaf_model_common_response.PageResult"
-                                        }
-                                    }
-                                }
-                            ]
                         }
                     }
                 }
@@ -2314,412 +2020,6 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/SamWaf_model_request.WafAntiCCSearchReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/SamWaf_model_common_response.PageResult"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/blockip/add": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "为指定网站新增一条IP黑名单记录",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-IP黑名单"
-                ],
-                "summary": "新增IP黑名单",
-                "parameters": [
-                    {
-                        "description": "IP黑名单配置",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafBlockIpAddReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "添加成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/blockip/del": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据ID删除IP黑名单记录",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-IP黑名单"
-                ],
-                "summary": "删除IP黑名单",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "记录ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "删除成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/blockip/detail": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据ID获取IP黑名单记录详情",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-IP黑名单"
-                ],
-                "summary": "获取IP黑名单详情",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "记录ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/blockip/edit": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "修改IP黑名单记录",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-IP黑名单"
-                ],
-                "summary": "编辑IP黑名单",
-                "parameters": [
-                    {
-                        "description": "IP黑名单配置",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafBlockIpEditReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "编辑成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/blockip/list": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "分页查询IP黑名单列表",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-IP黑名单"
-                ],
-                "summary": "获取IP黑名单列表",
-                "parameters": [
-                    {
-                        "description": "分页查询参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafBlockIpSearchReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/SamWaf_model_common_response.PageResult"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/blockurl/add": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "为指定网站新增一条URL黑名单记录（匹配该URL的请求将被拦截）",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-URL黑名单"
-                ],
-                "summary": "新增URL黑名单",
-                "parameters": [
-                    {
-                        "description": "URL黑名单配置",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafBlockUrlAddReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "添加成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/blockurl/del": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据ID删除URL黑名单记录",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-URL黑名单"
-                ],
-                "summary": "删除URL黑名单",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "记录ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "删除成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/blockurl/detail": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据ID获取URL黑名单记录详情",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-URL黑名单"
-                ],
-                "summary": "获取URL黑名单详情",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "记录ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/blockurl/edit": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "修改URL黑名单记录",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-URL黑名单"
-                ],
-                "summary": "编辑URL黑名单",
-                "parameters": [
-                    {
-                        "description": "URL黑名单配置",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafBlockUrlEditReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "编辑成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/blockurl/list": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "分页查询URL黑名单列表",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "网站防护-URL黑名单"
-                ],
-                "summary": "获取URL黑名单列表",
-                "parameters": [
-                    {
-                        "description": "分页查询参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafBlockUrlSearchReq"
                         }
                     }
                 ],
@@ -2948,24 +2248,111 @@
                 }
             }
         },
-        "/wafhost/engine/restart": {
+        "/wafhost/dataretention/detail": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "数据保留策略"
+                ],
+                "summary": "获取数据保留策略详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "记录ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/dataretention/edit": {
             "post": {
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "重启WAF引擎，重新加载所有规则和配置",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "引擎-WAF引擎"
+                    "数据保留策略"
                 ],
-                "summary": "重启WAF引擎",
+                "summary": "编辑数据保留策略",
+                "parameters": [
+                    {
+                        "description": "策略参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafDataRetentionEditReq"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "重启指令发起成功",
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/dataretention/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "数据保留策略"
+                ],
+                "summary": "获取数据保留策略列表",
+                "parameters": [
+                    {
+                        "description": "分页参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafDataRetentionSearchReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/SamWaf_model_common_response.Response"
                         }
@@ -3150,7 +2537,7 @@
             }
         },
         "/wafhost/host/guardstatus": {
-            "post": {
+            "get": {
                 "security": [
                     {
                         "ApiKeyAuth": []
@@ -3240,7 +2627,7 @@
             }
         },
         "/wafhost/host/startstatus": {
-            "post": {
+            "get": {
                 "security": [
                     {
                         "ApiKeyAuth": []
@@ -3273,6 +2660,209 @@
                         "description": "状态更新成功",
                         "schema": {
                             "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/ipblock/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "为指定网站新增一条IP黑名单记录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-IP黑名单"
+                ],
+                "summary": "新增IP黑名单",
+                "parameters": [
+                    {
+                        "description": "IP黑名单配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafBlockIpAddReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/ipblock/del": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID删除IP黑名单记录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-IP黑名单"
+                ],
+                "summary": "删除IP黑名单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "记录ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/ipblock/detail": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID获取IP黑名单记录详情",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-IP黑名单"
+                ],
+                "summary": "获取IP黑名单详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "记录ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/ipblock/edit": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改IP黑名单记录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-IP黑名单"
+                ],
+                "summary": "编辑IP黑名单",
+                "parameters": [
+                    {
+                        "description": "IP黑名单配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafBlockIpEditReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "编辑成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/ipblock/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页查询IP黑名单列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-IP黑名单"
+                ],
+                "summary": "获取IP黑名单列表",
+                "parameters": [
+                    {
+                        "description": "分页查询参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafBlockIpSearchReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/SamWaf_model_common_response.PageResult"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -3338,9 +2928,7 @@
                         }
                     }
                 }
-            }
-        },
-        "/wafhost/ipfailure/setconfig": {
+            },
             "post": {
                 "security": [
                     {
@@ -3374,6 +2962,209 @@
                         "description": "设置成功",
                         "schema": {
                             "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/ipwhite/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "为指定网站新增一条IP白名单记录（白名单IP绕过WAF检测）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-IP白名单"
+                ],
+                "summary": "新增IP白名单",
+                "parameters": [
+                    {
+                        "description": "IP白名单配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafAllowIpAddReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/ipwhite/del": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID删除IP白名单记录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-IP白名单"
+                ],
+                "summary": "删除IP白名单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "记录ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/ipwhite/detail": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID获取IP白名单记录详情",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-IP白名单"
+                ],
+                "summary": "获取IP白名单详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "记录ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/ipwhite/edit": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改IP白名单记录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-IP白名单"
+                ],
+                "summary": "编辑IP白名单",
+                "parameters": [
+                    {
+                        "description": "IP白名单配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafAllowIpEditReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "编辑成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/ipwhite/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页查询IP白名单列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-IP白名单"
+                ],
+                "summary": "获取IP白名单列表",
+                "parameters": [
+                    {
+                        "description": "分页查询参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafAllowIpSearchReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/SamWaf_model_common_response.PageResult"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -4467,8 +4258,8 @@
                 }
             }
         },
-        "/wafhost/rule/status": {
-            "post": {
+        "/wafhost/rule/rulestatus": {
+            "get": {
                 "security": [
                     {
                         "ApiKeyAuth": []
@@ -4684,209 +4475,6 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/SamWaf_model_request.WafSensitiveSearchReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/SamWaf_model_common_response.PageResult"
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/sslconfig/add": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "上传并保存SSL证书（PEM格式的证书和私钥）",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "SSL-证书配置"
-                ],
-                "summary": "新增SSL证书",
-                "parameters": [
-                    {
-                        "description": "SSL证书配置",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.SslConfigAddReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "添加成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/sslconfig/del": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据ID删除SSL证书",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "SSL-证书配置"
-                ],
-                "summary": "删除SSL证书",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "证书ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "删除成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/sslconfig/detail": {
-            "get": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "根据ID获取SSL证书详情",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "SSL-证书配置"
-                ],
-                "summary": "获取SSL证书详情",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "证书ID",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "获取成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/sslconfig/edit": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "修改SSL证书内容",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "SSL-证书配置"
-                ],
-                "summary": "编辑SSL证书",
-                "parameters": [
-                    {
-                        "description": "SSL证书配置",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.SslConfigEditReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "编辑成功",
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
-                        }
-                    }
-                }
-            }
-        },
-        "/wafhost/sslconfig/list": {
-            "post": {
-                "security": [
-                    {
-                        "ApiKeyAuth": []
-                    }
-                ],
-                "description": "分页查询SSL证书列表",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "SSL-证书配置"
-                ],
-                "summary": "获取SSL证书列表",
-                "parameters": [
-                    {
-                        "description": "分页查询参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.SslConfigSearchReq"
                         }
                     }
                 ],
@@ -5577,6 +5165,93 @@
                 }
             }
         },
+        "/wafhost/task/log": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "读取指定任务方法的日志内容，支持增量加载（通过 offset 参数）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "定时任务管理"
+                ],
+                "summary": "获取定时任务日志",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "任务方法名",
+                        "name": "task_method",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "最大行数（offset=0时生效，默认200，最大1000）",
+                        "name": "lines",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "文件偏移量（0=从头读取，\u003e0=增量读取）",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/task/log/clear": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "清空指定任务方法的日志文件内容",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "定时任务管理"
+                ],
+                "summary": "清空定时任务日志",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "任务方法名",
+                        "name": "task_method",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "清空成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/wafhost/task/manual_exec": {
             "get": {
                 "security": [
@@ -5609,6 +5284,412 @@
                         "description": "发起成功",
                         "schema": {
                             "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/urlblock/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "为指定网站新增一条URL黑名单记录（匹配该URL的请求将被拦截）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-URL黑名单"
+                ],
+                "summary": "新增URL黑名单",
+                "parameters": [
+                    {
+                        "description": "URL黑名单配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafBlockUrlAddReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/urlblock/del": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID删除URL黑名单记录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-URL黑名单"
+                ],
+                "summary": "删除URL黑名单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "记录ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/urlblock/detail": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID获取URL黑名单记录详情",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-URL黑名单"
+                ],
+                "summary": "获取URL黑名单详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "记录ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/urlblock/edit": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改URL黑名单记录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-URL黑名单"
+                ],
+                "summary": "编辑URL黑名单",
+                "parameters": [
+                    {
+                        "description": "URL黑名单配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafBlockUrlEditReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "编辑成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/urlblock/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页查询URL黑名单列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-URL黑名单"
+                ],
+                "summary": "获取URL黑名单列表",
+                "parameters": [
+                    {
+                        "description": "分页查询参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafBlockUrlSearchReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/SamWaf_model_common_response.PageResult"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/urlwhite/add": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "为指定网站新增一条URL白名单记录（白名单URL绕过WAF检测）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-URL白名单"
+                ],
+                "summary": "新增URL白名单",
+                "parameters": [
+                    {
+                        "description": "URL白名单配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafAllowUrlAddReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "添加成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/urlwhite/del": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID删除URL白名单记录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-URL白名单"
+                ],
+                "summary": "删除URL白名单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "记录ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/urlwhite/detail": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "根据ID获取URL白名单记录详情",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-URL白名单"
+                ],
+                "summary": "获取URL白名单详情",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "记录ID",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/urlwhite/edit": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "修改URL白名单记录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-URL白名单"
+                ],
+                "summary": "编辑URL白名单",
+                "parameters": [
+                    {
+                        "description": "URL白名单配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafAllowUrlEditReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "编辑成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafhost/urlwhite/list": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "分页查询URL白名单列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "网站防护-URL白名单"
+                ],
+                "summary": "获取URL白名单列表",
+                "parameters": [
+                    {
+                        "description": "分页查询参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafAllowUrlSearchReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/SamWaf_model_common_response.PageResult"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -5709,6 +5790,189 @@
                                     }
                                 }
                             ]
+                        }
+                    }
+                }
+            }
+        },
+        "/wafstatsitedetail": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "查询指定站点的趋势数据（24h走小时聚合，7d/30d走天聚合），完全基于预聚合表",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "统计-数据统计"
+                ],
+                "summary": "站点详情趋势查询",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "网站唯一码",
+                        "name": "host_code",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "时间范围:  24h | 7d | 30d",
+                        "name": "time_range",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafstatsiteoverview": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "按日期范围查询各站点的综合访问数据（PV/UV/IP/流量/攻击），完全基于预聚合表",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "统计-数据统计"
+                ],
+                "summary": "站点综合概览统计",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "开始日期 如 20260301",
+                        "name": "start_day",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "结束日期 如 20260310",
+                        "name": "end_day",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafstatsumday": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "获取今日访问总量和拦截总量统计",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "统计-数据统计"
+                ],
+                "summary": "获取今日访问统计",
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafstatsumdayrange": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "按指定日期范围查询每日访问量和拦截量",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "统计-数据统计"
+                ],
+                "summary": "按日期范围统计访问量",
+                "parameters": [
+                    {
+                        "description": "日期范围参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafStatsDayRangeReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/wafstatsumdaytopiprange": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "按日期范围统计攻击IP排行（Top N）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "统计-数据统计"
+                ],
+                "summary": "统计攻击IP排行",
+                "parameters": [
+                    {
+                        "description": "日期范围参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafStatsDayRangeReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
                         }
                     }
                 }
@@ -6333,6 +6597,43 @@
                 "host_code": {
                     "type": "string"
                 },
+                "keyWord": {
+                    "description": "关键字",
+                    "type": "string"
+                },
+                "pageIndex": {
+                    "description": "当前页面索引",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "description": "每页大小",
+                    "type": "integer"
+                }
+            }
+        },
+        "SamWaf_model_request.WafDataRetentionEditReq": {
+            "type": "object",
+            "properties": {
+                "clean_enabled": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "remarks": {
+                    "type": "string"
+                },
+                "retain_days": {
+                    "type": "integer"
+                },
+                "retain_rows": {
+                    "type": "integer"
+                }
+            }
+        },
+        "SamWaf_model_request.WafDataRetentionSearchReq": {
+            "type": "object",
+            "properties": {
                 "keyWord": {
                     "description": "关键字",
                     "type": "string"
@@ -7507,6 +7808,10 @@
                 "private_group_name": {
                     "description": "密钥分组名称DNS有效",
                     "type": "string"
+                },
+                "skip_dns_verify": {
+                    "description": "dns01是否跳过本地DNS传播校验 0否 1是",
+                    "type": "integer"
                 }
             }
         },
@@ -7547,6 +7852,10 @@
                 "private_group_name": {
                     "description": "密钥分组名称DNS有效",
                     "type": "string"
+                },
+                "skip_dns_verify": {
+                    "description": "dns01是否跳过本地DNS传播校验 0否 1是",
+                    "type": "integer"
                 }
             }
         },
@@ -7912,6 +8221,19 @@
                 }
             }
         },
+        "SamWaf_model_request.WafVpConfigSecurityEntryUpdateReq": {
+            "type": "object",
+            "properties": {
+                "entry_enable": {
+                    "description": "是否启用安全路径",
+                    "type": "boolean"
+                },
+                "entry_path": {
+                    "description": "安全路径码，为空时自动生成",
+                    "type": "string"
+                }
+            }
+        },
         "SamWaf_model_request.WafVpConfigSslEnableUpdateReq": {
             "type": "object",
             "properties": {
@@ -8085,7 +8407,7 @@
                     "type": "string"
                 },
                 "response_compress_json": {
-                    "description": "响应压缩配置 json（Gzip/Brotli）",
+                    "description": "响应压缩配置 json（Gzip/Brotli/Zstd）",
                     "type": "string"
                 },
                 "response_time_out": {
