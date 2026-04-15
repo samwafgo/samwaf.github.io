@@ -30,7 +30,6 @@ Change 80 or 443 to another port.
 ## 2 Login-related  
 ### 2.1 Forgot Password
 
-
 ::: tabs
 
 @tab Linux
@@ -44,6 +43,24 @@ Change 80 or 443 to another port.
 ```
 SamWaf64.exe resetpwd  
 ```
+:::
+
+After running the command, the program will list all accounts in the database. If an `admin` account exists, it will be selected by default; otherwise, you need to enter the number of the account you want to reset.
+
+Example interaction:
+
+```
+Available accounts:
+  [1] admin [default]
+  [2] myuser
+Please enter account number (press Enter to use default 'admin'): 
+Reset password for 'admin' successfully, the new password is:
+xK9mP2qRtZ7w
+Please keep it safe.
+```
+
+::: tip
+If you have renamed the `admin` account, the program will list all accounts for you to choose from. Enter the corresponding number to complete the reset.
 :::
  
 

@@ -45,6 +45,24 @@ SamWaf64.exe resetpwd
 ```
 :::
 
+执行命令后，程序会列出数据库中所有账号，如果存在 `admin` 账号则默认选中，否则需要手动输入序号选择要重置密码的账号。
+
+示例交互如下：
+
+```
+Available accounts:
+  [1] admin [default]
+  [2] myuser
+Please enter account number (press Enter to use default 'admin'): 
+Reset password for 'admin' successfully, the new password is:
+xK9mP2qRtZ7w
+Please keep it safe.
+```
+
+::: tip
+如果您已将 `admin` 账号改名，程序会列出所有账号供您选择，输入对应序号即可完成重置。
+:::
+
 ### 2.2 口令失效
 为了安全自v1.3.10-beta.4版本，将token增加实效性。
 
