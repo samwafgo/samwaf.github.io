@@ -1602,6 +1602,34 @@
                 }
             }
         },
+        "/vipconfig/getNoticeTitle": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "获取当前通知消息的标题前缀，用于区分多个 SamWaf 实例",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理端配置"
+                ],
+                "summary": "获取通知标题前缀",
+                "responses": {
+                    "200": {
+                        "description": "获取成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
         "/vipconfig/getSecurityEntry": {
             "get": {
                 "security": [
@@ -1718,6 +1746,45 @@
                 "responses": {
                     "200": {
                         "description": "更新IP白名单成功",
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_common_response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/vipconfig/updateNoticeTitle": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "更新通知消息的标题前缀，立即生效无需重启，用于区分多个 SamWaf 实例",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "管理端配置"
+                ],
+                "summary": "更新通知标题前缀",
+                "parameters": [
+                    {
+                        "description": "通知标题配置",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SamWaf_model_request.WafVpConfigNoticeTitleUpdateReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新成功",
                         "schema": {
                             "$ref": "#/definitions/SamWaf_model_common_response.Response"
                         }
@@ -6075,6 +6142,10 @@
         },
         "SamWaf_model_request.WafAllowIpAddReq": {
             "type": "object",
+            "required": [
+                "host_code",
+                "ip"
+            ],
             "properties": {
                 "host_code": {
                     "description": "网站唯一码（主要键）",
@@ -6092,6 +6163,11 @@
         },
         "SamWaf_model_request.WafAllowIpEditReq": {
             "type": "object",
+            "required": [
+                "host_code",
+                "id",
+                "ip"
+            ],
             "properties": {
                 "host_code": {
                     "description": "网站唯一码（主要键）",
@@ -6138,6 +6214,11 @@
         },
         "SamWaf_model_request.WafAllowUrlAddReq": {
             "type": "object",
+            "required": [
+                "compare_type",
+                "host_code",
+                "url"
+            ],
             "properties": {
                 "compare_type": {
                     "description": "对比方式",
@@ -6159,6 +6240,12 @@
         },
         "SamWaf_model_request.WafAllowUrlEditReq": {
             "type": "object",
+            "required": [
+                "compare_type",
+                "host_code",
+                "id",
+                "url"
+            ],
             "properties": {
                 "compare_type": {
                     "description": "对比方式",
@@ -6209,6 +6296,15 @@
         },
         "SamWaf_model_request.WafAntiCCAddReq": {
             "type": "object",
+            "required": [
+                "host_code",
+                "is_enable_rule",
+                "limit",
+                "limit_mode",
+                "lock_ip_minutes",
+                "rate",
+                "url"
+            ],
             "properties": {
                 "host_code": {
                     "description": "网站唯一码（主要键）",
@@ -6250,6 +6346,16 @@
         },
         "SamWaf_model_request.WafAntiCCEditReq": {
             "type": "object",
+            "required": [
+                "host_code",
+                "id",
+                "is_enable_rule",
+                "limit",
+                "limit_mode",
+                "lock_ip_minutes",
+                "rate",
+                "url"
+            ],
             "properties": {
                 "host_code": {
                     "description": "网站唯一码（主要键）",
@@ -6392,6 +6498,10 @@
         },
         "SamWaf_model_request.WafBlockIpAddReq": {
             "type": "object",
+            "required": [
+                "host_code",
+                "ip"
+            ],
             "properties": {
                 "host_code": {
                     "description": "网站唯一码（主要键）",
@@ -6409,6 +6519,11 @@
         },
         "SamWaf_model_request.WafBlockIpEditReq": {
             "type": "object",
+            "required": [
+                "host_code",
+                "id",
+                "ip"
+            ],
             "properties": {
                 "host_code": {
                     "description": "网站唯一码（主要键）",
@@ -6455,6 +6570,11 @@
         },
         "SamWaf_model_request.WafBlockUrlAddReq": {
             "type": "object",
+            "required": [
+                "compare_type",
+                "host_code",
+                "url"
+            ],
             "properties": {
                 "compare_type": {
                     "description": "对比方式",
@@ -6476,6 +6596,12 @@
         },
         "SamWaf_model_request.WafBlockUrlEditReq": {
             "type": "object",
+            "required": [
+                "compare_type",
+                "host_code",
+                "id",
+                "url"
+            ],
             "properties": {
                 "compare_type": {
                     "description": "对比方式",
@@ -8217,6 +8343,15 @@
             "properties": {
                 "ip_whitelist": {
                     "description": "IP白名单，多个IP用逗号分隔",
+                    "type": "string"
+                }
+            }
+        },
+        "SamWaf_model_request.WafVpConfigNoticeTitleUpdateReq": {
+            "type": "object",
+            "properties": {
+                "notice_title": {
+                    "description": "通知消息标题前缀，用于区分多实例",
                     "type": "string"
                 }
             }
