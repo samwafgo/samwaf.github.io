@@ -1,6 +1,66 @@
 # Version Releases 
-## 20260224 (v1.3.19)
-v1.3.19
+## 20260224 (v1.3.20)
+Added
+- Open Platform
+- Comprehensive website query statistics
+- Custom static service response headers
+- Tunnel SSL support, suitable for intranet penetration, cross-network secure communication, and zero-trust architecture scenarios
+- Site gzip / br compression support, effectively reducing transfer size and improving access performance
+- Enhanced certificate application capability: automatic retry mechanism, support for skipping local DNS validation, improving success rate in complex network environments
+- Secure entry
+- Database table information display
+- Zstd compression support
+- Data cleanup feature disabled by default with new cleanup policy, can be flexibly enabled or disabled
+- Custom response rules
+- Task log feature for tracking task execution status
+- Notification message title prefix for distinguishing multiple SamWaf instances
+- Skip global CC feature
+- Static website compression
+- In-depth integrated management of OWASP rule sets
+- Request protection to enhance request security
+- Custom IP header retrieval on the management side
+- Bulk deletion of risk logs
+- HTTP/3 BBR support, optimizing network transmission efficiency
+- Version rollback feature
+- Custom request header deletion: defining an empty string for a request header means it will not be forwarded to the backend
+- Tag select all / deselect all
+- Database supports SQLite and MySQL, cache supports Redis
+- Path routing support
+
+Fixed
+- Global IP judgment logic anomaly, avoiding inaccurate policy matching
+- XSS false positive issue, reducing false positive rate and improving rule accuracy
+- Issue where IP extraction mode could not be correctly selected when adding a new site
+- Issue where WASM resources were not handled correctly
+- monitor/system_info API documentation error
+- Issue where multiple ports and multiple domains did not take effect, along with interface optimization
+- IP database management interface display issue in dark mode
+- Firewall bug, with correct prompts when permissions are insufficient
+- Open API URL issue
+- In non-strict source mode, multiple domains and ports were not correctly bound
+- Sensitive word null value issue to avoid program crashes
+- Null value errors that may occur when managing IPs
+- Statistics errors, ensuring data accuracy
+- Open API test case errors
+- CC notification sending time error
+- Health check bug
+- Bug when resetting account password
+- OWASP variable setting bug
+
+Optimized
+- Website list display
+- gzip compression for management side static resource files
+- Configuration system consistency: avoiding duplicate parameter configuration
+- Password reset process
+- Default compression order adjustment: Zstd first, then Brotli, then Gzip
+- Request context cancellation mechanism to improve stability and response speed
+- Removed static labels, optimized configuration management
+- Reduced heap allocation when concatenating header strings in modifyResponse and errorResponse
+- Test case stability
+
+Thanks to the following contributors (in no particular order)
+
+@blue991989, @boxker, @Cycloctane, @echs-top, @EvianTian, @f0Xj1MnNy, @Firfr, @foxzzz, @fudiwei, @hamgua, @hashwing, @heruiguo, @hjpc, @lifetin, @liujiangniao, @Lvshujun0918, @MadeLuckyBoy, @MetaCubeX, @Omoinemie, @raychan239, @raychan2394, @rzorzo, @SONGjiemo, @systemctl529, @Tea-NT, @wangpenga999, @yinyutao, @恒嘉电脑-张波, @四维, @孙工
 
 ## 20260224 (v1.3.19)
 - Added: Display associated host information within the certificate folder
