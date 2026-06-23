@@ -16,6 +16,7 @@ export const zhSidebar = sidebar({
                 "/guide/CC.md",
                 "/guide/AttackLog.md",
                 "/guide/Sensitive.md",
+                "/guide/AIDetection.md",
                 "/guide/SSLConfig.md",
                 "/guide/SSLOrder.md",
                 "/guide/SslExpire.md",
