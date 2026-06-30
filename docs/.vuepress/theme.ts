@@ -5,6 +5,9 @@ import { enSidebar, zhSidebar } from "./sidebar/index.js";
 export default hopeTheme({
   logo: "/images/logo.png",
   repo: "https://github.com/samwafgo/samwaf.github.io",
+  // 首页 feature 图标依赖此 iconfont 资源（theme-hope demo 同款图标集）。
+  // 注意：升级到 @vuepress/plugin-icon 后，裸字符串 "iconfont" 不再生效，必须给出真实的 at.alicdn.com URL。
+  iconAssets: "//at.alicdn.com/t/c/font_2410206_5vb9zlyghj.css",
   docsDir: "docs",
   docsBranch: 'main',
   locales: {
