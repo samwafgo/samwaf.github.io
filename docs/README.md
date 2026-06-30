@@ -123,6 +123,58 @@ features:
   - title: 支持双因素认证(2FA)
     icon: folder
     details: 支持双因素认证(2FA)
+
+  - title: 防火墙IP封禁
+    icon: lock
+    details: 操作系统级IP封禁,性能优于应用层黑名单
+
+  - title: 缓存规则
+    icon: storage
+    details: 对静态资源等进行缓存,降低后端压力并提升访问速度
+
+  - title: 网站访问认证
+    icon: back-stage
+    details: 为网站开启密码访问,支持HTTP Basic和自定义登录页
+
+  - title: 隧道防护
+    icon: proxy
+    details: 内网穿透隧道,支持TCP/HTTP并可启用SSL
+
+  - title: 批量任务
+    icon: actions
+    details: 批量定时执行配置任务
+
+  - title: 密钥管理
+    icon: lock
+    details: 集中加密保存凭据,用于SSL证书DNS自动申请
+
+  - title: 计划任务
+    icon: actions
+    details: 内置定时任务统一管理
+
+  - title: 一键修改
+    icon: tool
+    details: 一键修改宝塔Web端口(仅Linux)
+
+  - title: 防护日志
+    icon: check
+    details: 风险日志统计与按来源IP下钻分析
+
+  - title: 访问分析
+    icon: compare
+    details: 访问数据分析与蜘蛛(爬虫)识别
+
+  - title: 通知告警
+    icon: interact
+    details: 支持多渠道通知告警与订阅
+
+  - title: 开放平台
+    icon: engine
+    details: 提供开放平台API与密钥管理
+
+  - title: SSL到期检测
+    icon: folder
+    details: 批量检测SSL证书到期情况
 ---	
 ## 项目源码
 

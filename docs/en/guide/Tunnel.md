@@ -35,8 +35,23 @@ Tunnel protection is currently an experimental feature designed to provide exter
 * **Denied IP List**
   List of denied client IPs, comma-separated. Takes precedence over allowed IPs.
 
+* **Allowed Time Ranges**
+  Time ranges during which the port is accessible, in the format `08:00-10:00;11:00-12:00`. Separate multiple ranges with a semicolon `;`; leave empty for 24/7 access.
+
+* **IP Version Support**
+  The IP version the tunnel listens on: `IPv4 Only`, `IPv6 Only`, or `IPv4 & IPv6` (default supports both).
+
+* **SSL Status** (TCP protocol only)
+  Whether to enable SSL/TLS on this tunnel port. When enabled, clients must connect to this port via TLS.
+
+* **SSL Certificate / SSL Certificate Key** (required when SSL is enabled)
+  The **absolute paths** to the certificate and private key files on the server, e.g. `/home/nginx/cert/test.com.pem`, `/home/nginx/cert/test.com.key`.
+
+* **SSL Protocols** (required when SSL is enabled)
+  Allowed TLS protocol versions, e.g. `TLSv1.2 TLSv1.3`.
+
 * **Start Status**
-  Whether to enable the tunnel on startup: `true` (enabled) or `false` (disabled).
+  Whether to enable the tunnel on startup: `On` (enabled) or `Off` (disabled).
 
 * **Connection Timeout**
   Timeout for establishing a connection, in seconds. For example, `10` means 10 seconds.
@@ -60,7 +75,7 @@ Tunnel protection is currently an experimental feature designed to provide exter
 
 ![Tunnel Connection Status](/images/tunnel3.png)
 
-* View current tunnel connection status.
+* Click **Connections** on a tunnel row to view its current connection status (such as TCP/UDP source connections, target connections, peer IP and region).
  
 ### 1.4 Example
 

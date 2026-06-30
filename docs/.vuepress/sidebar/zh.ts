@@ -2,10 +2,11 @@ import { sidebar } from "vuepress-theme-hope";
 
 export const zhSidebar = sidebar({
     "/guide/": [
+        "/guide/README.md",
         {
-            text: "操作手册",
+            text: "网站防护",
+            collapsible: true,
             children: [
-                "/guide/README.md",
                 "/guide/Host.md",
                 "/guide/Rule.md",
                 "/guide/IPWhite.md",
@@ -14,15 +15,43 @@ export const zhSidebar = sidebar({
                 "/guide/UrlBlack.md",
                 "/guide/Ldp.md",
                 "/guide/CC.md",
-                "/guide/AttackLog.md",
                 "/guide/Sensitive.md",
-                "/guide/AIDetection.md",
-                "/guide/SSLConfig.md",
-                "/guide/SSLOrder.md",
-                "/guide/SslExpire.md",
+                "/guide/FirewallIPBlock.md",
+                "/guide/CacheRule.md",
+                "/guide/HttpAuthBase.md",
+                "/guide/SSL.md",
                 "/guide/BlockingPage.md",
                 "/guide/BatchTask.md",
+            ],
+        },
+        {
+            text: "防护日志",
+            collapsible: true,
+            children: [
+                "/guide/AttackLog.md",
+            ],
+        },
+        {
+            text: "系统设置",
+            collapsible: true,
+            children: [
+                "/guide/AIDetection.md",
+                "/guide/PrivateInfo.md",
+                "/guide/OneKeyMod.md",
+                "/guide/Task.md",
+            ],
+        },
+        {
+            text: "账号管理",
+            collapsible: true,
+            children: [
                 "/guide/Otp.md",
+            ],
+        },
+        {
+            text: "隧道防护",
+            collapsible: true,
+            children: [
                 "/guide/Tunnel.md",
             ],
         },

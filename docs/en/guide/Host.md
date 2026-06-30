@@ -177,3 +177,81 @@ The system performs health checks every 5 seconds. Invalid connections will be r
 
 ### 8.2 Health Status Display
 ![Status Display](/images/healthy_loadbalance.png)
+
+## 9 Website List Page
+
+After opening the "Website Configuration" page, you can see the list of all protected websites and a set of management actions.
+
+### 9.1 Toolbar Buttons
+
+| Button | Description |
+| --- | --- |
+| New Protection | Opens the add-website form to add a protected site |
+| Export Data | Exports all website information to Excel (can be used as an import template, see Section 6) |
+| Import Data | Imports website information from Excel, supporting two strategies: "import new host codes" / "import retained host codes" (see Section 6) |
+| Batch Protection Switch | Changes the protection status of all sites at once; choose `Protected` or `Unprotected` (a second confirmation appears) |
+| Batch Copy Configuration | Copies selected configuration modules from a source site to multiple target sites (see 9.4) |
+
+The top-right area supports filtering by **Website** and clicking **Search**; the website, main port, backend IP, backend port, and remarks columns also support in-column input filtering.
+
+<!-- Image: Website list -->
+
+### 9.2 List Display
+
+Each row shows: Website (with nickname, SSL tag, bound multi-domains/multi-ports), Main Port, Stats, Status, Backend IP, Backend Port, Remarks, Create Time, and Operation.
+
+The **Stats** column shows in real time: PV, UV, Blocked (today's attacks), Inbound/Outbound traffic, QPS, and Connections.
+
+The **Status** column contains several switches and tags:
+
+| Item | Description |
+| --- | --- |
+| Health Status | Backend health (shows normal/abnormal when health check is enabled) |
+| Guard Status | Protection toggle, `Protected` / `Unprotected`; a confirmation appears when toggled |
+| Start Status | Startup toggle, `Auto Start` / `Manual Start`; a confirmation appears when toggled |
+| Static Service | Shows an "On" tag if the static website feature is enabled |
+| Strict Source Port | Shows a tag if strict source port is disabled |
+
+### 9.3 Row Actions
+
+The **Operation** column of each row provides: **Copy** (quickly create a new site based on this one; SSL and bindings are cleared), **Edit**, **Delete** (after deletion the site info and rules are cleared and cannot be recovered), and **SSL Auto Apply**.
+
+> Note: The global website can only have its guard status configured — it cannot be copied, edited, deleted, or issued certificates.
+
+### 9.4 Batch Copy Configuration
+
+After clicking **Batch Copy Configuration**:
+
+1. Select the **Source Site** (an already configured site).
+2. Tick the **Copy Modules**; currently supported: Cache Configuration, Response compression.
+3. In the **Target Sites** list, tick one or more sites (Select All is available); the source site is automatically excluded.
+4. Click **One-Click Copy**. The dialog shows the copy progress and reports success on completion.
+
+<!-- Image: Batch copy config dialog -->
+
+## 10 Built-in Engine Protection
+
+In the "Engine Protection" tab of the add/edit website form, you can toggle the built-in detections per site:
+
+| Detection | Description |
+| --- | --- |
+| Bot Detection | Detects whether search engines are spoofed |
+| SQL Injection Detection | Detects SQL injection |
+| XSS Detection | Detects XSS attacks |
+| Scanner Detection | Detects scanning tools |
+| RCE Detection | Remote code execution detection |
+| Sensitive Word Detection | Sensitive word detection |
+| Directory Traversal Detection | Directory traversal detection |
+| OWASP Set Detection | OWASP rule set detection |
+| AI Detection (Beta) | Detects anomalous requests with a machine-learning model; requires uploading a model package and enabling the global AI switch first. Use observation mode to verify false positives before switching to blocking. |
+
+### 10.1 Log-only Mode
+
+When "Log-only Mode" is enabled, SamWaf records attack logs but does not block attack requests — useful for observing false positives early after going live.
+
+### 10.2 IP Extraction Mode
+
+Selects how the client IP is extracted from a request; this setting applies to all features such as CC protection, CAPTCHA, and IP whitelist:
+
+- **NIC Mode**: gets the client IP directly from the network connection (for direct-connection scenarios).
+- **Proxy Mode**: gets the real IP from HTTP headers (X-Forwarded-For, etc.) (for scenarios using CDN, Nginx, and other proxies).

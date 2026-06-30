@@ -123,6 +123,58 @@ features:
   - title: Supports Two-Factor Authentication (2FA)
     icon: folder
     details: Supports Two-Factor Authentication (2FA)
+
+  - title: Firewall IP Block
+    icon: lock
+    details: OS-level IP blocking, outperforming the application-layer blacklist
+
+  - title: Cache Rule
+    icon: storage
+    details: Caches static resources to reduce backend load and speed up access
+
+  - title: Website Access Authentication
+    icon: back-stage
+    details: Require a password to access a website; supports HTTP Basic and a custom login page
+
+  - title: Tunnel
+    icon: proxy
+    details: Intranet penetration tunnels for TCP/HTTP with optional SSL
+
+  - title: Batch Task
+    icon: actions
+    details: Batch scheduled configuration tasks
+
+  - title: Key Management
+    icon: lock
+    details: Centralized encrypted credential storage for SSL DNS auto-application
+
+  - title: Scheduled Task
+    icon: actions
+    details: Built-in scheduled task management
+
+  - title: One-Key Modify
+    icon: tool
+    details: One-click change of BT Panel web port (Linux only)
+
+  - title: Protection Log
+    icon: check
+    details: Risk log statistics with per-source-IP drill-down analysis
+
+  - title: Access Analytics
+    icon: compare
+    details: Access data analysis and spider (crawler) identification
+
+  - title: Notification
+    icon: interact
+    details: Multi-channel notifications and subscriptions
+
+  - title: Open Platform
+    icon: engine
+    details: Open platform API with key management
+
+  - title: SSL Expiry Check
+    icon: folder
+    details: Batch check of SSL certificate expiration
 ---
 ## Project Source Code
 

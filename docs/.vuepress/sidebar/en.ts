@@ -2,10 +2,11 @@ import { sidebar } from "vuepress-theme-hope";
 
 export const enSidebar = sidebar({
     "/en/guide/": [
+        "/en/guide/README.md",
         {
-            text: "Manual",
+            text: "Website Protection",
+            collapsible: true,
             children: [
-                "/en/guide/README.md",
                 "/en/guide/Host.md",
                 "/en/guide/Rule.md",
                 "/en/guide/IPWhite.md",
@@ -14,15 +15,43 @@ export const enSidebar = sidebar({
                 "/en/guide/UrlBlack.md",
                 "/en/guide/Ldp.md",
                 "/en/guide/CC.md",
-                "/en/guide/AttackLog.md",
                 "/en/guide/Sensitive.md",
-                "/en/guide/AIDetection.md",
-                "/en/guide/SSLConfig.md",
-                "/en/guide/SSLOrder.md",
-                "/en/guide/SslExpire.md",
+                "/en/guide/FirewallIPBlock.md",
+                "/en/guide/CacheRule.md",
+                "/en/guide/HttpAuthBase.md",
+                "/en/guide/SSL.md",
                 "/en/guide/BlockingPage.md",
                 "/en/guide/BatchTask.md",
+            ],
+        },
+        {
+            text: "Protection Logs",
+            collapsible: true,
+            children: [
+                "/en/guide/AttackLog.md",
+            ],
+        },
+        {
+            text: "System Settings",
+            collapsible: true,
+            children: [
+                "/en/guide/AIDetection.md",
+                "/en/guide/PrivateInfo.md",
+                "/en/guide/OneKeyMod.md",
+                "/en/guide/Task.md",
+            ],
+        },
+        {
+            text: "Account",
+            collapsible: true,
+            children: [
                 "/en/guide/Otp.md",
+            ],
+        },
+        {
+            text: "Tunnel Protection",
+            collapsible: true,
+            children: [
                 "/en/guide/Tunnel.md",
             ],
         },

@@ -1,27 +1,76 @@
-# Custom BlockIng Response Page  
+# Custom Blocking Response Page
 
-## 1 Custom BlockIng Response Page  
-### 1.1 Custom BlockIng Response Page  
+## Overview
 
-![Custom BlockIng Response Page](/images/blocking_page.png)  
+The custom blocking response page lets you customize what the WAF returns to a visitor when it blocks a request. You can configure a dedicated response code, response content, and response headers per website and per attack type, making the blocking page friendlier or better aligned with your business.
 
-- **Custom BlockIng Response Page Name**: Used for identification.  
-- **Website**: Normally, select the global website. However, if each website needs a specific response, choose the specific website.  
-- **Response Code**: Default is 403, but you can edit it based on your requirements.  
-- **Response Content**: The content that is returned to the visitor. Supports variables:  
-  ```
-  Visit ID:  
-  [[.SAMWAF_REQ_UUID]]
-  ```
-- **Response Header Information**  
+<!-- Image: Custom blocking response page list -->
 
-  | Key Name          | Description                                                                                         | Example Value                                      |
-  |-------------------|-----------------------------------------------------------------------------------------------------|----------------------------------------------------|
-  | `Content-Type`    | Specifies the type of the returned content.                                                         | `text/html; charset=UTF-8`, `text/json; charset=UTF-8`  |
+## Steps
 
-### 1.2 HTML Example  
+1. Click **Create New** at the top-left.
+2. Enter a **Custom Blocking Page Name** (used for identification).
+3. Choose the **Website**: normally select the global website; if a website needs a specific response, choose that website.
+4. Choose the **Attack Type**: select the attack type this template applies to; choose "General (All Types)" to apply to all types.
+5. Enter the **Response Code**: default is `403`, editable as needed.
+6. Enter the **Response Content**: the content returned to the visitor; variables are supported (see below).
+7. Configure **Response Header Information**: click **Add** to add a row and fill in the key name and value; at least one header is required.
+8. Click **Confirm** to save.
 
-If you are using regular HTML, set the `Content-Type` to: `text/html; charset=UTF-8`.  
+To modify or remove a template, use **Edit** or **Delete** in the list action column.
+
+<!-- Image: Add custom blocking response page dialog -->
+
+## Field Reference
+
+| Field | Description |
+| --- | --- |
+| Custom Blocking Page Name | The template name, used for identification. |
+| Website | The website the template belongs to; can be the global website or a specific website. |
+| Attack Type | The attack type the template applies to; "General (All Types)" applies to all types. |
+| Response Code | The HTTP status code returned to the visitor; default is `403`. |
+| Response Content | The content returned to the visitor; variables are supported. |
+| Response Header Information | The HTTP response headers returned to the visitor, configured as "key = value"; at least one is required. |
+
+### Attack Type
+
+| Attack Type | Description |
+| --- | --- |
+| General (All Types) | Applies to all attack types. |
+| CC Attack | CC attack. |
+| SQL Injection | SQL injection. |
+| XSS Attack | XSS attack. |
+| Scan Tool | Scan tool. |
+| Remote Code Execution | Remote code execution (RCE). |
+| Directory Traversal | Directory traversal. |
+| Bot Attack | Bot crawler. |
+| Sensitive Word | Sensitive word. |
+| IP Blocked | IP blacklist. |
+| URL Blocked | URL blacklist. |
+| Anti Leech | Anti-leech. |
+| Custom Rule | Custom rule. |
+| OWASP Rule | OWASP rule. |
+| Plugin Block | Plugin block. |
+
+### Response Header
+
+| Key Name | Description | Example Value |
+| --- | --- | --- |
+| `Content-Type` | Specifies the type of the returned content. | `text/html; charset=UTF-8`, `text/json; charset=UTF-8` |
+
+## Response Content Variables
+
+The response content supports the following variable, which the WAF replaces with the actual value when responding:
+
+```
+Visit ID:
+[[.SAMWAF_REQ_UUID]]
+```
+
+## HTML Example
+
+If you are using regular HTML, set the `Content-Type` to: `text/html; charset=UTF-8`.
+
 ```html
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -124,9 +173,10 @@ If you are using regular HTML, set the `Content-Type` to: `text/html; charset=UT
 </html>
 ```
 
-### 1.3 JSON Example  
+## JSON Example
 
-If you want to use JSON for API interfaces, set the `Content-Type` to: `text/json; charset=UTF-8`.  
+If you want to use JSON for API interfaces, set the `Content-Type` to: `text/json; charset=UTF-8`.
+
 ```json
 {"samwaf_req_uuid":"[[.SAMWAF_REQ_UUID]]","msg":"Access Blocked"}
 ```
