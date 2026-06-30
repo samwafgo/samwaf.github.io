@@ -255,3 +255,28 @@ Selects how the client IP is extracted from a request; this setting applies to a
 
 - **NIC Mode**: gets the client IP directly from the network connection (for direct-connection scenarios).
 - **Proxy Mode**: gets the real IP from HTTP headers (X-Forwarded-For, etc.) (for scenarios using CDN, Nginx, and other proxies).
+
+## 11 Cookie Security
+
+Configured on the **Cookie Security** tab of the website edit page. When enabled, SamWaf hardens the `Set-Cookie` headers returned by the backend on the response path — **add-if-missing only, never overriding values the application already set** — and preserves all original cookie content (Path / Domain / Max-Age / Expires, etc.). Over HTTP, Secure is not auto-added to avoid breaking cookies.
+
+<!-- Image: "Cookie Security" tab on the website edit page -->
+
+### 11.1 Steps
+
+1. Edit the website and switch to the **Cookie Security** tab.
+2. Turn on **Enable cookie security** (click **Recommended** to fill in suggested values in one click).
+3. Set HttpOnly / Secure / SameSite / Excluded cookie names as needed.
+4. Save the website configuration to apply.
+
+### 11.2 Field Reference
+
+| Field | Description |
+| --- | --- |
+| Enable cookie security | Off / On. Set-Cookie is processed only when on. |
+| HttpOnly | Leave as-is / Add if missing. Appends HttpOnly when absent to prevent scripts from reading the cookie (mitigates XSS session theft). |
+| Secure | Leave as-is / Force add / Auto-add on HTTPS only. Adding Secure over HTTP breaks the cookie, so "Auto-add on HTTPS only" appends it just when the current request is HTTPS. |
+| SameSite | Leave as-is / Lax / Strict / None. Choosing None also adds Secure (browsers require Secure for SameSite=None). |
+| Excluded cookie names | Matched cookies are left untouched (comma-separated). Useful for third-party / SSO cookies that need cross-site behavior, e.g. `_ga,sso_token`. |
+
+> Recommended policy: On + HttpOnly "Add if missing" + Secure "Auto-add on HTTPS only" + SameSite=Lax.

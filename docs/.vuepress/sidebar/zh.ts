@@ -25,27 +25,20 @@ export const zhSidebar = sidebar({
             ],
         },
         {
+            text: "数据分析",
+            collapsible: true,
+            children: [
+                "/guide/Analysis.md",
+                "/guide/Spider.md",
+            ],
+        },
+        {
             text: "防护日志",
             collapsible: true,
             children: [
+                "/guide/VisitLog.md",
                 "/guide/AttackLog.md",
-            ],
-        },
-        {
-            text: "系统设置",
-            collapsible: true,
-            children: [
-                "/guide/AIDetection.md",
-                "/guide/PrivateInfo.md",
-                "/guide/OneKeyMod.md",
-                "/guide/Task.md",
-            ],
-        },
-        {
-            text: "账号管理",
-            collapsible: true,
-            children: [
-                "/guide/Otp.md",
+                "/guide/LogFileWrite.md",
             ],
         },
         {
@@ -53,6 +46,57 @@ export const zhSidebar = sidebar({
             collapsible: true,
             children: [
                 "/guide/Tunnel.md",
+            ],
+        },
+        {
+            text: "应用管理",
+            collapsible: true,
+            children: [
+                "/guide/Application.md",
+            ],
+        },
+        {
+            text: "账号管理",
+            collapsible: true,
+            children: [
+                "/guide/Account.md",
+                "/guide/AccountLog.md",
+                "/guide/Otp.md",
+            ],
+        },
+        {
+            text: "系统设置",
+            collapsible: true,
+            children: [
+                "/guide/VpConfig.md",
+                "/guide/FileManage.md",
+                "/guide/IPLocation.md",
+                "/guide/SysLog.md",
+                "/guide/SystemConfig.md",
+                "/guide/PrivateInfo.md",
+                "/guide/DataRetention.md",
+                "/guide/Owasp.md",
+                "/guide/AIDetection.md",
+                "/guide/RuntimeInfo.md",
+                "/guide/OneKeyMod.md",
+                "/guide/Task.md",
+                "/guide/SqlQuery.md",
+            ],
+        },
+        {
+            text: "通知管理",
+            collapsible: true,
+            children: [
+                "/guide/NotifyChannel.md",
+                "/guide/NotifySubscription.md",
+                "/guide/NotifyLog.md",
+            ],
+        },
+        {
+            text: "开放平台",
+            collapsible: true,
+            children: [
+                "/guide/OpenPlatform.md",
             ],
         },
     ],
