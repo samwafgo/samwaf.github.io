@@ -280,3 +280,36 @@ Configured on the **Cookie Security** tab of the website edit page. When enabled
 | Excluded cookie names | Matched cookies are left untouched (comma-separated). Useful for third-party / SSO cookies that need cross-site behavior, e.g. `_ga,sso_token`. |
 
 > Recommended policy: On + HttpOnly "Add if missing" + Secure "Auto-add on HTTPS only" + SameSite=Lax.
+
+## 12 CSRF Protection
+
+Configured on the **CSRF Protection** tab of the website edit page. When enabled, SamWaf validates the `Origin` / `Referer` of **state-changing requests** (POST / PUT / DELETE / PATCH, etc.) against this site; if the source is not this site, the request is treated as Cross-Site Request Forgery (CSRF) and blocked. This runs entirely on the WAF side and is transparent — no backend changes are required, and safe methods like GET / HEAD are never checked.
+
+`Origin` is used first (more reliable); when a request has no `Origin`, `Referer` is used instead. This site's domain and any domains listed under "Bind Multiple Domains" are automatically trusted.
+
+::: tip Prerequisite
+CSRF protection is part of the request inspection chain and only takes effect when the website's **protection is enabled** (protection shown as on in the website list). If "Log-only mode" is on for the website, matches are only logged and not actually blocked.
+:::
+
+<!-- Image: "CSRF Protection" tab on the website edit page -->
+
+### 12.1 Steps
+
+1. Edit the website and switch to the **CSRF Protection** tab.
+2. Turn on **Enable CSRF protection** (click **Recommended** to fill in suggested values in one click).
+3. Check the protected methods, fill in extra allowed origins, and set the no-origin-header behavior and excluded paths as needed.
+4. Save the website configuration to apply.
+
+> You can also toggle **CSRF Protection** and **Cookie Security** on/off directly from the overview on the **Protection** tab, then click **Configure** to jump to the corresponding tab for details.
+
+### 12.2 Field Reference
+
+| Field | Description |
+| --- | --- |
+| Enable CSRF protection | Off / On. Origin validation runs only when on. |
+| Protected Methods | Only the checked methods (POST / PUT / DELETE / PATCH) are origin-validated; safe methods (GET / HEAD / OPTIONS) are skipped. |
+| Extra Allowed Origins | This site's domain and bound domains are allowed automatically; add extra trusted origins here. One per line, supports `host`, `scheme://host`, or wildcard `*.example.com`. |
+| When No Origin/Referer | How to handle requests with neither Origin nor Referer: Allow (default) / Block. Native apps, curl, and server-to-server calls often have no such headers, so Allow avoids false blocks; switch to Block for stricter policy. |
+| Excluded Path Prefixes | Paths matching a prefix skip CSRF checks, one per line. Good for webhooks, callbacks, and token-authenticated APIs that have no browser origin headers, e.g. `/api/webhook`. |
+
+> Recommended policy: On + protect POST/PUT/DELETE/PATCH + Allow when no origin header, and configure excluded paths for API / webhook endpoints.
