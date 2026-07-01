@@ -313,3 +313,77 @@ CSRF protection is part of the request inspection chain and only takes effect wh
 | Excluded Path Prefixes | Paths matching a prefix skip CSRF checks, one per line. Good for webhooks, callbacks, and token-authenticated APIs that have no browser origin headers, e.g. `/api/webhook`. |
 
 > Recommended policy: On + protect POST/PUT/DELETE/PATCH + Allow when no origin header, and configure excluded paths for API / webhook endpoints.
+
+## 13 Web Page Anti-Tampering
+
+Configured on the "Web Page Anti-Tampering" tab of the website edit page. Once enabled, SamWaf learns a "correct page" baseline (content hash + body) for the static URLs you specify, then compares the hash of every response for those URLs. If a page is tampered with (origin compromised, files modified), SamWaf serves the learned correct copy back to the visitor, raises an alert, and logs an attack record.
+
+It uses **reverse-proxy response baseline comparison**, so SamWaf does not need to be on the same machine as the site files — a remote backend is protected too; and there is no extra origin fetch, since the proxy already forwards to the backend and anti-tampering just compares the hash once on the way back. Both egress paths are covered: reverse proxy, and SamWaf's own static serving (static site service / path-routing static files).
+
+::: tip Prerequisite
+Web page anti-tampering is part of the response handling chain and only takes effect when the website's **defense is enabled**. If the website has "Log-only mode" on, a hit is only logged and not actually replaced. Pages whose baseline body exceeds the "Baseline Size Cap" are neither learned nor protected.
+:::
+
+::: warning Only for byte-stable static assets
+A byte-for-byte hash baseline only suits assets that return identical content every time: truly static `.html` / `.js` / `.css` / images, etc. If the page body embeds content that **changes on every request** (real-time timestamps, CSRF tokens, random numbers, etc.), it will be misjudged as tampered — do not protect such dynamic pages (or use "Alert only" first to observe).
+:::
+
+<!-- Image: "Web Page Anti-Tampering" tab on the website edit page -->
+
+### 13.1 Steps
+
+1. Edit the website and switch to the "Web Page Anti-Tampering" tab.
+2. Turn "Enable Web Page Anti-Tampering" on (click "Recommended" to fill in suggested values: On + Serve correct copy + 1MB cap).
+3. **Save the website first** (protected URL rules are stored per website and require the website to exist).
+4. Back on the "Web Page Anti-Tampering" tab, under "Protected URLs" click "Add Protected URL" and enter an exact path (e.g. `/index.html`, `/app.js`, `/logo.png`).
+5. After saving, the **baseline is learned automatically on the first visit** to that URL, and the status changes from "Pending" to "Learned".
+
+> You can also toggle "Web Page Anti-Tampering" on/off directly in the overview on the "Defense" tab, and click "Configure" to jump to this tab.
+
+### 13.2 Extract Protected URLs from a Page in Bulk
+
+When adding URLs one by one is tedious, use "Extract from Page" to discover them automatically:
+
+1. Above "Protected URLs" click "Extract from Page".
+2. Pick the "Domain" (the dropdown lists the site's primary domain plus its bound extra domains), then enter a page path (default `/`).
+3. Click "Extract" — SamWaf fetches this page via the website's configured backend and parses the **same-site** js / css / html / images referenced by the page, listed with type tags.
+4. All candidates are selected by default; adjust as needed, tick "Ignore URL Params" if desired, and click "Add Selected" to create rules in bulk (existing ones are skipped automatically).
+
+::: tip Fetches this site only, no external address
+Extraction only fetches via the website's configured backend (the same backend it normally proxies to); it never visits any external address you type, and only lists same-site resources — third-party CDN references on the page are dropped automatically.
+:::
+
+### 13.3 Relearning and Bulk Actions
+
+- **Relearn**: after you **legitimately update a page**, its content changes and would be flagged as tampered; click "Relearn" on that row — SamWaf immediately re-fetches the URL from the backend and rebuilds the baseline on the spot (for a website with no backend configured, it falls back to "relearn on next visit").
+- **Relearn Selected / Relearn All**: relearn multiple selected rows in bulk, or relearn all protected URLs of the site at once (handy after a release).
+- **Delete Selected**: delete multiple selected rows at once.
+- **View Baseline**: inspect the current baseline's content type / size / hash / learned time; text can be expanded and images previewed, and you can "Download Baseline" to verify.
+- The protected URL list supports **sorting and filtering** by each column (URL, rule name, enabled, baseline status, etc.).
+
+### 13.4 Field Reference
+
+**Site-level configuration**
+
+| Field | Description |
+| --- | --- |
+| Enable Web Page Anti-Tampering | Off / On. Only when on are protected URLs learned and compared. |
+| On Detection | Serve correct copy (recommended) / Alert only (monitor). "Serve correct copy" returns the baseline correct copy to the visitor on mismatch and alerts + logs an attack; "Alert only" merely alerts and still serves the backend page — good for observing early after go-live. |
+| Baseline Size Cap (KB) | Pages larger than this are neither learned nor protected; default 1024 (1MB). Key static pages are usually tens of KB. |
+
+**Protected URL rules**
+
+| Field | Description |
+| --- | --- |
+| Protected URL | Exact path match, e.g. `/index.html`, `/app.js`; wildcards `/*`, directories and query params are not supported. |
+| Rule Name / Remarks | Optional name and note for easy identification. |
+| Enabled | Disable / enable this rule. |
+| Ignore URL Params | On (default): match by path and compare regardless of cache-busting params like `?v=timestamp` (recommended for static assets); Off: requests with a query are passed through without comparison (for pages whose content varies by params). |
+| Baseline Status | Pending / Learned / Over Limit. |
+| Size / Hits | Baseline body size / cumulative tamper hit count. |
+
+> Recommended policy: On + On Detection "Serve correct copy" + 1MB cap; only add truly byte-stable static assets as protected URLs.
+
+::: warning Does not scan server files
+This feature protects against "the content of a protected page being changed"; it does not scan the server file system or detect newly added files (such as an uploaded webshell) — that is the domain of host-based file anti-tampering.
+:::
