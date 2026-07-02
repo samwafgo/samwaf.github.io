@@ -429,3 +429,71 @@ Upload inspection requires the site's **Defense to be on**. Under "Log-only mode
 ::: warning Inspection scope
 Only `multipart/form-data` uploads are inspected; non-standard uploads such as base64 embedded in JSON are out of scope. Webshell content only scans the head of each file (first 64KB), which is sufficient for one-liner shells / signatures identifiable at the head.
 :::
+
+## 15 Path Route Rules
+
+Configured on the "Path Routes" tab of the website edit page. It works like Nginx `location`: within a single website, it dispatches requests to different destinations by URL path — forward to another backend, serve local static files directly, or redirect. Requests that don't match any rule are still forwarded to the website's original backend.
+
+<!-- Image: "Path Routes" tab on the website edit page -->
+
+### 15.1 Steps
+
+1. Edit the website and switch to the "Path Routes" tab.
+2. Click "New", fill in "Match Path" and "Match Type", and choose a "Target Type".
+3. Fill in the parameters for the chosen target type (Backend Proxy / Static Files / Redirect).
+4. Save. Rules take effect immediately without restart.
+
+::: tip Priority and match order
+A request may match several rules at once. In that case the rule with the smallest "Priority" number wins (default 100); on a tie, exact match beats prefix match and a longer path wins. Give more specific rules a smaller priority number.
+:::
+
+### 15.2 Common Fields
+
+| Field | Description |
+| --- | --- |
+| WebSite | The website this rule belongs to. |
+| Rule Name | Name of the rule; must be unique within the same website. |
+| Match Path | URL path starting with `/`. Prefix match e.g. `/api/`, exact match e.g. `/index.html`. |
+| Match Type | Prefix Match / Exact Match / Regex Match. |
+| Priority | Lower number = higher priority, default 100. |
+| Target Type | Backend Proxy / Static Files / Redirect. Choosing one expands its parameters. |
+| Remarks | Optional note. |
+
+### 15.3 Target Type: Backend Proxy
+
+Forwards matched requests to the specified backend.
+
+| Field | Description |
+| --- | --- |
+| Backend Protocol | Protocol used to connect the backend: **Auto (follow client)** / HTTP / HTTPS. Auto means an HTTPS client is proxied over HTTPS and an HTTP client over HTTP; if the backend only supports one protocol, choose it explicitly. |
+| Backend Host | Backend domain, e.g. `backend.example.com`. |
+| Backend Port | Backend port. |
+| Backend IP (optional) | Empty = resolve the backend hostname; when set, connects to this IP directly, bypassing DNS resolution. |
+| Response Timeout (s) | Timeout waiting for the backend **response headers**. `0` = inherit the website's "Access Timeout" setting; raise it for large downloads or slow-starting backends. |
+| Record Access Requests | Off by default. When enabled, requests matching this rule are written to the **program log** (URL, target, status code, cost), helping you check whether a request reached the backend. |
+| Strip Path Prefix | Yes / No. Whether to strip the matched path prefix before forwarding, e.g. after matching `/api/`, strip `/api/` before forwarding to the backend. |
+
+Below the form, a "Forwarding Preview" shows two live example lines — "Client request" and "Forwarded to" — based on your input, so you can confirm the forwarding behavior.
+
+::: tip Response Timeout only bounds the "wait for the first byte"
+"Response Timeout" only limits how long to **wait for the backend to start responding** (first byte / response headers); it does NOT limit the response body download/transfer time. So as long as the backend starts responding promptly, a multi-GB download can take as long as it needs without being cut off by this timeout. Only backends that "stay silent for a long time before responding" (e.g. dynamically packaging a large file before returning) need a larger value or the website's unlimited wait.
+:::
+
+### 15.4 Target Type: Static Files
+
+Serves matched requests directly from a local directory via SamWaf.
+
+| Field | Description |
+| --- | --- |
+| Static Files Root | Local server directory, e.g. `/var/www/html`, used for serving static files. |
+| SPA Fallback Mode | When enabled, falls back to `index.html` if no matching file exists (for Vue/React Router history mode). |
+| Strip Path Prefix | Yes / No. Same as Backend Proxy — whether to strip the matched prefix before mapping to the static directory. |
+
+### 15.5 Target Type: Redirect
+
+Redirects matched requests to another URL.
+
+| Field | Description |
+| --- | --- |
+| Redirect URL | Redirect target, e.g. `https://example.com/new-path`. |
+| Redirect Code | 302 Found / 301 Moved Permanently, default 302. |
