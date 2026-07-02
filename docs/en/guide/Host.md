@@ -387,3 +387,45 @@ Extraction only fetches via the website's configured backend (the same backend i
 ::: warning Does not scan server files
 This feature protects against "the content of a protected page being changed"; it does not scan the server file system or detect newly added files (such as an uploaded webshell) — that is the domain of host-based file anti-tampering.
 :::
+
+## 14 File Upload Inspection
+
+Configured on the "Upload Inspection" tab of the website edit page. Once enabled, SamWaf inspects `multipart/form-data` file uploads and blocks dangerous files. Four inspection dimensions can be toggled independently: **dangerous extension blacklist**, **webshell content signatures**, **declared-type vs real-content mismatch**, and **per-file size limit**.
+
+Only file-upload requests are inspected (zero overhead otherwise); only file fields (those with a filename) are processed, while ordinary form fields are covered by SQL injection / XSS detection. After reading the upload content the request is passed intact to the backend, so legitimate files are unaffected.
+
+::: tip Prerequisite
+Upload inspection requires the site's **Defense to be on**. Under "Log-only mode" a hit is logged but not actually blocked. It is **off by default**, and blocks when enabled — existing sites are unaffected.
+:::
+
+<!-- Image: "Upload Inspection" tab on the website edit page -->
+
+### 14.1 Steps
+
+1. Edit the website and switch to the "Upload Inspection" tab.
+2. Set "Enable Upload Inspection" to on (click "Recommended" to fill in: all four dimensions on + built-in default blacklist + 10MB cap + block over-limit).
+3. Adjust the dimension toggles, extension blacklist, size limit, and inspect/exclude paths as needed.
+4. Save the website.
+
+> You can also toggle "Upload Inspection" directly in the overview table on the "Defense" tab, and click "Details" to jump to this tab. When enabling from the overview while all four dimensions are currently off, the recommended policy (all four on) is applied automatically, so you never end up with "the master switch on but nothing inspected".
+
+### 14.2 Field Reference
+
+| Field | Description |
+| --- | --- |
+| Enable Upload Inspection | Off / On. Uploads are inspected only when on. |
+| Extension Blacklist | On / Off. Uploads whose extension hits the blacklist are blocked. **All** extension segments of the filename are checked (defeats double-extension `shell.php.jpg`) and null-byte bypass is handled. |
+| Dangerous Extension Blacklist | Comma-separated, e.g. `php,jsp,asp,exe`; empty = built-in default blacklist (php/jsp/asp/exe/sh/bat and other executable/script suffixes). Shown only when "Extension Blacklist" is on. |
+| Webshell Content Signatures | On / Off. Scans the file head for webshell signatures (PHP/JSP/ASP script markers combined with dangerous calls such as `eval`/`system`/`Runtime.exec`) and blocks on hit. A lone `eval` in minified JS won't false-positive. |
+| Real Type Check | On / Off. Sniffs the real file type: blocks when a file claims to be an image but the content is actually a script / HTML (renamed extension + spoofed Content-Type). |
+| Per-file Size Limit | On / Off. Blocks a single file exceeding the size limit. |
+| Size Limit (KB) | Per-file size limit, also the inspectable buffer cap for the request body. Default 10240 (10MB). |
+| Over-limit Action | Block (recommended) / Pass without inspection. What to do when the upload body exceeds the inspectable limit. Default "Block" prevents padding a malicious file over the limit to bypass content inspection; sites with legitimate large uploads can raise the limit or choose "Pass without inspection". |
+| Inspect Paths Only | One path prefix per line; empty = inspect all uploads. When non-empty, only uploads matching these prefixes are inspected. |
+| Excluded Paths | One path prefix per line; matches skip inspection. **Takes priority over "Inspect Paths Only"**. Good for trusted internal upload endpoints. |
+
+> Recommended policy: all four dimensions on + built-in default blacklist + 10MB cap + block over-limit.
+
+::: warning Inspection scope
+Only `multipart/form-data` uploads are inspected; non-standard uploads such as base64 embedded in JSON are out of scope. Webshell content only scans the head of each file (first 64KB), which is sufficient for one-liner shells / signatures identifiable at the head.
+:::
