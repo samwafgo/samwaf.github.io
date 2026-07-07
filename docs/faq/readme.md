@@ -257,6 +257,8 @@ cache:
 | --- | --- |
 | `security.ip_whitelist` | 管理端访问 IP 白名单，支持 CIDR，多个用逗号分隔（如 `0.0.0.0/0,::/0` 表示放开所有） |
 | `security.domain_whitelist` | 管理端访问域名白名单，多个用逗号分隔 |
+| `security.manage_trusted_proxies` | 管理端可信代理网段（CIDR/IP，逗号分隔）。仅当管理请求的直连来源落在此网段内，才采信 `X-Forwarded-For`/`X-Real-IP` 识别真实客户端，防止伪造代理头绕过 IP 白名单/登录锁定；留空=不信任任何代理头。仅在本机位于反向代理之后时设置 |
+| `security.cors_allow_origins` | 允许跨域(CORS)访问管理接口的来源（逗号分隔）。回环/本机（`127.0.0.1`、`localhost`）始终放行，仅需填异地部署的前端来源；留空=仅放行回环 |
 | `security.entry_enable` | 是否启用自定义管理入口路径 |
 | `security.entry_path` | 自定义管理入口路径（隐藏后台，见 3.3） |
 | `security.emergency_path` | 紧急入口路径（兜底访问） |

@@ -47,3 +47,31 @@ The security path applies to all requests of the entire HTTP server, so it affec
 ## 5 Notification Title Prefix
 
 Set a prefix for notification message titles, to distinguish the source among alerts from multiple SamWaf nodes. Click **Save** after editing.
+
+## 6 Management Trusted Proxies
+
+When the SamWaf console runs behind a reverse proxy (e.g. Nginx), this tells SamWaf which direct sources are trusted proxies so it can identify the real client IP correctly.
+
+- **Effect**: only when the management request's direct source IP falls within these CIDRs does SamWaf trust the `X-Forwarded-For` / `X-Real-IP` headers to identify the real client; otherwise it uses the network-layer source IP. This prevents an attacker from spoofing proxy headers to bypass the IP whitelist or login lockout.
+- **Value**: CIDR or IP, comma-separated, e.g. `10.0.0.0/8,192.168.0.0/16`. **Empty = trust no proxy header** (default; for direct deployments).
+- Only needed when this instance is behind a reverse proxy.
+
+::: warning
+Stored in `conf/config.yml`. If this locks you out via the IP whitelist, edit the file and restart to recover.
+:::
+
+<!-- Image: Management trusted proxies -->
+
+## 7 CORS Allow Origins
+
+Controls which origins may access the management API cross-origin (CORS), preventing arbitrary sites from making credentialed cross-origin requests.
+
+- **Effect**: loopback / local origins (`127.0.0.1`, `localhost`) are always allowed, so local access and local development need no setup; only add **remotely-deployed** frontend origins here. **Empty = loopback only**.
+- **Value**: origins, comma-separated, e.g. `https://waf.example.com,http://192.168.1.10:8080`.
+- Same-origin access (frontend on the same host and port as the console) is not cross-origin and needs no setup.
+
+::: warning
+Stored in `conf/config.yml`. If a wrong CORS config locks out a remote frontend, edit the file and restart to recover.
+:::
+
+<!-- Image: CORS allow origins -->

@@ -257,6 +257,8 @@ cache:
 | --- | --- |
 | `security.ip_whitelist` | Admin access IP whitelist, CIDR supported, comma-separated (e.g. `0.0.0.0/0,::/0` opens to all) |
 | `security.domain_whitelist` | Admin access domain whitelist, comma-separated |
+| `security.manage_trusted_proxies` | Management trusted proxy CIDRs/IPs (comma-separated). Only when a management request's direct source falls within these ranges are `X-Forwarded-For`/`X-Real-IP` trusted to identify the real client, preventing spoofed proxy headers from bypassing the IP whitelist / login lockout; empty = trust no proxy header. Set only when this instance is behind a reverse proxy |
+| `security.cors_allow_origins` | Origins allowed to access the management API cross-origin (CORS), comma-separated. Loopback/local (`127.0.0.1`, `localhost`) is always allowed; only add remotely-deployed frontend origins; empty = loopback only |
 | `security.entry_enable` | Enable a custom admin entry path |
 | `security.entry_path` | Custom admin entry path (hides the console, see 3.3) |
 | `security.emergency_path` | Emergency entry path (fallback access) |

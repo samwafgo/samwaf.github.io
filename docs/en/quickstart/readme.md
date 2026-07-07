@@ -80,4 +80,8 @@ Default username: admin
 Default password: admin868  
 (Note: Please change the default password upon first login)
 
+::: tip About the initial password
+Since v1.3.21-beta.8  no longer use a fixed default password for a **fresh install** — they generate a **random initial password** written to `data/initial_password.txt` in the program directory (the startup log also shows a hint). If `admin868` does not work, open that file to get the initial password. Either way, **change the password immediately after first login**.
+:::
+
 ![SamWaf Main Screen](/images/overview.png)
