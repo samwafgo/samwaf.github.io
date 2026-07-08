@@ -1,4 +1,52 @@
 # 版本发布
+## 20260708 (v1.3.21)
+
+重要说明
+1. 本次登录账号密码存储由 MD5 切换为 bcrypt，向上升级无感知。注意：如需回滚到 v1.3.21-beta.8 之前的版本，由于加密方式切换，需手工使用后台命令行重置密码。
+2. 全新安装：首次登录口令见 `data/initial_password.txt`，登录后请立即修改。
+3. 管理端前有反向代理：请在 `conf/config.yml` 中配置 `security.manage_trusted_proxies`（可信代理网段，CIDR 格式，逗号分隔），或在「系统配置」页面设置。
+
+新增
+- 管理端域名白名单 感谢 @友人B
+- IP 归属地支持 ipdb 格式 感谢 @echs-top
+- 防护的网站可设置昵称 感谢 @1091198228
+- AI 标注与检测（测试）
+- 应用管理
+- RBAC 权限管理
+- 管理端 SSL 证书自动更新 感谢 @Firfr
+- SamWaf 面板开启 HTTPS 后可配置是否自动从 HTTP 跳转 感谢 @Mr.Chen
+- 防护引擎增加 Cookies 加固
+- 防护引擎增加 CSRF 跨站防护
+- 网页防篡改功能
+- 防护引擎支持上传文件检测
+- 邮件通知支持自签证书
+
+修正
+- 发送测试消息无法看到服务器前缀的问题 感谢 @友人B
+- 删除规则时 SQL 语法错误的问题
+- MySQL、Redis 未启动时连接异常的问题
+- MySQL 分页未生效的问题 感谢 @王继波
+- MySQL 添加 CC 防护提示失败的问题 感谢 @王继波
+- MySQL 危险日志提示错误的问题 感谢 @王继波
+- MySQL 字段问题 感谢 @虫子
+- 访问日志的列配置无法修改的问题 感谢 @FiendFEARing
+- 每日大量访问日志情况下 SQLite 变慢的问题 感谢 @wangpenga999
+- IP 管理保存 ipdb 后重启丢失的问题 感谢 @Mr.Chen
+- 路径路由上游为 HTTPS 时下游也强制按 HTTP 访问的问题 感谢 @mmdlsu
+
+优化
+- 优雅/平滑升级
+- 网站配置重新加载业务不中断
+
+安全
+- 修复密码相关的潜在安全问题 感谢 @zuesdevil
+- 查询 SQL 整体调整 感谢 @zuesdevil @tomaioo
+- 整体进行安全加固
+
+感谢以下贡献者（排名不分先后）
+
+@1091198228, @echs-top, @FiendFEARing, @Firfr, @mmdlsu, @Mr.Chen, @tomaioo, @wangpenga999, @zuesdevil, @友人B, @王继波, @虫子
+
 ## 20260528 (v1.3.20) 
  新增
 - 开放平台

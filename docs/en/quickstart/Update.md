@@ -1,5 +1,53 @@
 # Version Releases 
-## 20260224 (v1.3.20)
+## 20260708 (v1.3.21)
+
+Important Notes
+1. Login password storage has been switched from MD5 to bcrypt. Upgrading is seamless. Note: if you roll back to a version earlier than v1.3.21-beta.8, you must manually reset the password via the backend command line due to the encryption change.
+2. Fresh installation: the initial login password is in `data/initial_password.txt`; change it immediately after first login.
+3. If the management console sits behind a reverse proxy: configure `security.manage_trusted_proxies` in `conf/config.yml` (trusted proxy CIDR ranges, comma-separated), or set it on the "System Configuration" page.
+
+Added
+- Domain whitelist for the management console (Thanks to @友人B)
+- IP geolocation supports ipdb format (Thanks to @echs-top)
+- Protected websites can be given nicknames (Thanks to @1091198228)
+- AI labeling and detection (beta)
+- Application management
+- RBAC permission management
+- Automatic SSL certificate renewal for the management console (Thanks to @Firfr)
+- Configurable HTTP-to-HTTPS auto redirect when the SamWaf panel has HTTPS enabled (Thanks to @Mr.Chen)
+- Cookie hardening in the protection engine
+- CSRF protection in the protection engine
+- Web page anti-tampering
+- Upload file inspection in the protection engine
+- Email notification supports self-signed certificates
+
+Fixed
+- Server prefix not visible when sending test messages (Thanks to @友人B)
+- SQL syntax error when deleting rules
+- Connection exceptions when MySQL or Redis is not running
+- MySQL pagination not taking effect (Thanks to @王继波)
+- Failure prompt when adding CC protection on MySQL (Thanks to @王继波)
+- Incorrect danger log prompts on MySQL (Thanks to @王继波)
+- MySQL field issue (Thanks to @虫子)
+- Access log column configuration could not be modified (Thanks to @FiendFEARing)
+- SQLite slowdown under heavy daily access log volume (Thanks to @wangpenga999)
+- ipdb file lost after restart when saved in IP management (Thanks to @Mr.Chen)
+- Path routing forced downstream HTTP access even when the upstream is HTTPS (Thanks to @mmdlsu)
+
+Optimized
+- Graceful / smooth upgrade
+- Website configuration reload without business interruption
+
+Security
+- Fixed potential password-related security issues (Thanks to @zuesdevil)
+- Overall adjustment of query SQL (Thanks to @zuesdevil, @tomaioo)
+- Overall security hardening
+
+Thanks to the following contributors (in no particular order)
+
+@1091198228, @echs-top, @FiendFEARing, @Firfr, @mmdlsu, @Mr.Chen, @tomaioo, @wangpenga999, @zuesdevil, @友人B, @王继波, @虫子
+
+## 20260528 (v1.3.20)
 Added
 - Open Platform
 - Comprehensive website query statistics
