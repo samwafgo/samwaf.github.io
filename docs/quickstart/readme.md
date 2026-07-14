@@ -55,6 +55,8 @@ Linux Arm64架构请下载对应的文件 SamWaf_Linux_arm64.v*.tar.gz
 @tab Docker
 请到dockerhub拉取最新版本 (https://hub.docker.com/r/samwaf/samwaf)
 
+**常规启动（端口映射模式）**
+
 ```
 docker run -d --name=samwaf-instance \
            --restart always \
@@ -69,6 +71,41 @@ docker run -d --name=samwaf-instance \
 
 
 ```
+
+四个挂载目录请换成宿主机上的真实路径，作用如下：
+
+| 目录 | 说明 |
+| --- | --- |
+| `/app/conf` | 配置文件 `config.yml` 所在目录。 |
+| `/app/data` | 数据库与数据文件（含首次安装生成的 `initial_password.txt`）。 |
+| `/app/logs` | 运行日志。 |
+| `/app/ssl` | SSL 证书文件。 |
+
+**需要使用「防火墙IP封禁」时**
+
+[防火墙IP封禁](/guide/FirewallIPBlock.html) 会调用宿主机的 iptables，容器需要额外的权限和网络配置，否则页面上该功能会被禁用并提示环境不支持：
+
+```
+docker run -d --name=samwaf-instance \
+           --restart always \
+           --cap-add=NET_ADMIN \
+           --network host \
+           -v /path/to/your/conf:/app/conf \
+           -v /path/to/your/data:/app/data \
+           -v /path/to/your/logs:/app/logs \
+           -v /path/to/your/ssl:/app/ssl \
+           samwaf/samwaf
+```
+
+- `--cap-add=NET_ADMIN`：授予容器操作 iptables 的权限（官方镜像已内置 iptables，无需自行安装）。
+- `--network host`：与宿主机共享网络。**不加这个参数，封禁规则只写入容器自身的网络命名空间，对真实流量不生效。**
+
+::: warning 注意
+使用 `--network host` 后不能再写 `-p` 端口映射，容器直接使用宿主机的 26666 / 80 / 443 端口。
+:::
+
+如果不需要防火墙IP封禁，用上面的常规启动即可，其余功能（含应用层 [IP黑名单](/guide/IPBlack.html)）都不受影响。
+
 :::
 
 

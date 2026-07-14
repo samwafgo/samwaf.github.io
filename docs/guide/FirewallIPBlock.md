@@ -10,6 +10,57 @@
 
 <!-- 图：防火墙IP封禁列表与统计卡片 -->
 
+## 前置条件
+
+该功能依赖操作系统自带的防火墙，因此对运行环境有要求：
+
+| 操作系统 | 依赖 |
+| --- | --- |
+| Linux | 已安装 `iptables`（同时需要 `iptables-save`），且 SamWaf 进程有操作 iptables 的权限（通常需 root）。 |
+| Windows | 已开启 Windows 防火墙（域 / 专用 / 公用任一配置文件启用即可）。 |
+| macOS | 已启用 pf 防火墙（`sudo pfctl -e`），且以 root 身份运行。 |
+
+进入页面时，SamWaf 会自动探测当前环境是否具备上述条件。**若不具备，页面顶部会显示一条黄色提示，说明具体原因，同时 新建防火墙IP封禁 / 批量添加 / 同步规则 按钮变为不可点击，列表中的 启用 操作也会隐藏。** 已有记录仍可正常查看、禁用和删除（此时只清理管理端记录，不会去操作系统防火墙）。
+
+<!-- 图：环境不支持时的提示与置灰按钮 -->
+
+### 容器（Docker）部署
+
+在容器中使用该功能，需要同时满足三个条件，缺一不可：
+
+1. **镜像内有 iptables**。SamWaf 官方镜像已内置；若自行构建的镜像基于精简版 Alpine，需要 `apk add --no-cache iptables`。
+2. **容器具备 `NET_ADMIN` 权限**，否则即使装了 iptables 也会因权限不足而失败。
+3. **容器与宿主机共享网络命名空间**（`--network host`），否则防火墙规则只写入容器自身的网络命名空间，对宿主机的流量不生效。
+
+`docker run` 示例：
+
+```bash
+docker run -d --name samwaf-instance \
+  --cap-add=NET_ADMIN \
+  --network host \
+  -v ./conf:/app/conf -v ./data:/app/data -v ./logs:/app/logs -v ./ssl:/app/ssl \
+  samwaf/samwaf
+```
+
+`docker-compose.yml` 中对应的写法：
+
+```yaml
+services:
+  samwaf-instance:
+    image: samwaf/samwaf
+    cap_add:
+      - NET_ADMIN
+    network_mode: host
+```
+
+::: warning 注意
+使用 `network_mode: host` 时不能再配置 `ports` 端口映射与自定义 `networks`，容器会直接使用宿主机网络。
+:::
+
+::: tip 提示
+如果无法满足上述容器条件，可以改用 **[IP黑名单](/guide/IPBlack.html)** 在 WAF 应用层拦截，功能不受运行环境限制。
+:::
+
 ## 适用场景
 
 - 需要在系统层面彻底屏蔽某些恶意 IP，而不仅在应用层拦截。
@@ -85,3 +136,5 @@
 - **填写 IP 后未立即拦截？** 可点击 **同步规则**，将规则同步到操作系统防火墙。
 - **永久封禁如何设置？** 新建或编辑时将过期时间留空即可，列表中会显示为 **永久**。
 - **过期记录如何清理？** 点击顶部的 **清理过期** 按钮一键清除。
+- **按钮全部置灰，提示"当前环境不支持系统防火墙封禁"？** 说明当前运行环境不满足[前置条件](#前置条件)。提示语中会给出具体原因，常见的有：Linux 未安装 `iptables`、当前进程没有操作 iptables 的权限（需 root）、Windows 防火墙未开启。容器部署请按上文补齐 iptables、`NET_ADMIN` 权限与 `--network host`。
+- **在容器里封禁成功了，但恶意 IP 还是能访问？** 多半是容器没有使用 `--network host`。此时规则只写进了容器自己的网络命名空间，对宿主机进来的流量没有作用。

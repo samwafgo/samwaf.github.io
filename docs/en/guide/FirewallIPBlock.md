@@ -10,6 +10,57 @@ The top of the page shows four statistics cards giving a live overview of the cu
 
 <!-- Image: Firewall IP Block list and statistics cards -->
 
+## Prerequisites
+
+This feature relies on the firewall built into the operating system, so it has environment requirements:
+
+| Operating System | Requirement |
+| --- | --- |
+| Linux | `iptables` is installed (`iptables-save` is required as well), and the SamWaf process is allowed to modify iptables (usually means running as root). |
+| Windows | Windows Firewall is turned on (any one of the Domain / Private / Public profiles is enough). |
+| macOS | The pf firewall is enabled (`sudo pfctl -e`) and SamWaf runs as root. |
+
+When you open the page, SamWaf probes the current environment automatically. **If the requirements are not met, a yellow banner at the top of the page explains why, the Add Firewall IP Block / Batch Add / Sync Rules buttons are disabled, and the Enable action is hidden from the list.** Existing records can still be viewed, disabled, and deleted (in that case only the management-side records are cleaned up; the OS firewall is not touched).
+
+<!-- Image: Warning banner and disabled buttons when the environment is unsupported -->
+
+### Docker deployment
+
+To use this feature inside a container, all three conditions below must be met:
+
+1. **iptables must be present in the image.** The official SamWaf image ships with it; if you build your own image from a minimal Alpine base, add `apk add --no-cache iptables`.
+2. **The container needs the `NET_ADMIN` capability.** Without it the commands fail on permissions even if iptables is installed.
+3. **The container must share the host network namespace** (`--network host`). Otherwise the rules are written only into the container's own network namespace and have no effect on traffic reaching the host.
+
+`docker run` example:
+
+```bash
+docker run -d --name samwaf-instance \
+  --cap-add=NET_ADMIN \
+  --network host \
+  -v ./conf:/app/conf -v ./data:/app/data -v ./logs:/app/logs -v ./ssl:/app/ssl \
+  samwaf/samwaf
+```
+
+The equivalent in `docker-compose.yml`:
+
+```yaml
+services:
+  samwaf-instance:
+    image: samwaf/samwaf
+    cap_add:
+      - NET_ADMIN
+    network_mode: host
+```
+
+::: warning Note
+With `network_mode: host` you can no longer declare `ports` mappings or custom `networks`; the container uses the host network directly.
+:::
+
+::: tip Tip
+If you cannot meet these container requirements, use the **[IP Blacklist](/en/guide/IPBlack.html)** instead to block at the WAF application layer — it works in any environment.
+:::
+
 ## Use Cases
 
 - Completely block malicious IPs at the system level, not just at the application layer.
@@ -85,3 +136,5 @@ The top of the page shows four statistics cards giving a live overview of the cu
 - **The IP is not blocked immediately after adding it?** Click **Sync Rules** to push the rules to the operating system firewall.
 - **How do I make a block permanent?** Leave the expire time blank when adding or editing; the list shows it as **Permanent**.
 - **How do I clean up expired records?** Click the **Clear Expired** button at the top.
+- **All buttons are greyed out with a "system firewall blocking is not available" message?** The environment does not meet the [prerequisites](#prerequisites). The banner states the exact reason — commonly: `iptables` is not installed on Linux, the process lacks permission to modify iptables (root is required), or Windows Firewall is off. For container deployments, add iptables, the `NET_ADMIN` capability, and `--network host` as described above.
+- **The block succeeds inside a container, but the malicious IP can still reach the site?** The container is most likely not running with `--network host`. The rules were written only into the container's own network namespace and do nothing to traffic arriving at the host.

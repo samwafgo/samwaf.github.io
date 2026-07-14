@@ -55,6 +55,8 @@ For Linux Arm64 architecture, please download the corresponding file SamWaf_Linu
 @tab Docker
 For Docker, please pull the latest version from Docker Hub (https://hub.docker.com/r/samwaf/samwaf)
 
+**Standard start (published ports)**
+
 ```
 docker run -d --name=samwaf-instance \
            --restart always \
@@ -69,6 +71,41 @@ docker run -d --name=samwaf-instance \
 
 
 ```
+
+Replace the four mount paths with real directories on the host. They are used for:
+
+| Directory | Description |
+| --- | --- |
+| `/app/conf` | Holds the `config.yml` configuration file. |
+| `/app/data` | Database and data files (including `initial_password.txt` generated on a fresh install). |
+| `/app/logs` | Runtime logs. |
+| `/app/ssl` | SSL certificate files. |
+
+**If you want to use Firewall IP Block**
+
+[Firewall IP Block](/en/guide/FirewallIPBlock.html) drives the host's iptables, so the container needs extra privileges and network settings. Without them the feature is disabled in the UI with an "environment not supported" message:
+
+```
+docker run -d --name=samwaf-instance \
+           --restart always \
+           --cap-add=NET_ADMIN \
+           --network host \
+           -v /path/to/your/conf:/app/conf \
+           -v /path/to/your/data:/app/data \
+           -v /path/to/your/logs:/app/logs \
+           -v /path/to/your/ssl:/app/ssl \
+           samwaf/samwaf
+```
+
+- `--cap-add=NET_ADMIN`: grants the container permission to modify iptables (the official image already ships with iptables — no need to install it yourself).
+- `--network host`: shares the host network. **Without it, block rules are written only into the container's own network namespace and have no effect on real traffic.**
+
+::: warning Note
+With `--network host` you can no longer use `-p` port mappings; the container binds directly to the host's 26666 / 80 / 443 ports.
+:::
+
+If you do not need Firewall IP Block, the standard start above is enough — every other feature (including the application-layer [IP Blacklist](/en/guide/IPBlack.html)) works either way.
+
 :::
 
  
