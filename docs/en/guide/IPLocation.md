@@ -10,6 +10,12 @@ Supported data sources:
 - **GeoLite2**: an mmdb-format offline database, usable for IPv6.
 - **IPDB**: an ipdb-format offline database that covers both IPv4 and IPv6 lookups.
 
+::: tip Works out of the box, no upload required
+SamWaf ships with two built-in IP databases: **ip2region for IPv4** (legacy format) and **GeoLite2 for IPv6**. After a fresh install, IP geolocation works right away without uploading anything; these two sources are marked as "Built-in" on the page.
+
+Uploading a file of the same type overrides the built-in data. The remaining sources have no built-in data and must be uploaded before use: **ip2region for IPv6** (requires `ip2region_v6.xdb`) and **IPDB** (requires a `.ipdb` file).
+:::
+
 <!-- Image: IP Database Management main page -->
 
 ## Steps
@@ -36,9 +42,16 @@ Switch to the **Config & Status** tab:
 
 1. Under **IPv4 Database Configuration**, choose a data source (ip2region / IPDB). If the source is ip2region, also choose the matching **Field Format**.
 2. Under **IPv6 Database Configuration**, choose a data source (ip2region / GeoLite2 / IPDB). If the source is ip2region, also choose the **Field Format**.
-3. A file status is shown under each source: "✓ File ready" means the database for that source has been uploaded; "⚠ File not found, please upload first" means you must upload it first.
-4. The **Current Status** panel below each card shows the data source, field format, file size, file create time, and load time.
-5. Click **Save Configuration**. If the selected source's database file has not been uploaded yet, a dialog prompts you to either save anyway or go upload the file first.
+3. A data status is shown under each source, with three possible values:
+
+   | Status | Meaning |
+   | --- | --- |
+   | ✓ File ready | A database file for this source has been uploaded and is in use. |
+   | ✓ Using built-in data (upload a file to override) | No file uploaded, but this source has built-in data and works as is; uploading a file overrides the built-in data. |
+   | ⚠ File not found, please upload first | This source has neither an uploaded file nor built-in data; upload one on the "Upload Database" tab first. |
+
+4. The **Current Status** panel below each card shows the data source, field format, file size, and load time. When built-in data is in use, the data source is followed by a "Built-in" tag and "File Create Time" is hidden (built-in data has no local file).
+5. Click **Save Configuration**. A dialog prompts you to either save anyway or upload the file first only when the selected source has neither an uploaded file nor built-in data.
 
 <!-- Image: Config & Status tab -->
 
@@ -46,10 +59,10 @@ Switch to the **Config & Status** tab:
 
 | Field | Description |
 | --- | --- |
-| Data Source | The IP database source used for that protocol (IPv4/IPv6): ip2region / GeoLite2 / IPDB. |
+| Data Source | The IP database source used for that protocol (IPv4/IPv6): ip2region / GeoLite2 / IPDB. A "Built-in" tag means the built-in data shipped with SamWaf is in use rather than a file you uploaded. |
 | Field Format | Required only for ip2region; matches the field structure of your xdb file (see table below). |
-| File Size | The size of the currently loaded database file. |
-| File Create Time | The creation time of the database file. |
+| File Size | The size of the currently loaded database (the size of the built-in data when built-in data is in use). |
+| File Create Time | The creation time of the database file; hidden when built-in data is in use. |
 | Load Time | The time the database was last loaded into memory. |
 | Test IP Address | The IP address used for the lookup test; supports IPv4 and IPv6. |
 
@@ -67,7 +80,8 @@ Different versions of ip2region xdb files contain different fields. Please choos
 
 ## FAQ
 
+- **Do I have to upload a database after a fresh install?** No. The default IPv4 (ip2region) and IPv6 (GeoLite2) sources both have built-in data and work immediately; the page shows "Using built-in data". Upload a file only when you want a newer or more detailed database.
 - **The lookup result didn't change after uploading?** Click **Reload Database** after uploading to make the new file take effect.
-- **Saving the configuration says the file does not exist?** The database file for the selected source has not been uploaded. Upload it on the "Upload Database" tab first, then save.
+- **Saving the configuration says the file does not exist?** The selected source has neither an uploaded file nor built-in data (this applies to ip2region for IPv6 and to IPDB). Upload it on the "Upload Database" tab first, then save.
 - **Which file formats are supported?** IPv4/IPv6 databases support `.xdb` (ip2region) and `.mmdb` (GeoLite2); IPDB supports `.ipdb`.
 - **Want to contribute another database format?** Send the database name, format description, and a sample file to `samwafgo@gmail.com`; the team will review and integrate more formats.
