@@ -31,7 +31,7 @@ Fill in the conditions in the top form as needed, click **Search** to run the qu
 
 ### 4. Export Logs (SQLite only)
 
-- When the current log archive database is file-based (SQLite), an **Export** button appears to export the currently selected log file. Historical files may be large, so export during off-peak hours. The Export button is hidden in MySQL mode.
+- When the current log archive database is file-based (SQLite), an **Export** button appears to export the currently selected log file. Historical files may be large, so export during off-peak hours. The Export button is hidden in MySQL / PostgreSQL mode.
 
 ### 5. Column Configuration
 
@@ -90,5 +90,5 @@ Fill in the conditions in the top form as needed, click **Search** to run the qu
 ## FAQ
 
 - **The Source IP shows the proxy/CDN IP — what now?** Use **IP extraction issue?** to configure the real-IP header (e.g. Cloudflare's CF-Connecting-IP, the generic X-Forwarded-For, etc.).
-- **Why is the Export button missing?** Export is only supported for file-based (SQLite) log archives; it is not available in MySQL mode.
+- **Why is the Export button missing?** Export works by backing up the log database file, so it is only supported for file-based (SQLite) log archives. MySQL / PostgreSQL have no log file, so export is not available there.
 - **What is the difference between Visit Log and Risk Log?** The Visit Log is per-request raw access records; the Risk Log aggregates attacks by source IP with their triggered rules, focusing on attack triage.

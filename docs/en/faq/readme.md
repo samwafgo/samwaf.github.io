@@ -164,7 +164,7 @@ SamWaf is a single executable. Besides running it directly, it supports the foll
 | `resetotp` | Reset the Two-Factor Authentication (2FA) code (see 2.3) |
 | `repairdb` | Repair a corrupted database |
 | `execsql` | Execute SQL statements on a specified database (SELECT/UPDATE/DELETE, etc.) |
-| `migratedb` | Offline migrate the database SQLite → MySQL (see 6.3) |
+| `migratedb` | Offline database migration: SQLite → MySQL / SQLite → PostgreSQL / MySQL → PostgreSQL (see 6.3) |
 | `rollback` | Roll back to a previous backup version (interactive) |
 
 > Running with no arguments starts SamWaf in foreground/service mode.
@@ -214,14 +214,20 @@ The main configuration file is `conf/config.yml` (YAML format) in the root direc
 
 | Field | Description |
 | --- | --- |
-| `database.driver` | Database driver: `sqlite` (default) or `mysql` |
+| `database.driver` | Database driver: `sqlite` (default), `mysql` or `postgres` |
 | `database.mysql.host` / `port` | MySQL host and port |
 | `database.mysql.user` / `password` | MySQL username and password |
 | `database.mysql.core_db` / `log_db` / `stats_db` | Core / log / stats database names |
+| `database.postgres.host` / `port` | PostgreSQL host and port (default port `5432`) |
+| `database.postgres.user` / `password` | PostgreSQL username and password |
+| `database.postgres.sslmode` | SSL mode, `disable` by default; use `require` for remote connections |
+| `database.postgres.timezone` | Session time zone, `Asia/Shanghai` by default (see the warning below) |
+| `database.postgres.maintenance_db` | Maintenance database used to auto-create the databases, `postgres` by default |
+| `database.postgres.core_db` / `log_db` / `stats_db` | Core / log / stats database names |
 
 ```yaml
 database:
-    driver: sqlite        # sqlite (default, zero-dependency) or mysql
+    driver: sqlite        # sqlite (default, zero-dependency), mysql or postgres
     mysql:
         host: 127.0.0.1
         port: 3306
@@ -230,9 +236,32 @@ database:
         core_db: samwaf_core
         log_db: samwaf_log
         stats_db: samwaf_stats
+    postgres:
+        host: 127.0.0.1
+        port: 5432
+        user: postgres
+        password: yourpassword
+        sslmode: disable
+        timezone: Asia/Shanghai
+        maintenance_db: postgres
+        core_db: samwaf_core
+        log_db: samwaf_log
+        stats_db: samwaf_stats
 ```
 
-> SQLite is used by default and needs no external service. To switch to MySQL, set `driver: mysql`, fill in the connection info, then migrate existing data with `migratedb` (see 6.3).
+> SQLite is used by default and needs no external service. To switch to MySQL or PostgreSQL, set the corresponding `driver`, fill in the connection info, then migrate existing data with `migratedb` (see 6.3).
+
+::: tip Databases are created automatically
+For both MySQL and PostgreSQL, SamWaf creates the three databases (`core_db` / `log_db` / `stats_db`) on startup, as long as the account has permission to create databases — no manual setup needed. If it does not, SamWaf prints the exact SQL you need to run manually in the log.
+
+PostgreSQL cannot create a database from a connection to that same database, so it first connects to an existing one (`maintenance_db`, `postgres` by default) to create them.
+:::
+
+::: warning Set the PostgreSQL time zone correctly
+`database.postgres.timezone` determines the time zone used to display timestamps. **A wrong value does not raise any error** — it silently shifts every timestamp in the UI (for example in attack logs) by a number of hours, which is easy to miss.
+
+Set it to the time zone of your server. After switching to PostgreSQL, open any attack log entry and check that the time matches the actual time.
+:::
 
 ### 5.3 Cache
 
@@ -311,15 +340,61 @@ Tells the running SamWaf to switch Workers: once the new Worker is ready, the ol
 
 The program lists local backup versions (version, backup time, size). Enter the number of the version to roll back to and confirm; after rollback, restart the service manually (`start` or `restart`).
 
-### 6.3 Database Migration (SQLite → MySQL)
+### 6.3 Database Migration
 
-First set `database.driver: mysql` in `conf/config.yml` with the connection info, then run:
+`migratedb` migrates existing data offline to another database. Three routes are supported:
+
+| Route | Description |
+| --- | --- |
+| SQLite → MySQL | Move from the default built-in database to MySQL |
+| SQLite → PostgreSQL | Move from the default built-in database to PostgreSQL |
+| MySQL → PostgreSQL | Already on MySQL, switching to PostgreSQL |
+
+::: warning Stop SamWaf before migrating
+If SamWaf keeps running and writing data during the migration, the result may be incomplete or lose data.
+
+Recommended order: **stop the service → run the migration → verify the data → switch the driver → restart the service**.
+:::
+
+**Usage**: run it directly and SamWaf shows a menu to pick the route, then prompts for the target database connection details one by one (if the source is MySQL, it prompts for the source connection first):
 
 ```
-./SamWaf64 migratedb            # perform migration
-./SamWaf64 migratedb --dry-run  # estimate only, no data written
-./SamWaf64 migratedb --force    # force overwrite when the target table already has data
+./SamWaf64 migratedb
 ```
+
+You can also specify the route with arguments and skip the menu:
+
+```
+./SamWaf64 migratedb --from=sqlite --to=mysql
+./SamWaf64 migratedb --from=sqlite --to=postgres
+./SamWaf64 migratedb --from=mysql  --to=postgres
+```
+
+**Optional arguments**:
+
+| Argument | Description |
+| --- | --- |
+| `--from=sqlite\|mysql` | Migration source; omit it to pick from the menu |
+| `--to=mysql\|postgres` | Migration target; omit it to pick from the menu |
+| `--dry-run` | Only count the rows of each table as an estimate, write nothing |
+| `--force` | Overwrite even when the target table already contains data (skipped by default) |
+
+It is a good idea to run `--dry-run` first to review the row counts, then perform the real migration:
+
+```
+./SamWaf64 migratedb --from=sqlite --to=postgres --dry-run
+./SamWaf64 migratedb --from=sqlite --to=postgres
+```
+
+**After the migration**:
+
+- A migration report `migration_report_<timestamp>.md` is written to the `data/` directory, listing the source rows, target rows and result for every table. Check it for any failures.
+- If everything succeeded, SamWaf asks whether to switch `database.driver` in `conf/config.yml` to the target database for you. Answer yes and restart — no manual config edit needed.
+- The migration supports **resuming**: if it is interrupted, run the same command again and it continues from where it stopped instead of importing rows twice.
+
+::: tip About skipped tables
+Entries reported as "target table does not exist" or "target already has N rows" are expected. The former are legacy backup tables no longer used by the current version; the latter are tables SamWaf already populated with defaults during initialization (such as CA servers and data retention policies). Use `--force` only if you really want to overwrite them.
+:::
 
 ### 6.4 Database Repair & SQL Execution
 
