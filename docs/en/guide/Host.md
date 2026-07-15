@@ -479,6 +479,14 @@ Below the form, a "Forwarding Preview" shows two live example lines — "Client 
 "Response Timeout" only limits how long to **wait for the backend to start responding** (first byte / response headers); it does NOT limit the response body download/transfer time. So as long as the backend starts responding promptly, a multi-GB download can take as long as it needs without being cut off by this timeout. Only backends that "stay silent for a long time before responding" (e.g. dynamically packaging a large file before returning) need a larger value or the website's unlimited wait.
 :::
 
+::: tip Path routing supports WebSocket (ws / wss) automatically
+No extra switch is needed. The WebSocket handshake runs over HTTP(S) and follows the "Backend Protocol":
+- **Backend Protocol = Auto**: a `wss://` client is proxied over wss, a `ws://` client over ws;
+- **= HTTPS**: connects the backend via `wss://`; **= HTTP**: connects via `ws://`.
+
+Long-lived connections are NOT bound by "Response Timeout" — that timeout only covers waiting for response headers; once the handshake (`101`) completes, the bidirectional traffic is never cut off by it. Browser ws/wss uses HTTP/1.1 upgrade by default, so no extra configuration is required.
+:::
+
 ### 15.4 Target Type: Static Files
 
 Serves matched requests directly from a local directory via SamWaf.
