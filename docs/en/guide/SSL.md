@@ -40,6 +40,10 @@ You must manually enter the applicant's email address; the domain name(s) have a
 
 After clicking "Confirm," the system will automatically process the certificate application. After a short wait, click the "Query" button to view the result (whether the certificate application was successful) in the list.
 
+::: tip File Verification and Port 80
+When "Application Method" is set to **File Verification**, the form automatically checks whether the selected host's **main port** and **bound extra ports** include port 80; if neither does, a red hint appears below "Application Method". File verification (http01) requires port 80 to be reachable to complete validation, so add port 80 in the "Bind More Ports" field on the "Protected Hosts" edit page first.
+:::
+
 > Note: The default number of days is 30. You can configure this setting within the system by adjusting `sslorder_expire_day`.
 
 ## 3 SSL Certificate Bulk Expiration Check

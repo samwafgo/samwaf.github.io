@@ -191,6 +191,7 @@ After opening the "Website Configuration" page, you can see the list of all prot
 | Import Data | Imports website information from Excel, supporting two strategies: "import new host codes" / "import retained host codes" (see Section 6) |
 | Batch Protection Switch | Changes the protection status of all sites at once; choose `Protected` or `Unprotected` (a second confirmation appears) |
 | Batch Copy Configuration | Copies selected configuration modules from a source site to multiple target sites (see 9.4) |
+| Batch Import Nginx Sites | Jumps to the "Batch Import Sites" tab of the "One-Key Modify" page to extract sites from an Nginx configuration in bulk and add them as protected hosts (see [One-Key Modify](./OneKeyMod.md)) |
 
 The top-right area supports filtering by **Website** and clicking **Search**; the website, main port, backend IP, backend port, and remarks columns also support in-column input filtering.
 
