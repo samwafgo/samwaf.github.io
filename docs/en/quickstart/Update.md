@@ -1,4 +1,26 @@
 # Version Releases 
+## 20260720 (v1.3.22)
+
+Added
+- Rules gain several generic command patterns that work alongside other built-in defense rules, plus rule content generation via a direct AI model connection
+- Database support for PostgreSQL (Thanks to @虫子)
+- Batch import of nginx configurations (Thanks to @Emmy)
+
+Fixed
+- Detection was limited to only the utf-8 and gbk encodings
+- Incorrect latest-access time in the MySQL risk log list (Thanks to @王继波)
+- Abnormal display when initializing the IP database (Thanks to @Weng)
+- Firewall not working properly in Docker environments (Thanks to @王继波)
+- SamWaf v1.3.21 failing to start on lightweight Windows (LTSC) due to the missing NUL null device (Thanks to @王嘉文)
+- Program exception caused by the first certificate application not being applied correctly (Thanks to @Lostxsawyer @ccefk)
+
+Optimized
+- Layout optimization for the parameter configuration page
+
+Thanks to the following contributors (in no particular order)
+
+@虫子, @王继波, @Weng, @王嘉文, @Lostxsawyer, @ccefk, @Emmy
+
 ## 20260708 (v1.3.21)
 
 Important Notes
