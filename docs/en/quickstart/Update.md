@@ -1,4 +1,16 @@
 # Version Releases 
+## 20260721 (v1.3.23)
+
+Fixed
+- On a fresh installation running as a service (Windows service / systemd), the initial password file `initial_password.txt` was written to the wrong directory due to a relative path and could not be found under the install directory; it is now always written to `data/` under the install directory
+
+Optimized
+- The random initial password generated on a fresh installation is now also printed to the log, so it can be retrieved under service mode where no console is visible (this password is a one-time credential and must be changed immediately on first login)
+
+Thanks to the following contributors (in no particular order)
+
+@zuishuai-ziyi, @GodRuiAn, @唔
+
 ## 20260720 (v1.3.22)
 
 Added
