@@ -197,6 +197,50 @@ The action taken when a rule matches is expressed via an action function in the 
 
 In Interface editing, when the action is **Allow**, a **Skip Detections** multi-select appears with: All, Bot Detection, SQL Injection, XSS, Scanner, RCE, Directory Traversal, CC Protection, AI Detection, Sensitive Words, OWASP, Anti-Leech, CSRF, Upload Check, Captcha. Choosing "All" equals Allow all.
 
+### 7.1 Rule Skip (modules skippable via RF.Allow)
+
+When you want to skip a specific built-in detection, use the latest `RF.Allow`:
+
+```
+RF.Allow([module...])
+```
+
+| Module | Description |
+|--------|-------------|
+| **BOT** | Crawler / bot detection — identifies automated UAs and crawler fingerprints |
+| **SQLI** | SQL injection detection (libinjection + rules) |
+| **XSS** | Cross-site scripting (XSS) detection |
+| **SCAN** | Scanner / vulnerability-tool fingerprinting (sqlmap, nmap, awvs, etc.) |
+| **RCE** | Remote command / code execution detection |
+| **DIR** | Directory traversal / path traversal (`../` escape) detection |
+| **CC** | CC attack protection (rate limiting / high-frequency access blocking) |
+| **AI** | AI-based anomalous request detection (catches abnormal traffic rules miss) |
+| **SENSITIVE** | Sensitive word / sensitive information detection |
+| **OWASP** | OWASP CRS rule set (Coraza) detection |
+| **ANTILEECH** | Anti-leech (Referer check, prevents resources being hotlinked by other sites) |
+| **CSRF** | Cross-site request forgery (CSRF) protection |
+| **UPLOAD** | File upload content check (extension / webshell / type / size of multipart uploads) |
+| **CAPTCHA** | Human verification (captcha) check |
+| **ALL** | Skip all of the above — equivalent to `RF.AllowAll()` |
+
+Usage notes:
+
+- Module names are **case-insensitive**: `RF.Allow("cc")` is the same as `RF.Allow("CC")`.
+- Multiple modules can be skipped at once, separated by commas: `RF.Allow("SQLI","XSS","CC");`
+- `RF.Allow()` without arguments only means "not blocked by custom rules"; it does **not** skip any built-in detection.
+- Using a module name outside this whitelist raises an error when the rule is saved/validated.
+
+Example — skip CC and AI detection for intranet IPs:
+
+```
+rule Rdemo_skip_cc_ai "Intranet IPs skip CC and AI detection" salience 100 {
+    when
+        RF.IPInCIDR(MF.SRC_IP, "192.168.1.0/24") == true
+    then
+        RF.Allow("CC","AI");
+}
+```
+
 ::: warning
 Skipping only applies to checks placed **after** custom rules. Under the default order, rules run after CC and can only skip AI/Sensitive/OWASP/Anti-leech/CSRF/Upload/Captcha; to skip front checks like Bot/SQLI/XSS/CC, set **Rule Chain Mode** to "Rule First" (see 5.3).
 :::
