@@ -175,6 +175,50 @@ features:
   - title: SSL到期检测
     icon: folder
     details: 批量检测SSL证书到期情况
+
+  - title: 威胁情报IP订阅
+    icon: filter
+    details: 订阅多渠道威胁情报IP,每日全量拉取自动落地到WAF应用层和系统防火墙
+
+  - title: 网页防篡改
+    icon: compare
+    details: 学习页面基线,应答比对哈希,被篡改时直接回吐正确副本并告警
+
+  - title: CSRF防护
+    icon: safe
+    details: 按站点校验状态变更类请求的Origin/Referer来源,无需改动后端代码
+
+  - title: 文件上传检测
+    icon: check
+    details: 危险扩展名、Webshell特征、真实类型不符、大小上限四个维度独立开关
+
+  - title: IP组
+    icon: storage
+    details: 可跨站点复用的IP集合,黑白名单与自定义规则均可引用,改一次全站生效
+
+  - title: CDN回源IP
+    icon: proxy
+    details: 各CDN厂商回源网段中心库,站点真实IP来源自动引用最新数据
+
+  - title: 路径路由规则
+    icon: interact
+    details: 类似Nginx location,按URL路径分发到后端代理、静态文件或重定向
+
+  - title: Cookie安全防护
+    icon: lock
+    details: 应答方向自动补齐Set-Cookie安全属性,缺失才补不覆盖应用已设的值
+
+  - title: 应用管理
+    icon: tool
+    details: 托管本地业务进程,支持启停重启、异常自动拉起、日志查看与升级回滚
+
+  - title: 数据库支持
+    icon: storage
+    details: 默认SQLite开箱即用,无需额外部署;可按需切换MySQL或PostgreSQL
+
+  - title: 缓存支持
+    icon: light
+    details: 默认内存缓存不依赖三方服务;需要时可切换Redis
 ---	
 ## 项目源码
 

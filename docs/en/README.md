@@ -175,6 +175,50 @@ features:
   - title: SSL Expiry Check
     icon: folder
     details: Batch check of SSL certificate expiration
+
+  - title: Threat Intelligence IP Feeds
+    icon: filter
+    details: Subscribe to multiple threat IP feeds, pulled daily and landed automatically into the WAF layer and the system firewall
+
+  - title: Web Page Anti-Tampering
+    icon: compare
+    details: Learns a page baseline and compares response hashes, serving the correct copy back and alerting when a page is tampered with
+
+  - title: CSRF Protection
+    icon: safe
+    details: Per-site Origin/Referer validation on state-changing requests, with no backend code changes
+
+  - title: File Upload Inspection
+    icon: check
+    details: Dangerous extensions, webshell signatures, declared-vs-real type mismatch and size limit, each toggled independently
+
+  - title: IP Group
+    icon: storage
+    details: A reusable IP set shared across sites, referenced by block/allow lists and custom rules; edit once and every site follows
+
+  - title: CDN Origin IP
+    icon: proxy
+    details: A central library of each CDN vendor's origin-facing ranges, referenced automatically by the site's real-client-IP source
+
+  - title: Path Route Rules
+    icon: interact
+    details: Nginx location style routing by URL path to a backend proxy, static files or a redirect
+
+  - title: Cookie Security
+    icon: lock
+    details: Fills in missing Set-Cookie security attributes on the response, never overriding values the application already set
+
+  - title: Application Management
+    icon: tool
+    details: Hosts local business processes with start/stop/restart, auto-restart on crash, log viewing and upgrade/rollback
+
+  - title: Database Support
+    icon: storage
+    details: SQLite by default and works out of the box with nothing extra to deploy; switchable to MySQL or PostgreSQL
+
+  - title: Cache Support
+    icon: light
+    details: In-memory cache by default with no third-party dependency; switchable to Redis when needed
 ---
 ## Project Source Code
 
