@@ -5,6 +5,7 @@
 - [Protection Rules](./Rule.md)
 - [IP Whitelist](./IPWhite.md)
 - [IP Blacklist](./IPBlack.md)
+- [IP Group](./IPGroup.md)
 - [URL Whitelist](./UrlWhite.md)
 - [URL Access Restriction](./UrlBlack.md)
 - [URL Privacy Protection](./Ldp.md)

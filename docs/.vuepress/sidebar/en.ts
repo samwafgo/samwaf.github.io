@@ -11,6 +11,7 @@ export const enSidebar = sidebar({
                 "/en/guide/Rule.md",
                 "/en/guide/IPWhite.md",
                 "/en/guide/IPBlack.md",
+                "/en/guide/IPGroup.md",
                 "/en/guide/UrlWhite.md",
                 "/en/guide/UrlBlack.md",
                 "/en/guide/Ldp.md",

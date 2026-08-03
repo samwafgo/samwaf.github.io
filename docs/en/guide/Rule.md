@@ -160,6 +160,8 @@ Common function examples (excerpted from the built-in examples):
 
 - `MF.GetHeaderValue("Accept").Contains("text/plain") == true` — inspect a request header
 - `MF.GetIPFailureCount(5) > 10` — more than 10 failures within 5 minutes
+- `RF.IPMatch(MF.SRC_IP, "10.10.*.*") == true` — unified IP match (single IP / CIDR / wildcard / range; prefer this one)
+- `RF.IPInGroup(MF.SRC_IP, "office-egress") == true` — whether the source IP is in the given [IP Group](./IPGroup.md)
 - `RF.IPInRange(MF.SRC_IP, "172.16.0.0", "172.20.255.254") == true` — IP range check
 - `RF.IPInRanges(MF.SRC_IP, "10.0.0.0/8", ...) == true` — multiple ranges
 - `RF.IPInCIDR(MF.SRC_IP, "192.168.1.0/24") == true` — CIDR check

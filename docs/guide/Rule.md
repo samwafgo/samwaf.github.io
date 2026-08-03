@@ -162,6 +162,8 @@ rule R80798f795d7947419ba6f593708b40d9 "禁止来自中国以外的访客访问"
 
 - `MF.GetHeaderValue("Accept").Contains("text/plain") == true` 判断请求头
 - `MF.GetIPFailureCount(5) > 10` 5 分钟内失败超过 10 次
+- `RF.IPMatch(MF.SRC_IP, "10.10.*.*") == true` IP 统一匹配（单 IP / CIDR / 通配符 / 区间，推荐优先用它）
+- `RF.IPInGroup(MF.SRC_IP, "办公室出口") == true` 判断来源 IP 是否在指定 [IP组](./IPGroup.md) 内
 - `RF.IPInRange(MF.SRC_IP, "172.16.0.0", "172.20.255.254") == true` IP 区间判断
 - `RF.IPInRanges(MF.SRC_IP, "10.0.0.0/8", ...) == true` 多网段判断
 - `RF.IPInCIDR(MF.SRC_IP, "192.168.1.0/24") == true` CIDR 判断

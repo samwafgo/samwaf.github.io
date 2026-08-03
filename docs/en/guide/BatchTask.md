@@ -42,6 +42,7 @@ Click "Manual Trigger" on a row and confirm to run the batch task immediately, w
 | Extra Config | Extra configuration in JSON format. The Sensitive Words type supports `check_direction` (detection direction: in / out / all) and `action` (action after detection: deny / replace); IP types need no config (`{}`) |
 | Source Type | Local Path / Remote URL (required) |
 | Source Value | A local file path for Local Path, or an http(s) address for Remote URL (required) |
+| Source Content Format | One entry per line. IP tasks accept a single IP, CIDR, wildcard (e.g. `10.10.*.*`) and range (e.g. `1.2.3.4-1.2.3.99`) — the same syntax as manual block/allow list entries. Unrecognized lines are skipped |
 | Execution Method | Append (add on top of existing data) / Overwrite (clear existing data then write) (required) |
 | Trigger Type | Scheduled Task (runs on the daily schedule) / Manual Task (manual trigger only) (required) |
 | Remarks | Optional additional notes |

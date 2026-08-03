@@ -11,6 +11,7 @@ export const zhSidebar = sidebar({
                 "/guide/Rule.md",
                 "/guide/IPWhite.md",
                 "/guide/IPBlack.md",
+                "/guide/IPGroup.md",
                 "/guide/UrlWhite.md",
                 "/guide/UrlBlack.md",
                 "/guide/Ldp.md",

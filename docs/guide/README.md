@@ -5,6 +5,7 @@
 - [防护规则](./Rule.md)
 - [IP白名单](./IPWhite.md)
 - [IP黑名单](./IPBlack.md)
+- [IP组](./IPGroup.md)
 - [URL白名单](./UrlWhite.md)
 - [URL限制访问](./UrlBlack.md)
 - [URL隐私防护](./Ldp.md)
