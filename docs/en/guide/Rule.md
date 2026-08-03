@@ -86,6 +86,7 @@ After opening the "Protection Rules" page, you can see the list of configured ru
 | Website | The protected site this rule applies to |
 | Rule Name | The name of the rule |
 | Rule Code | The unique rule code (system-generated) |
+| Priority | The rule's salience value; higher wins (see 6.1 and section 7) |
 | Rule Version | The rule's version number |
 | Rule Status | Rule toggle, `Enabled` / `Disabled`; can be switched directly in the list |
 | Update Time | Last modification time of the rule |
@@ -113,9 +114,13 @@ Click **Add Rule** or **Edit** on a rule to open the rule edit page.
 | --- | --- |
 | Rule Name | A readable name for the rule |
 | Protected Website | The protected site the rule applies to |
-| Rule Salience | The salience (priority) value; a higher value means higher priority |
+| Rule Salience | The salience (priority) value; higher wins. Range 0-10000, default 10. **Site rules and global rules are arbitrated together by this value** — see section 7 |
 | Editing Mode | Choose `Interface` or `Manual Code` |
 | Rule Status | Rule toggle, `Enabled` / `Disabled` |
+
+::: warning
+In **Manual Code** mode, the `salience` written by hand in the script is overwritten by the **Rule Salience** field; the form value always wins. To change the priority, edit that input — changing the number in the script has no effect.
+:::
 
 ### 6.2 Interface Editing
 
@@ -248,6 +253,48 @@ Skipping only applies to checks placed **after** custom rules. Under the default
 When multiple rules match with conflicting actions, the **higher salience wins**; with equal salience the effective action is chosen by **Block > Allow > Log Only**.
 
 <!-- Image: Hit action selection -->
+
+### 7.2 Priority Between Site Rules and Global Rules
+
+A rule can be attached to **one specific site**, or to the **Global Site** (applies to every site). When a request matches both a site rule and a global rule, the two are **arbitrated together by salience**:
+
+| Case | Effective result |
+| --- | --- |
+| Only one side matches | That side is used |
+| Both match, different salience | **The higher value wins** (regardless of site or global) |
+| Both match, equal salience | Chosen by **Block > Allow > Log Only**. So on a tie, a global block overrides a site allow |
+
+Therefore, **to make a site whitelist override a global blocking rule, the site rule's salience must be higher than the global rule's**.
+
+Example: a global rule blocks all overseas IPs (salience 10), but a file-sharing site must stay reachable for a set of trusted IPs — the site's allow rule needs a salience greater than 10 (for example 100):
+
+```
+// Rule under the Global Site: block overseas access, salience 10
+rule Rglobal_block_oversea "Block overseas access" salience 10 {
+    when
+        MF.COUNTRY != "中国"
+    then
+        RF.Deny();
+}
+```
+
+```
+// Rule under the file-sharing site: allow trusted IPs, salience 100 (higher than 10, so it beats the global block)
+rule Rsite_allow_partner "Allow partner IPs" salience 100 {
+    when
+        RF.IPInRanges(MF.SRC_IP, "203.0.113.10-203.0.113.20") == true
+    then
+        RF.Allow();
+}
+```
+
+::: warning
+If the site rule above also used salience 10, it would tie with the global rule and "Block > Allow" applies, so the request would still be blocked by the global rule. This is also the fixed behavior of older versions — existing configurations usually leave both at the default 10, so upgrading does not change their behavior.
+:::
+
+::: tip
+`RF.Allow()` and `RF.AllowAll()` behave **identically** for priority arbitration; they differ only in how many subsequent checks are skipped after allowing (see 7.1). Do not use `RF.AllowAll()` as a way to "raise the priority" — raise the salience value instead.
+:::
 
 ## 8 AI Rule Generation and AI Settings
 

@@ -41,6 +41,11 @@ Fill in the conditions in the top form as needed, click **Search** to run the qu
 
 - Click the "Log Settings" title at the top to expand the options, then click **Save Config** to apply. You can set whether to record response payloads, record the raw request BODY, the log recording type, max payload lengths, history retention days, log-archive parameters, log persistence, batch insert, IP Tag storage location, and more.
 
+::: tip About "Log Recording Type"
+- **All**: every request is recorded (default).
+- **Abnormal**: only non-allowed requests are recorded, which greatly reduces log volume. Note that requests which "matched a rule but were not blocked" count as security events and are still recorded even though they were allowed, including: custom-rule **allow** (`RF.Allow` / `RF.AllowAll`), custom-rule **log only** (`RF.Log`), and requests matched while the site has **Log Only Mode** enabled. This way you can still see which requests used a whitelist and what a rule under observation caught. Ordinary requests that match no rule are still not recorded in this mode.
+:::
+
 ### 7. IP Extraction Issue
 
 - Click **IP extraction issue?** to open a dialog and configure which HTTP header to extract the visitor's real IP from. Common headers like Cloudflare, X-Forwarded-For and X-Real-IP can be filled in with one click. If left empty, the connection IP is used; you can list multiple headers (comma-separated, the first non-empty one is used).

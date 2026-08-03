@@ -135,6 +135,8 @@ The effect is as follows:
 
 Enter one URL per line.
 
+Matching is by **prefix**: if the request URL starts with any of these lines, that visit is not written to the log. Blank lines are ignored (an extra newline will not silently stop the whole site from being logged).
+
 ### 5.2 Access Timeout Settings  
 
 Supported since v1.3.9-beta.13, Default is 60 seconds. Unit: seconds. If set to 0, there is no limit.  
