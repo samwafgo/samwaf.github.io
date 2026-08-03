@@ -257,6 +257,29 @@ Selects how the client IP is extracted from a request; this setting applies to a
 - **NIC Mode**: gets the client IP directly from the network connection (for direct-connection scenarios).
 - **Proxy Mode**: gets the real IP from HTTP headers (X-Forwarded-For, etc.) (for scenarios using CDN, Nginx, and other proxies).
 
+### 10.3 Real IP Source (Proxy-mode hardening)
+
+When **Proxy Mode** is selected, a **Real IP Source** dropdown appears to decide how the real client IP is safely extracted from headers, preventing a direct-connect attacker from spoofing proxy headers to bypass the blocklist/allowlist. **This is ignored in NIC mode. Empty keeps the legacy behavior — zero impact for existing sites.**
+
+Selecting a source shows a live description under the dropdown and reveals the matching config fields:
+
+- **Default (compat, leftmost XFF)**: takes the leftmost IP of `X-Forwarded-For`. The leftmost value can be spoofed and its source is not verified. Zero impact for existing sites; new sites should prefer one of the three hardened modes below.
+- **Specific HTTP header**: reads the real IP only from the header you specify (**Real IP Header**, e.g. `X-Real-IP`/`CF-Connecting-IP`). Good when the upstream sets exactly this one header; still recommended to set **Trusted Proxy CIDRs** to verify the source.
+- **XFF depth / trusted proxy**: takes the Nth hop counting from the right of `X-Forwarded-For` based on the number of reverse-proxy layers (nginx etc. append the real IP on the right). Set **Nth hop from right** + **Trusted Proxy CIDRs**; most accurate with multiple self-hosted proxies / load balancers.
+- **CDN provider preset**: selecting a CDN vendor automatically uses that vendor's real-IP header and verifies the source against the central store's official origin ranges (spoofing is rejected). For vendors without public origin ranges (e.g. EdgeOne, Aliyun), first configure or fetch the ranges on the [CDN Origin IPs](./CDNIP.md) page, otherwise source validation falls back to the network-layer IP. Once a vendor is selected, this shows the vendor's central-store downloaded count and last update time (read-only, no manual entry).
+
+<!-- Image: Real IP Source dropdown and per-mode fields under Proxy mode -->
+
+#### Field Reference
+
+| Field | Description |
+| --- | --- |
+| Real IP Source | Decides how the real client IP is extracted in proxy mode; empty = legacy (leftmost XFF, spoofable). |
+| Real IP Header | In "Specific HTTP header" mode, the header to read the real IP from. |
+| Nth hop from right | In "XFF depth / trusted proxy" mode, the Nth non-trusted hop counting from the right of XFF. |
+| Trusted Proxy CIDRs | Comma-separated CIDR/IP. The real-IP header is trusted only when the direct peer is within these ranges (or the selected CDN's origin ranges), preventing spoofing. |
+| CDN Provider | The vendor selected in "CDN provider preset" mode; determines the real-IP header and the official origin ranges used for source validation. |
+
 ## 11 Cookie Security
 
 Configured on the **Cookie Security** tab of the website edit page. When enabled, SamWaf hardens the `Set-Cookie` headers returned by the backend on the response path — **add-if-missing only, never overriding values the application already set** — and preserves all original cookie content (Path / Domain / Max-Age / Expires, etc.). Over HTTP, Secure is not auto-added to avoid breaking cookies.

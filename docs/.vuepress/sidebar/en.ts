@@ -17,6 +17,8 @@ export const enSidebar = sidebar({
                 "/en/guide/CC.md",
                 "/en/guide/Sensitive.md",
                 "/en/guide/FirewallIPBlock.md",
+                "/en/guide/ThreatIP.md",
+                "/en/guide/CDNIP.md",
                 "/en/guide/CacheRule.md",
                 "/en/guide/HttpAuthBase.md",
                 "/en/guide/SSL.md",

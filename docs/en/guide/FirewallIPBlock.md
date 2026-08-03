@@ -6,7 +6,7 @@ Firewall IP Block provides OS-level IP blocking. It performs better than the app
 
 Unlike the application-layer blacklist, Firewall IP Block stops traffic at the operating system firewall, so a blocked IP is rejected before it ever reaches the WAF application.
 
-The top of the page shows four statistics cards giving a live overview of the current block rules: Total, Active, Inactive, and Expired.
+The top of the page has two tabs: **Manual** and **Feed Source**. The **Manual** tab shows five statistics cards giving a live overview of the current block rules: Total, Active, Inactive, Expired, and **Feed Landed (System)** (the active count of threat-intel feeds landed into the system firewall). Clicking the **Feed Landed (System)** card switches to the **Feed Source** tab to view per-channel details.
 
 <!-- Image: Firewall IP Block list and statistics cards -->
 
@@ -95,12 +95,24 @@ If you cannot meet these container requirements, use the **[IP Blacklist](/en/gu
 
 ### Clear Expired
 
-- Click **Clear Expired** to remove all block records that have already expired.
+- Click **Clear Expired**; a confirmation dialog appears. After confirming, it **removes the firewall rules and deletes all expired block records (cannot be undone)**. Permanent bans and non-expired records are not affected.
 
 ### Edit / Delete / Batch Delete
 
 - In the action column, click **Edit** to modify a single rule or **Delete** to remove it.
 - Select multiple records and click **Batch Delete** to remove them at once.
+
+## Feed Source
+
+Switch to the **Feed Source** tab at the top to view, read-only, a per-channel summary of [Threat Intelligence IP Feeds](./ThreatIP.md) landed into the system firewall: name, channel code, landing layer, enabled status, **Landed (Active)** count, last status, and last sync time.
+
+For performance, subscribed IPs are not written row-by-row into this page's block list; they are summarized per channel. Click **View IPs** on a channel to browse its specific IPs/CIDRs read-only, with substring filtering.
+
+::: tip Landed (Active) count
+A disabled channel shows a landed count of 0 (removed from the system firewall), followed by a grey hint of its snapshot size (re-enabling re-lands it in seconds). So this column reflects the currently effective count, not the total subscribed entries.
+:::
+
+<!-- Image: Feed Source tab per-channel summary and View IPs -->
 
 ## Field Reference
 
@@ -135,6 +147,6 @@ If you cannot meet these container requirements, use the **[IP Blacklist](/en/gu
 
 - **The IP is not blocked immediately after adding it?** Click **Sync Rules** to push the rules to the operating system firewall.
 - **How do I make a block permanent?** Leave the expire time blank when adding or editing; the list shows it as **Permanent**.
-- **How do I clean up expired records?** Click the **Clear Expired** button at the top.
+- **How do I clean up expired records?** Click the **Clear Expired** button at the top; after confirming, it removes the firewall rules and deletes all expired records (cannot be undone). Permanent bans and non-expired records are not affected.
 - **All buttons are greyed out with a "system firewall blocking is not available" message?** The environment does not meet the [prerequisites](#prerequisites). The banner states the exact reason — commonly: `iptables` is not installed on Linux, the process lacks permission to modify iptables (root is required), or Windows Firewall is off. For container deployments, add iptables, the `NET_ADMIN` capability, and `--network host` as described above.
 - **The block succeeds inside a container, but the malicious IP can still reach the site?** The container is most likely not running with `--network host`. The rules were written only into the container's own network namespace and do nothing to traffic arriving at the host.

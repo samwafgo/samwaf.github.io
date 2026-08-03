@@ -50,17 +50,35 @@ Set a prefix for notification message titles, to distinguish the source among al
 
 ## 6 Management Trusted Proxies
 
-When the SamWaf console runs behind a reverse proxy (e.g. Nginx), this tells SamWaf which direct sources are trusted proxies so it can identify the real client IP correctly.
+When the SamWaf console runs behind a reverse proxy (e.g. Nginx) or a CDN, this tells SamWaf which direct sources are trusted proxies so it can identify the real client IP correctly. **The admin IP whitelist / login lockout / token IP binding are all judged by the identified IP.**
 
-- **Effect**: only when the management request's direct source IP falls within these CIDRs does SamWaf trust the `X-Forwarded-For` / `X-Real-IP` headers to identify the real client; otherwise it uses the network-layer source IP. This prevents an attacker from spoofing proxy headers to bypass the IP whitelist or login lockout.
-- **Value**: CIDR or IP, comma-separated, e.g. `10.0.0.0/8,192.168.0.0/16`. **Empty = trust no proxy header** (default; for direct deployments).
-- Only needed when this instance is behind a reverse proxy.
+There is a master switch **Admin behind proxy/CDN** at the top:
+
+- **Off**: always judge by the direct network-layer IP (keep off when the console is NOT behind a proxy/CDN — safest). The fields below are hidden.
+- **On**: identify the real client IP from proxy headers and reveal the config below. The switch reflects whether the proxy header has a value — non-empty means on.
+
+Once on, you configure "which header to read" and "which sources to trust":
+
+### 6.1 Management Proxy Header
+
+Comma-separated request headers by priority, e.g. `X-Forwarded-For,X-Real-IP,CF-Connecting-IP`. **Empty = don't parse proxy headers, use the network-layer IP.** Quick-fill tags below the input append common headers (Cloudflare/Fastly/AWS CloudFront/EdgeOne/Aliyun/Akamai real-IP headers); you can still edit manually.
+
+> This is the `gwaf_manage_proxy_header` parameter from Settings; changes here take effect immediately. It differs from the visitor IP header (`gwaf_proxy_header`), which applies to business sites.
+
+### 6.2 Trusted sources (① Reference CDN ∪ ② Manual CIDRs, combined)
+
+Only when the management request's direct source is a trusted proxy does SamWaf trust the real client IP from the header above; otherwise it falls back to the network-layer IP, preventing spoofing. **Trusted proxy = ① referenced CDN origin ranges ∪ ② manual CIDRs**, combined (a hit in either is trusted):
+
+- **① Reference CDN**: if the console is also behind a CDN, selecting a vendor auto-trusts its origin ranges (reads the latest central value, auto-updated, no manual entry). Ranges are managed on the [CDN Origin IPs](./CDNIP.md) page; once selected, the vendor's central-store downloaded count is shown here.
+- **② Manual Trusted Proxies**: for cases the CDN central store can't cover (e.g. a self-hosted Nginx / internal load balancer behind the CDN). CIDR or IP, comma-separated, e.g. `10.0.0.0/8,192.168.0.0/16`. **Empty = no manual entry** (the referenced CDN vendor above still applies).
+
+When using only one, leave the other empty.
 
 ::: warning
-Stored in `conf/config.yml`. If this locks you out via the IP whitelist, edit the file and restart to recover.
+The manual CIDRs are stored in `conf/config.yml`. If this locks you out via the IP whitelist, edit the file and restart to recover.
 :::
 
-<!-- Image: Management trusted proxies -->
+<!-- Image: Management trusted proxies (proxy-header switch + Reference CDN + manual CIDRs) -->
 
 ## 7 CORS Allow Origins
 

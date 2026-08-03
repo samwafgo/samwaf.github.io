@@ -11,6 +11,8 @@
 - [CC Protection (Data Desensitization)](./CC.md)
 - [Sensitive Words Management](./Sensitive.md)
 - [Firewall IP Block](./FirewallIPBlock.md)
+- [Threat Intelligence IP Feeds](./ThreatIP.md)
+- [CDN Origin IPs](./CDNIP.md)
 - [Cache Rule](./CacheRule.md)
 - [Website Access Authentication](./HttpAuthBase.md)
 - [SSL Certificate Management](./SSL.md)

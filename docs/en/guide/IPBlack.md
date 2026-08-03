@@ -59,3 +59,10 @@ The top-right area lets you filter by **Website** and **IP**; enter values and c
 ::: warning
 Use broad ranges like `0.0.0.0/0` with caution to avoid blocking legitimate visitors. If an IP whitelist is also configured, the whitelist takes precedence and allows the traffic through.
 :::
+## 5 Feed Source
+
+Switch to the **Feed Source** tab at the top to view, read-only, a per-channel summary of [Threat Intelligence IP Feeds](./ThreatIP.md) landed into the WAF application layer: name, channel code, landing layer, enabled status, **Landed (Active)** count, last status, and last sync time.
+
+For performance, subscribed IPs are not written row-by-row into this page's blacklist; they are summarized per channel. Click **View IPs** on a channel to browse its specific IPs/CIDRs read-only, with substring filtering.
+
+<!-- Image: IP Blacklist Feed Source tab -->
