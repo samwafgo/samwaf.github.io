@@ -43,6 +43,10 @@ After a bulk add, a **Bulk Add Result** dialog reports "N added, N skipped (alre
 
 <!-- Image: Bulk add result -->
 
+::: tip Need a daily automatic sync?
+"Bulk Add" is a one-off manual paste. When the IPs come from a file or a remote subscription source that keeps changing, use a **scheduled import** instead: a **Scheduled Import (Batch Task)** link is available both on the right of the notice bar at the top of the page and in the toolbar of this panel. It jumps to the [Batch Tasks](./BatchTask.md) page where you can create a task of type "Import into IP Group". When you jump from this panel, **the current group is carried over** and pre-selected in the new-task dialog.
+:::
+
 ### 2.3 Supported IP syntax
 
 Group entries use the same syntax as the block/allow lists:
