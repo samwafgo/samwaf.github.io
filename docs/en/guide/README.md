@@ -35,6 +35,12 @@
 ## App Management
 - [Application Management](./Application.md)
 
+## Access Authentication
+- [Auth Settings](./AccessConfig.md)
+- [Access Accounts](./AccessAccount.md)
+- [Active Sessions](./AccessSession.md)
+- [Access Audit](./AccessAudit.md)
+
 ## Account
 - [Account Management](./Account.md)
 - [Account Log](./AccountLog.md)

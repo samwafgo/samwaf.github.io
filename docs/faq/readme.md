@@ -293,6 +293,7 @@ cache:
 | `security.emergency_path` | 紧急入口路径（兜底访问） |
 | `security.ssl_enable` | 管理端是否启用 HTTPS 访问 |
 | `security.ssl_force_https` | 是否强制跳转 HTTPS |
+| `security.access_force_disable` | 强制关闭[统一访问认证](../guide/AccessConfig.md)的自救开关，默认 `false`。仅当「管理端也被反代进了 WAF、且统一访问认证配错把自己锁在外面」时改成 `true` 并重启即可恢复访问（等效环境变量 `SAMWAF_ACCESS_DISABLE=1`） |
 | `security.ssl_bind_cert_id` | 管理端 HTTPS 绑定的证书 ID |
 
 ### 5.5 应用管理 application

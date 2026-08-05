@@ -293,6 +293,7 @@ cache:
 | `security.emergency_path` | Emergency entry path (fallback access) |
 | `security.ssl_enable` | Whether the admin console uses HTTPS |
 | `security.ssl_force_https` | Whether to force redirect to HTTPS |
+| `security.access_force_disable` | Emergency kill switch for [Access Authentication](../guide/AccessConfig.md), default `false`. Set it to `true` and restart only when the admin panel is proxied through the WAF and a misconfiguration locked you out (equivalent env var: `SAMWAF_ACCESS_DISABLE=1`) |
 | `security.ssl_bind_cert_id` | Certificate ID bound to the admin HTTPS |
 
 ### 5.5 Application Management

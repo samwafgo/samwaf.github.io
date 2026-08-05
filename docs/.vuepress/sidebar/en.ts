@@ -59,6 +59,16 @@ export const enSidebar = sidebar({
             ],
         },
         {
+            text: "Access Authentication",
+            collapsible: true,
+            children: [
+                "/guide/AccessConfig.md",
+                "/guide/AccessAccount.md",
+                "/guide/AccessSession.md",
+                "/guide/AccessAudit.md",
+            ],
+        },
+        {
             text: "Account",
             collapsible: true,
             children: [

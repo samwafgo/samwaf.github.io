@@ -531,3 +531,68 @@ Redirects matched requests to another URL.
 | --- | --- |
 | Redirect URL | Redirect target, e.g. `https://example.com/new-path`. |
 | Redirect Code | 302 Found / 301 Moved Permanently, default 302. |
+
+## 16 Access Authentication (per site)
+
+[Access Authentication](./AccessConfig.md) is a global feature: once enabled, visiting any site proxied by the WAF requires signing in first. This tab creates exceptions for an **individual site**.
+
+Notice on the tab: **Access Authentication: once enabled, visitors must sign in before reaching this site. Accounts are managed under [Access Auth - Access Accounts]; the master switch and the auth center live on the [Access Auth] config page.**
+
+<!-- Image: Access Auth tab on the site edit page -->
+
+### 16.1 Site policy
+
+| Value | Description |
+| --- | --- |
+| Inherit global | Follow the master switch in system config (recommended) |
+| Force on | Require sign-in even when the master switch is off (good for protecting a single admin site) |
+| Force off | Always allow through even when the master switch is on (good for public sites) |
+
+::: tip
+Existing sites all default to **Inherit global**, so upgrading changes nothing.
+:::
+
+### 16.2 Bypass paths
+
+Prefix match, one per line. For health checks, webhook callbacks and other callers that cannot sign in.
+
+::: warning
+This is a **prefix match**: `/health` also lets `/healthz` through, so be as specific as you can.
+The ACME path `/.well-known/acme-challenge/` is always allowed and does not need to be listed.
+:::
+
+### 16.3 Bypass IP group
+
+Sources matching this [IP Group](./IPGroup.md) are let through without signing in. Useful for internal networks; one edit to the group applies to every site referencing it.
+
+### 16.4 Two-step verification
+
+**Inherit global / Force / Exempt**. Force means this site always asks for a code (the account must have it bound). Per-account settings take precedence over this.
+
+### 16.5 Unauthenticated response
+
+**Auto** (recommended): browser navigation gets a redirect to the sign-in page, API/WebSocket get 401 JSON; **Always redirect**: force 302; **Always 401**: everything gets JSON, suitable for API-only sites.
+
+::: tip
+WebSocket always gets 401 regardless, since it does not follow redirects.
+:::
+
+### 16.6 Risk when web caching is also enabled
+
+If [web caching](./CacheRule.md) is enabled on the same site, a red warning appears at the bottom of the tab:
+
+> Warning: web caching is also enabled on this site. Cache keys do not include user identity, so one user's private page may be cached and served to another signed-in user. Consider disabling web caching, or caching static assets only.
+
+::: warning
+Access Authentication keeps **unauthenticated** visitors out, but it does not prevent cache bleed **between signed-in users**. When protecting private content, disable web caching on that site or restrict cache rules to static assets.
+:::
+
+### 16.7 Field reference
+
+| Field | Description |
+| --- | --- |
+| Site policy | Inherit global / Force on / Force off |
+| Bypass paths | Site-specific bypass path prefixes, one per line |
+| Bypass IP group | IP group let through on this site |
+| Two-step verification | Inherit global / Force / Exempt |
+| Unauthenticated response | Inherit global / Auto / Always redirect / Always 401 |

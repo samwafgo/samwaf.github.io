@@ -59,6 +59,16 @@ export const zhSidebar = sidebar({
             ],
         },
         {
+            text: "统一访问认证",
+            collapsible: true,
+            children: [
+                "/guide/AccessConfig.md",
+                "/guide/AccessAccount.md",
+                "/guide/AccessSession.md",
+                "/guide/AccessAudit.md",
+            ],
+        },
+        {
             text: "账号管理",
             collapsible: true,
             children: [
