@@ -90,6 +90,7 @@ export const zhSidebar = sidebar({
                 "/guide/DataRetention.md",
                 "/guide/Owasp.md",
                 "/guide/AIDetection.md",
+                "/guide/AiAssistant.md",
                 "/guide/RuntimeInfo.md",
                 "/guide/OneKeyMod.md",
                 "/guide/Task.md",

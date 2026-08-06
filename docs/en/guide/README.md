@@ -56,6 +56,7 @@
 - [Data Retention](./DataRetention.md)
 - [OWASP Ruleset](./Owasp.md)
 - [AI Detection](./AIDetection.md)
+- [AI Assistant](./AiAssistant.md)
 - [Runtime Info](./RuntimeInfo.md)
 - [One-Key Modify](./OneKeyMod.md)
 - [Task Management](./Task.md)

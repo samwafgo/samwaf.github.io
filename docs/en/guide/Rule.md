@@ -306,7 +306,7 @@ The top of the **Manual Code editing** page provides an **AI Generate Rule** pan
 - **Copy AI Prompt**: if you prefer not to configure AI locally, copy a prompt and paste it into any external AI (ChatGPT / Claude / DeepSeek, etc.), fill in your site info and protection goal at the end, and paste the generated rule text back here.
 
 ::: tip
-The AI parameters (API URL / Model / Key) can also be configured on the **System Config** page as `gpt_url` / `gpt_model` / `gpt_token`; the two are equivalent and stay in sync.
+The AI parameters (API URL / Model / Key) can also be configured on the **System Config** page as `gpt_url` / `gpt_model` / `gpt_token`, or from **AI Settings** in the [AI Assistant](/en/guide/AiAssistant.md) at the bottom-right. All three are equivalent and stay in sync. If no key is configured, clicking **Generate** opens the settings dialog directly.
 :::
 
 <!-- Image: AI rule generation panel and AI settings -->

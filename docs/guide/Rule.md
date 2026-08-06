@@ -308,7 +308,7 @@ rule Rsite_allow_partner "合作方IP放行" salience 100 {
 - **复制 AI 提示词**：若不想在本地配置 AI，可点击复制一段提示词，粘贴到任意外部 AI（ChatGPT / Claude / DeepSeek 等），在末尾填上网站信息与防护意图，让它生成规则文本后再粘贴回本页。
 
 ::: tip
-AI 参数（接口地址 / 模型 / 密钥）也可在 **系统配置** 页配置对应的 `gpt_url` / `gpt_model` / `gpt_token`，与此处等价、实时同步。
+AI 参数（接口地址 / 模型 / 密钥）也可在 **系统配置** 页配置对应的 `gpt_url` / `gpt_model` / `gpt_token`，或在右下角 [AI 助手](/guide/AiAssistant.md) 的「AI 参数设置」里填写，三处等价、实时同步。未配置密钥时点击「生成规则」会直接弹出参数设置窗口。
 :::
 
 <!-- 图：AI 生成规则面板与 AI 参数设置 -->

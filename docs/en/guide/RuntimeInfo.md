@@ -35,6 +35,40 @@ The content is generated in real time by the backend and loads automatically whe
 
 > Note: All metrics above are real-time, read-only information for viewing and diagnostics only. This page does not allow editing.
 
+## System Information dialog (version number in the sidebar)
+
+Besides this page, **clicking the version number at the bottom of the left menu** (with a device icon; the tooltip reads "Click to view system information and support channels") opens a **System Information** dialog for a quick look at the runtime environment and for reporting problems.
+
+<!-- Image: System information dialog -->
+
+The dialog has two parts:
+
+**1. Runtime environment** (items that cannot be detected are hidden)
+
+| Field | Description |
+|-------|-------------|
+| Software Version | Version name and code; the tag on the right marks it as "Release" or "Debug". |
+| Operating System | Full name of the operating system (distribution name and version). |
+| System Type | Operating system type (e.g. windows / linux). |
+| Architecture | The build architecture of the program. When the kernel architecture differs (e.g. a 32-bit build on a 64-bit system), the "Kernel Arch" is shown alongside. |
+| Kernel Version | Operating system kernel version. |
+| Compiler Version | The Go version used to build the program. |
+| Runtime Environment | Detected container / Kubernetes / WSL / virtualization environment; hidden when nothing is detected. |
+| Win7 Kernel | Windows only — whether it runs on a Win7-compatible kernel; the dedicated Win7 build is tagged as well. |
+| Startup Mode | Whether SamWaf was started as a system service or from the console. |
+| System Uptime | How long the operating system itself has been running. |
+| Process Uptime | How long the SamWaf process has been running since startup. |
+
+Click **Copy Environment Info** to copy everything above as plain text and paste it straight into an issue report.
+
+**2. Support channels**
+
+Online Document, GitHub Issues, Gitee Issues, Email, WeChat Official Account (click to reveal the QR code) and Online Support.
+
+::: tip
+Even if the environment information fails to load (a notice appears at the top of the dialog), the support channels remain available.
+:::
+
 ## FAQ
 
 - **How often is the data updated?** It is generated in real time by the backend each time you open or refresh the page, reflecting the current moment.

@@ -56,6 +56,7 @@
 - [数据留存](./DataRetention.md)
 - [OWASP规则集](./Owasp.md)
 - [AI智能检测](./AIDetection.md)
+- [AI助手](./AiAssistant.md)
 - [运行信息](./RuntimeInfo.md)
 - [一键修改](./OneKeyMod.md)
 - [任务管理](./Task.md)
