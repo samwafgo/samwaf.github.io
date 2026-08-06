@@ -10,7 +10,9 @@ The notification feature works in three parts:
 - **Notify Subscription**: which event types are sent to which channels.
 - **Notify Log**: the delivery result of every notification.
 
-This page covers the first part. Supported channel types are: DingTalk, Feishu, WeChat Work, Email, and ServerChan.
+This page covers the first part. Supported channel types are: DingTalk, Feishu, WeChat Work, Email, ServerChan, and Custom Webhook.
+
+If the platform you want to integrate is not one of the built-in types (for example Slack, Telegram, Bark, ntfy, Gotify, or your own alerting system), use **Custom Webhook** and define the request URL, method, headers and payload format yourself.
 
 <!-- Image: Notify channel list page -->
 
@@ -56,6 +58,69 @@ Checking "skip certificate verification" lowers transport security and exposes y
 
 <!-- Image: Email channel skip certificate verification option -->
 
+#### Custom Webhook
+
+For platforms the built-in types do not cover. After selecting **Custom Webhook** as the channel type, configure the following:
+
+**1) Pick a preset (optional)**
+
+The **Preset** dropdown offers Generic JSON, Slack, Discord, Telegram Bot, Bark, ntfy and Gotify. Selecting one fills in the **Method**, **Content-Type**, **Custom headers** and **Body template** automatically. **You still enter the URL yourself** — the preset only provides a format example. Choosing "Custom (no fill)" leaves everything untouched.
+
+::: tip
+Picking a preset only fills the form. SamWaf never contacts these platforms on its own — whether and where anything is sent is entirely determined by the webhook URL you enter.
+:::
+
+**2) Enter the Webhook URL**
+
+The address where the receiving platform accepts messages. Only `http` / `https` is allowed, and the target must be a **public address** — private addresses such as `127.0.0.1` or `192.168.x.x` are rejected on save.
+
+**3) Choose the method and content type**
+
+- **Method**: POST, PUT, PATCH, GET, DELETE. No request body is sent when GET is selected.
+- **Content-Type**: application/json, application/x-www-form-urlencoded, text/plain, text/xml — or type any other value directly.
+
+**4) Add custom headers (optional)**
+
+Click **Add header** and enter the header name and value. A common use is authentication, such as `Authorization` / `Bearer xxxxxx`. Up to 20 headers.
+
+::: warning
+System-controlled headers such as `Host`, `Content-Length` and `Transfer-Encoding` cannot be overridden, and header values must not contain line breaks. Invalid entries are rejected on save with a message.
+:::
+
+**5) Write the body template**
+
+The **Body template** defines what the outgoing payload looks like. Leave it blank to send the built-in default payload (a JSON object containing all variables when the content type is JSON; otherwise plain text with the title, a blank line, and the body).
+
+The following variables are available. Click a variable tag above the input to insert it:
+
+| Variable | Description |
+|----------|-------------|
+| `{{.Title}}` | Notification title |
+| `{{.Content}}` | Notification body |
+| `{{.Time}}` | Event time |
+| `{{.MessageType}}` | Message type key (e.g. `rule_trigger`) |
+| `{{.MessageTypeName}}` | Message type name (e.g. "Rule Triggered") |
+| `{{.Severity}}` | Severity (info / warn / critical) |
+| `{{.ServerName}}` | Local server name |
+
+For example, a body template for Slack:
+
+```json
+{
+  "text": "*{{.Title}}*\n{{.Content}}"
+}
+```
+
+::: tip Body template vs. message template
+The **Body template** here only defines the payload envelope — the field names the receiving platform expects. The **alert text itself** comes from the **Message Template** in [Notify Subscription](./NotifySubscription.md); its rendered output becomes the `{{.Title}}` and `{{.Content}}` used here.
+
+So detail variables such as domain, attacker IP or rule info belong in the **subscription's message template**. Putting them in the body template fails validation with a "variable does not exist" message.
+:::
+
+When the content type is JSON, variable values are JSON-escaped automatically (quotes and line breaks in the body will not break the payload), and the rendered result is validated as JSON before saving, so unbalanced braces or quotes are reported immediately.
+
+<!-- Image: Custom Webhook channel configuration form -->
+
 ### 3. Test a Channel
 
 Click the **Test** button on a channel row, and SamWaf will attempt to send a test message through that channel. After the "Test successful" message, confirm on the corresponding platform that the notification was received.
@@ -76,7 +141,7 @@ Each channel row has a status switch you can toggle to enable or disable it dire
 | Field | Description |
 |-------|-------------|
 | Channel Name | The channel's display name. Required. |
-| Channel Type | DingTalk / Feishu / WeChat Work / Email / ServerChan. Required. |
+| Channel Type | DingTalk / Feishu / WeChat Work / Email / ServerChan / Custom Webhook. Required. |
 | Status | On / Off, controls whether the channel is active. |
 | Remarks | Custom note. Optional. |
 
@@ -107,6 +172,17 @@ Each channel row has a status switch you can toggle to enable or disable it dire
 | Encryption Mode | None / SSL/TLS / STARTTLS. |
 | Cert Verify | Shown only when the encryption mode is SSL/TLS or STARTTLS. Checking "Skip certificate verification (self-signed)" disables TLS certificate verification of the mail server, for internal mail servers with self-signed certificates. This lowers security; use only on trusted networks. |
 
+### Custom Webhook
+
+| Field | Description |
+|-------|-------------|
+| Preset | Generic JSON / Slack / Discord / Telegram Bot / Bark / ntfy / Gotify. Selecting one fills in the method, headers and body template; you still enter the URL. "Custom (no fill)" leaves existing values untouched. |
+| Webhook URL | Where the receiving platform accepts messages. Required. Only http / https, and the target must be a public address. |
+| Method | POST / PUT / PATCH / GET / DELETE, default POST. No request body is sent with GET. |
+| Content-Type | The request Content-Type, default application/json. Common values are offered in a dropdown, or type your own. |
+| Custom headers | Header name and value pairs, up to 20. System-controlled headers such as Host and Content-Length cannot be overridden, and values must not contain line breaks. |
+| Body template | The payload sent to the receiver. Supports variables such as `{{.Title}}` and `{{.Content}}`. Leave blank to send the built-in default payload. |
+
 ## FAQ
 
 **What if the test fails?**
@@ -115,7 +191,16 @@ Each channel row has a status switch you can toggle to enable or disable it dire
 - If you get **connection refused**, the SMTP server address or port is unreachable. Verify the server IP and port are correct and the network is reachable.
 - If the mail server uses a self-signed certificate and you get a **certificate verification error** (e.g. certificate signed by unknown authority), check **Skip certificate verification (self-signed)** in the channel configuration and retry.
 - For DingTalk / Feishu, verify the webhook URL and secret are correct and that the bot's signing setting matches.
+- For Custom Webhook, a **4xx / 5xx status code** means the request reached the platform but was rejected. The error message includes the platform's response, usually indicating the payload format or credentials do not match what it expects.
 - Check the specific error message in [Notify Log](./NotifyLog.md).
+
+**Why is my Custom Webhook URL rejected as "not allowed"?**
+
+The webhook URL must use `http` / `https` and point to a **public address**. URLs pointing to `127.0.0.1`, `192.168.x.x`, `10.x.x.x` or redirecting to a private address are rejected.
+
+**Why does saving report that a variable does not exist?**
+
+The body template can only use these seven variables: `{{.Title}}`, `{{.Content}}`, `{{.Time}}`, `{{.MessageType}}`, `{{.MessageTypeName}}`, `{{.Severity}}`, `{{.ServerName}}`. Detail variables such as domain, attacker IP and rule info belong to the **message template** in [Notify Subscription](./NotifySubscription.md); they are rendered into `{{.Content}}`.
 
 **Why am I not receiving notifications after configuring a channel?**
 

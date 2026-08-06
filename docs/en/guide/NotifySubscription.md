@@ -4,7 +4,7 @@
 
 Notify subscriptions define **which event types are sent to which channels**. They link the channels configured in [Notify Channel](./NotifyChannel.md) with the system's various message types, enabling flexible notification strategies.
 
-The page is presented as a matrix table: rows are **message types**, columns are **channel types** (DingTalk, Feishu, Email, ServerChan, WeChat Work), and each cell represents "whether this message type is sent through the corresponding channel".
+The page is presented as a matrix table: rows are **message types**, columns are **channel types** (DingTalk, Feishu, Email, ServerChan, WeChat Work, Custom Webhook), and each cell represents "whether this message type is sent through the corresponding channel".
 
 Supported message types include: User Login, Rule Trigger, IP Ban, Attack Info, SSL Certificate Expire, Weekly Report, System Error, Operation Notice, Access Sign-in, and Access Alert.
 
