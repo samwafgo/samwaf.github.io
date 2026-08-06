@@ -14,7 +14,7 @@ It is the "result record" among the three parts of the notification feature: [No
 
 The top of the page provides filter conditions:
 
-- **Message Type**: filter by Rule Trigger, Operation Notice, User Login, Attack Info, Weekly Report, SSL Certificate Expire, System Error, IP Ban, Access Sign-in, or Access Alert.
+- **Message Type**: filter by Rule Trigger, Operation Notice, User Login, Attack Info, Weekly Report, SSL Certificate Expire, System Error, IP Ban, Access Sign-in, Access Alert, or Admin Sign-in Source Changed.
 - **Send Status**: Success / Failed / Suppressed.
 - **Start Time / End Time**: filter by send-time range.
 

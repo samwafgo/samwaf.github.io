@@ -44,6 +44,7 @@
 ## Account
 - [Account Management](./Account.md)
 - [Account Log](./AccountLog.md)
+- [Login History](./LoginHistory.md)
 - [Two-Factor Auth (2FA)](./Otp.md)
 
 ## System Settings

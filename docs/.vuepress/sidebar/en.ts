@@ -74,6 +74,7 @@ export const enSidebar = sidebar({
             children: [
                 "/en/guide/Account.md",
                 "/en/guide/AccountLog.md",
+                "/en/guide/LoginHistory.md",
                 "/en/guide/Otp.md",
             ],
         },

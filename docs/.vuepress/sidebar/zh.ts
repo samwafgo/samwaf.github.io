@@ -74,6 +74,7 @@ export const zhSidebar = sidebar({
             children: [
                 "/guide/Account.md",
                 "/guide/AccountLog.md",
+                "/guide/LoginHistory.md",
                 "/guide/Otp.md",
             ],
         },

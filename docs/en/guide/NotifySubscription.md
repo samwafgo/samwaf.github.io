@@ -6,7 +6,7 @@ Notify subscriptions define **which event types are sent to which channels**. Th
 
 The page is presented as a matrix table: rows are **message types**, columns are **channel types** (DingTalk, Feishu, Email, ServerChan, WeChat Work, Custom Webhook), and each cell represents "whether this message type is sent through the corresponding channel".
 
-Supported message types include: User Login, Rule Trigger, IP Ban, Attack Info, SSL Certificate Expire, Weekly Report, System Error, Operation Notice, Access Sign-in, and Access Alert.
+Supported message types include: User Login, Rule Trigger, IP Ban, Attack Info, SSL Certificate Expire, Weekly Report, System Error, Operation Notice, Access Sign-in, Access Alert, and Admin Sign-in Source Changed.
 
 <!-- Image: Notify subscription matrix table -->
 
@@ -206,6 +206,7 @@ Available variables differ per message type; the "Available Variables" area list
 | Operation Notice | Notifications related to management operations. |
 | Access Sign-in | A successful sign-in through unified access authentication. |
 | Access Alert | A security anomaly detected by unified access authentication. |
+| Admin Sign-in Source Changed | An admin account signed in from an IP or location different from its previous sign-in. See [Login History](./LoginHistory.md). |
 
 ## FAQ
 

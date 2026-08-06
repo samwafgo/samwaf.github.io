@@ -44,6 +44,7 @@
 ## 账号管理
 - [账号管理](./Account.md)
 - [账号日志](./AccountLog.md)
+- [登录历史](./LoginHistory.md)
 - [双因素认证(2FA)](./Otp.md)
 
 ## 系统设置
