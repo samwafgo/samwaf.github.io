@@ -8,6 +8,10 @@ CDN Origin IP is a central store SamWaf maintains for each CDN vendor's origin (
 
 Built-in vendors **do not fetch from the internet by default**. Only when a vendor is referenced by a site or the management side should you enable that vendor's **Auto Fetch** on this page; enabling it triggers one immediate fetch.
 
+::: tip Want to know what is blocking a given IP right now?
+Every CIDR in the "View IPs" dialog is clickable — one click opens **IP Lookup**, which checks the allow/block lists, IP groups, threat intelligence, every ban record and the CDN origin ranges in one go, and lets you allowlist or blocklist the IP on the spot. See [IP Lookup](./IPLookup.md).
+:::
+
 <!-- Image: CDN Origin IP list page -->
 
 ### Vendor types (Tier)

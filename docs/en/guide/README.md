@@ -1,5 +1,10 @@
 # Main Features
 
+::: tip Every page has an info bar at the top
+Every feature page in the admin console carries a blue info bar that explains in one sentence what the page is for. Pages with more to say show a **Details** link on the right: short explanations expand in place, longer ones slide out in a panel from the right. The panel also links to **the full documentation**, taking you straight to the matching chapter of this manual (the English docs open automatically when the UI is set to English).
+:::
+
+
 ## Website Protection
 - [Host Configuration](./Host.md)
 - [Protection Rules](./Rule.md)
@@ -14,6 +19,7 @@
 - [Firewall IP Block](./FirewallIPBlock.md)
 - [Threat Intelligence IP Feeds](./ThreatIP.md)
 - [CDN Origin IPs](./CDNIP.md)
+- [IP Lookup](./IPLookup.md)
 - [Cache Rule](./CacheRule.md)
 - [Website Access Authentication](./HttpAuthBase.md)
 - [SSL Certificate Management](./SSL.md)
@@ -49,6 +55,7 @@
 
 ## System Settings
 - [Parameter Settings](./VpConfig.md)
+- [Remote Brute-force Guard](./HostGuard.md)
 - [File Management](./FileManage.md)
 - [IP Database Management](./IPLocation.md)
 - [System Log](./SysLog.md)

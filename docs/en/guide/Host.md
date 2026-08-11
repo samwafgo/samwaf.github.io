@@ -554,10 +554,21 @@ Existing sites all default to **Inherit global**, so upgrading changes nothing.
 
 ### 16.2 Bypass paths
 
-Prefix match, one per line. For health checks, webhook callbacks and other callers that cannot sign in.
+Matched on **path segments**, one per line. For health checks, webhook callbacks and other callers that cannot sign in.
 
-::: warning
-This is a **prefix match**: `/health` also lets `/healthz` through, so be as specific as you can.
+Entering `/api` lets that whole subtree through:
+
+| Request path | Result |
+| --- | --- |
+| `/api` | Allowed |
+| `/api/` | Allowed |
+| `/api/user/list` | Allowed |
+| `/apixxx` | Not allowed |
+
+A trailing slash makes no difference — `/api` and `/api/` mean the same thing.
+
+::: tip
+What gets through is a subtree, not every path sharing the prefix — `/health` does **not** also let `/healthz` through, and `/admin` does not let `/adminconsole` through.
 The ACME path `/.well-known/acme-challenge/` is always allowed and does not need to be listed.
 :::
 

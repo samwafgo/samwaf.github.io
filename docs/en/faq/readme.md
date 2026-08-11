@@ -294,6 +294,7 @@ cache:
 | `security.ssl_enable` | Whether the admin console uses HTTPS |
 | `security.ssl_force_https` | Whether to force redirect to HTTPS |
 | `security.access_force_disable` | Emergency kill switch for [Access Authentication](../guide/AccessConfig.md), default `false`. Set it to `true` and restart only when the admin panel is proxied through the WAF and a misconfiguration locked you out (equivalent env var: `SAMWAF_ACCESS_DISABLE=1`) |
+| `security.host_guard_force_disable` | Emergency kill switch for [Remote Brute-force Guard](../guide/HostGuard.md), default `false`. Set it to `true` and restart when a whitelist misconfiguration got your own IP blocked into the system firewall; this stops any new blocks (equivalent env var: `SAMWAF_HOSTGUARD_DISABLE=1`). Note it only stops new blocks — firewall rules already applied must still be removed by hand |
 | `security.ssl_bind_cert_id` | Certificate ID bound to the admin HTTPS |
 
 ### 5.5 Application Management

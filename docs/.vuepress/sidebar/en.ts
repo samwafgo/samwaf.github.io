@@ -20,6 +20,7 @@ export const enSidebar = sidebar({
                 "/en/guide/FirewallIPBlock.md",
                 "/en/guide/ThreatIP.md",
                 "/en/guide/CDNIP.md",
+                "/en/guide/IPLookup.md",
                 "/en/guide/CacheRule.md",
                 "/en/guide/HttpAuthBase.md",
                 "/en/guide/SSL.md",
@@ -83,6 +84,7 @@ export const enSidebar = sidebar({
             collapsible: true,
             children: [
                 "/en/guide/VpConfig.md",
+                "/en/guide/HostGuard.md",
                 "/en/guide/FileManage.md",
                 "/en/guide/IPLocation.md",
                 "/en/guide/SysLog.md",

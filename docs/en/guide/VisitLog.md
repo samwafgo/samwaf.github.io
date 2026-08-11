@@ -6,6 +6,10 @@ The Visit Log page records every **raw access request** that passes through the 
 
 > Note: The Visit Log shows accesses **per request**. To view attacks aggregated **by source IP** with the rules they triggered, use the "Risk Log" instead.
 
+::: tip Want to know what is blocking a given IP right now?
+IPs in the list are clickable — one click opens **IP Lookup**, which checks the allow/block lists, IP groups, threat intelligence, every ban record and the CDN origin ranges in one go, and lets you allowlist or blocklist the IP on the spot. See [IP Lookup](./IPLookup.md).
+:::
+
 The page has three parts: a collapsible **Log Settings** area, a **Search/Filter** area, and the **access record list**.
 
 <!-- Image: Visit Log page with log settings, search area and record list -->

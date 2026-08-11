@@ -20,6 +20,7 @@ export const zhSidebar = sidebar({
                 "/guide/FirewallIPBlock.md",
                 "/guide/ThreatIP.md",
                 "/guide/CDNIP.md",
+                "/guide/IPLookup.md",
                 "/guide/CacheRule.md",
                 "/guide/HttpAuthBase.md",
                 "/guide/SSL.md",
@@ -83,6 +84,7 @@ export const zhSidebar = sidebar({
             collapsible: true,
             children: [
                 "/guide/VpConfig.md",
+                "/guide/HostGuard.md",
                 "/guide/FileManage.md",
                 "/guide/IPLocation.md",
                 "/guide/SysLog.md",

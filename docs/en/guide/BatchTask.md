@@ -45,7 +45,7 @@ Typical use: turn a threat-intelligence feed or a corporate egress IP list into 
 
 Differences from the other task types:
 
-- **Not bound to a website**: there is no Website field; you pick a "Target IP Group" instead. The group must already exist (if the dropdown is empty, create one under **Website Protection → IP Group** first).
+- **Not bound to a website**: there is no Website field; you pick a "Target IP Group" instead. If no suitable group exists yet, click **New IP Group** next to the dropdown, fill in a group name and remarks, and save — the new group is **selected automatically** without leaving the task form you are filling in.
 - **Execution Method "Overwrite" means full sync**: after the import, IPs **that no longer exist in this source are deleted from the group**, keeping the group identical to the source — IPs removed upstream disappear from the group automatically. For the other task types, "Overwrite" only updates and never deletes.
 - Catch-all patterns such as `*.*.*.*` in the source are skipped, matching the restriction for manual IP group entries (see [IP Group - Supported IP syntax](./IPGroup.md#_2-3-supported-ip-syntax)).
 
@@ -70,7 +70,7 @@ In the task list, the first column of an IP group task shows a tag with the **ta
 | Task Name | A custom name for the task (required) |
 | Website | The website the task applies to, selected from the dropdown (required; hidden and not needed when the Task Type is "Import into IP Group") |
 | Task Type | Add IP Whitelist / Add IP Blacklist / Import into IP Group / Add Sensitive Words (required) |
-| Target IP Group | Only shown for the "Import into IP Group" type; the IP group to import into (required). The dropdown shows "group name (entry count)", and the "Manage IP Groups" link next to it jumps to the IP Group page |
+| Target IP Group | Only shown for the "Import into IP Group" type; the IP group to import into (required). The dropdown shows "group name (entry count)"; the "New IP Group" link next to it creates a group in place and selects it automatically, and "Manage IP Groups" jumps to the IP Group page |
 | Extra Config | Extra configuration in JSON format. The Sensitive Words type supports `check_direction` (detection direction: in / out / all) and `action` (action after detection: deny / replace); IP types need no config (`{}`); for "Import into IP Group" this is managed by the Target IP Group dropdown and the field is hidden |
 | Source Type | Local Path / Remote URL (required) |
 | Source Value | A local file path for Local Path, or an http(s) address for Remote URL (required) |
@@ -83,6 +83,6 @@ In the task list, the first column of an IP group task shows a tag with the **ta
 
 - **The extra config cannot be saved?** Extra Config must be valid JSON; check that brackets and quotes are complete.
 - **When do scheduled tasks run?** Batch tasks with Trigger Type "Scheduled Task" run sequentially at 5 AM every day; use "Manual Trigger" to run immediately.
-- **The "Target IP Group" dropdown is empty?** No IP group has been created yet — create one under **Website Protection → IP Group** first.
+- **The "Target IP Group" dropdown is empty?** No IP group has been created yet. Click **New IP Group** next to the dropdown to create one in place, or create it on the **Website Protection → IP Group** page.
 - **I chose "Overwrite" but stale IPs were not removed from the group?** One of the safeguards above kicked in: reading the source failed midway, or the source contained no valid IP. The group is left as-is; check that the source file/URL is healthy.
 - **Do I need to restart or re-save the websites after importing into an IP group?** No. Group changes take effect immediately on every website referencing the group.

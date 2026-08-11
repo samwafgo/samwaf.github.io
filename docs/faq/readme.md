@@ -294,6 +294,7 @@ cache:
 | `security.ssl_enable` | 管理端是否启用 HTTPS 访问 |
 | `security.ssl_force_https` | 是否强制跳转 HTTPS |
 | `security.access_force_disable` | 强制关闭[统一访问认证](../guide/AccessConfig.md)的自救开关，默认 `false`。仅当「管理端也被反代进了 WAF、且统一访问认证配错把自己锁在外面」时改成 `true` 并重启即可恢复访问（等效环境变量 `SAMWAF_ACCESS_DISABLE=1`） |
+| `security.host_guard_force_disable` | 强制关闭[远程防爆破](../guide/HostGuard.md)的自救开关，默认 `false`。仅当「白名单配错，自己的 IP 被 SSH 爆破防护封进了系统防火墙」时改成 `true` 并重启，即可阻止新的封禁（等效环境变量 `SAMWAF_HOSTGUARD_DISABLE=1`）。注意：它只阻止新封禁，已下发的防火墙规则仍需手工清除 |
 | `security.ssl_bind_cert_id` | 管理端 HTTPS 绑定的证书 ID |
 
 ### 5.5 应用管理 application

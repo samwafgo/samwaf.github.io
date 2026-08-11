@@ -4,12 +4,11 @@
 
 Threat Intelligence IP Subscription lets you subscribe to multiple threat-intel IP feeds. It performs a **daily full pull with automatic incremental landing** into the WAF app layer and/or the system firewall (ipset). It is optimized for tens of thousands of entries.
 
-Two banners appear at the top of the page:
+A single info bar appears at the top of the page: `Subscribe to threat-intel IP feeds; daily full pull with incremental landing (WAF app layer / system firewall ipset). Optimized for tens of thousands of entries.`
 
-- Blue banner: `Subscribe to threat-intel IP feeds; daily full pull with incremental landing (WAF app layer / system firewall ipset). Optimized for tens of thousands of entries.`
-- Yellow banner: explains what each operation (Enable / Disable / Sync / Delete) does — see [Operation Semantics](#operation-semantics) below.
+Clicking **Details** on its right slides out a panel that explains what each operation (Enable / Disable / Sync / Delete) does — see [Operation Semantics](#operation-semantics) below — with a link to this page's online documentation pinned at the bottom. The info bar also carries an **IP Lookup** button, which tells you whether a given IP is covered by the feeds on this page; see [IP Lookup](./IPLookup.md).
 
-<!-- Image: Threat Intelligence IP Subscription list page with the two top banners -->
+<!-- Image: Threat Intelligence IP Subscription list page with the top info bar -->
 
 ::: tip
 For performance, subscribed IPs are **not** written into the IP Blacklist list row-by-row. To browse the actual landed IPs, use this feature's "Subscription Source" summary view (see [View Landed IPs](#view-landed-ips)), or the "Subscription Source" tab on the **Firewall IP Block / IP Blacklist** pages.

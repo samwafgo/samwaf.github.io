@@ -72,9 +72,12 @@ Lock for M minutes after N consecutive failures. Counted separately **per source
 
 ### 3.5 Global bypass paths
 
-Applies to every site, **prefix match**, one per line. For health checks, webhook callbacks and other callers that cannot sign in.
+Applies to every site, matched on **path segments**, one per line. For health checks, webhook callbacks and other callers that cannot sign in.
+
+Entering `/api` allows `/api`, `/api/` and everything below `/api/`, but **not** `/apixxx`. A trailing slash makes no difference.
 
 ::: tip
+What gets through is a subtree, not every path sharing the prefix — `/health` does not also let `/healthz` through.
 The ACME path `/.well-known/acme-challenge/` is always allowed and does not need to be listed — otherwise certificate renewal would fail.
 :::
 

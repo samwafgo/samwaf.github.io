@@ -8,6 +8,10 @@ The top of the page shows tabs grouped by **Triggered Rule** for quick switching
 
 ![Defense Logs](/images/attacklog.png)
 
+::: tip Want to know what is blocking a given IP right now?
+IPs in the list are clickable — one click opens **IP Lookup**, which checks the allow/block lists, IP groups, threat intelligence, every ban record and the CDN origin ranges in one go, and lets you allowlist or blocklist the IP on the spot. See [IP Lookup](./IPLookup.md).
+:::
+
 ## Steps
 
 ### 1. Query and Filter
