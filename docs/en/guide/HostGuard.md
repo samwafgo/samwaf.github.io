@@ -26,6 +26,16 @@ Menu location: **System Settings → Remote Brute-force Guard**. The page has si
 
 When the environment cannot collect logs, a red banner at the top of the page explains why.
 
+::: tip Two collection methods on Windows
+Windows uses an **event subscription** (`wevtapi`) by default to receive failed logins in real time. On a few systems the subscription is established successfully yet never delivers any event; SamWaf detects this within a minute and automatically **falls back to polling** (`wevtutil`, once every 5 seconds — same functionality, slightly higher latency). The fallback is written to the log and the **Event Source** on the Overview tab changes accordingly; no manual action is needed.
+
+To select polling explicitly, set this system environment variable and restart SamWaf:
+
+```
+SAMWAF_HOSTGUARD_WINSRC=wevtutil
+```
+:::
+
 ### Blocking (calling the system firewall)
 
 Block execution relies on the operating system firewall; the requirements are the same as for [Firewall IP Block](/en/guide/FirewallIPBlock.html#prerequisites) (Linux needs `iptables`/`ipset` and sufficient privileges, Windows needs the firewall enabled, macOS needs pf enabled).
@@ -194,7 +204,7 @@ Setting **Block Scope** to **SSH/RDP Ports Only** means that if a false positive
 | --- | --- |
 | Block Scope | **All Ports** (default) or **SSH/RDP Ports Only**. The latter has a smaller blast radius on a false positive, but is not supported by every OS and execution mode. |
 | Execution Mode | **Auto** (default, adapts to the platform) / **Set (ipset)** / **Per-rule**. The mode actually in use is shown alongside. |
-| Windows Sync Debounce | In seconds, default 30. Windows has no ipset and can only rebuild firewall rules in full, so debouncing avoids repeated rebuilds during heavy blocking. Linux / macOS use incremental updates and are unaffected. |
+| Windows Sync Debounce | In seconds, default 5. Windows has no ipset and can only rebuild firewall rules in full, so debouncing collapses a burst into a single rebuild. **This value is also the maximum delay before a block is actually written to the firewall** — up to this long between triggering a block and the rule taking effect; the notification is sent immediately. Linux / macOS use incremental updates that take effect at once and are unaffected. |
 
 ### Flood protection
 
@@ -260,6 +270,20 @@ Setting **Block Scope** to **SSH/RDP Ports Only** means that if a false positive
 ## FAQ
 
 - **Does detection still work if I changed the SSH / RDP port?** Yes. Detection reads login failure logs and is independent of the service port. The port settings only affect the "SSH/RDP ports only" block scope and port highlighting in the connection dashboard.
+
+- **The Failed Logins list stays empty on Windows — how do I troubleshoot?** Check these three in order:
+
+  1. **Is SamWaf running as administrator?** Reading the Security event log requires administrator or LocalSystem privileges; installing it as a system service satisfies this.
+  2. **Is the system recording failed logons?** In an elevated PowerShell (quote the GUID, otherwise PowerShell treats `{}` as a script block):
+
+     ```powershell
+     auditpol /get /subcategory:"{0CCE9215-69AE-11D9-BED3-505054503030}"
+     ```
+
+     "Logon" should read **Success and Failure**; if only Success, enable it with `/set ... /failure:enable`.
+  3. **Check the SamWaf log.** Search `logs/log.log` for `主机登录防护`. You should see the subscription being established followed by a message confirming the first Windows security event was received. If only the former appears, SamWaf falls back to polling within a minute and logs the reason.
+
+- **Why isn't a block effective immediately on Windows?** Windows has no ipset and can only rebuild the firewall rules as a whole, so automatic blocks are batched over the window set by **Windows Sync Debounce** (default 5 seconds) — **that value is the maximum delay before a block takes effect**. The notification is sent immediately, which is why you see "notification first, rule shortly after". Manual block, manual release and expiry all take effect at once and are unaffected; Linux / macOS use incremental updates and are also immediate.
 
 - **The banner says "System firewall unavailable, automatically degraded to observe mode".** The environment does not meet the blocking prerequisites; the banner states the exact reason. Follow the [Firewall IP Block prerequisites](/en/guide/FirewallIPBlock.html#prerequisites); container deployments additionally need `--cap-add=NET_ADMIN` and `--network host`.
 
