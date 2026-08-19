@@ -12,6 +12,67 @@ Batch management of certificates.
 
 ![Certificate Loading Location](/images/sslconfig_auto.png)
 
+### 1.2 Certificate Export (Sync to Real Certificate Files)
+
+If other programs on the server (nginx, for example) need the same certificate, SamWaf can write the certificate and its private key out as real files whenever the certificate is updated.
+
+This is the opposite direction of "Automatic Certificate Loading" above:
+
+- **Key File Path / Crt File Path**: read **IN** — at 3 AM daily the certificate is read from these paths and overwrites this entry.
+- **Export Crt File Path / Export Key File Path**: written **OUT** — whenever this entry's certificate changes, it is written to these two files.
+
+#### Configuration Steps
+
+1. Click "Edit" on the corresponding entry in the certificate folder list.
+2. Scroll down to the certificate export area of the dialog and fill in:
+   - **Export Crt File Path**: e.g. `/etc/nginx/ssl/a.com.crt` (on Windows: `D:\certs\a.com.crt`)
+   - **Export Key File Path**: e.g. `/etc/nginx/ssl/a.com.key` (on Windows: `D:\certs\a.com.key`)
+3. Click "Confirm" to save. The export runs immediately after saving, and the confirmation message includes the paths actually written.
+
+<!-- Image: certificate export paths in the certificate folder edit dialog -->
+
+#### When the Export Runs Automatically
+
+Once configured, the files are kept in sync in all three of these cases:
+
+- After an automatic certificate application / renewal succeeds;
+- After you edit and save the certificate content on this page;
+- After the 3 AM "automatic certificate loading" picks up a new certificate from the path.
+
+#### Field Description
+
+| Field | Description |
+| --- | --- |
+| Export Crt File Path | Full path the certificate is written to. Must be an absolute path including the file name. Leave empty to disable export |
+| Export Key File Path | Full path the private key is written to, same requirements as above. Both paths must be filled in together |
+| Last Export Result | Read-only. Shows whether the most recent export succeeded or failed, and the reason on failure. Hidden when export is not configured |
+
+::: tip Path Requirements
+- Must be an **absolute path** including the **file name** — a directory alone or a relative path is rejected.
+- Missing directories are created automatically.
+- Both paths must be filled in **together**; filling in only one returns an error (an external program cannot use a certificate without its private key).
+- They must not be the same as the "Key File Path / Crt File Path" above (that is the read-in direction, and writing there would overwrite your own source files).
+- They must not be a path already used by another certificate folder entry, otherwise the two entries would overwrite each other.
+:::
+
+::: warning A Failed Export Never Affects the Certificate Itself
+Export is an add-on action. A wrong path, a directory without write permission, or a file that is locked only produces a message on save and is recorded in "Last Export Result" — certificate application, renewal and activation are **completely unaffected**.
+:::
+
+#### FAQ
+
+**Q: The files were not created. What should I check?**
+Open the "Edit" dialog of that entry and read "Last Export Result": if both paths are empty, export has not been enabled yet; if there is a failure message, fix the path or the directory permission accordingly.
+
+**Q: How do I use them in nginx?**
+
+```nginx
+ssl_certificate     /etc/nginx/ssl/a.com.crt;
+ssl_certificate_key /etc/nginx/ssl/a.com.key;
+```
+
+After a renewal, run `nginx -t && nginx -s reload`. SamWaf does not rewrite the files when the certificate content is unchanged, so scripts that watch these files are not triggered needlessly.
+
 ## 2 Automatic Certificate Application
 
 Starting with v1.3.9-beta.7, automatic certificate renewal is supported. When the remaining validity period of a certificate falls below 30 days, the system will automatically initiate renewal based on the information from the last successful application.

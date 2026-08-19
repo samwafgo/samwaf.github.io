@@ -106,6 +106,21 @@ With `--network host` you can no longer use `-p` port mappings; the container bi
 
 If you do not need Firewall IP Block, the standard start above is enough — every other feature (including the application-layer [IP Blacklist](/en/guide/IPBlack.html)) works either way.
 
+**How to upgrade**
+
+In a container, upgrade by **updating the image**. Do not use the in-app update in the admin console (it is disabled there and shows instructions instead): the binary lives in the image's writable layer, so an in-app update only applies to the current container. Once the container is recreated the binary rolls back to the version shipped in the image, while the database has already been migrated by the newer version and cannot roll back.
+
+```bash
+# deployed with docker compose
+docker compose pull && docker compose up -d
+
+# deployed with docker run
+docker pull samwaf/samwaf
+docker rm -f samwaf-instance && <run the docker run command above again>
+```
+
+The mounted `conf` / `data` / `logs` / `ssl` directories are not affected. See [Common Issues - Upgrading in a Container (Docker)](../faq/readme.md).
+
 :::
 
  

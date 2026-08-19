@@ -81,16 +81,44 @@ If you have renamed the `admin` account, the program lists all accounts for you 
 
 ### 2.2 Token Expiration
 
-For security, starting from v1.3.10-beta.4 the login token has an expiration time. Adjust it as needed:
+For security, the login token has an expiration time. It is an **idle timeout** — every authenticated request slides the expiry forward, so the token only dies after that much time with no activity at all. Adjust it as needed:
 
 ```
-Menu path: System Settings -> Parameter Settings
-token_expire_time   Management token validity period, in minutes (default 5)
+Menu path: System Settings -> System Config
+token_expire_time   Management token validity period, in minutes (default 30)
 ```
 
-A token becomes invalid in two cases: ① it reaches its expiry time; ② the account logs in from a different IP, invalidating the old token.
+::: tip Set it to 0 for "no limit"
+Setting `token_expire_time` to `0` or a negative number means **no expiry management**; in practice it is capped at 1 year. A truly never-expiring session has no natural end, so a leaked token could only be cleaned up by hand. Values longer than 1 year are capped at 1 year as well.
+:::
 
-### 2.3 2FA Secret Code Cannot Log In
+This value used to default to 5 minutes. Because an idle page sends no requests, that easily led to "I left the page open for a few minutes and got logged out". The default is now 30 minutes. **After upgrading, if you never changed this item (the stored value is still 5), it is automatically raised to 30 on the first start, with a line in the log; a value you set yourself is left untouched.**
+
+A token can become invalid in these cases:
+
+| Case | Description |
+| --- | --- |
+| Idle timeout | No activity for longer than `token_expire_time` |
+| Same account logs in again | Only one valid token is kept per account and login type; a new login invalidates the old token |
+| Program restart | Tokens live in process memory, so a restart (including container recreation or service restart) requires logging in again |
+| Logout / password change | Logging out invalidates the token immediately |
+
+### 2.3 Device Fingerprint and Strict IP Binding
+
+System Config offers two optional hardening switches, **both disabled by default**:
+
+| Item | Description |
+| --- | --- |
+| `enable_device_fingerprint` | Device fingerprint check. The fingerprint is derived from the browser's User-Agent, Accept-Language and Accept-Encoding; a request whose fingerprint differs from the one captured at login is rejected |
+| `enable_strict_ip_binding` | Strict IP binding. The token is bound to the real client IP seen at login; a change of IP requires logging in again |
+
+::: warning Enable with care behind a reverse proxy / CDN
+Headers such as `Accept-Encoding` are frequently rewritten by reverse proxies and CDNs, and dynamic IPs, dual-stack IPv4/IPv6 switching or multi-egress NAT make the bound IP change often. In such environments these two switches easily cause seemingly random logouts. Make sure the path is stable first; before enabling strict IP binding, also configure the **trusted proxy ranges** for the admin console in Parameter Settings, otherwise the proxy IP is used for the check.
+:::
+
+A failed check only rejects that single request; the session is invalidated only after several consecutive mismatches. WebSocket connections, the AI assistant's streaming responses and token-in-URL log downloads are excluded from the fingerprint check, because their headers naturally differ from ordinary in-page requests.
+
+### 2.4 2FA Secret Code Cannot Log In
 
 Reset Two-Factor Authentication (2FA) from the command line:
 
@@ -334,7 +362,35 @@ SamWaf64.exe rolling-restart    # Windows
 
 Tells the running SamWaf to switch Workers: once the new Worker is ready, the old one drains in-flight connections and exits — zero interruption.
 
-### 6.2 Version Rollback
+### 6.2 Upgrading in a Container (Docker)
+
+::: warning In-app update is disabled in containers
+Inside a container the binary lives in the **image's writable layer**, so an in-app update only applies to **that one container**. As soon as the container is recreated (`docker compose up -d`, a new image, host reinstall, ...) the binary rolls back to the version shipped in the image — while the database was already migrated by the newer version and **cannot roll back**. That leaves an "old program + new database" mismatch, which can surface as broken features or log lines such as "task method xxx not found".
+
+For that reason the in-app update button is disabled in containers and shows the image-update instructions instead.
+:::
+
+In a container, upgrade by updating the image:
+
+```bash
+docker compose pull
+docker compose up -d
+```
+
+The mounted `conf` / `data` / `logs` / `ssl` data is not affected.
+
+If you really did mount the binary into a volume (so an update survives recreation), you can allow it explicitly:
+
+```
+Menu path: System Settings -> System Config
+allow_container_selfupdate  Allow in-app update inside containers (0 = block, 1 = allow; blocked by default)
+```
+
+::: tip Downgraded runs are reported in the log
+SamWaf records the version of every successful start in the database. If, at startup, the **version recorded in the database is newer than the running program** (typically the container-recreation rollback described above), an error line is printed telling you to update the image to at least that version and recreate the container. It is a warning only and does not prevent startup.
+:::
+
+### 6.3 Version Rollback
 
 ```
 ./SamWaf64 rollback
@@ -342,7 +398,7 @@ Tells the running SamWaf to switch Workers: once the new Worker is ready, the ol
 
 The program lists local backup versions (version, backup time, size). Enter the number of the version to roll back to and confirm; after rollback, restart the service manually (`start` or `restart`).
 
-### 6.3 Database Migration
+### 6.4 Database Migration
 
 `migratedb` migrates existing data offline to another database. Three routes are supported:
 
@@ -398,7 +454,7 @@ It is a good idea to run `--dry-run` first to review the row counts, then perfor
 Entries reported as "target table does not exist" or "target already has N rows" are expected. The former are legacy backup tables no longer used by the current version; the latter are tables SamWaf already populated with defaults during initialization (such as CA servers and data retention policies). Use `--force` only if you really want to overwrite them.
 :::
 
-### 6.4 Database Repair & SQL Execution
+### 6.5 Database Repair & SQL Execution
 
 ```
 ./SamWaf64 repairdb     # try to repair a corrupted database

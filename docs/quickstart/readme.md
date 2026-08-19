@@ -106,6 +106,21 @@ docker run -d --name=samwaf-instance \
 
 如果不需要防火墙IP封禁，用上面的常规启动即可，其余功能（含应用层 [IP黑名单](/guide/IPBlack.html)）都不受影响。
 
+**升级方式**
+
+容器环境请**更新镜像**，不要用管理界面上的"应用内升级"（界面里已禁用并给出指引）：容器内的程序文件在镜像可写层，界面升级只对当前容器有效，容器一旦重建就会回退成镜像自带的旧版本，而数据库已被新版本迁移且无法回退。
+
+```bash
+# docker compose 部署
+docker compose pull && docker compose up -d
+
+# docker run 部署
+docker pull samwaf/samwaf
+docker rm -f samwaf-instance && <重新执行上面的 docker run 命令>
+```
+
+挂载出来的 `conf` / `data` / `logs` / `ssl` 不受影响。详见[常见问题 - 容器（Docker）环境如何升级](../faq/readme.md)。
+
 :::
 
 
