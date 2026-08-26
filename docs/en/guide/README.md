@@ -45,7 +45,6 @@ Every feature page in the admin console carries a blue info bar that explains in
 - [Auth Settings](./AccessConfig.md)
 - [Access Accounts](./AccessAccount.md)
 - [Active Sessions](./AccessSession.md)
-- [Access Audit](./AccessAudit.md)
 
 ## Account
 - [Account Management](./Account.md)
@@ -59,6 +58,7 @@ Every feature page in the admin console carries a blue info bar that explains in
 - [File Management](./FileManage.md)
 - [IP Database Management](./IPLocation.md)
 - [System Log](./SysLog.md)
+- [Security Audit](./AccessAudit.md)
 - [System Config](./SystemConfig.md)
 - [Key Management](./PrivateInfo.md)
 - [Data Retention](./DataRetention.md)

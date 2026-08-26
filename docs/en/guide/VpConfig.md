@@ -31,6 +31,140 @@ Enable HTTPS access for the console.
 
 <!-- Image: Management SSL configuration -->
 
+### 3.1 Getting a certificate for the console
+
+The console is different from a protected site: it is usually **not exposed to the internet**, so file validation (HTTP-01) is not an option — that method requires Let's Encrypt to reach your port 80 from the public internet.
+
+**If you have a domain, use DNS validation (DNS-01).** Validation only touches DNS records, so it needs **no port 80 and no public exposure of the console**.
+
+Supported DNS providers: Alibaba Cloud, Huawei Cloud, Tencent Cloud, Cloudflare, Baidu Cloud.
+
+Steps:
+
+1. Go to **SSL Certificates → Automatic certificate request → New**, choose **DNS validation** as the request method, and fill in the domain for the console plus the applicant email;
+2. Once issued, come back to this page and use **Bind certificate-folder certificate** to select it;
+3. Click **Restart Manager** to apply.
+
+After binding you get **automatic renewal and automatic refresh**: the certificate in the folder renews 30 days before expiry and the console certificate follows. This is why binding is easier than pasting the certificate content — the latter has to be pasted again after every renewal.
+
+::: tip The domain does not need to resolve publicly
+DNS-01 validates that you control the DNS records for the domain, regardless of which IP it points to. Pointing the domain at an internal address such as `192.168.x.x` works fine and still gets a certificate issued.
+:::
+
+::: warning No domain at all
+If you only have an IP address and not even an internal domain name, DNS-01 cannot be used. See the next section on local certificates.
+:::
+
+
+
+### 3.2 Local certificate (when you have no domain)
+
+If you only have an IP address — or you have a domain but do not want to go through ACME — SamWaf can generate a long-lived CA on this machine and use it to sign the console certificate.
+
+::: warning One thing to be clear about
+A local certificate gives **exactly the same encryption strength as a public one** — TLS strength has nothing to do with who signed the certificate. The only difference is that browsers do not know this CA by default, so you import the root CA once on **the computer you browse from**. After that it is a normal green padlock.
+:::
+
+#### Steps
+
+1. Turn on **Enable SSL** in the **Management SSL** card;
+2. In **Local certificate**, enter **every address you actually use to reach the console**, comma separated. For example:
+
+   ```
+   192.168.1.10,waf.internal,localhost,127.0.0.1
+   ```
+
+3. Click **Generate local certificate**;
+4. Click **Download root CA** to get `samwaf-local-ca.crt` and import it on the computers you browse from (next section);
+5. Click **Restart Manager** to apply.
+
+::: danger Do not leave any access address out
+Modern browsers only look at the SAN list in the certificate; they **ignore** the CommonName. Every address you use to reach the console must appear in the field above, otherwise that address will fail with a certificate error. Common misses: entering only the domain while habitually browsing by IP, or entering only the internal IP after having reached it once over a public IP. Listing extra addresses does no harm; leaving one out does.
+:::
+
+#### Importing the root CA
+
+**Windows** (the store location is the step people get wrong - follow all three):
+
+1. Double-click `samwaf-local-ca.crt` → **Install Certificate** → store location **Local Machine** (Current User works if it is only for you).
+2. **The key step**: choose "**Place all certificates in the following store**". Do **not** leave "Automatically select the certificate store based on the type of certificate" selected - that puts it under *Personal*, where it has no effect.
+3. Click **Browse** → select "**Trusted Root Certification Authorities**" → OK → Next → Finish, and confirm the security warning with **Yes**.
+
+**Restart the browser** afterwards: Chrome and Edge only read the system trust store at startup, so without a restart they keep showing "Not secure".
+
+**macOS**: double-click to import into the **login** or **System** keychain in Keychain Access → find `SamWaf Local CA`, double-click → expand **Trust** → set "When using this certificate" to **Always Trust**. Restart the browser.
+
+**Linux (Debian/Ubuntu)**:
+```bash
+sudo cp samwaf-local-ca.crt /usr/local/share/ca-certificates/samwaf-local-ca.crt
+sudo update-ca-certificates
+```
+
+**Linux (RHEL/CentOS)**:
+```bash
+sudo cp samwaf-local-ca.crt /etc/pki/ca-trust/source/anchors/
+sudo update-ca-trust
+```
+
+**Firefox** keeps its own trust store and does not read the system one, so import separately: Settings → Privacy & Security → Certificates → View Certificates → **Authorities** tab → Import → tick "Trust this CA to identify websites".
+
+#### Renewal
+
+- The certificate is **reissued automatically** when fewer than **30 days** remain; the card always shows the days left;
+- You can also click **Reissue / renew** at any time (use the same button after changing the access addresses);
+- **The CA does not change, so computers that already imported the root CA never need to import it again.** This is precisely why a two-level "CA + server certificate" design is used instead of a single self-signed certificate.
+
+::: tip Why not a 10-year validity
+The CA itself lasts 10 years, but the server certificate **cannot exceed 825 days** — a hard limit Apple platforms impose on TLS certificates from any CA; beyond it Safari and iOS reject the certificate outright. Hence the long-lived CA plus a short-lived, auto-renewing certificate.
+:::
+
+#### Working out which root CA to delete
+
+The **Local certificate** section shows the SHA-256 **fingerprint** of the current root CA.
+
+This matters once you have rebuilt the root CA: the trust store then holds **several entries all named `SamWaf Local CA`**, and only the fingerprint tells them apart. The one whose fingerprint **matches the page** is in use (deleting it brings the "Not secure" warning back); any entry with a different fingerprint is left over from before the rebuild and is safe to delete.
+
+#### Removing the root CA
+
+**Windows**: press `Win+R` and run `certlm.msc` (use `certmgr.msc` if you installed it for the current user) → expand **Trusted Root Certification Authorities → Certificates** → find `SamWaf Local CA` → double-click to check the fingerprint → right-click and delete.
+
+**macOS**: open **Keychain Access** → search for `SamWaf` in the System or login keychain → double-click to check the fingerprint → right-click and **Delete**.
+
+**Linux**:
+```bash
+# Debian / Ubuntu
+sudo rm /usr/local/share/ca-certificates/samwaf-local-ca.crt
+sudo update-ca-certificates --fresh
+
+# RHEL / CentOS
+sudo rm /etc/pki/ca-trust/source/anchors/samwaf-local-ca.crt
+sudo update-ca-trust
+```
+
+**Firefox**: Settings → Privacy & Security → Certificates → View Certificates → **Authorities** → select `SamWaf Local CA` → Delete or Distrust.
+
+#### Rebuilding the root CA (the equivalent of revocation)
+
+A self-managed CA has no revocation service (CRL/OCSP), so there is **no true revocation**. If the root CA private key may have leaked, or you simply want a different one, the answer is to switch to a new CA:
+
+**Local certificate → expand Destructive actions → Rebuild root CA**.
+
+::: danger This is destructive
+The new root CA has no relationship to the old one. **Every computer that imported the old root CA will immediately mark the console as insecure** and must delete the old entry and import the new one using the steps above. A restart of the manager is required as well.
+:::
+
+#### Removing the local certificate
+
+If you no longer want to use a local certificate (for example you switched to a public one), use **Local certificate → expand Destructive actions → Remove local certificate**. This deletes the local root CA and the console certificate it signed.
+
+Two notes:
+
+- If the console is **currently using** the local certificate, the request is refused - turn off SSL or switch to another certificate source first, otherwise the console would find no certificate to load after a restart;
+- Only certificates issued by the local CA are touched. Manually uploaded certificates and certificates bound from the certificate folder **are never deleted by mistake**.
+
+After removing it, remember to delete the root CA on the computers that imported it as well (same steps as above).
+
+
 ## 4 Security Entry Path
 
 Add a "security code" prefix path to the console to hide the admin entry. Once enabled, every access must include the prefix: `http(s)://host:port/{code}/...`.

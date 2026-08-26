@@ -8,6 +8,10 @@ Batch management of certificates.
 
 ![Certificate Folder](/images/sslconfig.png)
 
+::: tip Permission
+Adding, editing and deleting certificate folders are system-level operations (they can write files to the server via "Certificate Export" below) and are restricted to the **System Administrator** role; other administrator roles can still view the list and details.
+:::
+
 ### 1.1 Automatic Certificate Loading
 
 ![Certificate Loading Location](/images/sslconfig_auto.png)
@@ -29,6 +33,8 @@ This is the opposite direction of "Automatic Certificate Loading" above:
    - **Export Key File Path**: e.g. `/etc/nginx/ssl/a.com.key` (on Windows: `D:\certs\a.com.key`)
 3. Click "Confirm" to save. The export runs immediately after saving, and the confirmation message includes the paths actually written.
 
+> Note: certificates can only be exported into **allowed directories**. By default only `data/ssl_export/` under the program directory is allowed; to export into nginx's cert directory or elsewhere, declare it in `conf/config.yml` first (see "Export Directory Whitelist" below).
+
 <!-- Image: certificate export paths in the certificate folder edit dialog -->
 
 #### When the Export Runs Automatically
@@ -49,14 +55,30 @@ Once configured, the files are kept in sync in all three of these cases:
 
 ::: tip Path Requirements
 - Must be an **absolute path** including the **file name** — a directory alone or a relative path is rejected.
-- Missing directories are created automatically.
+- Filename extension is restricted: the **exported certificate** must end with `.crt` or `.pem`, and the **exported key** must end with `.key` or `.pem`.
+- The **export directory must be whitelisted** (security restriction, see "Export Directory Whitelist" below). Missing directories are created automatically within the allowed range.
 - Both paths must be filled in **together**; filling in only one returns an error (an external program cannot use a certificate without its private key).
 - They must not be the same as the "Key File Path / Crt File Path" above (that is the read-in direction, and writing there would overwrite your own source files).
 - They must not be a path already used by another certificate folder entry, otherwise the two entries would overwrite each other.
 :::
 
+::: warning Export Directory Whitelist (Security Restriction)
+For safety, certificates can only be exported into **allowed directories**, to prevent writing to sensitive system locations:
+
+- By default, only **`data/ssl_export/`** under the SamWaf program directory is allowed.
+- To export into other directories (e.g. nginx's cert directory `/etc/nginx/ssl`), the operator must declare them **one by one** in `security.ssl_export_allowed_dirs` in `conf/config.yml` (comma-separated), then **restart SamWaf**:
+
+  ```yaml
+  security:
+      ssl_export_allowed_dirs: /etc/nginx/ssl,/etc/haproxy/certs
+  ```
+
+- This whitelist can **only be changed in `conf/config.yml`**, never through the management UI.
+- If an export path is not in an allowed directory, saving reports "export path is not in an allowed directory" — just add the target directory to the config above.
+:::
+
 ::: warning A Failed Export Never Affects the Certificate Itself
-Export is an add-on action. A wrong path, a directory without write permission, or a file that is locked only produces a message on save and is recorded in "Last Export Result" — certificate application, renewal and activation are **completely unaffected**.
+Export is an add-on action. A wrong path, a directory not on the whitelist, a wrong extension, a directory without write permission, or a locked file only produces a message on save and is recorded in "Last Export Result" — certificate application, renewal and activation are **completely unaffected**. Every export (success or denial) is recorded in the [Security Audit](./AccessAudit.md) log, so you can trace who exported what and when.
 :::
 
 #### FAQ

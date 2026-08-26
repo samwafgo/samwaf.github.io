@@ -66,7 +66,6 @@ export const enSidebar = sidebar({
                 "/guide/AccessConfig.md",
                 "/guide/AccessAccount.md",
                 "/guide/AccessSession.md",
-                "/guide/AccessAudit.md",
             ],
         },
         {
@@ -88,6 +87,7 @@ export const enSidebar = sidebar({
                 "/en/guide/FileManage.md",
                 "/en/guide/IPLocation.md",
                 "/en/guide/SysLog.md",
+                "/en/guide/AccessAudit.md",
                 "/en/guide/SystemConfig.md",
                 "/en/guide/PrivateInfo.md",
                 "/en/guide/DataRetention.md",
@@ -95,6 +95,7 @@ export const enSidebar = sidebar({
                 "/en/guide/AIDetection.md",
                 "/en/guide/AiAssistant.md",
                 "/en/guide/RuntimeInfo.md",
+                "/en/guide/UpgradeNotice.md",
                 "/en/guide/OneKeyMod.md",
                 "/en/guide/Task.md",
                 "/en/guide/SqlQuery.md",

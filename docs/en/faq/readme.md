@@ -84,7 +84,7 @@ If you have renamed the `admin` account, the program lists all accounts for you 
 For security, the login token has an expiration time. It is an **idle timeout** — every authenticated request slides the expiry forward, so the token only dies after that much time with no activity at all. Adjust it as needed:
 
 ```
-Menu path: System Settings -> System Config
+Menu path: System Settings -> Parameter Settings
 token_expire_time   Management token validity period, in minutes (default 30)
 ```
 
@@ -174,6 +174,70 @@ security:
 
 When `entry_enable` is on, the startup log prints the actual accessible entry URL.
 
+
+### 3.4 Wrong certificate plus "Force HTTPS" - locked out of the console?
+
+Start with whether "Force HTTPS" is on - **that switch decides what happens when the certificate breaks**: with it off SamWaf falls back to HTTP so you can still get in; with it on the console refuses to be served in the clear (by design, see case 2). Both situations have a documented way back in.
+
+#### Case 1: "Force HTTPS" is off - automatic fallback, nothing to do
+
+If `data/ssl/manager/domain.crt` / `domain.key` are missing, corrupt, or the certificate and key do not match, SamWaf **falls back to plain HTTP** at startup and logs:
+
+```
+SSL certificate file not found, falling back to HTTP: ...
+Failed to load SSL certificate, falling back to HTTP: ...
+```
+
+Just use `http://IP:26666` to get in and fix the certificate.
+
+#### Case 2: "Force HTTPS" is on and the certificate is unusable - service is refused (by design)
+
+Since v1.3.24, turning on "Force HTTPS" means SamWaf **no longer falls back to plaintext silently**. An expired or broken certificate is the most common failure, and the operator explicitly asked for HTTPS only - quietly serving HTTP would let the console accept logins in the clear, with credentials crossing the network unnoticed.
+
+The port stays open, but **no console functionality is mounted**; every request gets a `503` notice instead (so nobody mistakes it for a dead process):
+
+```
+The console has "Force HTTPS" enabled but cannot serve HTTPS.
+Reason: failed to load the console certificate: ...
+All HTTP requests are refused so the console is never served in the clear.
+To recover (pick one, then restart SamWaf):
+  1. Fix the console certificate (data/ssl/manager/domain.crt and domain.key)
+  2. Set security.ssl_force_https: false in conf/config.yml
+  3. Set security.ssl_enable: false in conf/config.yml
+```
+
+Pick one of the three:
+
+```yaml
+security:
+    # Option A (recommended): only drop the forced redirect - HTTPS still works, HTTP gets you in
+    ssl_force_https: false
+
+    # Option B: turn HTTPS off entirely and go back to plain HTTP
+    ssl_enable: false
+```
+
+```bash
+# Option C: fix or delete the certificate files. Note that with ssl_force_https still true
+# the service stays refused, so combine this with option A to get back in quickly.
+rm data/ssl/manager/domain.crt data/ssl/manager/domain.key
+```
+
+::: warning A restart is required
+`conf/config.yml` is only read **when the process starts**; edits do not take effect until you restart.
+:::
+
+#### Case 3: the certificate loads but the browser rejects it
+
+For example you used a local certificate without importing the root CA on this computer, or the SAN list is missing the address you are browsing with. HTTPS **is** up, "Force HTTPS" works as intended, HTTP is redirected with a 301, and HTTPS is blocked by the browser.
+
+Browsers usually still offer "Advanced - Proceed anyway"; if that works, go in and turn the switch off. If not, edit `conf/config.yml` as described in case 2.
+
+Once back in, go to System Settings - Console certificate and fix it: for a local certificate, check whether an **access address is missing** (every address you browse with must be listed) and whether the root CA was imported on this computer.
+
+#### Case 4: the port is wrong too
+
+If you also changed the port by mistake, see [3.1 Change the Management Port](#_3-1-change-the-management-port); for a misconfigured whitelist see [3.2](#_3-2-locked-out-by-a-wrong-whitelist). All of these switches live in the `security` section of `conf/config.yml`, so you can fix them in one edit and restart once.
 ---
 
 ## 4. Command-Line Tools
@@ -382,7 +446,7 @@ The mounted `conf` / `data` / `logs` / `ssl` data is not affected.
 If you really did mount the binary into a volume (so an update survives recreation), you can allow it explicitly:
 
 ```
-Menu path: System Settings -> System Config
+Menu path: System Settings -> Parameter Settings
 allow_container_selfupdate  Allow in-app update inside containers (0 = block, 1 = allow; blocked by default)
 ```
 

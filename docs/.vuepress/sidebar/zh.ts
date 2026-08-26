@@ -66,7 +66,6 @@ export const zhSidebar = sidebar({
                 "/guide/AccessConfig.md",
                 "/guide/AccessAccount.md",
                 "/guide/AccessSession.md",
-                "/guide/AccessAudit.md",
             ],
         },
         {
@@ -88,6 +87,7 @@ export const zhSidebar = sidebar({
                 "/guide/FileManage.md",
                 "/guide/IPLocation.md",
                 "/guide/SysLog.md",
+                "/guide/AccessAudit.md",
                 "/guide/SystemConfig.md",
                 "/guide/PrivateInfo.md",
                 "/guide/DataRetention.md",
@@ -95,6 +95,7 @@ export const zhSidebar = sidebar({
                 "/guide/AIDetection.md",
                 "/guide/AiAssistant.md",
                 "/guide/RuntimeInfo.md",
+                "/guide/UpgradeNotice.md",
                 "/guide/OneKeyMod.md",
                 "/guide/Task.md",
                 "/guide/SqlQuery.md",

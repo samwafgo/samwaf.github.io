@@ -45,7 +45,6 @@
 - [认证配置](./AccessConfig.md)
 - [访问账号](./AccessAccount.md)
 - [在线会话](./AccessSession.md)
-- [认证审计](./AccessAudit.md)
 
 ## 账号管理
 - [账号管理](./Account.md)
@@ -59,6 +58,7 @@
 - [文件管理](./FileManage.md)
 - [IP数据库管理](./IPLocation.md)
 - [系统日志](./SysLog.md)
+- [安全审计](./AccessAudit.md)
 - [系统配置](./SystemConfig.md)
 - [密钥管理](./PrivateInfo.md)
 - [数据留存](./DataRetention.md)

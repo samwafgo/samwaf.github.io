@@ -1,14 +1,27 @@
-# Access Audit
+# Security Audit
 
 ## 1 Overview
 
-The security event stream for [Access Authentication](./AccessConfig.md): who did what, when, from which IP, against which site, and whether it succeeded.
+SamWaf's **unified security audit stream**: all kinds of security events collected into one table — who did what, when, from which IP, against which site, and whether it succeeded. All security logs will eventually land here.
 
-Notice at the top of the page: **Security event stream for Access Authentication. Ticket replay and bad return address should never appear in normal operation - when they do, someone is crafting requests deliberately. Denied is high-frequency and throttled to one entry per IP+site per 5 minutes.**
+It currently covers two **categories** (filterable at the top of the page):
 
-<!-- Image: Access audit list page -->
+- **Access authentication**: sign-in, kick, ticket and unauthenticated-block events from [Access Authentication](./AccessConfig.md).
+- **Config change**: sensitive configuration operations, e.g. SSL certificate export to disk (see [SSL Certificate Management](./SSL.md)).
+
+::: tip Menu location
+This page is under **System Settings → Security Audit**.
+:::
+
+Notice at the top of the page: **Unified security audit stream; all security events land here. Currently covers Access Authentication (sign-in/kick/ticket anomalies/denied - ticket replay and bad return address mean someone is crafting requests; denied is throttled to one entry per IP+site per 5 min) and Config Changes (e.g. SSL certificate export to disk). Filter by category.**
+
+<!-- Image: Security audit list page -->
 
 ## 2 Event types
+
+Events fall into **Access authentication** and **Config change** categories. Filter by **Category** first, then by the specific **Event**.
+
+### 2.1 Access authentication
 
 | Event | Meaning | Attention |
 | --- | --- | --- |
@@ -30,9 +43,21 @@ Notice at the top of the page: **Security event stream for Access Authentication
 **Ticket replay** and **Bad return address** should not occur in normal use. Tickets are redeemed immediately after issuance, and return addresses are always signed by the WAF itself — seeing these events essentially means someone is crafting requests deliberately.
 :::
 
+### 2.2 Config change
+
+Records of sensitive configuration operations. This category is reserved for more sensitive operations in the future; it currently contains:
+
+| Event | Meaning | Attention |
+| --- | --- | --- |
+| SSL cert exported | Writing a certificate/key to a server file via "Certificate Export" in [SSL Certificate Management](./SSL.md) (both success and denial are recorded) | **Important** |
+
+::: tip
+Config-change events record the **operator, target path and result**, so you can trace "who exported which certificate, where and when". For safety they contain **no** certificate or private-key material.
+:::
+
 ## 3 Steps
 
-The top-right corner filters by **Event**, **Account**, **Source IP** and **Site**; set your criteria and click **Search**.
+The top-right corner filters by **Category** (Access auth / Config change), **Event**, **Account**, **Source IP** and **Site**; set your criteria and click **Search**.
 
 In the list:
 
@@ -64,6 +89,7 @@ The audit table records everything; notifications only carry what is worth inter
 
 | Field | Description |
 | --- | --- |
+| Category | Access auth / Config change |
 | Event | Event type, see [2](#_2-event-types) |
 | Result | Success / Failure |
 | Account | The related access account (may be empty for unauthenticated events) |
