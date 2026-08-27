@@ -1,4 +1,65 @@
 # Version Releases 
+## 20260827 (v1.3.24)
+
+Important Notes
+1. The default release package no longer bundles GeoLite2-Country.mmdb (the IPv6 geo database)
+2. The central-management feature has been removed
+
+Added
+- Per-site switch for outbound HTTP/2
+- Unified access authentication (Thanks to @xihefeng)
+- Host brute-force protection for remote access
+- CDN origin IP ranges
+- Threat intelligence IP subscription (Thanks to @ᴹʳXavier)
+- Wildcard resolution support in IP allowlist/blocklist (Thanks to @ᴹʳXavier)
+- IP groups, bindable to IP allowlists, IP blocklists, and custom rules (Thanks to @GodRuiAn @nickdlkk)
+- Scheduled batch import for IP groups (Thanks to @FiendFEARing)
+- Custom notification frequency and custom message templates (Thanks to @Sxsy2022)
+- Custom webhook notification channel (Thanks to @Firfr @chryuvski)
+- Website nickname column in the log list (Thanks to @1091198228)
+- Pop-up reminder at the bottom-right corner when logging in from a different IP
+- Run diagnostics for troubleshooting CPU/memory usage
+- Local CA certificate management for the console, merged with the console access configuration
+- Upgrade notes: important changes of the new version are shown in the product after upgrading
+- Dashboard cards with same-period-yesterday comparison and live QPS trend
+- Per-site response buffering switch
+- IP lookup
+- SSL certificate export
+
+Fixed
+- Skipping HTTPS certificate verification did not work when proxying HTTP to HTTPS (Thanks to @bbker @xiaoran0503)
+- IP list rules moved to another site left stale cache on the old site (Thanks to @ysn2382617094wsw @Tea-NT)
+- Priority between global rules and per-site rules did not take effect (Thanks to @GodRuiAn)
+- SQL query error in site overview statistics (Thanks to @EverEcho)
+- Log page preference and navigation issue (Thanks to @FiendFEARing)
+- Windows service upgrade failed to replace files automatically with an "access denied" message
+- Allowlist rule issue in unified access authentication (Thanks to @陈**)
+- HTTP3 did not take effect immediately after being enabled (Thanks to @Tutu20230712)
+- Duplicate system firewall entries from threat intelligence IPs (Thanks to @Exsilium)
+- HTTP-based certificate application failed in specific situations (Thanks to @Misty @seven_spades)
+- AI assistant replies not working, plus several usability improvements (Thanks to @诗华)
+- Version check timeout in fully intranet environments (Thanks to @TP)
+- Interrupted responses from large language model APIs (Thanks to @xingxingcan @legegeCoder)
+- Incomplete traffic byte statistics (Thanks to @chankey-7)
+- Custom blocking page content priority issue
+- Real IP source configuration was not saved
+
+Optimized
+- Host maintenance moved from the top navigation to the default left navigation (Thanks to @1091198228)
+- Clicking the version at the bottom-left corner now shows version details useful for feedback
+- Enhanced scanner detection (expanded fingerprints, case-insensitive User-Agent matching)
+- Threat intelligence IPs support a false-positive exclusion list
+- Detailed logs for SSL certificate application to ease troubleshooting
+- SSL expiry check can be configured whether to auto-sync host domains
+
+Security
+- Overall security hardening of the WAF and detection layers (Thanks to @Cha111Ng1 @0xkalawy @ZeyadZonkorany @B0YK4)
+- Overall security hardening of the console
+
+Thanks to the following contributors (in no particular order)
+
+@bbker, @xiaoran0503, @1091198228, @ysn2382617094wsw, @EverEcho, @FiendFEARing, @ᴹʳXavier, @GodRuiAn, @nickdlkk, @Tea-NT, @xihefeng, @Sxsy2022, @Firfr, @chryuvski, @诗华, @TP, @陈**, @Tutu20230712, @Exsilium, @Misty, @seven_spades, @xingxingcan, @legegeCoder, @chankey-7, @Cha111Ng1, @0xkalawy, @ZeyadZonkorany, @B0YK4
+
 ## 20260721 (v1.3.23)
 
 Fixed

@@ -95,6 +95,7 @@ export const zhSidebar = sidebar({
                 "/guide/AIDetection.md",
                 "/guide/AiAssistant.md",
                 "/guide/RuntimeInfo.md",
+                "/guide/RunDiagnostic.md",
                 "/guide/UpgradeNotice.md",
                 "/guide/OneKeyMod.md",
                 "/guide/Task.md",

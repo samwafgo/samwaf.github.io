@@ -66,6 +66,7 @@ Every feature page in the admin console carries a blue info bar that explains in
 - [AI Detection](./AIDetection.md)
 - [AI Assistant](./AiAssistant.md)
 - [Runtime Info](./RuntimeInfo.md)
+- [Run Diagnostic](./RunDiagnostic.md)
 - [One-Key Modify](./OneKeyMod.md)
 - [Task Management](./Task.md)
 - [SQL Query](./SqlQuery.md)

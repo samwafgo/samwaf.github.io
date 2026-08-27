@@ -1,4 +1,65 @@
 # 版本发布
+## 20260827 (v1.3.24)
+
+重要说明
+1. 默认发布包不再内置 GeoLite2-Country.mmdb（IPv6 地理库）
+2. 中心管理功能已移除
+
+新增
+- 网站可配置对外 HTTP/2 开关
+- 统一访问认证方式 感谢 @xihefeng
+- 防止主机远程爆破
+- CDN 回源 IP
+- 威胁情报 IP 订阅 感谢 @ᴹʳXavier
+- IP 黑白名单支持泛解析 感谢 @ᴹʳXavier
+- IP 组，可绑定 IP 白名单、IP 黑名单、自定义规则 感谢 @GodRuiAn @nickdlkk
+- 支持 IP 组定时批量导入 感谢 @FiendFEARing
+- 消息通知支持频率自定义、模板自定义 感谢 @Sxsy2022
+- 消息通知支持自定义 Webhook 感谢 @Firfr @chryuvski
+- 日志列表加上网站昵称列 感谢 @1091198228
+- 登录时右下角弹出不同 IP 登录提醒
+- 运行诊断功能，便于排查 CPU/内存占用情况
+- 管理端本地 CA 证书管理，并与管理端访问配置合并
+- 升级须知：升级后产品内提示该版本重要变更
+- 首页数据卡片支持较昨日同期对比与实时 QPS 趋势
+- 网站响应缓冲开关
+- IP 归属查询
+- SSL 证书导出
+
+修正
+- http 代理 https 时，跳过 HTTPS 证书验证不起作用 感谢 @bbker @xiaoran0503
+- IP 名单类规则移动到其它站点后，旧站点仍留有脏缓存的问题 感谢 @ysn2382617094wsw @Tea-NT
+- 解决全局规则、单站点规则优先级未生效的问题 感谢 @GodRuiAn
+- 网站综合统计 SQL 查询异常 感谢 @EverEcho
+- 日志界面偏好跳转问题 感谢 @FiendFEARing
+- Windows 服务升级无法自动替换文件、提示 access denied 的问题
+- 统一访问认证方式白名单规则问题 感谢 @陈**
+- HTTP3 开启后没有立即生效的问题 感谢 @Tutu20230712
+- 威胁情报 IP 系统防火墙重复问题 感谢 @Exsilium
+- HTTP 方式的证书申请特定情况下会报错 感谢 @Misty @seven_spades
+- AI 助手回复无效问题，并进行部分使用上优化 感谢 @诗华
+- 完全内网环境下版本检测超时的问题 感谢 @TP
+- 大模型接口返回时候中断问题 感谢 @xingxingcan @legegeCoder
+- 流量字节统计记录不完整问题 感谢 @chankey-7
+- 自定义拦截页面内容优先级问题
+- 真实 IP 来源配置未保存的问题
+
+优化
+- 主机维护从顶部导航改成默认左侧导航 感谢 @1091198228
+- 左下角版本点击后出现相关版本信息，可在反馈时候使用
+- 扫描器检测能力增强（扩充指纹、User-Agent 匹配不区分大小写）
+- 威胁情报 IP 支持误报排除清单
+- SSL 证书申请增加详细日志，便于排查
+- SSL 过期检测支持配置是否自动同步主机域名
+
+安全
+- WAF 层与检测层整体进行安全加固 感谢 @Cha111Ng1 @0xkalawy @ZeyadZonkorany @B0YK4
+- 管理端整体进行安全加固
+
+感谢以下贡献者（排名不分先后）
+
+@bbker, @xiaoran0503, @1091198228, @ysn2382617094wsw, @EverEcho, @FiendFEARing, @ᴹʳXavier, @GodRuiAn, @nickdlkk, @Tea-NT, @xihefeng, @Sxsy2022, @Firfr, @chryuvski, @诗华, @TP, @陈**, @Tutu20230712, @Exsilium, @Misty, @seven_spades, @xingxingcan, @legegeCoder, @chankey-7, @Cha111Ng1, @0xkalawy, @ZeyadZonkorany, @B0YK4
+
 ## 20260721 (v1.3.23)
 
 修正

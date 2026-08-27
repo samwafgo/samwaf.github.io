@@ -95,6 +95,7 @@ export const enSidebar = sidebar({
                 "/en/guide/AIDetection.md",
                 "/en/guide/AiAssistant.md",
                 "/en/guide/RuntimeInfo.md",
+                "/en/guide/RunDiagnostic.md",
                 "/en/guide/UpgradeNotice.md",
                 "/en/guide/OneKeyMod.md",
                 "/en/guide/Task.md",
