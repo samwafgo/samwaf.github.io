@@ -63,7 +63,7 @@ whole block is omitted rather than leaving a blank line.
 
 Write whatever fits: an email address, a phone number, a ticket URL or a sentence of
 explanation. Line breaks are preserved, 200 characters maximum. Visitors see
-"Contact admin: <your text>", with the label following the visitor's language.
+`Contact admin: <your text>`, with the label following the visitor's language.
 
 It works best together with the **Reference ID** at the bottom of the page: ask the visitor
 to quote that code, then filter the attack log by **Access reference** to see the rule,
