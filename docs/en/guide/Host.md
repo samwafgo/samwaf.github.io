@@ -60,9 +60,15 @@ Key configuration; set it up once for future use.
     
 	For example: www.baidu.com, pan.baidu.com
 	
-- Port:
-    - Enter the port of the website that needs protection.
-	http is 80 and https is 443. (If you have already installed Baota, Nginx, IIS, etc., you need to manually change the port to a non-80 or non-443 port.) [Modify and view common issues](../faq/readme.md#_1-端口80-被占用情况) 
+::: tip Form sections
+"Basic Content" is grouped into six sections: **Site / Listening & Protocol / HTTPS Certificate / Backend (Upstream) / Runtime / Notes**.
+The fields below follow that order. The top-right corner of the form lets you switch between vertical/horizontal tabs and toggle fullscreen.
+:::
+
+- Listen Ports:
+    - Declare each port this website listens on, together with the protocol that port speaks (HTTP or HTTPS). **The first row is the main port**; the rest are additional ports. Use "Add Port" to add a row and the delete button at the end of a row to remove one.
+	http is 80 and https is 443. (If you have already installed Baota, Nginx, IIS, etc., you need to manually change the port to a non-80 or non-443 port.) [Modify and view common issues](../faq/readme.md#_1-端口80-被占用情况)
+	- See [2.2 Listen Ports and Protocols](#_2-2-listen-ports-and-protocols) below.
 - Encryption Certificate:
     1. If it's https, you need to select an encryption certificate. The 80 port does not require one.
 	You need to click "Add New Certificate" to add a new certificate.
@@ -96,7 +102,65 @@ Key configuration; set it up once for future use.
      If SamWaf and the website are on the same server, fill in 127.0.0.1. If on different servers, please fill in the actual IP.	
 - Backend Port:
      Situation 1: If SamWaf and the website are on the same server, then the port needs to be changed to something like 81 or other ports. Situation 2: If they are on different servers, you can keep the original port.
-	
+
+### 2.2 Listen Ports and Protocols
+
+A port is a **machine-wide shared resource**: it has exactly one listener and speaks exactly one protocol.
+That is why the protocol is declared **per port** instead of being inferred from the "SSL Certificate" switch.
+
+<!-- Image: per-port protocol declaration -->
+
+**Steps**
+
+1. In the "Listening & Protocol" section, fill in the main port on the first row and pick its protocol (HTTP or HTTPS).
+2. Click "Add Port" for additional ports and pick a protocol for each of them.
+3. If any port is set to HTTPS, you must set "SSL Certificate" in the "HTTPS Certificate" section below to "SSL Certificate (upload required)" and configure the certificate, otherwise the form cannot be saved.
+4. If a port protocol conflicts with another website on the same machine, the form shows a **red inline message naming the conflicting site** and the save is rejected.
+
+**Field description**
+
+| Field | Description |
+| --- | --- |
+| Port | Listen port, 1–65535, up to 32 entries, no duplicates |
+| Protocol | Whether this port serves HTTP or HTTPS. **Port 80 may be HTTPS too**, it is your choice |
+| IP Version | Listens on both by default (IPv4+IPv6). Tick "Set IP version (default IPv4+IPv6)" to reveal this column and pick "IPv4 only" or "IPv6 only" |
+| Add port 80 (for certificate file validation) | Shown when the site has an HTTPS port and the main port is not 80; ticked by default, adds an `80:HTTP` row |
+
+::: warning IP version
+Before choosing "IPv6 only", make sure the machine really has an IPv6 address, otherwise that port cannot listen.
+A listen failure is reported in the system log and in the admin notifications.
+
+Unticking "Set IP version" resets every row back to IPv4+IPv6, so no invisible-but-effective setting is left behind.
+:::
+
+::: tip Why port 80 is added by default
+Certificate issuance and auto-renewal via HTTP file validation (http01) require the CA to reach port 80 of this site
+over **plain HTTP**, so an `80:HTTP` row is added by default for HTTPS sites.
+If you order certificates with DNS validation, you can untick it and skip port 80.
+
+Conversely, setting port 80 to HTTPS makes file validation impossible for both issuance and auto-renewal;
+the form shows an orange warning in that case.
+:::
+
+::: tip Relationship with "Force 80 redirect HTTPS"
+When "Force 80 redirect HTTPS" is enabled, the engine **occupies port 80 for the redirect** even if 80 is not listed
+in the port table. A note is shown in the port area.
+:::
+
+**Upgrade notes**
+
+When upgrading from an older version, sites with an empty port table keep **deriving the old way**, so behaviour is
+identical to before the upgrade and no action is required. A site switches to explicit declaration only after you
+edit and save its port area.
+
+**FAQ: the whole machine's port 80 turned into HTTPS**
+
+If a site used port 80 as its main port with SSL enabled, older versions turned the machine-wide port 80 into an HTTPS
+listener, so every other plaintext HTTP site — and plaintext CDN origin-pull — returned
+`400 Client sent an HTTP request to an HTTPS server`.
+Set that site's port 80 protocol explicitly to **HTTP** and save; the certificate configuration is kept as-is.
+Use "Port Overview" in the toolbar to confirm who occupies each port and with which protocol (see 9.1).
+
 ## 3 Load Balancing:
 Load balancing supports: Weighted Round Robin (WRR), IP Hash.
  
@@ -194,14 +258,23 @@ After opening the "Website Configuration" page, you can see the list of all prot
 | Batch Protection Switch | Changes the protection status of all sites at once; choose `Protected` or `Unprotected` (a second confirmation appears) |
 | Batch Copy Configuration | Copies selected configuration modules from a source site to multiple target sites (see 9.4) |
 | Batch Import Nginx Sites | Jumps to the "Batch Import Sites" tab of the "One-Key Modify" page to extract sites from an Nginx configuration in bulk and add them as protected hosts (see [One-Key Modify](./OneKeyMod.md)) |
+| Port Overview | Shows which websites occupy each port on this machine and with which protocol (see 9.6) |
 
 The top-right area supports filtering by **Website** and clicking **Search**; the website, main port, backend IP, backend port, and remarks columns also support in-column input filtering.
+
+Right below the toolbar there is a **group navigation bar** for filtering websites by group. Creating and maintaining groups also happens on that same row (see 9.5).
 
 <!-- Image: Website list -->
 
 ### 9.2 List Display
 
-Each row shows: Website (with nickname, SSL tag, bound multi-domains/multi-ports), Main Port, Stats, Status, Backend IP, Backend Port, Remarks, Create Time, and Operation.
+Each row shows: Website (with nickname, SSL tag, bound multi-domains/multi-ports), Listen Ports, **Group**, Stats, Status, Backend IP, Backend Port, Remarks, Create Time, and Operation.
+
+The **Listen Ports** column shows every port of the site as a "port·protocol" tag, e.g. `443·HTTPS`, `80·HTTP`.
+If the site declares a protocol different from another site on the same port, the tags turn red and a "Port conflict"
+marker is appended; hover it for guidance.
+
+The **Group** column shows the group tag of the website; clicking a tag filters the list down to that group. Websites without a group show "Ungrouped", and the global website shows `-`.
 
 The **Stats** column shows in real time: PV, UV, Blocked (today's attacks), Inbound/Outbound traffic, QPS, and Connections.
 
@@ -217,9 +290,23 @@ The **Status** column contains several switches and tags:
 
 ### 9.3 Row Actions
 
-The **Operation** column of each row provides: **Copy** (quickly create a new site based on this one; SSL and bindings are cleared), **Edit**, **Delete** (after deletion the site info and rules are cleared and cannot be recovered), and **SSL Auto Apply**.
+The **Operation** column shows the two most frequently used actions directly:
+
+| Action | Description |
+| --- | --- |
+| Edit | Opens the configuration form of this website |
+| Auto Cert | Short label for "SSL Auto Apply"; hover to see the full name |
+
+The remaining actions live under the **More** dropdown:
+
+| Action | Description |
+| --- | --- |
+| Copy | Quickly create a new site based on this one; SSL and bindings are cleared |
+| Delete | After deletion the site info and rules are cleared and **cannot be recovered** |
 
 > Note: The global website can only have its guard status configured — it cannot be copied, edited, deleted, or issued certificates.
+
+> Tip: When there are many columns the table scrolls horizontally. The **Operation column stays pinned to the right** and the selection column stays pinned to the left, so you never have to scroll to the end just to act on a row.
 
 ### 9.4 Batch Copy Configuration
 
@@ -231,6 +318,65 @@ After clicking **Batch Copy Configuration**:
 4. Click **One-Click Copy**. The dialog shows the copy progress and reports success on completion.
 
 <!-- Image: Batch copy config dialog -->
+
+### 9.5 Website Groups
+
+Once you have many websites, locating one by fuzzy domain search gets tedious and batch operations mean ticking rows one by one. **Website groups** let you classify sites by your own criteria (production / test / intranet, by customer, by data center, ...).
+
+> **A group is only an organizing and filtering dimension.** It does not apply any protection configuration to a website and does not affect how the WAF handles requests. Moving websites in and out of groups changes nothing about protection behavior.
+
+#### 9.5.1 Group Navigation Bar
+
+The row right below the toolbar is the group navigation, from left to right:
+
+| Item | Description |
+| --- | --- |
+| Group | Label |
+| All Sites *N* | No filter; shows every website (including the global website) |
+| Ungrouped *N* | Only websites that have not been assigned to a group |
+| Each group *N* | Click to filter by that group; the number is the site count in it |
+| + New Group | Creates a group |
+| Move to Group (*N*) | Moves the websites ticked in the list into a group; greyed out when nothing is selected |
+
+Switching groups automatically returns the list to **page 1**.
+
+#### 9.5.2 Creating and Maintaining Groups
+
+- **Create**: click "+ New Group", enter a group name (1-50 characters, must not duplicate an existing group), pick one of the 8 preset tag colors, and optionally add remarks.
+- **Maintain**: hover over a group to reveal `⋮`, which offers **Rename / Change Color**, **Move Left**, **Move Right** and **Delete**. Move Left/Right reorders the group on the navigation bar.
+- **Delete**: deleting a group **does not delete the websites**. They fall back to "Ungrouped" and their configuration and protection status are untouched. The confirmation tells you how many websites the group contains.
+
+#### 9.5.3 Assigning Websites to a Group
+
+Two ways:
+
+1. **One website**: on the "Basic" tab of the add/edit website form there is a **Group** select; leave it empty for ungrouped. The "+ New Group" link next to it creates a group in place and fills it in automatically.
+2. **In bulk**: tick websites in the list (leftmost selection column), then click "Move to Group" on the group navigation bar and pick a target group, or pick "Move out (Ungrouped)" to unassign them. Up to 500 websites per operation.
+
+> The global website does not take part in grouping; its checkbox is disabled, and the backend skips it even if it is included some other way.
+
+#### 9.5.4 FAQ
+
+- **The Group column shows "Unknown Group"**: the group referenced by that website no longer exists. The usual cause is importing website data (the `hosts` table) from another SamWaf instance without importing the group data as well. The list does not error out — just use "Move to Group" to reassign it.
+- **Groups are empty after upgrading**: expected. Groups are a new feature; after upgrading every website starts out "Ungrouped", which behaves exactly as before.
+
+### 9.6 Port Overview
+
+Click "Port Overview" in the toolbar to see how **every port on this machine** is currently occupied.
+A port is a machine-wide shared resource: one listener, one protocol — this table is the place to look when
+a port you configured does not behave as expected.
+
+<!-- Image: Port Overview -->
+
+| Column | Description |
+| --- | --- |
+| Port | Port number |
+| Active Listener | The protocol and IP version actually in effect on that port; shows "Not listening" when no listener is up |
+| Websites | All sites occupying the port, each tag showing the protocol it declared; the main port carries a "main" suffix and a port implicitly taken by "Force 80 redirect HTTPS" carries an "auto (HTTPS redirect)" suffix |
+| Status | "OK" / "Protocol conflict" / "Not listening"; conflicting rows are highlighted in red |
+
+A "Protocol conflict" means several sites declared different protocols on the same port; the **site loaded first**
+wins. Fix it by editing the sites to agree on one protocol, or by moving one of them to another port.
 
 ## 10 Built-in Engine Protection
 

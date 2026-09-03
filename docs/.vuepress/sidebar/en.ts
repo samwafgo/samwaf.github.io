@@ -16,6 +16,7 @@ export const enSidebar = sidebar({
                 "/en/guide/UrlBlack.md",
                 "/en/guide/Ldp.md",
                 "/en/guide/CC.md",
+                "/en/guide/HumanVerify.md",
                 "/en/guide/Sensitive.md",
                 "/en/guide/FirewallIPBlock.md",
                 "/en/guide/ThreatIP.md",
