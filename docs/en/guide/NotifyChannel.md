@@ -74,6 +74,10 @@ Picking a preset only fills the form. SamWaf never contacts these platforms on i
 
 The address where the receiving platform accepts messages. Only `http` / `https` is allowed, and the target must be a **public address** — private addresses such as `127.0.0.1` or `192.168.x.x` are rejected on save.
 
+::: tip Alerting platform hosted on your intranet?
+For self-hosted intranet platforms such as ntfy or Gotify, a server administrator can allow the target in `security.outbound_allowed_hosts` in `conf/config.yml` by host name, IP or CIDR (comma separated, e.g. `192.168.10.0/24,notify.intranet.lan`), then save the file and restart SamWaf. This file is not exposed through the console UI or API and can only be edited on the server itself.
+:::
+
 **3) Choose the method and content type**
 
 - **Method**: POST, PUT, PATCH, GET, DELETE. No request body is sent when GET is selected.
@@ -196,7 +200,7 @@ Each channel row has a status switch you can toggle to enable or disable it dire
 
 **Why is my Custom Webhook URL rejected as "not allowed"?**
 
-The webhook URL must use `http` / `https` and point to a **public address**. URLs pointing to `127.0.0.1`, `192.168.x.x`, `10.x.x.x` or redirecting to a private address are rejected.
+The webhook URL must use `http` / `https` and point to a **public address**. URLs pointing to `127.0.0.1`, `192.168.x.x`, `10.x.x.x` or redirecting to a private address are rejected. If you genuinely need to push to an intranet alerting platform, declare its host, IP or CIDR in `security.outbound_allowed_hosts` in `conf/config.yml` and restart.
 
 **Why does saving report that a variable does not exist?**
 
