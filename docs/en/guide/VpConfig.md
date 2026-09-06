@@ -204,15 +204,43 @@ Comma-separated request headers by priority, e.g. `X-Forwarded-For,X-Real-IP,CF-
 Only when the management request's direct source is a trusted proxy does SamWaf trust the real client IP from the header above; otherwise it falls back to the network-layer IP, preventing spoofing. **Trusted proxy = ① referenced CDN origin ranges ∪ ② manual CIDRs**, combined (a hit in either is trusted):
 
 - **① Reference CDN**: if the console is also behind a CDN, selecting a vendor auto-trusts its origin ranges (reads the latest central value, auto-updated, no manual entry). Ranges are managed on the [CDN Origin IPs](./CDNIP.md) page; once selected, the vendor's central-store downloaded count is shown here.
-- **② Manual Trusted Proxies**: for cases the CDN central store can't cover (e.g. a self-hosted Nginx / internal load balancer behind the CDN). CIDR or IP, comma-separated, e.g. `10.0.0.0/8,192.168.0.0/16`. **Empty = no manual entry** (the referenced CDN vendor above still applies).
+- **② Manual Trusted Proxies**: for cases the CDN central store can't cover (e.g. a self-hosted Nginx / internal load balancer behind the CDN). CIDR or IP, comma-separated, e.g. `10.0.0.0/8,192.168.0.0/16`. **Empty = no manual entry** (the referenced CDN vendor above still applies). You can also use the keyword `private`, which is equivalent to `10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.0/8,::1,fc00::/7` and may be mixed with specific ranges.
 
-When using only one, leave the other empty.
+Leave the other one empty if you only need one of them.
 
 ::: warning
-The manual CIDRs are stored in `conf/config.yml`. If this locks you out via the IP whitelist, edit the file and restart to recover.
+Manual ranges are stored in `conf/config.yml`. If this locks you out through the IP whitelist, edit that file and restart to recover.
 :::
 
 <!-- Image: Management trusted proxies (proxy-header switch + Reference CDN + manual CIDRs) -->
+
+### 6.3 What to enter for common deployments
+
+| Deployment | Proxy header | Manual trusted proxies |
+|---|---|---|
+| Console exposed directly, no proxy in front | empty (master switch off) | not needed |
+| Docker / K8s (host port mapped into the container) | whatever the upstream actually sets | `private` |
+| Self-hosted Nginx (same machine or same intranet) | `X-Forwarded-For` or `X-Real-IP` | the Nginx address, e.g. `10.0.0.5`; `private` works on an intranet |
+| Behind a CDN (Cloudflare etc.) | that vendor's real IP header, e.g. `CF-Connecting-IP` | leave empty, use ① Reference CDN instead |
+| A self-hosted Nginx behind a CDN | the header written by the hop closest to the console | the Nginx address (use ① and ② together) |
+
+::: danger Do not enter `0.0.0.0/0`
+Ranges that cover everything (`0.0.0.0/0`, `::/0`, and splitting the internet in two with `0.0.0.0/1` + `128.0.0.0/1`) **cannot tell which address in a proxy header is the client** - the range contains the real client as well, so there is no way to separate "this is a proxy hop" from "this is the client".
+
+With such a configuration SamWaf does not honour the proxy header and identifies the client by the network-layer address instead (the gateway address in a container, so every visit looks like it comes from the same IP, which also costs the IP allowlist and the login failure lockout their ability to tell anyone apart). The page marks it in red and the startup log carries a warning.
+
+**What to do instead**: enter the upstream proxy's own address, or simply `private` for container and intranet deployments.
+:::
+
+### 6.4 Check this request
+
+With the master switch on, the card offers a **Check this request** button for verifying that the configuration behaves as intended. It shows how the current request was resolved:
+
+- **Direct peer**: the address seen at the TCP layer, whether it counts as a trusted proxy, and which entry it matched (`cidr:10.0.0.0/8` / `private:...` / `ip:...` / `cdn:cloudflare`)
+- **Per-hop verdict**: the raw value of each configured header and whether each address in it is a trusted proxy or not
+- The **resolved** client IP and the **reason** behind it
+
+Click it right after saving a change - quicker than digging through the log. It only echoes information about your own request, takes no parameters, and is visible to **system administrators** only.
 
 ## 7 CORS Allow Origins
 
