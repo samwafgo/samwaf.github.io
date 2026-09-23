@@ -129,7 +129,88 @@ For webhooks, monitoring and other **machine callers** that cannot sign in:
 
 Leaving the field empty **keeps existing tokens**; entering a single dash `-` **clears them all**.
 
-### 4.5 Unauthenticated behavior
+### 4.5 Cross-origin access (CORS)
+
+**You only need this section when the page and the API live on different origins. Skip it for same-origin deployments.**
+
+An "origin" is **scheme + host + port** together, so a single difference makes it cross-origin.
+A page on `http://oa.example.com:7013` calling an API on `http://oa.example.com:7014` is cross-origin
+even though the domain is the same, because the port differs.
+
+#### What you will see
+
+With Access enabled, cross-origin calls to a protected API usually fail in one of two ways:
+
+1. The browser console reports `No 'Access-Control-Allow-Origin' header is present` and the front end gets nothing back;
+2. Requests with a custom header, or with `Content-Type: application/json`, fail **entirely**, while a plain GET still works.
+
+The reason: an unauthenticated request is stopped by the gateway **before** it reaches the backend,
+so the backend never gets a chance to send its own CORS headers. And before sending those richer requests
+the browser first sends a **preflight**, which by specification carries no credentials at all - so the gateway stops that too.
+
+#### How to configure it
+
+Under **Allowed origins**, list the page origins that are allowed to call this service, one per line
+(include the scheme, and mind the port):
+
+```
+https://app.example.com
+https://admin.example.com:8443
+```
+
+Once saved:
+
+- unauthenticated responses carry CORS headers, so the front end can read the status code and the `login_url`
+  and decide whether to prompt or redirect;
+- preflight requests are answered by SamWaf directly instead of being forwarded to the backend.
+
+The other three fields can usually stay empty: **Allowed methods** falls back to the common verbs,
+**Allowed request headers** falls back to whatever the preflight asks for, and **Preflight cache** defaults to 600 seconds.
+
+#### Three prerequisites you must know
+
+::: warning The front end must send withCredentials
+Browsers do **not** attach cookies to cross-origin XHR / fetch by default.
+Without this flag the request arrives at the gateway anonymously and stays unauthenticated no matter
+what you put on the allow list - the server cannot make up for a credential that was never sent.
+
+```js
+// native fetch
+fetch(url, { credentials: 'include' });
+// jQuery
+$.ajax({ url, xhrFields: { withCredentials: true } });
+```
+:::
+
+::: warning Same-site only
+Different ports on the same domain and different subdomains of the same parent domain are supported.
+A genuinely cross-site call (`a.com` calling `b.com`) is blocked by the cookie SameSite rules -
+the credential never leaves the browser, so configuring the allow list changes nothing.
+Use the same-origin approach below for that case.
+:::
+
+::: warning The user must have visited the API site once first
+Sign-in state is stored **per site**. Being signed in on the page's site does not mean the API site has it too.
+Opening the API site in the browser completes that step automatically (no second password prompt when an
+authentication center is configured), but XHR cannot do it - it does not follow redirects and only sees
+the unauthenticated response.
+
+So the front end should read `login_url` out of the 401 and **send the user through it once**.
+Without that, users experience "half the calls fail right after signing in, then a manual refresh fixes it".
+:::
+
+#### The simpler alternative: make it same-origin
+
+If you can change the API base URL in the front end, **removing the cross-origin situation is usually better**:
+
+add a [path rule](./Host.md#_15-path-route-rules) on the page's site that forwards `/api/` to the API service,
+and have the front end call the relative path `/api/...`.
+
+Nothing in this section needs to be configured, `withCredentials` is not required, there is no preflight
+overhead, and none of the three limitations above apply. The API stays fully protected and the backend
+still receives the visitor identity.
+
+### 4.6 Unauthenticated behavior
 
 | Field | Description |
 | --- | --- |
@@ -143,6 +224,9 @@ WebSocket always gets 401 regardless of this setting, because it does not follow
 ## 5 Per-site exceptions
 
 Each site can override the behavior on the **Access Auth** tab of [Sites](./Host.md#_16-access-authentication-per-site): **Inherit global / Force on / Force off**, plus its own bypass paths, bypass IP group, two-step verification and unauthenticated response.
+
+Cross-origin settings can be overridden per site as well: leave them empty to inherit the global values,
+or enter a single dash `-` to allow no cross-origin access on that site at all.
 
 ## 6 Notifications
 
@@ -195,6 +279,10 @@ A misconfiguration can lock down every site. Know the recovery paths before enab
 | Bind to device fingerprint | Whether a session dies when the browser changes |
 | Service token header | Header name used by machine callers |
 | Service tokens | Plaintext tokens (one per line), stored as SHA256; empty keeps, `-` clears |
+| Allowed origins | Page origins allowed to call this service cross-origin, one per line; empty means cross-origin support is off |
+| Allowed methods | Methods allowed when answering a cross-origin preflight; empty falls back to the common verbs |
+| Allowed request headers | Request headers allowed when answering a preflight; empty allows whatever the preflight asks for |
+| Preflight cache | Seconds a browser may cache a preflight result; empty means 600, capped at 7200 |
 | Unauthenticated response | Auto / Always redirect / Always 401 |
 | Pass identity to backend | Whether to add `X-SamWaf-Access-User` when forwarding |
 
@@ -207,6 +295,10 @@ A misconfiguration can lock down every site. Know the recovery paths before enab
 - **Sign-in succeeds but immediately asks again.** Check whether a plain HTTP site has **Cookie Secure flag** set to Always on — browsers will not store a Secure cookie over HTTP, so the signed-in state never sticks. Switch back to Auto.
 
 - **Certificate renewal started failing.** Make sure `/.well-known/acme-challenge/` is reachable. That path is always allowed and needs no bypass entry; if you set the **auth path prefix** to something overlapping it, the save is rejected.
+
+- **The front end is full of CORS errors now that Access is on.** The page and the API are on different origins (any difference in scheme, host or port counts). See [4.5 Cross-origin access](#_4-5-cross-origin-access-cors); the simplest fix is a path rule that puts the API under the same site as the page.
+
+- **I added the origin to the allow list but the API still says unauthenticated.** Check that the front end sends `withCredentials`. Cross-origin requests carry no cookies by default - that is a browser rule the server cannot work around. Also make sure the user has signed in on the **API's** site, not just the page's site.
 
 - **How is this different from a site's [Site Password](./HttpAuthBase.md)?** Site Password is **per site** — accounts belong to the site and you sign in again on the next site. Access Authentication is **global** — sign in once, reach every site. Both can coexist; Access Authentication runs first.
 

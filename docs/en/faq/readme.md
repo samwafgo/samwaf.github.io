@@ -140,6 +140,45 @@ SamWaf64.exe resetotp
 
 ---
 
+### 2.5 Bounced back to the login page a second or two after signing in (when using Redis)
+
+First check which cache backend `conf/config.yml` uses:
+
+```
+cache:
+    type: redis      # the default is memory
+```
+
+If it is `redis` and you are on v1.3.24 or earlier, a failed cache read and "the token is not there" produce the
+same result in the console, so one read timeout or connection-pool wait is treated as an expired session - which
+looks like being bounced back to the login page right after signing in. From v1.3.25 the two are separate: only a
+genuinely missing token asks for a new login, while an unavailable cache backend reports "service temporarily
+unavailable" and keeps the session.
+
+**Workaround without upgrading**: set `cache.type` back to `memory` and restart. The console cache is
+single-node by nature, so switching to memory loses no functionality and requires no database change.
+
+**Settings worth tuning if you stay on Redis**:
+
+```
+cache:
+    redis:
+        pool_size: 0              # 0 = scale with CPU count (recommended); do not pin a small value on many-core hosts
+        pool_timeout_seconds: 0   # 0 = library default
+        op_timeout_seconds: 0     # 0 = default (5 seconds per operation)
+```
+
+When troubleshooting, this startup log line tells you which backend is actually in use (log messages are not localised):
+
+```
+INFO  缓存后端: redis 127.0.0.1:6379 db=0 pool=80
+```
+
+Failed cache reads are written to the log as well (the token itself is never printed) and are included in the
+package exported from System Management -> Run Diagnostics.
+
+---
+
 ## 3. Admin Console Configuration
 
 ### 3.1 Change the Management Port

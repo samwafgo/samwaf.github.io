@@ -734,7 +734,21 @@ Sources matching this [IP Group](./IPGroup.md) are let through without signing i
 WebSocket always gets 401 regardless, since it does not follow redirects.
 :::
 
-### 16.6 Risk when web caching is also enabled
+### 16.6 Cross-origin access (CORS)
+
+Only needed when the page and this site's API are on different origins. Leaving all four fields empty
+**inherits the global configuration**; entering a single dash `-` under "Allowed origins" means this site
+**allows no cross-origin access at all** (and does not inherit the global list).
+
+See [Authentication Settings - Cross-origin access](./AccessConfig.md#_4-5-cross-origin-access-cors)
+for the full explanation, the limitations, and a simpler alternative.
+
+::: warning
+An allow list on its own is not enough: the front end must send `withCredentials` for a cross-origin
+request to carry the sign-in state.
+:::
+
+### 16.7 Risk when web caching is also enabled
 
 If [web caching](./CacheRule.md) is enabled on the same site, a red warning appears at the bottom of the tab:
 
@@ -744,7 +758,7 @@ If [web caching](./CacheRule.md) is enabled on the same site, a red warning appe
 Access Authentication keeps **unauthenticated** visitors out, but it does not prevent cache bleed **between signed-in users**. When protecting private content, disable web caching on that site or restrict cache rules to static assets.
 :::
 
-### 16.7 Field reference
+### 16.8 Field reference
 
 | Field | Description |
 | --- | --- |
@@ -753,3 +767,7 @@ Access Authentication keeps **unauthenticated** visitors out, but it does not pr
 | Bypass IP group | IP group let through on this site |
 | Two-step verification | Inherit global / Force / Exempt |
 | Unauthenticated response | Inherit global / Auto / Always redirect / Always 401 |
+| Allowed origins | Cross-origin page origins allowed on this site, one per line; empty inherits the global list, `-` blocks cross-origin here |
+| Allowed methods | Methods allowed when answering a preflight; empty inherits the global value |
+| Allowed request headers | Request headers allowed when answering a preflight; empty inherits the global value |
+| Preflight cache | Seconds a browser may cache a preflight result; empty or 0 inherits the global value, capped at 7200 |
