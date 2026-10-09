@@ -133,6 +133,10 @@ The API Docs page embeds the online Swagger API documentation at [https://doc.sa
 - **Authentication**: Carry `X-API-Key` in the HTTP header of each request. No login token required.
 - **Header Value**: The value obtained after creating a key on the **API Key Management** page.
 
+::: tip Look up endpoints by scenario
+For ready-to-run curl examples organized by integration scenario (e.g. "query / unblock banned IPs"), see the [OpenAPI Cookbook](../dev/openapi-cookbook.md) in the developer manual — new scenarios are added over time.
+:::
+
 ## 5 FAQ
 
 **Q: Why does the API Docs page say "Open Platform is not enabled"?**

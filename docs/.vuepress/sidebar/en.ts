@@ -34,6 +34,7 @@ export const enSidebar = sidebar({
             collapsible: true,
             children: [
                 "/en/guide/Analysis.md",
+                "/en/guide/SourcePathAnalysis.md",
                 "/en/guide/Spider.md",
             ],
         },
@@ -144,6 +145,10 @@ export const enSidebar = sidebar({
         {
             text: "Dev Manual",
             link: "/en/dev/readme.md",
+        },
+        {
+            text: "OpenAPI Cookbook",
+            link: "/en/dev/openapi-cookbook.md",
         },
     ],
     "/en/api/": [

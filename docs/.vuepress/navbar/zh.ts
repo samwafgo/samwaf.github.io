@@ -25,4 +25,8 @@ export const zhNavbar = navbar([
 			text: 'API文档',
 			link: '/api/',
 	},
+	{
+			text: '支持一下 ❤️',
+			link: '/donate.html',
+	},
 ]);

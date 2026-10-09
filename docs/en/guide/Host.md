@@ -201,7 +201,37 @@ Enter one URL per line.
 
 Matching is by **prefix**: if the request URL starts with any of these lines, that visit is not written to the log. Blank lines are ignored (an extra newline will not silently stop the whole site from being logged).
 
-### 5.2 Access Timeout Settings  
+### 5.2 Exclude IPs When Logging
+
+One entry per line, or comma-separated.
+
+Skips logging by **source IP**, a separate dimension from the URL exclusion above; the two are unioned.
+Four notations plus one reference are supported:
+
+| Notation | Example |
+|----------|---------|
+| Single IP | `203.0.113.7` |
+| CIDR | `10.0.0.0/8` |
+| Wildcard | `192.168.1.*` |
+| Range | `10.0.0.1-10.0.0.50` |
+| IP group reference | `group:office` (group codes come from [IP Group](./IPGroup.md); changing the contents of the group takes effect immediately for every site naming it) |
+
+Lines starting with `#` are comments. A malformed pattern is rejected when you save and the offending line is named,
+never silently ignored. Saving is enough - no restart needed.
+
+::: warning Only plain requests are silenced
+**Security events** from an excluded IP (rule hits, blocks) are still recorded - an office exit is often one
+NAT-shared address, and silencing it outright would make a real attack invisible.
+
+Excluded requests write no log row, are not counted in request statistics and never reach the Source & Path Analysis
+rollups, while their inbound and outbound bytes are still metered, so they remain visible on the traffic charts.
+:::
+
+Besides this per-site list there is a **global list** in Log Settings on the Access Log page (see
+[Visit Log](./VisitLog.md)); addresses that are global by nature, such as an office exit or a monitoring probe,
+are easier to maintain there.
+
+### 5.3 Access Timeout Settings  
 
 Supported since v1.3.9-beta.13, Default is 60 seconds. Unit: seconds. If set to 0, there is no limit.  
 

@@ -28,6 +28,7 @@ Every feature page in the admin console carries a blue info bar that explains in
 
 ## Data Analysis
 - [Access Analytics](./Analysis.md)
+- [Source & Path Analysis](./SourcePathAnalysis.md)
 - [Spider Identification](./Spider.md)
 
 ## Protection Logs

@@ -28,6 +28,7 @@
 
 ## 数据分析
 - [访问分析](./Analysis.md)
+- [来源与路径分析](./SourcePathAnalysis.md)
 - [蜘蛛识别](./Spider.md)
 
 ## 防护日志

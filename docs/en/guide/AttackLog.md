@@ -24,6 +24,9 @@ IPs in the list are clickable — one click opens **IP Lookup**, which checks th
 ### 2. View Access Details for an IP
 
 - Click **Details** on a row to open the "Access IP Details" for that IP, listing the specific access/defense log records for that source IP, so you can analyze request content one by one.
+- The details offer two views, **All Activity** and **Security Events**. It opens on Security Events (the requests from
+  that IP which hit a rule, with full payloads); switch to All Activity to see **every** request from that IP,
+  including those that matched no rule, when you need to work out what it is actually doing.
 
 ### 3. Add an IP to the Block List
 
@@ -36,17 +39,36 @@ IPs in the list are clickable — one click opens **IP Lookup**, which checks th
   - **Also Delete Logs**: deletes the tag and all related attack logs (slow for large datasets and not recoverable — use with caution).
 - Click **Batch Delete** to select multiple rule tags at once; both delete modes above are supported.
 
+### 5. Add to the Watchlist (full capture)
+
+An ordinary request keeps only a narrow row and no payload, so reviewing "what else did this IP touch before it got
+blocked" afterwards often finds no payload to look at. That is what the watchlist is for:
+
+1. Click **Watch** on a row.
+2. Confirm the IP in the dialog, then set **Days** (1-30, 7 by default) and a **Reason** (optional, e.g. "triggered the SQL injection rule").
+3. Once confirmed, **every** request from that IP is captured with its full payload for the watch period, which then expires by itself.
+
+### 6. Manage the Watchlist
+
+- Click **Watchlist** in the toolbar to open the management dialog, listing the IPs on the watchlist with their expiry time and reason.
+- Click **Remove** to end the observation of an IP early.
+
+::: warning Watching has a cost
+Every request from a watched IP stores a full payload, so a watched IP with heavy traffic takes noticeable space.
+Watch only genuinely suspicious IPs and only for a short while - it is not meant to be left on permanently.
+:::
+
 ## Field Reference
 
 | Field | Description |
 |-------|-------------|
 | IP | The source IP that triggered the rule; an "Add to Block List" button sits next to it. |
 | Blocked Count | Number of requests from this IP that were blocked by the WAF. |
-| Allowed Count | Number of requests from this IP that were allowed. |
+| Allowed Count | Number of requests from this IP that were allowed, taken from statistics data (a "normal" tag is no longer generated per IP, which keeps the tag list clean). |
 | First Access Time | The first time this IP appeared. |
 | Latest Access Time | The most recent time this IP appeared. |
 | Triggered Rule Set | The set of all rule tags this IP has hit. |
-| Operation | Click "Details" to drill into the access details for this IP. |
+| Operation | **Details**: drill into the access details for this IP. **Watch**: add the IP to the watchlist for full capture. |
 
 > The "Triggered Rule" tags at the top come from the rule-hit tag set recorded by the system; AI Intelligent Detection hits also appear among the rule tags in the form `AI Detection:<category>`.
 
@@ -54,3 +76,6 @@ IPs in the list are clickable — one click opens **IP Lookup**, which checks th
 
 - **Why aggregate by IP instead of per request?** The Risk Log focuses on "who is attacking and which rules were triggered", and aggregating by IP makes triage faster; to see per-request content, click "Details" to enter the access details.
 - **Does deleting a tag delete the logs?** It depends on the mode you choose. "Tag Only" leaves the raw logs untouched; only "Also Delete Logs" removes the related attack logs, and that is not recoverable.
+- **Why is the "normal" tag gone?** A "normal" tag is no longer recorded per IP, which would grow the tag table with every visitor. Allowed counts come from statistics data instead, and the pass ranking on the dashboard is unaffected.
+- **When should I use the watchlist?** When an IP looks suspicious but the existing logs are not enough to judge. During the watch period all of its requests, ordinary ones included, are captured with payloads - remember to remove it when you are done.
+- **Where do I read what the watchlist captured?** In the **All Activity** view under Details; the payloads sit in each record's detail.

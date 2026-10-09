@@ -133,6 +133,10 @@ curl -H "X-API-Key: 你的API_Key" https://host:port/{安全码}/api/v1/...
 - **认证方式**：在每次请求的 HTTP Header 中携带 `X-API-Key` 即可完成鉴权，无需 Token 登录。
 - **Header 值**：在「密钥管理」页面创建密钥后获得的值。
 
+::: tip 按场景查接口
+常见对接场景（如「查询/解除被封的 IP」）的可运行 curl 示例，见开发手册的 [开放平台 API 场景手册](../dev/openapi-cookbook.md)，会持续补充新场景。
+:::
+
 ## 5 常见问题
 
 **Q：为什么接口文档页面提示「开放平台未启用」？**

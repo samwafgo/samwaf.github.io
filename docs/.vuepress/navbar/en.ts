@@ -25,4 +25,8 @@ export const enNavbar = navbar([
 			text: 'API Docs',
 			link: '/en/api/',
 	},
+	{
+			text: 'Support Us ❤️',
+			link: '/en/donate.html',
+	},
 ]);

@@ -34,6 +34,7 @@ export const zhSidebar = sidebar({
             collapsible: true,
             children: [
                 "/guide/Analysis.md",
+                "/guide/SourcePathAnalysis.md",
                 "/guide/Spider.md",
             ],
         },
@@ -144,6 +145,10 @@ export const zhSidebar = sidebar({
         {
             text: "开发手册",
             link: "/dev/readme.md",
+        },
+        {
+            text: "开放平台API场景手册",
+            link: "/dev/openapi-cookbook.md",
         },
     ],
 });
