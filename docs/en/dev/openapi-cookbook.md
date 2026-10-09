@@ -165,18 +165,7 @@ curl -X POST "http://127.0.0.1:26666/api/v1/hostguard/ban/release" \
 - **Temporary bans expire on their own**: failure bans and CC bans carry a TTL; the manual endpoint is for when you cannot wait.
 - **Blocked ≠ banned**: an IP showing 403s in the attack log is not necessarily blacklisted — if no ban record exists, there is nothing to unblock.
 
-## 4 Scenario 3: One-Click Verification Script
-
-The repo ships a zero-dependency Python script `SamWafTechDoc/Tool/openapicheck/openapi_verify.py` that automatically: temporarily enables the open platform → creates a temporary key → runs all four queries → exercises a block/unblock cycle → checks that a bad key is rejected → cleans up, printing a per-item report:
-
-```bash
-python openapi_verify.py --password <admin-password>
-# Custom instance: python openapi_verify.py --password xxx --admin http://192.168.1.10:26666
-```
-
-Each run leaves a timestamped log under `logs/` next to the script; passwords and keys are never written in full. Useful for release regression or integrator self-service troubleshooting.
-
-## 5 Maintainer Notes: Adding a New Scenario
+## 4 Maintainer Notes: Adding a New Scenario
 
 1. Add one row to the scenario index (name / anchor / main endpoints).
 2. Add a section following the existing layout: one-line summary → curl example → key parameters / response example → caveats.
