@@ -19,11 +19,15 @@ If SamWaf has helped you, consider buying the author a coffee ☕. Your support 
 
 <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin: 30px 0;">
   <div style="text-align: center;">
-    <img src="/images/donate_weixin.jpg" alt="Donate via WeChat" width="260" />
+    <div style="width: 260px; height: 260px; display: flex; align-items: center; justify-content: center; border: 1px solid #eaecef; border-radius: 8px; padding: 10px; box-sizing: border-box; background: #fff;">
+      <img src="/images/donate_weixin.jpg" alt="Donate via WeChat" style="max-width: 100%; max-height: 100%; margin: 0;" />
+    </div>
     <p><strong>WeChat</strong></p>
   </div>
   <div style="text-align: center;">
-    <img src="/images/donate_alipay.png" alt="Donate via Alipay" width="260" />
+    <div style="width: 260px; height: 260px; display: flex; align-items: center; justify-content: center; border: 1px solid #eaecef; border-radius: 8px; padding: 10px; box-sizing: border-box; background: #fff;">
+      <img src="/images/donate_alipay.png" alt="Donate via Alipay" style="max-width: 100%; max-height: 100%; margin: 0;" />
+    </div>
     <p><strong>Alipay</strong></p>
   </div>
 </div>

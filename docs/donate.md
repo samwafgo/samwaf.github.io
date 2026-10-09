@@ -19,11 +19,15 @@ SamWaf 是一款完全开源、免费使用的网站应用防火墙，所有代�
 
 <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin: 30px 0;">
   <div style="text-align: center;">
-    <img src="/images/donate_weixin.jpg" alt="微信捐赠" width="260" />
+    <div style="width: 260px; height: 260px; display: flex; align-items: center; justify-content: center; border: 1px solid #eaecef; border-radius: 8px; padding: 10px; box-sizing: border-box; background: #fff;">
+      <img src="/images/donate_weixin.jpg" alt="微信捐赠" style="max-width: 100%; max-height: 100%; margin: 0;" />
+    </div>
     <p><strong>微信</strong></p>
   </div>
   <div style="text-align: center;">
-    <img src="/images/donate_alipay.png" alt="支付宝捐赠" width="260" />
+    <div style="width: 260px; height: 260px; display: flex; align-items: center; justify-content: center; border: 1px solid #eaecef; border-radius: 8px; padding: 10px; box-sizing: border-box; background: #fff;">
+      <img src="/images/donate_alipay.png" alt="支付宝捐赠" style="max-width: 100%; max-height: 100%; margin: 0;" />
+    </div>
     <p><strong>支付宝</strong></p>
   </div>
 </div>
