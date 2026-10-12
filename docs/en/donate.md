@@ -13,9 +13,12 @@ SamWaf is a completely open-source and free web application firewall. All code i
 
 If SamWaf has helped you, consider buying the author a coffee ☕. Your support goes toward:
 
-- Infrastructure costs: servers, domains, documentation site and update sources
+- Infrastructure costs: servers, domains and update sources
 - Test devices and compatibility verification
+- Subscription and usage costs for AI-assisted development tools
 - Ongoing feature development and maintenance
+
+Every contribution is also a source of encouragement, helping the author stay motivated to keep developing and maintaining SamWaf.
 
 <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin: 30px 0;">
   <div style="text-align: center;">

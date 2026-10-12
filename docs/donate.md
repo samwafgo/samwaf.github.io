@@ -13,9 +13,12 @@ SamWaf 是一款完全开源、免费使用的网站应用防火墙，所有代�
 
 如果 SamWaf 帮到了你，欢迎请作者喝杯咖啡 ☕。你的支持将用于：
 
-- 服务器、域名、文档站与升级源等基础设施开销
+- 服务器、域名与升级源等基础设施开销
 - 测试设备与兼容性验证成本
+- AI 辅助开发工具的订阅与使用费用
 - 持续的功能迭代与维护投入
+
+每一份支持也是一份鼓励，让作者更有动力持续开发和维护 SamWaf。
 
 <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin: 30px 0;">
   <div style="text-align: center;">
