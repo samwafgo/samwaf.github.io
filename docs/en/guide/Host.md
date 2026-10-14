@@ -258,21 +258,62 @@ Multiple domains can be supported, one per line. Wildcard domains are also suppo
 ![Bind Multiple Domains Simultaneously](/images/bind_more_domain.png) 
 
 ## 8. Health Check
-The system performs health checks every 5 seconds. Invalid connections will be removed when load balancing is configured.
+
+When enabled, scheduled health checks run every 5 seconds and update backend health using consecutive failure/success thresholds. With load balancing enabled, unhealthy backends are excluded and used again after recovery. The **Health Check** tab in the website editor lets you configure these checks and diagnose origin responses before saving.
 
 ### 8.1 Custom Configuration
+
 ![Custom Configuration](/images/healthy_config.png)
 
-- Enable Health Check (manually configurable)
-- Detection Methods: GET/HEAD (confirm backend supports HEAD)
-- Check Path: Default root directory /
-- Expected Status Code: 200 (customizable HTTP response codes)
-- Response Timeout: 5 seconds
-- Consecutive Failure Threshold: 3
-- Consecutive Success Threshold: 3
+| Field | Description |
+| --- | --- |
+| Enable Health Check | Enables/disables scheduled checks. You can still edit the conditions and run a manual test when off. |
+| Check Method | GET / HEAD; default GET. Confirm that the backend supports HEAD before using it. |
+| Check Path | Default `/`; an empty value also checks `/`. Use a site-relative path starting with `/`; query parameters are allowed. Maximum 2048 bytes; full URLs, addresses starting with `//`, fragments and control characters are rejected. |
+| Expected Status Codes | Default `200,`. Separate multiple HTTP codes with commas; a trailing comma is allowed. Codes must be 100–599 and the list must not exceed 512 bytes. Empty uses `200,201,202,203,204,301,302,303,307,308`. |
+| Response Timeout | Default 5 seconds. Manual tests accept an integer from 1 to 120 seconds. |
+| Consecutive Failures | Default 3, range 1–10. Scheduled checks accumulate these failures before changing runtime health. |
+| Consecutive Successes | Default 3, range 1–10. Scheduled checks accumulate these successes to restore health. |
 
 ### 8.2 Health Status Display
+
 ![Status Display](/images/healthy_loadbalance.png)
+
+Health status in the website list and load balancing comes from scheduled checks. A manual test's result describes one request and does not represent runtime health status.
+
+### 8.3 Test Health Check Before Saving
+
+1. Edit the website, open **Health Check**, and set the method, path, expected status codes and timeout.
+2. Confirm that the current backend domain, IP and port on the **Basic Content** tab describe the intended target.
+3. Click **Test Health Check** without saving first. The button shows a loading state and prevents repeated clicks while testing.
+4. Review the completed count and each backend's result. Use the dial address, check URL, request Host, expected/actual status codes, elapsed time and reason to diagnose the response.
+
+<!-- Image: manual health test button, progress and per-backend results -->
+
+A **single origin** uses the current form's origin settings. **Load balancing** uses the saved backend list for this website together with the current form's origin settings. Larger lists are tested in batches, with results added until all backends have been checked. For a new website using load balancing, save the website and configure its backends before testing.
+
+| Result | Meaning |
+| --- | --- |
+| Passed | This request returned an expected status code. |
+| Failed | The connection failed, timed out, or returned an unexpected status code. Review the reason. |
+| Skipped | A valid check request could not be constructed for the target, for example because of an unresolved wildcard or invalid backend settings. |
+
+::: tip Manual tests are diagnostic
+A manual test does not save configuration, change runtime health status or consecutive counts, or trigger health status notifications. Tests remain available when scheduled checks are off; the page states that scheduled checks remain off. A failed test leaves the scheduled thresholds and switch at their configured values.
+:::
+
+Changing health or origin settings marks existing results as **outdated**; run the test again. Closing the website editor cancels the current manual request. Reopening clears old results, and a previous response cannot overwrite another website or a newer test. Requests already received by the origin cannot be recalled; scheduled checks continue independently.
+
+Manual checks send GET/HEAD to the origin and use the same connection and Host behavior as scheduled checks. **The check URL, dial address and request Host may differ**. Diagnose the values shown in the result rather than inferring the target from its domain alone. If HEAD returns an unexpected code, first confirm that the application supports it.
+
+#### Common notices
+
+| Notice | Cause and what to do |
+| --- | --- |
+| The target is a local SamWaf listening port; enter the origin address | The origin IP/port points at SamWaf itself (the management port or a local business listener). Enter the real origin address; origins on other local ports are not affected. |
+| Health tests are busy; please retry later | Several test batches are already running. Retry in a moment. |
+
+A manual test runs at most 4 batches at a time, with at most 5 backends per batch. Larger backend lists are tested batch by batch, and the run only reports completion after every batch finishes.
 
 ## 9 Website List Page
 
@@ -801,3 +842,9 @@ Access Authentication keeps **unauthenticated** visitors out, but it does not pr
 | Allowed methods | Methods allowed when answering a preflight; empty inherits the global value |
 | Allowed request headers | Request headers allowed when answering a preflight; empty inherits the global value |
 | Preflight cache | Seconds a browser may cache a preflight result; empty or 0 inherits the global value, capped at 7200 |
+
+## Update History
+
+| Applicable version | Changes |
+| --- | --- |
+| >v1.3.25-beta.7 (unreleased) | Added health tests before saving, per-backend diagnostics, outdated-result notices and cancellation on closing; manual tests leave saved configuration and runtime health unchanged, and never probe local SamWaf listening ports as origins. |

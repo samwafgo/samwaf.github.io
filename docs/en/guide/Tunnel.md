@@ -86,3 +86,9 @@ Tunnel protection is currently an experimental feature designed to provide exter
 3. **Set up an IP whitelist on port 3399**, allowing only trusted IP addresses to connect;
 
 In this way, only authorized IPs can access port 3399, which then forwards to 3389, effectively securing your Remote Desktop connection.
+
+## Update History
+
+| Date | Applicable Version | Description |
+| --- | --- | --- |
+| 2026-10-14 | > v1.3.25-beta.7 | Fixed IPv6 clients being unable to connect to tunnels: connections from IPv6 addresses (such as `::1` resolved from local `localhost`) were always rejected with a "failed to parse client IP" log entry (present from v1.3.18-beta.10 to v1.3.25-beta.7). IPv6 sources now go through the same allowed/denied IP and time-range checks as IPv4. |
