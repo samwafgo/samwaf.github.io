@@ -7,7 +7,7 @@ The Visit Log page records every **raw access request** that passes through the 
 > Note: The Visit Log shows accesses **per request**. To view attacks aggregated **by source IP** with the rules they triggered, use the "Risk Log" instead.
 
 ::: tip Want to know what is blocking a given IP right now?
-IPs in the list are clickable — one click opens **IP Lookup**, which checks the allow/block lists, IP groups, threat intelligence, every ban record and the CDN origin ranges in one go, and lets you allowlist or blocklist the IP on the spot. See [IP Lookup](./IPLookup.md).
+IPs in the list are clickable — one click opens **IP Policy Match Lookup**, which checks the allow/block lists, IP groups, threat intelligence, every ban record and the CDN origin ranges in one go, and lets you allowlist or blocklist the IP on the spot. See [IP Policy Match Lookup](./IPLookup.md).
 :::
 
 The page has three parts: a collapsible **Log Settings** area, a **Search/Filter** area, and the **access record list**. Above the list you can switch between the **Access Log** and **Security Events** views.
@@ -155,7 +155,7 @@ and refreshes itself when it finishes. It applies immediately on save, with no r
 |-------|-------------|
 | Website | Filter by a specific website; searchable and clearable. |
 | Rule Name | Fuzzy search by the hit rule name. |
-| Visit Identifier | Exact lookup by the unique request identifier. |
+| Visit Identifier | Exact lookup by the unique request identifier. Once filled in, no date range or partition is needed — it is a primary-key point query (the UI automatically ignores the date and selected partition). |
 | Access Status | Defense status: All / Block / Allow / Forbid. |
 | Response Code | Search by HTTP response status code. |
 | Source IP | Search by the visitor's source IP. |
@@ -173,3 +173,10 @@ and refreshes itself when it finishes. It applies immediately on save, with no r
 - **I excluded an IP, so why does it still show up in traffic statistics?** Exclusion applies to logs and request counts; inbound and outbound bytes are metered by the engine outside the log path, so they still appear on the traffic charts. That is expected.
 - **A partition shows "file missing" in the archive dropdown, or a query says some partitions were skipped.** The partition's record still exists but its archive file (an archive table on MySQL / PostgreSQL) is gone - usually because the file was deleted by hand. If the message says the file exists but contains no data, the file was replaced or emptied. All other partitions are queried as usual. Once you are sure you don't need it, delete the record under Partitions. History archive files are only ever read; queries never modify them.
 - **How do I cut log volume?** Set the access log mode to "Sampled" first, or list your office exit and probe machines in the global exclude-IP list. Use "Security events only" only when you really need the savings, accepting the loss of CC threshold recommendations and the rest.
+- **A visitor shows me the identifier from the block page - how do I look it up?** Paste it into the **Visit Identifier** field; no date or partition selection is needed. Every block during a CC ban window leaves a narrow row with the rule "CC ban", so each identifier on the page maps to a queryable record. These rows keep metadata only and do not store a duplicate copy of the request payload.
+
+## Update History
+
+| Date | Applies to | Description |
+| --- | --- | --- |
+| 2026-10-13 | > v1.3.25-beta.7 | Every block during a CC ban window is now recorded as a narrow row with rule "CC ban"; the identifier shown on the block page can be looked up directly by visit identifier (date and partition are ignored). These rows do not duplicate the request payload. |

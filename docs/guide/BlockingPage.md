@@ -63,9 +63,20 @@
 响应内容支持以下变量，WAF 会在返回时替换为实际值：
 
 ```
-访问ID码：
+访问识别码：
 [[.SAMWAF_REQ_UUID]]
+
+访客 IP（按网站配置解析，与日志来源 IP 一致）：
+[[.SAMWAF_IP]]
+
+拦截说明（本次拦截的原因文案）：
+[[.SAMWAF_BLOCK_INFO]]
 ```
+
+::: tip 识别码怎么用在排查上？
+拦截页展示的访问识别码是本次请求的唯一标识，访客报障时把它发给管理员，在「访问日志」的
+**访问识别码** 框里直接粘贴即可查到这条记录——不需要选日期和分区。
+:::
 
 ## HTML 示例
 
@@ -166,8 +177,9 @@
 <body>
     <div class="container">
         <h1>您的访问被阻止</h1>
-        <p class="message">由于安全策略，您的请求被阻止。<br>如果有疑问，请将下面的访问识别码发给管理员，以便进一步排查。</p>
+        <p class="message">由于安全策略，您的请求被阻止。<br>如果有疑问，请将下面的访问识别码和您的 IP 发给管理员，以便进一步排查。</p>
         <h3>访问识别码：[[.SAMWAF_REQ_UUID]]</h3>
+        <p>您的 IP：[[.SAMWAF_IP]]</p>
     </div>
 </body>
 </html>
@@ -178,5 +190,11 @@
 如果是纯 API 接口也想用 JSON，可以将 `Content-Type` 设置成：`text/json; charset=UTF-8`。
 
 ```json
-{"samwaf_req_uuid":"[[.SAMWAF_REQ_UUID]]","msg":"访问被拦截"}
+{"samwaf_req_uuid":"[[.SAMWAF_REQ_UUID]]","ip":"[[.SAMWAF_IP]]","msg":"访问被拦截"}
 ```
+
+## 更新记录
+
+| 日期 | 适用版本 | 说明 |
+| --- | --- | --- |
+| 2026-10-13 | > v1.3.25-beta.7 | 新增 `[[.SAMWAF_IP]]`（访客 IP）与 `[[.SAMWAF_BLOCK_INFO]]`（拦截说明）变量；内置默认拦截页同步展示访客 IP。 |

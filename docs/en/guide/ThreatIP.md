@@ -6,7 +6,7 @@ Threat Intelligence IP Subscription lets you subscribe to multiple threat-intel 
 
 A single info bar appears at the top of the page: `Subscribe to threat-intel IP feeds; daily full pull with incremental landing (WAF app layer / system firewall ipset). Optimized for tens of thousands of entries.`
 
-Clicking **Details** on its right slides out a panel that explains what each operation (Enable / Disable / Sync / Delete) does — see [Operation Semantics](#operation-semantics) below — with a link to this page's online documentation pinned at the bottom. The info bar also carries an **IP Lookup** button, which tells you whether a given IP is covered by the feeds on this page; see [IP Lookup](./IPLookup.md).
+Clicking **Details** on its right slides out a panel that explains what each operation (Enable / Disable / Sync / Delete) does — see [Operation Semantics](#operation-semantics) below — with a link to this page's online documentation pinned at the bottom. The info bar also carries an **IP Policy Match Lookup** button, which tells you whether a given IP is covered by the feeds on this page; see [IP Policy Match Lookup](./IPLookup.md).
 
 <!-- Image: Threat Intelligence IP Subscription list page with the top info bar -->
 

@@ -9,7 +9,7 @@ The top of the page shows tabs grouped by **Triggered Rule** for quick switching
 ![Defense Logs](/images/attacklog.png)
 
 ::: tip Want to know what is blocking a given IP right now?
-IPs in the list are clickable — one click opens **IP Lookup**, which checks the allow/block lists, IP groups, threat intelligence, every ban record and the CDN origin ranges in one go, and lets you allowlist or blocklist the IP on the spot. See [IP Lookup](./IPLookup.md).
+IPs in the list are clickable — one click opens **IP Policy Match Lookup**, which checks the allow/block lists, IP groups, threat intelligence, every ban record and the CDN origin ranges in one go, and lets you allowlist or blocklist the IP on the spot. See [IP Policy Match Lookup](./IPLookup.md).
 :::
 
 ## Steps
@@ -79,3 +79,10 @@ Watch only genuinely suspicious IPs and only for a short while - it is not meant
 - **Why is the "normal" tag gone?** A "normal" tag is no longer recorded per IP, which would grow the tag table with every visitor. Allowed counts come from statistics data instead, and the pass ranking on the dashboard is unaffected.
 - **When should I use the watchlist?** When an IP looks suspicious but the existing logs are not enough to judge. During the watch period all of its requests, ordinary ones included, are captured with payloads - remember to remove it when you are done.
 - **Where do I read what the watchlist captured?** In the **All Activity** view under Details; the payloads sit in each record's detail.
+- **A visitor keeps refreshing during a CC ban and every hit shows a record - why?** Every block during a CC ban window now leaves a narrow row with the rule "CC ban", and the visit identifier shown on the block page maps to it one by one - so you can give visitors an accurate answer when they report being blocked. These rows keep metadata only and do not duplicate the request payload, and ban notifications stay throttled per ban key.
+
+## Update History
+
+| Date | Applies to | Description |
+| --- | --- | --- |
+| 2026-10-13 | > v1.3.25-beta.7 | Every block during a CC ban window now leaves a "CC ban" narrow row, queryable directly by visit identifier (date and partition ignored); no duplicate request payload is stored and notifications remain throttled. |

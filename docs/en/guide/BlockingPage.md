@@ -60,12 +60,24 @@ To modify or remove a template, use **Edit** or **Delete** in the list action co
 
 ## Response Content Variables
 
-The response content supports the following variable, which the WAF replaces with the actual value when responding:
+The response content supports the following variables, which the WAF replaces with the actual value when responding:
 
 ```
 Visit ID:
 [[.SAMWAF_REQ_UUID]]
+
+Visitor IP (resolved per the website configuration, matching the log source IP):
+[[.SAMWAF_IP]]
+
+Block reason (the message describing why this request was blocked):
+[[.SAMWAF_BLOCK_INFO]]
 ```
+
+::: tip How the visit ID helps troubleshooting
+The visit ID shown on the block page uniquely identifies the request. When a visitor reports being blocked,
+paste it into the **Visit ID** field of the visit log — the record comes up directly, with no need to pick
+a date range or partition.
+:::
 
 ## HTML Example
 
@@ -166,8 +178,9 @@ If you are using regular HTML, set the `Content-Type` to: `text/html; charset=UT
 <body>
     <div class="container">
         <h1>Your Access is Blocked</h1>
-        <p class="message">Your request was blocked due to security policies.<br>If you have any questions, please send the visit ID below to the administrator for further investigation.</p>
+        <p class="message">Your request was blocked due to security policies.<br>If you have any questions, please send the visit ID and your IP below to the administrator for further investigation.</p>
         <h3>Visit ID: [[.SAMWAF_REQ_UUID]]</h3>
+        <p>Your IP: [[.SAMWAF_IP]]</p>
     </div>
 </body>
 </html>
@@ -178,5 +191,11 @@ If you are using regular HTML, set the `Content-Type` to: `text/html; charset=UT
 If you want to use JSON for API interfaces, set the `Content-Type` to: `text/json; charset=UTF-8`.
 
 ```json
-{"samwaf_req_uuid":"[[.SAMWAF_REQ_UUID]]","msg":"Access Blocked"}
+{"samwaf_req_uuid":"[[.SAMWAF_REQ_UUID]]","ip":"[[.SAMWAF_IP]]","msg":"Access Blocked"}
 ```
+
+## Update History
+
+| Date | Applies to | Description |
+| --- | --- | --- |
+| 2026-10-13 | > v1.3.25-beta.7 | Added the `[[.SAMWAF_IP]]` (visitor IP) and `[[.SAMWAF_BLOCK_INFO]]` (block reason) variables; the built-in default block page now also shows the visitor IP. |

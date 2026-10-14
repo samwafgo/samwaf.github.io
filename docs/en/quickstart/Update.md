@@ -23,7 +23,7 @@ Added
 - Upgrade notes: important changes of the new version are shown in the product after upgrading
 - Dashboard cards with same-period-yesterday comparison and live QPS trend
 - Per-site response buffering switch
-- IP lookup
+- IP Policy Match Lookup
 - SSL certificate export
 
 Fixed

@@ -1,18 +1,18 @@
-# IP Lookup
+# IP Policy Match Lookup
 
 ## Overview
 
 A single IP can be governed by several places at once: the IP Blacklist, IP Allowlist, IP Groups, Threat Intelligence IP feeds, IP Failure Bans, CC bans, Firewall IP Blocking — and it may also fall inside a CDN origin range. Working out "why is this IP blocked?" (or "why isn't it?") by opening each page one by one is slow and easy to get wrong.
 
-**IP Lookup** collapses that into a single query: enter an IP, and it checks every source above at once and gives you a verdict — **Will be allowed** or **Will be blocked** — along with exactly which rule, which site and which feed matched. If it turns out to be a false positive you can add it to the allowlist right there; if it is genuinely malicious you can block it right there too.
+**IP Policy Match Lookup** collapses that into a single query: enter an IP, and it checks every source above at once and gives you a verdict — **Will be allowed** or **Will be blocked** — along with exactly which rule, which site and which feed matched. If it turns out to be a false positive you can add it to the allowlist right there; if it is genuinely malicious you can block it right there too.
 
 Matching is **CIDR-aware**: looking up `1.2.3.4` matches a `1.2.3.0/24` entry in your lists — it is not a plain text comparison.
 
-<!-- Image: IP Lookup dialog with query results -->
+<!-- Image: IP Policy Match Lookup dialog with query results -->
 
 ## Where to Open It
 
-The **IP Lookup** button is available at the top right of these pages:
+The **IP Policy Match Lookup** button is available at the top right of these pages:
 
 | Page | Location |
 | --- | --- |
@@ -34,7 +34,7 @@ In addition, the IPs in the following places are **clickable** — one click ope
 
 ### Look Up an IP
 
-1. Open **IP Lookup** from any of the entry points above.
+1. Open **IP Policy Match Lookup** from any of the entry points above.
 2. Enter the IP and click **Search** (or just press Enter).
 3. The query runs as 4 concurrent batches, and the progress of each is shown below the input: **Lists**, **Bans**, **Threat-intel IPs**, **CDN origin ranges**. Batches that finish first render first — you do not have to wait for all of them.
 4. The top of the results area shows the IP, its location and the **verdict**; below it, every match is listed by source.
@@ -110,3 +110,9 @@ The site this entry was bound to has been deleted, so the entry does nothing. Yo
 **I allowlisted the IP but still cannot reach the site.**
 
 It is most likely blocked at the system firewall layer. See [The allowlist only applies inside the WAF](#allowlist-a-false-positive) above.
+
+## Update History
+
+| Date | Applicable Version | Description |
+| --- | --- | --- |
+| 2026-10-14 | > v1.3.25-beta.7 | Renamed to "IP Policy Match Lookup" across entry buttons, dialog titles and generated remarks. |

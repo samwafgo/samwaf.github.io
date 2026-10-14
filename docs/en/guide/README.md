@@ -19,7 +19,7 @@ Every feature page in the admin console carries a blue info bar that explains in
 - [Firewall IP Block](./FirewallIPBlock.md)
 - [Threat Intelligence IP Feeds](./ThreatIP.md)
 - [CDN Origin IPs](./CDNIP.md)
-- [IP Lookup](./IPLookup.md)
+- [IP Policy Match Lookup](./IPLookup.md)
 - [Cache Rule](./CacheRule.md)
 - [Website Access Authentication](./HttpAuthBase.md)
 - [SSL Certificate Management](./SSL.md)

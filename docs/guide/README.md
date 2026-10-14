@@ -19,7 +19,7 @@
 - [防火墙IP封禁](./FirewallIPBlock.md)
 - [威胁情报IP订阅](./ThreatIP.md)
 - [CDN回源IP](./CDNIP.md)
-- [IP归属查询](./IPLookup.md)
+- [IP策略命中查询](./IPLookup.md)
 - [缓存规则](./CacheRule.md)
 - [网站访问认证](./HttpAuthBase.md)
 - [SSL证书管理](./SSL.md)
