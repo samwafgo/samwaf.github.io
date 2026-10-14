@@ -6317,9 +6317,9 @@
                     "application/json"
                 ],
                 "tags": [
-                    "网站防护-IP归属查询"
+                    "网站防护-IP策略命中查询"
                 ],
-                "summary": "IP归属查询",
+                "summary": "IP策略命中查询",
                 "parameters": [
                     {
                         "type": "string",
