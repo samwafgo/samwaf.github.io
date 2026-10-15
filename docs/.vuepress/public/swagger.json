@@ -5736,13 +5736,18 @@
                 "summary": "修改主机防御状态",
                 "parameters": [
                     {
-                        "description": "防御状态参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafHostGuardStatusReq"
-                        }
+                        "type": "string",
+                        "description": "主机唯一编码",
+                        "name": "code",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "防御状态 1开启 0关闭",
+                        "name": "guard_status",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -5826,13 +5831,18 @@
                 "summary": "修改主机启动状态",
                 "parameters": [
                     {
-                        "description": "启动状态参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafHostStartStatusReq"
-                        }
+                        "type": "string",
+                        "description": "主机唯一编码",
+                        "name": "code",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "启动状态 1启动 0停止",
+                        "name": "start_status",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -8634,13 +8644,18 @@
                 "summary": "修改WAF规则状态",
                 "parameters": [
                     {
-                        "description": "状态参数",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/SamWaf_model_request.WafRuleStatusReq"
-                        }
+                        "type": "string",
+                        "description": "规则唯一编码",
+                        "name": "code",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "规则状态 1启用 0禁用",
+                        "name": "rule_status",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -11120,7 +11135,8 @@
                 },
                 "req_uuid": {
                     "description": "请求UUID",
-                    "type": "string"
+                    "type": "string",
+                    "maxLength": 64
                 },
                 "rule": {
                     "description": "规则名",
@@ -12318,18 +12334,6 @@
                 }
             }
         },
-        "SamWaf_model_request.WafHostGuardStatusReq": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "string"
-                },
-                "guard_status": {
-                    "description": "防御状态 1 是开启防御 0 是防御关闭",
-                    "type": "integer"
-                }
-            }
-        },
         "SamWaf_model_request.WafHostGuardWhitelistAddReq": {
             "type": "object",
             "properties": {
@@ -12388,18 +12392,6 @@
                 "sort_descending": {
                     "description": "排序方式",
                     "type": "string"
-                }
-            }
-        },
-        "SamWaf_model_request.WafHostStartStatusReq": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "string"
-                },
-                "start_status": {
-                    "description": "启动状态",
-                    "type": "integer"
                 }
             }
         },
@@ -13409,18 +13401,6 @@
                 }
             }
         },
-        "SamWaf_model_request.WafRuleStatusReq": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "string"
-                },
-                "rule_status": {
-                    "description": "规则状态 1 是开启 0 是关闭",
-                    "type": "integer"
-                }
-            }
-        },
         "SamWaf_model_request.WafSensitiveAddReq": {
             "type": "object",
             "properties": {
@@ -13564,11 +13544,15 @@
                     "type": "string"
                 },
                 "apply_method": {
-                    "description": "申请方式http，dns",
-                    "type": "string"
+                    "description": "申请方式：http01(HTTP 文件验证) 或 dns01(DNS 验证)",
+                    "type": "string",
+                    "enum": [
+                        "http01",
+                        "dns01"
+                    ]
                 },
                 "apply_platform": {
-                    "description": "申请平台",
+                    "description": "申请平台，取CA服务器名称（ca_server_name），默认 letsencrypt",
                     "type": "string"
                 },
                 "host_code": {
@@ -13601,11 +13585,15 @@
                     "type": "string"
                 },
                 "apply_method": {
-                    "description": "申请方式http01，dns",
-                    "type": "string"
+                    "description": "申请方式：http01(HTTP 文件验证) 或 dns01(DNS 验证)",
+                    "type": "string",
+                    "enum": [
+                        "http01",
+                        "dns01"
+                    ]
                 },
                 "apply_platform": {
-                    "description": "申请平台",
+                    "description": "申请平台，取CA服务器名称（ca_server_name），默认 letsencrypt",
                     "type": "string"
                 },
                 "apply_status": {
@@ -14639,6 +14627,10 @@
                 "virtualization": {
                     "description": "虚拟化类型 如 kvm/vmware/hyperv，空=未识别",
                     "type": "string"
+                },
+                "web_version": {
+                    "description": "内嵌管理端前端版本",
+                    "type": "string"
                 }
             }
         },
@@ -14669,6 +14661,10 @@
                     "type": "string"
                 },
                 "version_release": {
+                    "type": "string"
+                },
+                "web_version": {
+                    "description": "内嵌管理端前端版本",
                     "type": "string"
                 }
             }
