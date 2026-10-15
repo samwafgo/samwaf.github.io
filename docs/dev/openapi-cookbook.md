@@ -37,6 +37,28 @@
 
 每次调用都会记录到「开放平台 → 调用日志」（含请求/响应内容、来源 IP、耗时），联调时先去那里看。
 
+### 1.4 参数命名与整条更新
+
+- **URL 查询参数一律全小写**，与文档和请求体字段名保持一致：`code`、`guard_status`、`start_status`、`rule_status`、`req_uuid`。
+- 少数接口是 GET + 查询参数（不是请求体），调用时把参数拼在 `?` 后面：
+
+  | 接口 | 查询参数 |
+  |------|----------|
+  | `GET /api/v1/wafhost/host/detail` | `code` |
+  | `GET /api/v1/wafhost/host/del` | `code` |
+  | `GET /api/v1/wafhost/host/guardstatus` | `code`、`guard_status` |
+  | `GET /api/v1/wafhost/host/startstatus` | `code`、`start_status` |
+  | `GET /api/v1/wafhost/rule/detail` | `code` |
+  | `GET /api/v1/wafhost/rule/del` | `code` |
+  | `GET /api/v1/wafhost/rule/rulestatus` | `code`、`rule_status` |
+  | `GET /api/v1/waflog/attack/detail` | `req_uuid`、`current_db_name`、`output_format` |
+  | `GET /api/v1/waflog/attack/httpcopymask` | `req_uuid`、`current_db_name`、`output_format` |
+
+  缺 `code` 会返回 `{"code":-1,"msg":"解析失败"}`。
+- **`POST /api/v1/wafhost/host/edit` 是整条更新，不是增量更新**：请求体里没带的字段会被清空。
+  对接方应先 `GET /api/v1/wafhost/host/detail?code=xxx` 取回整条记录，改完要改的字段后把**整条**发回去；
+  只发 `{"code":"xxx","ssl":1}` 会把证书、负载均衡后端等一并清掉。同理适用于 `sslorder` 之外的整条编辑类接口。
+
 ## 2 场景索引
 
 | 场景 | 章节 | 主要接口 |
@@ -172,3 +194,9 @@ curl -X POST "http://127.0.0.1:26666/api/v1/hostguard/ban/release" \
 3. curl 示例一律用 `X-API-Key` 方式、明文 JSON，参数名以代码里的 json tag 为准（分页是驼峰 `pageIndex/pageSize`）。
 4. 涉及写操作的场景，示例 IP 一律用 RFC 5737 文档段（`198.51.100.x`），避免读者误伤真实地址。
 5. 英文版同步更新 `en/dev/openapi-cookbook.md`。
+
+## 更新记录
+
+| 日期 | 适用版本 | 说明 |
+| --- | --- | --- |
+| 2026-10-14 | > v1.3.25-beta.7 | 补齐 GET 查询参数清单并统一为全小写命名；写明 `host/edit` 为整条更新，缺字段会被清空，须先取详情再整条回写。 |

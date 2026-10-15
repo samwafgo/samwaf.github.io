@@ -37,7 +37,27 @@ and respond with:
 
 Every call is logged under "Open Platform → Call Logs" (request/response bodies, client IP, latency) — look there first when debugging.
 
-### 1.4 Scenario Index
+### 1.4 Parameter Naming and Whole-Record Updates
+
+- **URL query parameters are always lower case**, matching the documentation and the request body fields: `code`, `guard_status`, `start_status`, `rule_status`, `req_uuid`.
+- A few endpoints are GET with query parameters (not a request body) — append them after `?`:
+
+  | Endpoint | Query parameters |
+  |----------|------------------|
+  | `GET /api/v1/wafhost/host/detail` | `code` |
+  | `GET /api/v1/wafhost/host/del` | `code` |
+  | `GET /api/v1/wafhost/host/guardstatus` | `code`, `guard_status` |
+  | `GET /api/v1/wafhost/host/startstatus` | `code`, `start_status` |
+  | `GET /api/v1/wafhost/rule/detail` | `code` |
+  | `GET /api/v1/wafhost/rule/del` | `code` |
+  | `GET /api/v1/wafhost/rule/rulestatus` | `code`, `rule_status` |
+  | `GET /api/v1/waflog/attack/detail` | `req_uuid`, `current_db_name`, `output_format` |
+  | `GET /api/v1/waflog/attack/httpcopymask` | `req_uuid`, `current_db_name`, `output_format` |
+
+  A missing `code` returns `{"code":-1,"msg":"解析失败"}`.
+- **`POST /api/v1/wafhost/host/edit` replaces the whole record, it is not a partial update**: every field you leave out of the body is cleared. Fetch the record first with `GET /api/v1/wafhost/host/detail?code=xxx`, change only what you need, and send the **entire** record back. Sending just `{"code":"xxx","ssl":1}` also wipes the certificate and the load-balanced backends. The same applies to the other whole-record edit endpoints.
+
+### 1.5 Scenario Index
 
 | Scenario | Section | Main endpoints |
 |----------|---------|----------------|
@@ -172,3 +192,9 @@ curl -X POST "http://127.0.0.1:26666/api/v1/hostguard/ban/release" \
 3. curl examples always use `X-API-Key` with plain JSON; parameter names follow the json tags in the Go code (pagination is camelCase `pageIndex/pageSize`).
 4. For write scenarios, always use RFC 5737 documentation-range IPs (`198.51.100.x`) so readers cannot hurt real addresses by copy-pasting.
 5. Keep the Chinese version `dev/openapi-cookbook.md` in sync.
+
+## Update History
+
+| Date | Applies to | Change |
+| --- | --- | --- |
+| 2026-10-14 | > v1.3.25-beta.7 | Added the list of GET query parameters and unified them to lower-case naming; documented that `host/edit` replaces the whole record, so fields left out are cleared - fetch the detail first and write the complete record back. |
