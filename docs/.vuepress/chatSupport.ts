@@ -27,17 +27,30 @@ function chatEnabled(): boolean {
   return false
 }
 
+// 文档站当前语种。优先看路径：enhance() 在 app 创建期就跑了，
+// 那时 VuePress 可能还没把 html[lang] 设好，路径是更早也更可靠的信号。
+function currentLang(): 'zh' | 'en' {
+  if (window.location.pathname.indexOf('/en/') === 0) return 'en'
+  if (window.location.pathname.indexOf('/en') === 0) return 'en'
+  const html = document.documentElement.lang || ''
+  return html.toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en'
+}
+
 export function setupChatSupport(): void {
   if (!chatEnabled() || document.getElementById(FRAME_ID)) return
 
   const root = document.documentElement
+  const lang = currentLang()
+  const copy = lang === 'en'
+    ? { title: 'Online consultation', link: 'Chat', aria: 'Open online consultation in a new window' }
+    : { title: '在线咨询', link: '咨询', aria: '在新窗口打开在线咨询' }
   const expectedOrigin = new URL(SERVER).origin
   const iframe = document.createElement('iframe')
   iframe.id = FRAME_ID
-  iframe.title = '在线客服'
+  iframe.title = copy.title
   iframe.setAttribute('data-sc', 'closed')
   iframe.setAttribute('data-full', '0')
-  iframe.src = `${SERVER}/widget-frame.html?server=${encodeURIComponent(SERVER)}&site_id=${encodeURIComponent(SITE_ID)}&launcher=consult`
+  iframe.src = `${SERVER}/widget-frame.html?server=${encodeURIComponent(SERVER)}&site_id=${encodeURIComponent(SITE_ID)}&launcher=consult&lang=${lang}`
   root.classList.add('samwaf-chat-enabled')
 
   let ready = false
@@ -83,8 +96,8 @@ export function setupChatSupport(): void {
     a.href = FALLBACK_URL
     a.target = '_blank'
     a.rel = 'noopener noreferrer'
-    a.textContent = '咨询'
-    a.setAttribute('aria-label', '在新窗口打开在线咨询')
+    a.textContent = copy.link
+    a.setAttribute('aria-label', copy.aria)
     document.body.appendChild(a)
     requestAnimationFrame(() => a.classList.add('show'))
   }
