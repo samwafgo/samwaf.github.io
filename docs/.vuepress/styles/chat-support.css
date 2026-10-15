@@ -1,0 +1,120 @@
+html.samwaf-chat-enabled {
+  --chat-surface: #fff;
+  --chat-text: #262b31;
+  --chat-accent: #318765;
+  --chat-shadow: 0 8px 24px rgb(32 45 56 / 10%);
+  --chat-edge: max(24px, env(safe-area-inset-bottom));
+  --chat-top-offset: 0px;
+}
+html.samwaf-chat-enabled[data-theme="dark"] {
+  --chat-surface: #242a2f;
+  --chat-text: #edf1f3;
+  --chat-accent: #66bd99;
+  --chat-shadow: 0 8px 24px rgb(0 0 0 / 26%);
+}
+html.samwaf-chat-has-top { --chat-top-offset: 62px; }
+
+#samwaf-chat-frame {
+  position: fixed;
+  border: 0;
+  background: transparent;
+  z-index: 999999;
+  pointer-events: none;
+  color-scheme: normal;
+}
+#samwaf-chat-frame.ready { pointer-events: auto; }
+
+/* 为入口阴影和角标预留四周空间。 */
+#samwaf-chat-frame[data-sc="closed"] {
+  right: 4px;
+  bottom: calc(var(--chat-edge) + var(--chat-top-offset) - 20px);
+  width: 100px;
+  height: 136px;
+  clip-path: inset(0 0 8px 0);
+}
+
+#samwaf-chat-frame[data-sc="open"] {
+  right: 24px;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  width: min(460px, calc(100% - 48px));
+  height: min(680px, calc(100vh - 96px));
+  height: min(680px, calc(100dvh - 96px));
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 48px rgb(0 0 0 / 18%);
+  overflow: hidden;
+  clip-path: inset(0 round 16px);
+}
+#samwaf-chat-frame[data-sc="open"][data-full="1"] {
+  inset: 20px;
+  width: calc(100% - 40px);
+  height: calc(100vh - 40px);
+  height: calc(100dvh - 40px);
+}
+#samwaf-chat-frame.narrow[data-sc="open"],
+#samwaf-chat-frame.narrow[data-sc="open"][data-full="1"] {
+  top: max(72px, env(safe-area-inset-top));
+  right: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  left: 12px;
+  width: calc(100% - 24px);
+  height: min(680px, calc(100vh - max(72px, env(safe-area-inset-top)) - max(12px, env(safe-area-inset-bottom))));
+  height: min(680px, calc(100dvh - max(72px, env(safe-area-inset-top)) - max(12px, env(safe-area-inset-bottom))));
+}
+
+#samwaf-chat-fallback {
+  position: fixed;
+  right: 24px;
+  bottom: calc(var(--chat-edge) + var(--chat-top-offset));
+  z-index: 999999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 96px;
+  background: var(--chat-surface);
+  color: var(--chat-text);
+  border-radius: 30px;
+  font-size: 13px;
+  text-decoration: none;
+  box-shadow: var(--chat-shadow);
+}
+#samwaf-chat-fallback.show { display: flex; }
+#samwaf-chat-fallback:hover { color: var(--chat-accent); }
+
+html.samwaf-chat-enabled .vp-back-to-top-button {
+  bottom: var(--chat-edge);
+  inset-inline-end: auto;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  padding: 13px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 50%;
+  background: var(--chat-surface);
+  color: var(--chat-text);
+  box-shadow: var(--chat-shadow);
+  transform: none;
+  transition: color .15s ease;
+}
+html.samwaf-chat-enabled .vp-back-to-top-button:hover { color: var(--chat-accent); }
+html.samwaf-chat-enabled .vp-back-to-top-button > .vp-scroll-progress { display: none; }
+html.samwaf-chat-enabled .vp-back-to-top-button .back-to-top-icon {
+  width: 22px;
+  height: 22px;
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m5 12 7-7 7 7M12 5v14' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+html.samwaf-chat-enabled .vp-back-to-top-button:focus-visible { outline: 2px solid var(--chat-accent); outline-offset: 3px; }
+
+@media (max-width: 480px) {
+  html.samwaf-chat-enabled { --chat-edge: max(20px, env(safe-area-inset-bottom)); }
+  html.samwaf-chat-has-top { --chat-top-offset: 58px; }
+  #samwaf-chat-frame[data-sc="closed"] { right: 0; width: 92px; height: 124px; }
+  html.samwaf-chat-enabled .vp-back-to-top-button { right: 24px; width: 44px; height: 44px; padding: 11px; }
+  #samwaf-chat-fallback { right: 20px; width: 52px; height: 84px; border-radius: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.samwaf-chat-enabled .vp-back-to-top-button { transition: none; }
+}
