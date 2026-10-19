@@ -115,4 +115,4 @@ It is most likely blocked at the system firewall layer. See [The allowlist only 
 
 | Date | Applicable Version | Description |
 | --- | --- | --- |
-| 2026-10-14 | > v1.3.25-beta.7 | Renamed to "IP Policy Match Lookup" across entry buttons, dialog titles and generated remarks. |
+| 2026-10-14 | v1.3.25-beta.8 | Renamed to "IP Policy Match Lookup" across entry buttons, dialog titles and generated remarks. |

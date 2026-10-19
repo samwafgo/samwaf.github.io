@@ -1,10 +1,73 @@
-# Version Releases 
+# Version Releases
 
-## Unreleased
+## 20261019 (v1.3.25-beta.8)
 
-Optimized
+This is a beta release. The latest stable release remains **v1.3.24**. Choose a version on the [Quick Start](./readme.md) page. The additions, fixes, and improvements below are changes since **v1.3.25-beta.7**; the upgrade notes summarize important changes since v1.3.24 included in this beta.
 
+### Added
+
+- Website password access can protect only specified paths, exclude specified paths, and use a password-free IP group.
+- Website health checks can be tested before saving, with probe results for each backend. Testing does not save the configuration or change runtime health status.
+- Requests that match no website receive a setup guidance page. A dedicated global page can be edited under Custom Blocking Response Pages > Unmatched Website Response; the HTTP status remains 403.
+
+### Fixed
+
+- Saving changes to the health check toggle or probe settings resets the status immediately. Disabling shows "Check off"; re-enabling starts from "No data yet".
+- Character-aware truncation of ServerChan notification titles and content improves message delivery compatibility.
+- Management API query parameter names now match the documentation in lower case. SSL certificate creation and renewal accept only `http01` or `dns01` for `apply_method`, with a clear response for invalid values.
+- IPv6 client address parsing in tunnels.
+- Requests blocked during a CC ban are recorded and can be found using the visit identifier on the blocking page. Deleting a website also removes its associated CC rules.
+- Failure counters and ban record reads when using Redis cache.
+
+### Improved
+
+- Human verification captchas and behavior checks.
 - Website configuration adds origin Host examples for **Pass Backend Domain** (hidden by default; click the help icon on the left to expand), clarifying that off preserves the visitor's Host and on uses the backend domain. The manual also explains how to pass the original visitor domain to the application with the custom request header `X-Forwarded-Host: ${host}`. Thanks to @hlwen ([issue #869](https://github.com/samwafgo/SamWaf/issues/869)).
+
+### Before upgrading
+
+- Back up your configuration, databases, and `data/.keys`. Log storage supports tiers and monthly archives. If cleanup is enabled, review retention for each tier; expired archives are recycled by partition.
+- Source and Path Analysis summaries accumulate after upgrading, without historical backfill. Excluding normal requests from logs by IP still counts their traffic bytes in traffic statistics.
+- If you use the API, check query parameter casing and the SSL certificate validation method values in your integration.
+
+<!-- upgrade-notes:v1.3.25-beta.8:start -->
+Download [SamWaf v1.3.25-beta.8](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.8) · [all releases](https://github.com/samwafgo/SamWaf/releases)
+
+Upgrade Notes
+
+- Per-port protocol selection - port 80 is no longer forced to HTTPS by the SSL switch　[Important · Notice]　[details](/en/guide/Host.html)
+- CC protection is now rule-based, and a rate-mode threshold inconsistency is fixed　[Important · Check]　[details](/en/guide/AntiCC.html)
+- Check whether the console trusted proxy ranges are set too wide　[Important · Check]　[details](/en/quickstart/Update.html)
+- Log archives are now cut per month and expired by dropping whole partitions (MySQL/PostgreSQL archive tables start being recycled)　[Important · Notice]　[details](/en/quickstart/Update.html)
+- API query parameter names are now all lower case　[Important · Notice]　[details](/en/quickstart/Update.html)
+- Setup guidance and a global custom page for unmatched websites　[Check]
+- Crawler verification now includes a forward DNS confirmation, and CC rules can exempt verified crawlers　[Check]　[details](/en/guide/AntiCC.html)
+- Human verification settings are no longer hidden behind the switch, and the exclude list is renamed　[Check]　[details](/en/guide/HumanVerify.html)
+- CC rules with the Human verification action no longer re-challenge visitors who already passed　[Check]　[details](/en/guide/CC.html)
+- New Emergency mode - one click to put every visitor behind a human verification　[Notice]　[details](/en/guide/CC.html)
+- Notification channel Webhooks can now reach intranet alerting platforms when declared in config.yml　[Notice]　[details](/en/guide/NotifyChannel.html)
+- Website password access gains session lifetime and online session management; auth now uses the real visitor IP　[Notice]　[details](/en/guide/HttpAuthBase.html)
+- A single failed cache read no longer forces a new login when Redis is used　[Notice]　[details](/en/quickstart/Update.html)
+- Oversized payloads are truncated on write, plus new access-log indexes for IP and rule lookups　[Notice]　[details](/en/quickstart/Update.html)
+- Payloads move to their own table, and switching the IP tag location now merges the history　[Notice]　[details](/en/quickstart/Update.html)
+- Tiered log storage, an IP watchlist, and time-ranged log export　[Notice]　[details](/en/quickstart/Update.html)
+- New Source and Path Analysis page, viewing traffic by origin and by path　[Notice]　[details](/en/quickstart/Update.html)
+- Exclude log recording by source IP, keeping office exits and probes out of the logs　[Notice]　[details](/en/quickstart/Update.html)
+- No more picking a partition - the time range decides where to look, and a visit identifier is looked up across all of them　[Notice]　[details](/en/quickstart/Update.html)
+- Requests blocked during a CC ban can be looked up by visit identifier　[Notice]　[details](/en/guide/BlockingPage.html)
+- Test website health checks before saving　[Notice]　[details](/en/guide/Host.html)
+- Site password access can now protect only specific paths, with a password-free IP group option　[Notice]　[details](/en/quickstart/Update.html)
+- SSL certificate orders via API accept only http01 or dns01 as apply_method　[Notice]　[details](/en/quickstart/Update.html)
+- Health check status now resets immediately when its settings change　[Check]
+- Website groups added to the list, with group filtering and bulk move　[Notice]　[details](/en/guide/Host.html)
+- Unified Access credentials are now scoped per site　[Notice]　[details](/en/quickstart/Update.html)
+
+Full text of each item (what changes if you act, what it costs if you don't, how to revert) lives in the console under System - Upgrade Notes: [Upgrade Notes](https://doc.samwaf.com/en/guide/UpgradeNotice.html)
+
+Thanks to the following contributors (in no particular order)
+
+@Double-Click-ERP, @Lvshujun0918, @wishday（[GitHub](https://github.com/wishday) · [Gitee](https://gitee.com/wishday)）, @wxf26054, @zhuquehxb（[GitHub](https://github.com/zhuquehxb) · [Gitee](https://gitee.com/zhuquehxb)）, @hlwen
+<!-- upgrade-notes:v1.3.25-beta.8:end -->
 
 ## 20260827 (v1.3.24)
 

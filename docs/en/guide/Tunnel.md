@@ -91,4 +91,4 @@ In this way, only authorized IPs can access port 3399, which then forwards to 33
 
 | Date | Applicable Version | Description |
 | --- | --- | --- |
-| 2026-10-14 | > v1.3.25-beta.7 | Fixed IPv6 clients being unable to connect to tunnels: connections from IPv6 addresses (such as `::1` resolved from local `localhost`) were always rejected with a "failed to parse client IP" log entry (present from v1.3.18-beta.10 to v1.3.25-beta.7). IPv6 sources now go through the same allowed/denied IP and time-range checks as IPv4. |
+| 2026-10-14 | v1.3.25-beta.8 | Fixed IPv6 clients being unable to connect to tunnels: connections from IPv6 addresses (such as `::1` resolved from local `localhost`) were always rejected with a "failed to parse client IP" log entry (present from v1.3.18-beta.10 to v1.3.25-beta.7). IPv6 sources now go through the same allowed/denied IP and time-range checks as IPv4. |

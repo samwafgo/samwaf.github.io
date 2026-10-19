@@ -1,10 +1,73 @@
 # 版本发布
 
-## 未发布
+## 20261019 (v1.3.25-beta.8)
 
-优化
+本次为测试版，最新正式版仍为 **v1.3.24**。可在[快速上手](./readme.md)中选择下载版本。以下新增、修正与优化为相对 **v1.3.25-beta.7** 的变化；升级须知汇总截至本测试版、相对 v1.3.24 的重要变更。
 
+### 新增
+
+- 网站密码访问支持仅保护指定路径、排除指定路径，并可配置免密 IP 组。
+- 网站健康检测支持保存前手动测试，可查看各后端探测结果，不保存配置、不改变运行健康状态。
+- 未匹配网站时显示接入引导页，并可通过「自定义拦截响应界面 → 未匹配网站响应」维护全局专用页面，HTTP 状态码保持 403。
+
+### 修正
+
+- 保存健康检测开关或检测参数后立即重置状态；关闭后显示「检测已关闭」，重新开启后从「暂无数据」开始检测。
+- Server酱通知的中文标题与内容截断处理，改善消息发送兼容性。
+- 管理端 API 查询参数名与文档统一为全小写；SSL 证书申请与续期的 `apply_method` 仅接受 `http01` 或 `dns01`，参数不合法时返回明确提示。
+- 隧道客户端 IPv6 地址解析。
+- CC 封禁期间的阻断请求记录，可按拦截页上的访问识别码查询；删除网站时同步清理关联 CC 规则。
+- Redis 缓存下的失败计数与封禁记录读取。
+
+### 优化
+
+- 增强人机验证码与行为验证。
 - 网站配置补充「是否传递后端域名」的回源 Host 示例（点击左侧帮助图标展开，默认隐藏），明确默认关闭时保留访客 Host、开启时使用后端域名；手册补充通过自定义请求头 `X-Forwarded-Host: ${host}` 向应用传递原始访问域名的方法。感谢 @hlwen（[issue #869](https://github.com/samwafgo/SamWaf/issues/869)）。
+
+### 升级前请确认
+
+- 升级前备份配置、数据库与 `data/.keys`。日志存储已支持分层与按月归档，启用清理策略的部署请核对各层保留期，过期归档会按分区回收。
+- 「来源与路径分析」的汇总从升级后开始积累，不回填历史；按 IP 排除正常请求日志后，该部分流量字节仍会计入流量统计。
+- 有 API 对接时，请同步检查查询参数大小写及 SSL 证书的申请方式取值。
+
+<!-- upgrade-notes:v1.3.25-beta.8:start -->
+下载 [SamWaf v1.3.25-beta.8](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.8) · [全部版本](https://github.com/samwafgo/SamWaf/releases)
+
+升级须知
+
+- 端口协议可逐端口显式选择，80 端口不再被 SSL 开关"连带"改成 HTTPS　[重要 · 知悉]　[查看](/guide/Host.html)
+- CC 防护改为多规则，并修正了「平均速率模式」保存后阈值不一致的问题　[重要 · 确认]　[查看](/guide/AntiCC.html)
+- 检查「管理端可信代理网段」是否填得过宽　[重要 · 确认]　[查看](/quickstart/Update.html)
+- 日志归档改为按月切分区，过期回收改为丢整个分区（MySQL/PostgreSQL 的归档表首次开始回收）　[重要 · 知悉]　[查看](/quickstart/Update.html)
+- 通过 API 调用时，查询参数名统一为全小写　[重要 · 知悉]　[查看](/quickstart/Update.html)
+- 未匹配网站时显示接入引导，支持全局自定义页面　[确认]
+- 搜索引擎爬虫的身份验证补齐了正向回查，CC 规则可豁免已验证爬虫　[确认]　[查看](/guide/AntiCC.html)
+- 人机验证设置不再被开关藏起来，「排除URL列表」更名为「永不挑战的路径」　[确认]　[查看](/guide/HumanVerify.html)
+- CC 规则的「人机验证」动作：通过验证后不再被反复挑战　[确认]　[查看](/guide/CC.html)
+- 新增「紧急模式」：被打的时候一键让全部访客先过人机验证　[知悉]　[查看](/guide/CC.html)
+- 通知渠道 Webhook 支持内网告警平台，需在 config.yml 声明放行　[知悉]　[查看](/guide/NotifyChannel.html)
+- 网站密码访问新增有效期与在线会话管理，认证链路改用真实访客 IP　[知悉]　[查看](/guide/HttpAuthBase.html)
+- 使用 Redis 缓存时不再因为一次读取失败而要求重新登录　[知悉]　[查看](/quickstart/Update.html)
+- 超长报文落库时截断，并为访问日志按 IP / 规则查询补索引　[知悉]　[查看](/quickstart/Update.html)
+- 报文改存独立表，IP 标签切换存放位置时自动合并历史　[知悉]　[查看](/quickstart/Update.html)
+- 日志分层存储：访问窄行与安全事件分表，新增观察名单，日志导出改按时间段　[知悉]　[查看](/quickstart/Update.html)
+- 新增「来源与路径分析」：从来源和路径两个视角看流量构成　[知悉]　[查看](/quickstart/Update.html)
+- 可按来源IP排除日志记录：办公出口与探测机的噪音不再进日志　[知悉]　[查看](/quickstart/Update.html)
+- 查日志不用再挑分区：时间范围自动决定查哪里，按访问识别码可直接全库查找　[知悉]　[查看](/quickstart/Update.html)
+- CC 封禁期间的阻断请求可按访问识别码查询　[知悉]　[查看](/guide/BlockingPage.html)
+- 网站健康检测支持保存前手动测试　[知悉]　[查看](/guide/Host.html)
+- 网站密码访问可以只保护指定路径了，还可搭配免密IP组　[知悉]　[查看](/quickstart/Update.html)
+- 通过 API 申请/续期 SSL 证书时，apply_method 只接受 http01 或 dns01　[知悉]　[查看](/quickstart/Update.html)
+- 健康检测配置变化后，列表状态立即重置　[确认]
+- 网站列表新增分组，可按分组筛选与批量移动　[知悉]　[查看](/guide/Host.html)
+- 统一访问认证的登录凭据改为按站点区分　[知悉]　[查看](/quickstart/Update.html)
+
+每条的完整说明（做了 / 不做的区别、怎么撤销）见站内「系统设置 → 升级须知」： [升级须知](https://doc.samwaf.com/guide/UpgradeNotice.html)
+
+感谢以下贡献者（排名不分先后）
+
+@Double-Click-ERP, @Lvshujun0918, @wishday（[GitHub](https://github.com/wishday) · [Gitee](https://gitee.com/wishday)）, @wxf26054, @zhuquehxb（[GitHub](https://github.com/zhuquehxb) · [Gitee](https://gitee.com/zhuquehxb)）, @hlwen
+<!-- upgrade-notes:v1.3.25-beta.8:end -->
 
 ## 20260827 (v1.3.24)
 

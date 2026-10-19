@@ -198,4 +198,4 @@ If you want to use JSON for API interfaces, set the `Content-Type` to: `text/jso
 
 | Date | Applies to | Description |
 | --- | --- | --- |
-| 2026-10-13 | > v1.3.25-beta.7 | Added the `[[.SAMWAF_IP]]` (visitor IP) and `[[.SAMWAF_BLOCK_INFO]]` (block reason) variables; the built-in default block page now also shows the visitor IP. |
+| 2026-10-13 | v1.3.25-beta.8 | Added the `[[.SAMWAF_IP]]` (visitor IP) variable; the built-in default block page now also shows the visitor IP. Documented the existing `[[.SAMWAF_BLOCK_INFO]]` (block reason) variable. |

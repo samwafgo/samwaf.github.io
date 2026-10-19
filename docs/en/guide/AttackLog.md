@@ -85,4 +85,4 @@ Watch only genuinely suspicious IPs and only for a short while - it is not meant
 
 | Date | Applies to | Description |
 | --- | --- | --- |
-| 2026-10-13 | > v1.3.25-beta.7 | Every block during a CC ban window now leaves a "CC ban" narrow row, queryable directly by visit identifier (date and partition ignored); no duplicate request payload is stored and notifications remain throttled. |
+| 2026-10-13 | v1.3.25-beta.8 | Every block during a CC ban window now leaves a "CC ban" narrow row, queryable directly by visit identifier (date and partition ignored); no duplicate request payload is stored and notifications remain throttled. |

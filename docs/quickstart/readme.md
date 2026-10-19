@@ -4,10 +4,20 @@
 **强烈建议您在测试环境测试充分在上生产，如遇到问题请及时反馈**
 :::
 
-## 1.下载最新版本 <Badge text="v1.3.24" type="tip" />
-gitee:  [https://gitee.com/samwaf/SamWaf/releases](https://gitee.com/samwaf/SamWaf/releases)
+## 1.选择并下载版本
 
-github: [https://github.com/samwafgo/SamWaf/releases](https://github.com/samwafgo/SamWaf/releases)
+| 发布渠道 | 当前版本 | 适用场景 | 下载 |
+| --- | --- | --- | --- |
+| 正式版 | <Badge text="v1.3.24" type="tip" /> | 希望使用正式发布版本的用户 | [GitHub 下载](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.24) · [Gitee 下载](https://gitee.com/samwaf/SamWaf/releases/tag/v1.3.24) |
+| 测试版（Beta） | <Badge text="v1.3.25-beta.8" type="warning" /> | 希望提前体验最新功能与修正，并参与验证的用户 | [GitHub 下载](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.8) · [Gitee 下载](https://gitee.com/samwaf/SamWaf/releases/tag/v1.3.25-beta.8) |
+
+请按需要自行选择正式版或测试版，并下载对应操作系统与架构的安装包。测试版的更新内容与升级注意事项见[版本发布](./Update.md)。已有部署升级前请备份配置与数据，并先在测试环境验证。
+
+全部版本：[Gitee](https://gitee.com/samwaf/SamWaf/releases) · [GitHub](https://github.com/samwafgo/SamWaf/releases)。
+
+::: tip 安装指定测试版
+如需使用上表中的测试版，请从对应版本的下载页获取安装包，解压后按下方平台说明启动。下方 Linux 一键安装脚本会自行选择版本，不能用于指定安装上表中的测试标签。
+:::
 
 ## 2.快速启动
 
@@ -53,7 +63,7 @@ Linux Arm64架构请下载对应的文件 SamWaf_Linux_arm64.v*.tar.gz
 ./SamWafLinuxArm64 install && ./SamWafLinuxArm64 start
 ```
 @tab Docker
-请到dockerhub拉取最新版本 (https://hub.docker.com/r/samwaf/samwaf)
+镜像见 [Docker Hub](https://hub.docker.com/r/samwaf/samwaf)。下方命令使用正式版通道 `samwaf/samwaf`（即 `:latest`）；如需指定上表中的测试版，将镜像名替换为 `samwaf/samwaf:v1.3.25-beta.8`。后续升级时，`docker pull` 与 `docker run`（或 Compose 配置）应使用同一个标签。
 
 **常规启动（端口映射模式）**
 

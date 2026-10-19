@@ -179,4 +179,4 @@ and refreshes itself when it finishes. It applies immediately on save, with no r
 
 | Date | Applies to | Description |
 | --- | --- | --- |
-| 2026-10-13 | > v1.3.25-beta.7 | Every block during a CC ban window is now recorded as a narrow row with rule "CC ban"; the identifier shown on the block page can be looked up directly by visit identifier (date and partition are ignored). These rows do not duplicate the request payload. |
+| 2026-10-13 | v1.3.25-beta.8 | Every block during a CC ban window is now recorded as a narrow row with rule "CC ban"; the identifier shown on the block page can be looked up directly by visit identifier (date and partition are ignored). These rows do not duplicate the request payload. |

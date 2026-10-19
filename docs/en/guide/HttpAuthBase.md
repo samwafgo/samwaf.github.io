@@ -162,6 +162,6 @@ Denied requests from visitors who are not signed in are recorded as well, but th
 
 | Date | Applies to | Changes |
 | ---- | ---- | ---- |
-| 2026-10-12 | > v1.3.25-beta.7 | Added "Protection scope and password-free IP group": web password visit can be enabled per path (whole site / only listed paths / except listed paths) with `*` wildcard support in the path list, plus an optional password-free IP group that lets selected sources skip the password. Session lifetime (TTL / idle timeout / bind to login IP) is unreleased in the same batch. |
+| 2026-10-12 | v1.3.25-beta.8 | Added "Protection scope and password-free IP group": web password visit can be enabled per path (whole site / only listed paths / except listed paths) with `*` wildcard support in the path list, plus an optional password-free IP group that lets selected sources skip the password. Session lifetime (TTL / idle timeout / bind to login IP) has been available since v1.3.25-beta.5. |
 
 > About "Applies to": `vX.Y.Z` means the feature is available from that release; `> vX.Y.Z` means it is already in the code but not released yet and ships with the next version.

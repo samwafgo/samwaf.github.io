@@ -197,4 +197,4 @@ curl -X POST "http://127.0.0.1:26666/api/v1/hostguard/ban/release" \
 
 | Date | Applies to | Change |
 | --- | --- | --- |
-| 2026-10-14 | > v1.3.25-beta.7 | Added the list of GET query parameters and unified them to lower-case naming; documented that `host/edit` replaces the whole record, so fields left out are cleared - fetch the detail first and write the complete record back. |
+| 2026-10-14 | v1.3.25-beta.8 | Added the list of GET query parameters and unified them to lower-case naming; documented that `host/edit` replaces the whole record, so fields left out are cleared - fetch the detail first and write the complete record back. |
