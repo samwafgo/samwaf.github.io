@@ -898,3 +898,4 @@ Access Authentication keeps **unauthenticated** visitors out, but it does not pr
 | --- | --- |
 | >v1.3.25-beta.7 (unreleased) | Documented the origin Host option's default, wildcard-domain examples, and custom request header configuration for `X-Forwarded-Host: ${host}`. |
 | >v1.3.25-beta.7 (unreleased) | Added health tests before saving, per-backend diagnostics, outdated-result notices and cancellation on closing; manual tests leave saved configuration and runtime health unchanged, and never probe local SamWaf listening ports as origins. |
+| >v1.3.25-beta.7 (unreleased) | Saving a change to health check settings (the toggle or any probe parameter) now clears that host's health status and restarts counting immediately: disabling the check shows "Check off" in the list without leftover data, and re-enabling starts from "No data yet". The dashboard's abnormal-host count also excludes hosts with the check disabled. |
