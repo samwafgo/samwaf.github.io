@@ -1,4 +1,11 @@
 # Version Releases 
+
+## Unreleased
+
+Optimized
+
+- Website configuration adds origin Host examples for **Pass Backend Domain** (hidden by default; click the help icon on the left to expand), clarifying that off preserves the visitor's Host and on uses the backend domain. The manual also explains how to pass the original visitor domain to the application with the custom request header `X-Forwarded-Host: ${host}`. Thanks to @hlwen ([issue #869](https://github.com/samwafgo/SamWaf/issues/869)).
+
 ## 20260827 (v1.3.24)
 
 Important Notes

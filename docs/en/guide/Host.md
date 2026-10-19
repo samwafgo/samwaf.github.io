@@ -96,7 +96,7 @@ The fields below follow that order. The top-right corner of the form lets you sw
      Not necessary; you can select the actual type or keep the default (adaptations may be made for different backend access later).
 
 - Backend Domain:
-     Defaults to the same as the primary domain (requires http/https protocol prefix). Exception: If the frontend domain and backend domain configured in samwaf differ, you must enable the "Pass Backend Domain" option to ensure proper access.
+     Defaults to the primary domain and requires an `http://` or `https://` prefix. Set "Pass Backend Domain" according to the HTTP `Host` required by the origin: turn it off to preserve the visitor's original Host, or on to use the backend domain. See 2.3.
 	  
 - Backend IP:
      If SamWaf and the website are on the same server, fill in 127.0.0.1. If on different servers, please fill in the actual IP.	
@@ -160,6 +160,55 @@ listener, so every other plaintext HTTP site — and plaintext CDN origin-pull �
 `400 Client sent an HTTP request to an HTTPS server`.
 Set that site's port 80 protocol explicitly to **HTTP** and save; the certificate configuration is kept as-is.
 Use "Port Overview" in the toolbar to confirm who occupies each port and with which protocol (see 9.1).
+
+### 2.3 Origin Host (Pass Backend Domain)
+
+In the add/edit website form, open **Basic Content → Backend (Upstream)** and set **Pass Backend Domain**. It is **off by default**. Choose according to the origin's virtual host or application requirements:
+
+| Setting | HTTP Host received by the origin | Use case |
+| --- | --- | --- |
+| Off (default) | Preserves the visitor's original request `Host` | The origin uses the visitor's domain to select a website or tenant, including wildcard sites |
+| On | Uses the host part of **Backend Domain** | The origin requires a fixed backend domain to match its virtual host |
+
+For example, the website is `*.test.com`, the backend domain is `http://www.test.com`, and a visitor requests `www123.test.com`:
+
+| Setting | HTTP Host received by the origin |
+| --- | --- |
+| Off | `www123.test.com` |
+| On | `www.test.com` |
+
+This option changes only the origin request's `Host`; the backend IP and port used for the connection still come from the origin settings. Different visitor and backend domains alone do not require enabling it.
+
+The example explanation is hidden by default. Click the help icon to the left of **Pass Backend Domain** to expand it.
+
+If the origin requires a fixed `Host` and also needs the visitor's original domain, enable this option and manually configure `X-Forwarded-Host: ${host}` as described in 2.4. To preserve only the original `Host`, leave this option off.
+
+### 2.4 Custom Request Headers: Pass the Original Visitor Domain
+
+Custom request headers and **Pass Backend Domain** are **configured independently**. To pass the original visitor domain to the backend application in a header:
+
+1. Add or edit the website and open the **Custom Request Headers** tab.
+2. Turn on **Enable Custom Request Headers**.
+3. Click **Add Header** and enter the values below.
+4. Save the website and configure the backend application or framework to read `X-Forwarded-Host`.
+
+| Field | Value |
+| --- | --- |
+| Header Name | `X-Forwarded-Host` |
+| Header Value | `${host}` |
+
+`${host}` always uses the visitor's original request `Host`, regardless of **Pass Backend Domain**, and **may include a port**. For a request to `www123.test.com`, the header contains `www123.test.com`; if the original Host is `www123.test.com:8080`, the header also includes `:8080`.
+
+Using the domains from 2.3:
+
+| Requirement | Configuration | What the origin receives |
+| --- | --- | --- |
+| Preserve only the visitor's original Host | Turn off **Pass Backend Domain** | `Host: www123.test.com` |
+| Use a fixed origin Host and pass the original visitor domain | Turn on **Pass Backend Domain**; enable custom request headers and add the entry above | `Host: www.test.com`, `X-Forwarded-Host: www123.test.com` |
+
+::: tip Configure the application to read the header
+Enabling **Pass Backend Domain** does not automatically add this custom header. Adding `X-Forwarded-Host` does not automatically make the application use it as the visitor domain; configure the application or framework accordingly.
+:::
 
 ## 3 Load Balancing:
 Load balancing supports: Weighted Round Robin (WRR), IP Hash.
@@ -847,4 +896,5 @@ Access Authentication keeps **unauthenticated** visitors out, but it does not pr
 
 | Applicable version | Changes |
 | --- | --- |
+| >v1.3.25-beta.7 (unreleased) | Documented the origin Host option's default, wildcard-domain examples, and custom request header configuration for `X-Forwarded-Host: ${host}`. |
 | >v1.3.25-beta.7 (unreleased) | Added health tests before saving, per-backend diagnostics, outdated-result notices and cancellation on closing; manual tests leave saved configuration and runtime health unchanged, and never probe local SamWaf listening ports as origins. |
