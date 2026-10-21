@@ -2,7 +2,7 @@
 
 ## Overview
 
-A single IP can be governed by several places at once: the IP Blacklist, IP Allowlist, IP Groups, Threat Intelligence IP feeds, IP Failure Bans, CC bans, Firewall IP Blocking — and it may also fall inside a CDN origin range. Working out "why is this IP blocked?" (or "why isn't it?") by opening each page one by one is slow and easy to get wrong.
+A single IP can be governed by several places at once: the IP Blacklist, IP Allowlist, IP Groups, Threat Intelligence IP feeds, Rule Bans, Failure Counting, CC bans, Firewall IP Blocking — and it may also fall inside a CDN origin range. Working out "why is this IP blocked?" (or "why isn't it?") by opening each page one by one is slow and easy to get wrong.
 
 **IP Policy Match Lookup** collapses that into a single query: enter an IP, and it checks every source above at once and gives you a verdict — **Will be allowed** or **Will be blocked** — along with exactly which rule, which site and which feed matched. If it turns out to be a false positive you can add it to the allowlist right there; if it is genuinely malicious you can block it right there too.
 
@@ -20,13 +20,13 @@ The **IP Policy Match Lookup** button is available at the top right of these pag
 | Protection Logs → Visit Log | Right side of the top info bar |
 | Website Protection → Threat Intelligence IP Subscription | Right side of the top info bar |
 | Website Protection → CDN Origin IPs | Right side of the top info bar |
-| System Settings → IP Failure Ban | Next to the Refresh button |
+| Website Protection → IP Ban | Top right corner of the page |
 
 In addition, the IPs in the following places are **clickable** — one click opens the lookup and runs it automatically, no copy-and-paste needed:
 
 - The **IP** column in the Attack Log list
 - The **Source IP** column in the Visit Log list
-- The **IP** column in the IP Failure Ban list
+- The **IP** column in the IP Ban list (Rule Ban / Failure Counting sources)
 - Every IP / CIDR in the "View IPs" dialog of Threat Intelligence IP Subscription
 - Every CIDR in the "View IPs" dialog of CDN Origin IPs
 
@@ -83,7 +83,7 @@ Each match in the result list contains:
 
 | Field | Description |
 | --- | --- |
-| Source | Where the match came from: IP allowlist, IP blocklist, IP group, Threat-intel IP, IP failure ban, CC ban, Firewall IP ban, CDN origin IP |
+| Source | Where the match came from: IP allowlist, IP blocklist, IP group, Threat-intel IP, Rule Ban, Failure Counting, CC ban, Firewall IP ban, CDN origin IP |
 | Scope | Which site / IP group / feed channel / CDN provider the entry belongs to. Entries that apply everywhere show "Global Site" |
 | Matched rule | The exact rule that matched (single IP, CIDR, wildcard or range). Cache-based bans have no rule text, so this is empty |
 | Effect | Allow / Block / Info only |
@@ -93,7 +93,7 @@ Each match in the result list contains:
 
 **Which sources are covered?**
 
-IP allowlist, IP blocklist, IP groups, threat-intel IPs, IP failure bans, CC bans, firewall IP bans and CDN origin ranges — eight in total.
+IP allowlist, IP blocklist, IP groups, threat-intel IPs, rule bans, failure counting, CC bans, firewall IP bans and CDN origin ranges — nine in total.
 
 **Why is the first lookup slightly slower, and later ones fast?**
 
@@ -115,4 +115,5 @@ It is most likely blocked at the system firewall layer. See [The allowlist only 
 
 | Date | Applicable Version | Description |
 | --- | --- | --- |
+| 2026-10-21 | >v1.3.25-beta.8 | Added the Rule Ban source with in-place "Remove Rule Ban"; entry list updated to the unified "Website Protection → IP Ban" page. |
 | 2026-10-14 | v1.3.25-beta.8 | Renamed to "IP Policy Match Lookup" across entry buttons, dialog titles and generated remarks. |

@@ -41,7 +41,8 @@ the Access Log view is labelled **All Activity** and shows every request from th
 
 Fill in the conditions in the top form as needed, click **Search** to run the query, and **Reset** to clear:
 
-- Choose a **Website**, and enter **Rule Name**, **Visit Identifier**, **Access Status**, **Response Code**, **Source IP**, **Access Date** (time range), **Access Method**, **Log Archive Database**, etc.
+- Choose a **Website**, and enter **Access URL**, **Rule Name**, **Visit Identifier**, **Access Status**, **Response Code**, **Source IP**, **Access Date** (time range), **Access Method**, **Log Archive Database**, etc.
+- **Access URL** searches for a literal substring in the stored URL. For example, `/api/login` finds records containing that path, and `page=2` finds that query-string fragment. `%`, `_`, `!` and `|` are ordinary characters. An empty value adds no filter; leading and trailing spaces are preserved, and no URL decoding is applied (`%2F` does not mean `/`). The URL is usually the original path with its query string; use **Website** to filter by domain. Combine this filter with website, time, source IP or visit identifier in either view, for live or archived logs.
 - Some table columns (Identity, Visit Identifier, Header) support inline keyword filtering — type in the column header and press Enter to confirm.
 - Click a column header to sort columns such as "Time Spent", "AI Score" and "Time".
 
@@ -154,6 +155,7 @@ and refreshes itself when it finishes. It applies immediately on save, with no r
 | Field | Description |
 |-------|-------------|
 | Website | Filter by a specific website; searchable and clearable. |
+| Access URL | Find a literal substring, up to 2048 characters. Case matching follows the database's existing rules. Narrow rows retain at most 2048 bytes of the URL, so content beyond the stored portion cannot be searched in the Access Log view. |
 | Rule Name | Fuzzy search by the hit rule name. |
 | Visit Identifier | Exact lookup by the unique request identifier. Once filled in, no date range or partition is needed — it is a primary-key point query (the UI automatically ignores the date and selected partition). |
 | Access Status | Defense status: All / Block / Allow / Forbid. |
@@ -179,4 +181,5 @@ and refreshes itself when it finishes. It applies immediately on save, with no r
 
 | Date | Applies to | Description |
 | --- | --- | --- |
+| 2026-10-20 | >v1.3.25-beta.8 (unreleased) | Add a literal Access URL substring filter that combines with other conditions for access logs, security events and archives. Supported in both Vue2 and Vue3. |
 | 2026-10-13 | v1.3.25-beta.8 | Every block during a CC ban window is now recorded as a narrow row with rule "CC ban"; the identifier shown on the block page can be looked up directly by visit identifier (date and partition are ignored). These rows do not duplicate the request payload. |

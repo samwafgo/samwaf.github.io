@@ -190,7 +190,7 @@ Click **Test Rule** at the bottom of the edit page to simulate a request and ver
 It is recommended to auto-generate a defense script by selecting feature values from **Log Details** with one click (see Section 1 of this page) — faster and more accurate than writing by hand.
 :::
 
-## 7 Hit Action (Block / Allow / Log Only)
+## 7 Hit Action (Block / Allow / Log Only / Ban)
 
 The action taken when a rule matches is expressed via an action function in the `then` block (Manual Code editing), or chosen from the **Hit Action** dropdown (Interface editing):
 
@@ -201,6 +201,7 @@ The action taken when a rule matches is expressed via an action function in the 
 | Allow and skip given checks | `RF.Allow("CC","AI");` | Allow and skip the detection modules listed in the parentheses |
 | Allow all | `RF.AllowAll();` | Allow and skip all subsequent checks, straight to the backend |
 | Log only | `RF.Log();` | Only log on match, do not block; used for canary observation of new rules |
+| Ban | `RF.Ban(10);` | Block the current request and temporarily ban the client IP on the current host for the given minutes (a positive integer). Bans are managed under "Website Protection → IP Ban"; an existing ban is not extended |
 
 In Interface editing, when the action is **Allow**, a **Skip Detections** multi-select appears with: All, Bot Detection, SQL Injection, XSS, Scanner, RCE, Directory Traversal, CC Protection, AI Detection, Sensitive Words, OWASP, Anti-Leech, CSRF, Upload Check, Captcha. Choosing "All" equals Allow all.
 

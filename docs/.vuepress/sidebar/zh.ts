@@ -22,6 +22,7 @@ export const zhSidebar = sidebar({
                 "/guide/ThreatIP.md",
                 "/guide/CDNIP.md",
                 "/guide/IPLookup.md",
+                "/guide/IPBan.md",
                 "/guide/CacheRule.md",
                 "/guide/HttpAuthBase.md",
                 "/guide/SSL.md",
