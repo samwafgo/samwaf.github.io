@@ -33,6 +33,7 @@
 
 ## 防护日志
 - [访问日志](./VisitLog.md)
+- [日志导出](./LogExport.md)
 - [攻击日志](./AttackLog.md)
 - [日志文件写入](./LogFileWrite.md)
 

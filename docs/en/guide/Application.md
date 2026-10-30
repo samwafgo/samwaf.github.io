@@ -4,7 +4,27 @@
 
 Application Management lets SamWaf host and supervise local business processes (such as jar packages or executables). SamWaf can start, stop, and restart hosted applications, automatically relaunch them on abnormal exit according to a policy, and provides log viewing, initial file upload, upgrade/rollback, and network listening information.
 
-The banner at the top of the page notes: trusted paths (directories allowed to be hosted) are configured via the `application_allow_dirs` field in `conf/config.yml`. Restart SamWaf after changes to take effect.
+## Enable Application Management
+
+Application Management is disabled by default. When you open the page, SamWaf checks whether the running instance has it enabled. A loading indicator appears during the check; when enabled, the application list is displayed.
+
+If the page shows the setup guide, follow these steps:
+
+1. Open `conf/config.yml` in the **SamWaf installation directory** and set the existing `application_manage` entry to `true`. If the entry is missing, add it at the YAML top level:
+
+   ```yaml
+   application_manage: true
+   ```
+
+2. Save the file and restart SamWaf. For a service installation, restart the corresponding service. For a container installation, edit the persistent configuration file actually used by that container, then restart the container.
+3. On first enablement, if no app operation password is configured, SamWaf generates one and saves it in the `application_op_password` field of the same configuration file. Read it from the file and keep it safe for subsequent application operations.
+4. Return to Application Management and click **Check again**. Once the running instance reports that the feature is enabled, the original application list appears.
+
+The page provides setup instructions. The configuration file and the settings loaded after restart determine the feature state; the page has no online switch and does not display the operation password. If you change the file to `true` without restarting, checking again still reports the current instance as disabled.
+
+If the check fails, the page shows an error and lets you retry after the network and service recover. A failed check does not mean the feature is disabled. During a restart, wait until the service is available before checking again.
+
+Once enabled, the banner at the top of the page notes: trusted paths (directories allowed to be hosted) are configured via the `application_allow_dirs` field in `conf/config.yml`. Restart SamWaf after changes to take effect.
 
 > Most sensitive operations (create, edit, delete, start, restart, upgrade) require entering the **App Operation Password** first. See the "App Operation Password" section below.
 
@@ -108,11 +128,18 @@ After a command is sent, "Processing..." is shown while the system polls the sta
 
 Operations such as create, edit, delete, start, restart, and upgrade require the **App Operation Password**.
 
-- This password differs from the login password. It is auto-generated at first startup and printed in the startup log, and is also visible in the `application_op_password` field of `conf/config.yml`.
+- This password differs from the login password. When Application Management is enabled and no operation password is configured, SamWaf generates one and saves it in the `application_op_password` field of `conf/config.yml` in the installation directory. Read it from that file.
 - Enter the password in the confirmation dialog. You can check **Remember for this session** to avoid re-entering it for a period of time.
 - An incorrect password shows "Operation password is incorrect, please try again".
 
 ## FAQ
 
 - **The working directory does not take effect / the path is unavailable?** The directories that can be hosted are restricted by the `application_allow_dirs` (trusted paths) field in `conf/config.yml`. Restart SamWaf after changing it.
-- **Don't know the app operation password?** Check the first startup log, or view the `application_op_password` field in `conf/config.yml`.
+- **Don't know the app operation password?** Read the `application_op_password` field in `conf/config.yml` in the SamWaf installation directory. If it is still empty after first enablement, confirm that you restarted the correct service or container and that its configuration file is writable.
+- **Still shown as disabled after changing the configuration?** Confirm that you edited the file used by the current instance, save it, restart that instance, and click **Check again**.
+
+## Update History
+
+| Applicable version | Changes |
+|--------------------|---------|
+| >v1.3.25-beta.8 (unreleased) | Added setup guidance, feature status checks and retries, and instructions for finding the operation password in the configuration file. |

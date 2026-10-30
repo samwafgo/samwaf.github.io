@@ -55,12 +55,12 @@ Fill in the conditions in the top form as needed, click **Search** to run the qu
 
 - Each IP in the **Source IP** column has an **Add to Block List** button; click and confirm to add that IP to the site's block list.
 
-### 5. Export Logs (SQLite only)
+### 5. Export Logs
 
-- When the current log archive database is file-based (SQLite), an **Export** button appears. What it produces is no longer a copy of the whole log database but a fresh encrypted SQLite file built from **a chosen time range and chosen tiers**:
-  - **Time range**: empty means everything.
-  - **Content**: tick any of "Access Log / Security Events / Payloads / Legacy web_logs"; at least one is required.
-- After confirming, the export runs in the background; collect the file from the download centre when it finishes. Historical data can be large, so export during off-peak hours. The Export button is hidden in MySQL / PostgreSQL mode.
+- A super administrator can click **Export Logs**, choose a time range (last 4 hours by default), tables (Access Log / Security Events, both selected) and format (JSONL by default, or CSV/encrypted SQLite), then create a background task.
+- SQLite, MySQL and PostgreSQL log sources are supported. Use the same dialog to inspect, cancel, delete and download tasks as ZIPs. Downloads use single-use tickets valid for 60 seconds; artifacts are retained for 24 hours by default.
+- Only metadata from `access_log` and `security_event` is included, excluding payloads and legacy `web_logs`. The `export_download` master switch must be enabled. Current list filters do not automatically restrict an export.
+- See [Log Export](./LogExport.md) for format selection, partial results, manifest checks and legacy API migration.
 
 ### 6. Column Configuration
 
@@ -168,7 +168,7 @@ and refreshes itself when it finishes. It applies immediately on save, with no r
 ## FAQ
 
 - **The Source IP shows the proxy/CDN IP — what now?** Use **IP extraction issue?** to configure the real-IP header (e.g. Cloudflare's CF-Connecting-IP, the generic X-Forwarded-For, etc.).
-- **Why is the Export button missing?** Export works by backing up the log database file, so it is only supported for file-based (SQLite) log archives. MySQL / PostgreSQL have no log file, so export is not available there.
+- **Why is the Export button missing?** Check that the account is a super administrator and both frontend and backend are current. SQLite, MySQL and PostgreSQL are all supported. If `export_download` is off, the dialog explains how to enable it. See [Log Export](./LogExport.md).
 - **What is the difference between Visit Log and Risk Log?** The Visit Log is per-request raw access records; the Risk Log aggregates attacks by source IP with their triggered rules, focusing on attack triage.
 - **Why does a detail say no payload was retained?** Payloads are kept only for security events, watchlist captures and sampled requests; an ordinary request has a narrow row and nothing else. To retain payloads for a suspicious IP, add it to the watchlist on the [Risk Log](./AttackLog.md).
 - **The Request filter disappeared after switching to the Access Log view.** That filter matches payload text and exists only in the Security Events view. In the Access Log view, use the User-Agent / Referer column filters instead.
@@ -181,5 +181,6 @@ and refreshes itself when it finishes. It applies immediately on save, with no r
 
 | Date | Applies to | Description |
 | --- | --- | --- |
+| 2026-10-29 | >v1.3.25-beta.8 | Unreleased: background exports across three log database engines, JSONL/CSV/encrypted SQLite, short-lived tickets and manifest checks; only the two metadata tables are exported. |
 | 2026-10-20 | >v1.3.25-beta.8 (unreleased) | Add a literal Access URL substring filter that combines with other conditions for access logs, security events and archives. Supported in both Vue2 and Vue3. |
 | 2026-10-13 | v1.3.25-beta.8 | Every block during a CC ban window is now recorded as a narrow row with rule "CC ban"; the identifier shown on the block page can be looked up directly by visit identifier (date and partition are ignored). These rows do not duplicate the request payload. |

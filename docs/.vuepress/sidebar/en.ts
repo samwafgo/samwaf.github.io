@@ -28,6 +28,7 @@ export const enSidebar = sidebar({
                 "/en/guide/SSL.md",
                 "/en/guide/BlockingPage.md",
                 "/en/guide/BatchTask.md",
+                "/en/guide/WebsiteDiagnostic.md",
             ],
         },
         {
@@ -44,6 +45,7 @@ export const enSidebar = sidebar({
             collapsible: true,
             children: [
                 "/en/guide/VisitLog.md",
+                "/en/guide/LogExport.md",
                 "/en/guide/AttackLog.md",
                 "/en/guide/LogFileWrite.md",
             ],

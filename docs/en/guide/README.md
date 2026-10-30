@@ -33,6 +33,7 @@ Every feature page in the admin console carries a blue info bar that explains in
 
 ## Protection Logs
 - [Visit Log](./VisitLog.md)
+- [Log Export](./LogExport.md)
 - [Attack Log](./AttackLog.md)
 - [Log File Write](./LogFileWrite.md)
 

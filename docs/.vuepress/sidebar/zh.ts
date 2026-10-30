@@ -28,6 +28,7 @@ export const zhSidebar = sidebar({
                 "/guide/SSL.md",
                 "/guide/BlockingPage.md",
                 "/guide/BatchTask.md",
+                "/guide/WebsiteDiagnostic.md",
             ],
         },
         {
@@ -44,6 +45,7 @@ export const zhSidebar = sidebar({
             collapsible: true,
             children: [
                 "/guide/VisitLog.md",
+                "/guide/LogExport.md",
                 "/guide/AttackLog.md",
                 "/guide/LogFileWrite.md",
             ],
