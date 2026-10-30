@@ -13,7 +13,15 @@ See: Website Management -> Batch Tasks
 
 ## 2 Overview
 
-The IP whitelist is an "allow list": when an IP or CIDR range in the whitelist accesses a protected website, SamWaf skips all protection checks for it and lets the request through. It is commonly used for internal ops IPs, monitoring/health-check IPs, payment callback sources, and other traffic that should bypass inspection.
+The IP whitelist is an allowlist: matching an enabled entry skips subsequent WAF checks. It is commonly used for internal ops IPs, monitoring/health-check IPs, payment callback sources and other traffic that should bypass inspection. Website password access, unified access authentication and the application's own authentication still follow their respective configurations.
+
+Enabled site allowlist entries, including single IPs/CIDRs and IP group references, take precedence over the WAF IP blacklist. Enabled global entries also take precedence when global-site protection is enabled. Matching follows the visited site's IP mode: NIC mode uses the network peer IP; Proxy mode uses the IP identified through the configured real-IP source. Check the actual IP in the logs, especially behind a CDN or reverse proxy.
+
+::: warning Inspection bypass scope
+Allowlisted sources skip subsequent WAF checks; do not expect all protection checks to remain active. URL allowlists and callback-source allowances may also skip the IP blacklist. Combining an allowlist with a [whole-family WAF blacklist](./IPBlack.md) should therefore not be treated as a strict "only allowlisted IPs can access" policy.
+
+A WAF allowlist cannot override a [system firewall block](./FirewallIPBlock.md) that drops packets. Remove that system-layer block separately.
+:::
 
 The banner at the top of the page reads: **SamWaf will ignore IPs / ranges that are in the whitelist**.
 
@@ -50,7 +58,7 @@ For IPs that must be allowed on several sites at once — ops egress, monitoring
 The same hint appears under the input box: **Supports single IP, CIDR, wildcard (IPv4 per octet e.g. 10.10.\*.\*; IPv6 must spell out all 8 groups and cannot use ::), and range (start-end)**.
 
 ::: warning
-Patterns that match **every IP** — such as `*.*.*.*` and `0.0.0.0-255.255.255.255` — are rejected on save. A whitelist that matches everything leaves the site completely unprotected. If you really need this, write `0.0.0.0/0` explicitly.
+Wildcards and ranges covering an entire address family, such as `*.*.*.*` and `0.0.0.0-255.255.255.255`, are rejected on save. If a whole-family inspection bypass is required, explicitly enter `0.0.0.0/0` (IPv4 only) or `::/0` (IPv6 only) and check the selected website scope.
 :::
 
 ### 3.3 Edit / Delete
@@ -79,5 +87,11 @@ The top-right area lets you filter by **Website** and **IP**; enter values and c
 | Create Time | The creation time of the record (shown in the list, generated automatically). |
 
 ::: tip
-The "Website" column in the list shows the corresponding site name. To allow an IP across all sites, select the global website when adding the entry.
+The "Website" column shows the corresponding site name. For a WAF inspection bypass across all sites with protection enabled, select the global website and enable both the entry and global-site protection.
 :::
+
+## Update History
+
+| Date | Applicable Version | Description |
+| --- | --- | --- |
+| 2026-10-30 | Unreleased | Clarified enabled-entry and global-protection conditions, IP mode, precedence and inspection bypass scope; other authentication and system-layer blocks retain their own behavior. |

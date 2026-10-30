@@ -50,16 +50,28 @@ When the same set of IPs has to be blocked on several sites, create an [IP Group
 The same hint appears under the input box: **Supports single IP, CIDR, wildcard (IPv4 per octet e.g. 10.10.\*.\*; IPv6 must spell out all 8 groups and cannot use ::), and range (start-end)**.
 
 ::: warning
-Patterns that match **every IP** — such as `*.*.*.*` and `0.0.0.0-255.255.255.255` — are rejected on save (in a blacklist that would ban every visitor). If you really need this, write `0.0.0.0/0` explicitly.
+Wildcards and ranges covering an entire address family, such as `*.*.*.*` and `0.0.0.0-255.255.255.255`, are rejected on save. If a whole-family blacklist is required, explicitly enter `0.0.0.0/0` (IPv4) or `::/0` (IPv6) and complete the second confirmation described below.
 :::
 
-### 3.3 Block layer and syntax limits
+### 3.3 WAF application layer and system firewall
 
-**Block Layer** can be **WAF App Layer**, **System Firewall**, or **Both**. When the entry type is **Reference IP Group**, or the IP uses a **wildcard or range**, the **System Firewall** and **Both** options are greyed out automatically — only **WAF App Layer** remains selectable — and the page shows:
+The blacklist page has removed the **Block Layer** selector. Entries now apply at the **WAF application layer** within the selected website scope. Manage single IPs, CIDRs, wildcards, ranges and IP group references here. For operating-system blocking, use [Firewall IP Block](./FirewallIPBlock.md), whose rules apply to all ports on the machine.
 
-> Entries referencing an IP group or using wildcard/range syntax can only apply at the WAF layer; the system firewall does not support them
+Existing WAF blacklist and system firewall records are preserved after upgrading. If you previously selected "Both", the two records remain independently managed on their respective pages: deleting the WAF entry does not delete the system block, and deleting the system block does not delete the WAF entry.
 
-The reason is that the system firewall (iptables / netsh) only understands single IPs and CIDR ranges; it cannot express wildcards, ranges or group references.
+### 3.3.1 Explicit `/0` scope and second confirmation
+
+When adding or editing a single blacklist entry with an explicit `0.0.0.0/0` or `::/0`, clicking the form's **Confirm** opens a second confirmation showing the website, rule and affected scope. **Cancel** or closing that confirmation does not save the addition or changes. Review the scope and click **Confirm scope and save** to continue saving.
+
+- `0.0.0.0/0` covers **IPv4 only**; `::/0` covers **IPv6 only**. For dual-stack coverage, configure and confirm two separate rules.
+- Selecting a specific website affects that address family's requests while protection is enabled for that site. Selecting **Global Site** requires global-site protection to be enabled and affects all sites with protection enabled.
+- Only enabled blacklist entries participate in blocking. IP matching uses the client IP identified by the site's configuration: **NIC mode** uses the network peer IP; **Proxy mode** uses the IP identified through the configured real-IP source. Behind a CDN or reverse proxy, first check the site's IP mode, trusted proxies and the IPs shown in logs.
+
+::: warning Allow rules and authentication
+Enabled site IP allowlist entries, including single entries and IP group references, take precedence over the IP blacklist. Enabled global IP allowlist entries also take precedence when global-site protection is enabled. URL allowlists and callback-source allowances can also skip the blacklist, so an IP allowlist combined with a `/0` blacklist should not be treated as a strict "only these IPs can access" policy.
+
+Allowlisted requests skip subsequent WAF checks; do not expect all protection checks to remain active for those requests. Website password access, unified access authentication and the application's own authentication still follow their respective configurations. WAF allowlists cannot override an OS firewall DROP; remove the system-layer block on its own page first.
+:::
 
 ### 3.4 Edit / Delete
 
@@ -87,12 +99,12 @@ The top-right area lets you filter by **Website** and **IP**; enter values and c
 | Entry Type | **Single IP / CIDR** (default) or **Reference IP Group**; decides whether you fill in the IP or pick a group. |
 | IP | The IP to block. Supports a single IP, CIDR, wildcard and range (see [3.2](#_3-2-supported-ip-syntax)). Required when the entry type is Single IP / CIDR. |
 | IP Group | The referenced [IP Group](./IPGroup.md). Required when the entry type is Reference IP Group; the entry follows the group content immediately whenever it changes. |
-| Block Layer | **WAF App Layer** / **System Firewall** / **Both**. Only WAF App Layer is available for group references and for wildcard/range syntax. |
+| Enabled | Enabled entries participate in WAF blacklist matching. Disabled entries remain saved but do not participate. |
 | Remarks | Optional free-text notes. |
 | Create Time | The creation time of the record (shown in the list, generated automatically). |
 
 ::: warning
-Use broad ranges like `0.0.0.0/0` with caution to avoid blocking legitimate visitors. If an IP whitelist is also configured, the whitelist takes precedence and allows the traffic through.
+Use broad ranges with caution. Before saving a `/0` entry, check its address family, website scope, enabled state and applicable allow rules as described in section 3.3.1.
 :::
 ## 5 Feed Source
 
@@ -101,3 +113,9 @@ Switch to the **Feed Source** tab at the top to view, read-only, a per-channel s
 For performance, subscribed IPs are not written row-by-row into this page's blacklist; they are summarized per channel. Click **View IPs** on a channel to browse its specific IPs/CIDRs read-only, with substring filtering.
 
 <!-- Image: IP Blacklist Feed Source tab -->
+
+## Update History
+
+| Date | Applicable Version | Description |
+| --- | --- | --- |
+| 2026-10-30 | Unreleased | Blacklist UI uses the WAF layer only; explicit `/0` additions/edits require scope confirmation; clarified allowlist precedence, IP identification mode and independent system-layer records. |

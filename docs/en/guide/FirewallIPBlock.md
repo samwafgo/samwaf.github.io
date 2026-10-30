@@ -6,6 +6,16 @@ Firewall IP Block provides OS-level IP blocking. It performs better than the app
 
 Unlike the application-layer blacklist, Firewall IP Block stops traffic at the operating system firewall, so a blocked IP is rejected before it ever reaches the WAF application.
 
+**System firewall blocks apply globally to the machine and all ports, including the management port.** The add, edit and batch-add dialogs no longer select a website; the search area has no website filter, and the list has no website column. Use [IP Blacklist](./IPBlack.md) for website-scoped blocking.
+
+Existing system block records are preserved after upgrading, even though their former website field is no longer shown. Editing and saving an existing record normalizes its scope to global. Existing WAF blacklist entries are preserved independently. If you previously selected "Both", manage the two records separately: deletion on either page does not cascade to the other.
+
+::: warning Scope and allowlists
+The system layer accepts single IPs and CIDRs, with no wildcards, ranges or IP group references. Targets covering an entire address family, such as `0.0.0.0/0` and `::/0`, cannot be added, edited, batch-added or enabled; rule synchronization also skips such records.
+
+WAF IP/URL allowlists cannot override an OS firewall DROP. The system firewall matches the network source; behind a CDN or reverse proxy, it may see the proxy node's IP. Check the actual network source to avoid blocking shared proxy nodes and management connections. To block by the client IP identified for a particular website, use the WAF blacklist.
+:::
+
 The top of the page has two tabs: **Manual** and **Feed Source**. The **Manual** tab shows five statistics cards giving a live overview of the current block rules: Total, Active, Inactive, Expired, and **Feed Landed (System)** (the active count of threat-intel feeds landed into the system firewall). Clicking the **Feed Landed (System)** card switches to the **Feed Source** tab to view per-channel details.
 
 <!-- Image: Firewall IP Block list and statistics cards -->
@@ -72,7 +82,7 @@ If you cannot meet these container requirements, use the **[IP Blacklist](/en/gu
 ### Add a single block
 
 1. Click **Add Firewall IP Block** at the top-left of the page.
-2. In the dialog, choose the **Website**, enter the **IP Address** and **Block Reason**, and select a **Block Type**.
+2. In the dialog, enter the **IP Address** and **Block Reason**, and select a **Block Type**. Rules apply globally, with no website selection.
 3. To set an **Expire Time**, pick a specific time; leave it blank for a permanent block.
 4. Optionally add a remark, then click **Confirm** to save.
 
@@ -82,7 +92,7 @@ If you cannot meet these container requirements, use the **[IP Blacklist](/en/gu
 
 1. Click the **Batch Add** button.
 2. In the **IP List** text box, enter one IP address per line. Single IP and CIDR formats are supported.
-3. Choose the **Website**, enter the **Block Reason**, select a **Block Type**, and add remarks.
+3. Enter the **Block Reason**, select a **Block Type**, and add remarks. Batch-added rules also apply globally.
 4. Click **Confirm** to block all of them at once.
 
 ### Enable / Disable
@@ -118,7 +128,6 @@ A disabled channel shows a landed count of 0 (removed from the system firewall),
 
 | Field | Description |
 | --- | --- |
-| Website | The website this block rule belongs to. |
 | IP Address | The IP to block. Supports single IP or CIDR format, e.g. `192.168.1.100` or `192.168.1.0/24`. |
 | IP List | Used for batch add: one IP address per line, single IP or CIDR format. |
 | Block Reason | The reason for the block, for later traceability. |
@@ -150,3 +159,9 @@ A disabled channel shows a landed count of 0 (removed from the system firewall),
 - **How do I clean up expired records?** Click the **Clear Expired** button at the top; after confirming, it removes the firewall rules and deletes all expired records (cannot be undone). Permanent bans and non-expired records are not affected.
 - **All buttons are greyed out with a "system firewall blocking is not available" message?** The environment does not meet the [prerequisites](#prerequisites). The banner states the exact reason — commonly: `iptables` is not installed on Linux, the process lacks permission to modify iptables (root is required), or Windows Firewall is off. For container deployments, add iptables, the `NET_ADMIN` capability, and `--network host` as described above.
 - **The block succeeds inside a container, but the malicious IP can still reach the site?** The container is most likely not running with `--network host`. The rules were written only into the container's own network namespace and do nothing to traffic arriving at the host.
+
+## Update History
+
+| Date | Applicable Version | Description |
+| --- | --- | --- |
+| 2026-10-30 | Unreleased | System blocks apply globally to the machine; removed website selection, filter and column; preserved existing records with global scope on edit; disallowed whole-family targets and clarified independent records on the two pages. |

@@ -8,6 +8,8 @@ A single IP can be governed by several places at once: the IP Blacklist, IP Allo
 
 Matching is **CIDR-aware**: looking up `1.2.3.4` matches a `1.2.3.0/24` entry in your lists — it is not a plain text comparison.
 
+A verdict reflects the IP policy sources covered by this lookup; it does not guarantee that an actual request can reach the application. The IP used for a request depends on the site's IP mode and real-IP source configuration. IP allowlist entries must be enabled, and global entries also require global-site protection. An allowlist match skips subsequent WAF checks. URL allowlists, callback-source allowances, website password access and unified access authentication each retain their own conditions. Check real requests and logs as well. System firewall blocks always have machine-wide global scope.
+
 <!-- Image: IP Policy Match Lookup dialog with query results -->
 
 ## Where to Open It
@@ -61,7 +63,7 @@ To allow it completely, unban it on the **Firewall IP Blocking** page, or change
 ### Blocklist a Malicious IP
 
 1. When the IP is in neither the blocklist nor the allowlist, an **Add to blocklist** button appears.
-2. Choose the site it **applies to** and where to **block** it (WAF only / System firewall / Both — defaults to "WAF only").
+2. Choose the site it **applies to**. The block-layer selector has been removed; this action adds a WAF application-layer blacklist entry for that website scope. For machine-wide system blocking, use [Firewall IP Block](./FirewallIPBlock.md).
 3. Fill in the **reason** (also pre-filled).
 4. Click **Confirm**. The lookup re-runs automatically.
 
@@ -115,5 +117,6 @@ It is most likely blocked at the system firewall layer. See [The allowlist only 
 
 | Date | Applicable Version | Description |
 | --- | --- | --- |
-| 2026-10-21 | >v1.3.25-beta.8 | Added the Rule Ban source with in-place "Remove Rule Ban"; entry list updated to the unified "Website Protection → IP Ban" page. |
+| 2026-10-30 | Unreleased | In-place blocklisting uses the WAF layer only, with system blocks managed on their own page; clarified the scope of lookup verdicts. |
+| 2026-10-21 | Unreleased | Added the Rule Ban source with in-place "Remove Rule Ban"; entry list updated to the unified "Website Protection → IP Ban" page. |
 | 2026-10-14 | v1.3.25-beta.8 | Renamed to "IP Policy Match Lookup" across entry buttons, dialog titles and generated remarks. |
