@@ -1,5 +1,57 @@
 # 版本发布
 
+## 20261030 (v1.3.25-beta.9)
+
+<!-- upgrade-notes:v1.3.25-beta.9:start -->
+下载 [SamWaf v1.3.25-beta.9](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.9) · [全部版本](https://github.com/samwafgo/SamWaf/releases)
+
+升级须知
+
+- 端口协议可逐端口显式选择，80 端口不再被 SSL 开关"连带"改成 HTTPS　[重要 · 知悉]　[查看](/guide/Host.html)
+- CC 防护改为多规则，并修正了「平均速率模式」保存后阈值不一致的问题　[重要 · 确认]　[查看](/guide/AntiCC.html)
+- 检查「管理端可信代理网段」是否填得过宽　[重要 · 确认]　[查看](/quickstart/Update.html)
+- 日志归档改为按月切分区，过期回收改为丢整个分区（MySQL/PostgreSQL 的归档表首次开始回收）　[重要 · 知悉]　[查看](/quickstart/Update.html)
+- 通过 API 调用时，查询参数名统一为全小写　[重要 · 知悉]　[查看](/quickstart/Update.html)
+- 访问日志导出改为后台任务，支持 JSONL / CSV / 加密 SQLite　[知悉]
+- 自定义规则支持临时封禁 IP　[确认]
+- 未匹配网站时显示接入引导，支持全局自定义页面　[确认]
+- 搜索引擎爬虫的身份验证补齐了正向回查，CC 规则可豁免已验证爬虫　[确认]　[查看](/guide/AntiCC.html)
+- 人机验证设置不再被开关藏起来，「排除URL列表」更名为「永不挑战的路径」　[确认]　[查看](/guide/HumanVerify.html)
+- CC 规则的「人机验证」动作：通过验证后不再被反复挑战　[确认]　[查看](/guide/CC.html)
+- 新增「紧急模式」：被打的时候一键让全部访客先过人机验证　[知悉]　[查看](/guide/CC.html)
+- 通知渠道 Webhook 支持内网告警平台，需在 config.yml 声明放行　[知悉]　[查看](/guide/NotifyChannel.html)
+- 网站密码访问新增有效期与在线会话管理，认证链路改用真实访客 IP　[知悉]　[查看](/guide/HttpAuthBase.html)
+- 使用 Redis 缓存时不再因为一次读取失败而要求重新登录　[知悉]　[查看](/quickstart/Update.html)
+- 超长报文落库时截断，并为访问日志按 IP / 规则查询补索引　[知悉]　[查看](/quickstart/Update.html)
+- 报文改存独立表，IP 标签切换存放位置时自动合并历史　[知悉]　[查看](/quickstart/Update.html)
+- 日志分层存储：访问窄行与安全事件分表，新增观察名单，日志导出改按时间段　[知悉]　[查看](/quickstart/Update.html)
+- 新增「来源与路径分析」：从来源和路径两个视角看流量构成　[知悉]　[查看](/quickstart/Update.html)
+- 可按来源IP排除日志记录：办公出口与探测机的噪音不再进日志　[知悉]　[查看](/quickstart/Update.html)
+- 查日志不用再挑分区：时间范围自动决定查哪里，按访问识别码可直接全库查找　[知悉]　[查看](/quickstart/Update.html)
+- CC 封禁期间的阻断请求可按访问识别码查询　[知悉]　[查看](/guide/BlockingPage.html)
+- 网站健康检测支持保存前手动测试　[知悉]　[查看](/guide/Host.html)
+- 网站密码访问可以只保护指定路径了，还可搭配免密IP组　[知悉]　[查看](/quickstart/Update.html)
+- 通过 API 申请/续期 SSL 证书时，apply_method 只接受 http01 或 dns01　[知悉]　[查看](/quickstart/Update.html)
+- IP 黑名单回归纯 WAF 层，系统层封禁统一到「防火墙 IP 封禁」页　[知悉]　[查看](/guide/IPBlack.html)
+- 防火墙 IP 封禁不再关联网站，并拒绝全网封禁写法　[知悉]　[查看](/guide/FirewallIPBlock.html)
+- 网站 Excel 导入支持各位宽整数　[确认]
+- 网站列表新增网站访问诊断　[确认]
+- 应用管理未开启时显示配置引导　[确认]
+- IP/URL 黑白名单支持按条目启用停用　[确认]
+- 访问日志支持按 URL 关键字查询　[确认]
+- 支持统一自定义后台标题　[确认]
+- 健康检测配置变化后，列表状态立即重置　[确认]
+- 网站列表新增分组，可按分组筛选与批量移动　[知悉]　[查看](/guide/Host.html)
+- 统一访问认证的登录凭据改为按站点区分　[知悉]　[查看](/quickstart/Update.html)
+
+每条的完整说明（做了 / 不做的区别、怎么撤销）见站内「系统设置 → 升级须知」： [升级须知](https://doc.samwaf.com/guide/UpgradeNotice.html)
+
+感谢以下贡献者（排名不分先后）
+
+@HiNandy
+<!-- upgrade-notes:v1.3.25-beta.9:end -->
+
+
 ## 20261019 (v1.3.25-beta.8)
 
 本次为测试版，最新正式版仍为 **v1.3.24**。可在[快速上手](./readme.md)中选择下载版本。以下新增、修正与优化为相对 **v1.3.25-beta.7** 的变化；升级须知汇总截至本测试版、相对 v1.3.24 的重要变更。

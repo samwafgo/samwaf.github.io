@@ -1,5 +1,57 @@
 # Version Releases
 
+## 20261030 (v1.3.25-beta.9)
+
+<!-- upgrade-notes:v1.3.25-beta.9:start -->
+Download [SamWaf v1.3.25-beta.9](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.9) · [all releases](https://github.com/samwafgo/SamWaf/releases)
+
+Upgrade Notes
+
+- Per-port protocol selection - port 80 is no longer forced to HTTPS by the SSL switch　[Important · Notice]　[details](/en/guide/Host.html)
+- CC protection is now rule-based, and a rate-mode threshold inconsistency is fixed　[Important · Check]　[details](/en/guide/AntiCC.html)
+- Check whether the console trusted proxy ranges are set too wide　[Important · Check]　[details](/en/quickstart/Update.html)
+- Log archives are now cut per month and expired by dropping whole partitions (MySQL/PostgreSQL archive tables start being recycled)　[Important · Notice]　[details](/en/quickstart/Update.html)
+- API query parameter names are now all lower case　[Important · Notice]　[details](/en/quickstart/Update.html)
+- Access log export is now a background task with JSONL / CSV / encrypted SQLite　[Notice]
+- Temporarily ban IPs with custom rules　[Check]
+- Setup guidance and a global custom page for unmatched websites　[Check]
+- Crawler verification now includes a forward DNS confirmation, and CC rules can exempt verified crawlers　[Check]　[details](/en/guide/AntiCC.html)
+- Human verification settings are no longer hidden behind the switch, and the exclude list is renamed　[Check]　[details](/en/guide/HumanVerify.html)
+- CC rules with the Human verification action no longer re-challenge visitors who already passed　[Check]　[details](/en/guide/CC.html)
+- New Emergency mode - one click to put every visitor behind a human verification　[Notice]　[details](/en/guide/CC.html)
+- Notification channel Webhooks can now reach intranet alerting platforms when declared in config.yml　[Notice]　[details](/en/guide/NotifyChannel.html)
+- Website password access gains session lifetime and online session management; auth now uses the real visitor IP　[Notice]　[details](/en/guide/HttpAuthBase.html)
+- A single failed cache read no longer forces a new login when Redis is used　[Notice]　[details](/en/quickstart/Update.html)
+- Oversized payloads are truncated on write, plus new access-log indexes for IP and rule lookups　[Notice]　[details](/en/quickstart/Update.html)
+- Payloads move to their own table, and switching the IP tag location now merges the history　[Notice]　[details](/en/quickstart/Update.html)
+- Tiered log storage, an IP watchlist, and time-ranged log export　[Notice]　[details](/en/quickstart/Update.html)
+- New Source and Path Analysis page, viewing traffic by origin and by path　[Notice]　[details](/en/quickstart/Update.html)
+- Exclude log recording by source IP, keeping office exits and probes out of the logs　[Notice]　[details](/en/quickstart/Update.html)
+- No more picking a partition - the time range decides where to look, and a visit identifier is looked up across all of them　[Notice]　[details](/en/quickstart/Update.html)
+- Requests blocked during a CC ban can be looked up by visit identifier　[Notice]　[details](/en/guide/BlockingPage.html)
+- Test website health checks before saving　[Notice]　[details](/en/guide/Host.html)
+- Site password access can now protect only specific paths, with a password-free IP group option　[Notice]　[details](/en/quickstart/Update.html)
+- SSL certificate orders via API accept only http01 or dns01 as apply_method　[Notice]　[details](/en/quickstart/Update.html)
+- The IP blacklist is WAF-layer only; system-layer blocking lives on the Firewall IP Block page　[Notice]　[details](/en/guide/IPBlack.html)
+- Firewall IP blocks are no longer tied to a website, and whole-network blocks are rejected　[Notice]　[details](/en/guide/FirewallIPBlock.html)
+- Website Excel import supports all integer widths　[Check]
+- Website access diagnostics added to the site list　[Check]
+- Setup guidance when application management is disabled　[Check]
+- Per-entry enable switches for IP/URL black- and whitelists　[Check]
+- Search access logs by URL keyword　[Check]
+- Customize a shared admin title　[Check]
+- Health check status now resets immediately when its settings change　[Check]
+- Website groups added to the list, with group filtering and bulk move　[Notice]　[details](/en/guide/Host.html)
+- Unified Access credentials are now scoped per site　[Notice]　[details](/en/quickstart/Update.html)
+
+Full text of each item (what changes if you act, what it costs if you don't, how to revert) lives in the console under System - Upgrade Notes: [Upgrade Notes](https://doc.samwaf.com/en/guide/UpgradeNotice.html)
+
+Thanks to the following contributors (in no particular order)
+
+@HiNandy
+<!-- upgrade-notes:v1.3.25-beta.9:end -->
+
+
 ## 20261019 (v1.3.25-beta.8)
 
 This is a beta release. The latest stable release remains **v1.3.24**. Choose a version on the [Quick Start](./readme.md) page. The additions, fixes, and improvements below are changes since **v1.3.25-beta.7**; the upgrade notes summarize important changes since v1.3.24 included in this beta.
