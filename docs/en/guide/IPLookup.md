@@ -117,6 +117,6 @@ It is most likely blocked at the system firewall layer. See [The allowlist only 
 
 | Date | Applicable Version | Description |
 | --- | --- | --- |
-| 2026-10-30 | Unreleased | In-place blocklisting uses the WAF layer only, with system blocks managed on their own page; clarified the scope of lookup verdicts. |
-| 2026-10-21 | Unreleased | Added the Rule Ban source with in-place "Remove Rule Ban"; entry list updated to the unified "Website Protection → IP Ban" page. |
+| 2026-10-30 | v1.3.25-beta.9 | In-place blocklisting uses the WAF layer only, with system blocks managed on their own page; clarified the scope of lookup verdicts. |
+| 2026-10-21 | v1.3.25-beta.9 | Added the Rule Ban source with in-place "Remove Rule Ban"; entry list updated to the unified "Website Protection → IP Ban" page. |
 | 2026-10-14 | v1.3.25-beta.8 | Renamed to "IP Policy Match Lookup" across entry buttons, dialog titles and generated remarks. |

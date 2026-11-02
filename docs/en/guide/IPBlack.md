@@ -118,4 +118,4 @@ For performance, subscribed IPs are not written row-by-row into this page's blac
 
 | Date | Applicable Version | Description |
 | --- | --- | --- |
-| 2026-10-30 | Unreleased | Blacklist UI uses the WAF layer only; explicit `/0` additions/edits require scope confirmation; clarified allowlist precedence, IP identification mode and independent system-layer records. |
+| 2026-10-30 | v1.3.25-beta.9 | Blacklist UI uses the WAF layer only; explicit `/0` additions/edits require scope confirmation; clarified allowlist precedence, IP identification mode and independent system-layer records. |

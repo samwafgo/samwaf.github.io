@@ -40,7 +40,7 @@ Once enabled, the banner at the top of the page notes: trusted paths (directorie
    **Basic Configuration**
    - **App Name** (required)
    - **Start Command** (required, e.g. `java -jar app.jar` or `./myapp`)
-   - **Working Directory**: leave blank for the default `data/applications/{code}/`. The form shows the "Actual directory"; an absolute path prompts you to confirm that the path exists and contains the executable, while a relative path is relative to the SamWaf install directory.
+   - **Working Directory**: leave blank to use the server default. The form shows the server-resolved path, allowed directory roots and the relative-path base in real time; save or start failures show the specific reason directly.
    - **Environment Variables**: format `KEY=VALUE,KEY2=VALUE2` (comma separated)
    - **Status**: On / Off
    - **Auto Start**: Yes / No
@@ -64,7 +64,7 @@ Once enabled, the banner at the top of the page notes: trusted paths (directorie
    - **Select File**: upload the application's initial files to the working directory
    - **SHA256 Hash**: auto-calculated after selecting a file, or entered manually
 
-3. Click **Submit** to create, or **Cancel** to discard.
+3. Click **Submit** to create, or **Cancel** to discard. If the initial file upload fails, the application record is kept; you can adjust the settings and submit again in the same dialog to update the existing record and retry the upload without creating a duplicate application.
 
 <!-- Image: Create application form -->
 
@@ -134,7 +134,7 @@ Operations such as create, edit, delete, start, restart, and upgrade require the
 
 ## FAQ
 
-- **The working directory does not take effect / the path is unavailable?** The directories that can be hosted are restricted by the `application_allow_dirs` (trusted paths) field in `conf/config.yml`. Restart SamWaf after changing it.
+- **The working directory does not take effect / the path is unavailable?** The directories that can be hosted are restricted by the `application_allow_dirs` (trusted paths) field in `conf/config.yml`. Restart SamWaf after changing it. The page shows the server-resolved directory and allowed roots; if saving or starting fails, first check whether the path in the message is inside the allowed range.
 - **Don't know the app operation password?** Read the `application_op_password` field in `conf/config.yml` in the SamWaf installation directory. If it is still empty after first enablement, confirm that you restarted the correct service or container and that its configuration file is writable.
 - **Still shown as disabled after changing the configuration?** Confirm that you edited the file used by the current instance, save it, restart that instance, and click **Check again**.
 
@@ -142,4 +142,5 @@ Operations such as create, edit, delete, start, restart, and upgrade require the
 
 | Applicable version | Changes |
 |--------------------|---------|
-| >v1.3.25-beta.8 (unreleased) | Added setup guidance, feature status checks and retries, and instructions for finding the operation password in the configuration file. |
+| >v1.3.25-beta.9 (unreleased) | The working directory field now shows the server-resolved path, allowed directory roots and the relative-path base in real time; save or start failures show the specific reason directly; if the initial file upload fails, you can retry it in the same dialog without creating a duplicate application. |
+| v1.3.25-beta.9 | Added setup guidance, feature status checks and retries, and instructions for finding the operation password in the configuration file. |

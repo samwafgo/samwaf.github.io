@@ -94,4 +94,4 @@ The "Website" column shows the corresponding site name. For a WAF inspection byp
 
 | Date | Applicable Version | Description |
 | --- | --- | --- |
-| 2026-10-30 | Unreleased | Clarified enabled-entry and global-protection conditions, IP mode, precedence and inspection bypass scope; other authentication and system-layer blocks retain their own behavior. |
+| 2026-10-30 | v1.3.25-beta.9 | Clarified enabled-entry and global-protection conditions, IP mode, precedence and inspection bypass scope; other authentication and system-layer blocks retain their own behavior. |

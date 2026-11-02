@@ -137,4 +137,4 @@ Regular management APIs use X-Token and replay-protection headers. Check their b
 
 | Date | Applies to | Description |
 | --- | --- | --- |
-| 2026-10-29 | >v1.3.25-beta.8 | Unreleased: background exports across three log database engines, JSONL/CSV/encrypted SQLite, task management, short-lived download tickets and manifest checks. |
+| 2026-10-29 | v1.3.25-beta.9 | Background exports across three log database engines, JSONL/CSV/encrypted SQLite, task management, short-lived download tickets and manifest checks. |

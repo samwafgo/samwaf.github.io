@@ -69,5 +69,5 @@ The origin phase probes 5 per batch by default (for load-balanced backends); rem
 
 | Date | Version | Description |
 | --- | --- | --- |
-| 2026-10-26 | >v1.3.25-beta.8 | Added "Website Access Diagnostic": staged simulation of config matching, local ingress, origin and visit-URL probing, with per-stage request/response/connection/certificate evidence and actionable advice. |
-| 2026-10-27 | >v1.3.25-beta.8 | Visit-URL probe gained a "Follow system proxy" switch (on by default); wildcard sites (`*` / `*.domain`) require a concrete hostname or IP URL and show the match kind; config matching now reports how the route matched. |
+| 2026-10-26 | v1.3.25-beta.9 | Added "Website Access Diagnostic": staged simulation of config matching, local ingress, origin and visit-URL probing, with per-stage request/response/connection/certificate evidence and actionable advice. |
+| 2026-10-27 | v1.3.25-beta.9 | Visit-URL probe gained a "Follow system proxy" switch (on by default); wildcard sites (`*` / `*.domain`) require a concrete hostname or IP URL and show the match kind; config matching now reports how the route matched. |

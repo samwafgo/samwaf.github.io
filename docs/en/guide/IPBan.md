@@ -69,4 +69,4 @@ The legacy "Rule Ban" and "IP Failure Ban" menus are merged into this page; the 
 
 | Date | Version | Description |
 | --- | --- | --- |
-| 2026-10-21 | >v1.3.25-beta.8 | Added the unified "IP Ban" entry merging Rule Ban and IP Failure Ban; ban list switches between rule/failure/CC sources; added the RF.Ban(minutes) rule action and ban action configuration; IP Policy Lookup supports the rule ban source and removal. |
+| 2026-10-21 | v1.3.25-beta.9 | Added the unified "IP Ban" entry merging Rule Ban and IP Failure Ban; ban list switches between rule/failure/CC sources; added the RF.Ban(minutes) rule action and ban action configuration; IP Policy Lookup supports the rule ban source and removal. |

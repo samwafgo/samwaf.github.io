@@ -164,4 +164,4 @@ A disabled channel shows a landed count of 0 (removed from the system firewall),
 
 | Date | Applicable Version | Description |
 | --- | --- | --- |
-| 2026-10-30 | Unreleased | System blocks apply globally to the machine; removed website selection, filter and column; preserved existing records with global scope on edit; disallowed whole-family targets and clarified independent records on the two pages. |
+| 2026-10-30 | v1.3.25-beta.9 | System blocks apply globally to the machine; removed website selection, filter and column; preserved existing records with global scope on edit; disallowed whole-family targets and clarified independent records on the two pages. |

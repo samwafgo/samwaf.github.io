@@ -9,7 +9,7 @@
 | 发布渠道 | 当前版本 | 适用场景 | 下载 |
 | --- | --- | --- | --- |
 | 正式版 | <Badge text="v1.3.24" type="tip" /> | 希望使用正式发布版本的用户 | [GitHub 下载](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.24) · [Gitee 下载](https://gitee.com/samwaf/SamWaf/releases/tag/v1.3.24) |
-| 测试版（Beta） | <Badge text="v1.3.25-beta.8" type="warning" /> | 希望提前体验最新功能与修正，并参与验证的用户 | [GitHub 下载](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.8) · [Gitee 下载](https://gitee.com/samwaf/SamWaf/releases/tag/v1.3.25-beta.8) |
+| 测试版（Beta） | <Badge text="v1.3.25-beta.9" type="warning" /> | 希望提前体验最新功能与修正，并参与验证的用户 | [GitHub 下载](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.9) · [Gitee 下载](https://gitee.com/samwaf/SamWaf/releases/tag/v1.3.25-beta.9) |
 
 请按需要自行选择正式版或测试版，并下载对应操作系统与架构的安装包。测试版的更新内容与升级注意事项见[版本发布](./Update.md)。已有部署升级前请备份配置与数据，并先在测试环境验证。
 
@@ -63,7 +63,7 @@ Linux Arm64架构请下载对应的文件 SamWaf_Linux_arm64.v*.tar.gz
 ./SamWafLinuxArm64 install && ./SamWafLinuxArm64 start
 ```
 @tab Docker
-镜像见 [Docker Hub](https://hub.docker.com/r/samwaf/samwaf)。下方命令使用正式版通道 `samwaf/samwaf`（即 `:latest`）；如需指定上表中的测试版，将镜像名替换为 `samwaf/samwaf:v1.3.25-beta.8`。后续升级时，`docker pull` 与 `docker run`（或 Compose 配置）应使用同一个标签。
+镜像见 [Docker Hub](https://hub.docker.com/r/samwaf/samwaf)。下方命令使用正式版通道 `samwaf/samwaf`（即 `:latest`）；如需指定上表中的测试版，将镜像名替换为 `samwaf/samwaf:v1.3.25-beta.9`。后续升级时，`docker pull` 与 `docker run`（或 Compose 配置）应使用同一个标签。
 
 **常规启动（端口映射模式）**
 
