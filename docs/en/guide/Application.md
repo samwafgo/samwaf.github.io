@@ -86,6 +86,10 @@ After a command is sent, "Processing..." is shown while the system polls the sta
 
 - Click **Upgrade/Rollback** to open the upgrade window, where you can upload a new version file and choose the action (Upload Only / Upload & Upgrade, where the upgrade flow is stop → backup → replace → restart), or roll back to a historical version from the backup list.
 
+On Linux, first uploads add the owner's execute bit to the initial file permissions while read and write permissions remain subject to the system `umask`. For example, the usual `0644` becomes `0744`, while `0600` under `umask 077` becomes `0700`. Uploading over or upgrading an existing file preserves its ordinary read, write and execute permissions. New backups retain the source file permissions, and rollback restores the permissions recorded in the backup.
+
+If a Linux application already reports `Permission denied`, enter its working directory on the server and check `ls -l ./server-linux-amd64`. If the file owner is also the application's runtime account and the execute bit is missing, run `chmod u+x ./server-linux-amd64`, then start it from the page. For other runtime accounts, set permissions for the actual account and group. Historical backups do not automatically recover execute bits that were already lost. If permissions are correct but startup still fails, check parent-directory access, the filesystem's `noexec` mount option and system access policies.
+
 <!-- Image: Upgrade/Rollback window -->
 
 ### 5. View Network
@@ -95,6 +99,9 @@ After a command is sent, "Processing..." is shown while the system polls the sta
 ### 6. Change Logs
 
 - Click **Change Logs** to open a drawer showing the application's change history. The badge on the button indicates the number of unread changes.
+- In **Security Audit**, select **Application Management** to view creation, editing, deletion, lifecycle commands, uploads, upgrades, rollback, log clearing and rejected operation-password checks. Records include the operator, source IP and result; details contain the application code, name, relevant file and processing stage. Application operations are reviewed in Security Audit and are no longer written to the system log.
+- Success for an asynchronous command means that it was submitted. Check application status and logs for the actual outcome. If startup fails immediately after upgrade or rollback, the response states that the file was replaced or restored but startup failed, and the audit result is failure. If the application's start status is disabled, upgrade or rollback only replaces or restores the file without starting the application; the response states that the application is disabled and was not started, and the audit result is success.
+- New creation and editing change logs keep the actual working directory path, and retain only setting or change summaries for commands and environment variables. Audit records do not contain operation passwords, environment variable values or complete commands.
 
 ### 7. Edit / Delete
 
@@ -142,5 +149,6 @@ Operations such as create, edit, delete, start, restart, and upgrade require the
 
 | Applicable version | Changes |
 |--------------------|---------|
+| >v1.3.25-beta.9 (unreleased) | Linux first uploads add owner execute permission; overwrites and upgrades preserve existing ordinary permissions, while backups and rollback retain source permissions. Application operations appear under Application Management in Security Audit with results and processing stages. Added execute-permission recovery instructions. |
 | >v1.3.25-beta.9 (unreleased) | The working directory field now shows the server-resolved path, allowed directory roots and the relative-path base in real time; save or start failures show the specific reason directly; if the initial file upload fails, you can retry it in the same dialog without creating a duplicate application. |
 | v1.3.25-beta.9 | Added setup guidance, feature status checks and retries, and instructions for finding the operation password in the configuration file. |

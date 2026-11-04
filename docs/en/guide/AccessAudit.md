@@ -4,22 +4,24 @@
 
 SamWaf's **unified security audit stream**: all kinds of security events collected into one table — who did what, when, from which IP, against which site, and whether it succeeded. All security logs will eventually land here.
 
-It currently covers two **categories** (filterable at the top of the page):
+It currently covers these **categories** (filterable at the top of the page):
 
-- **Access authentication**: sign-in, kick, ticket and unauthenticated-block events from [Access Authentication](./AccessConfig.md).
-- **Config change**: sensitive configuration operations, e.g. SSL certificate export to disk (see [SSL Certificate Management](./SSL.md)).
+- **Access authentication**: `access`, sign-in, kick, ticket and unauthenticated-block events from [Access Authentication](./AccessConfig.md).
+- **Website password**: `httpauth`, per-site password sign-in, lockout, kick, session expiration and unauthenticated-block events.
+- **Config change**: `config`, sensitive configuration operations, e.g. SSL certificate export to disk (see [SSL Certificate Management](./SSL.md)).
+- **App management**: `app`, adding, editing, deleting, starting, stopping and restarting apps, plus file uploads, upgrades, rollbacks, log cleanup and denied operations in [App Management](./Application.md).
 
 ::: tip Menu location
 This page is under **System Settings → Security Audit**.
 :::
 
-Notice at the top of the page: **Unified security audit stream; all security events land here. Currently covers Access Authentication (sign-in/kick/ticket anomalies/denied - ticket replay and bad return address mean someone is crafting requests; denied is throttled to one entry per IP+site per 5 min) and Config Changes (e.g. SSL certificate export to disk). Filter by category.**
+The page notice explains which events are covered and how to filter them. App auditing includes **adding apps and file operations**. It also explains that Success for an asynchronous command only means successful submission; check the app status and logs for its actual running state.
 
 <!-- Image: Security audit list page -->
 
 ## 2 Event types
 
-Events fall into **Access authentication** and **Config change** categories. Filter by **Category** first, then by the specific **Event**.
+Filter by **Category** first, then by the specific **Event**. Existing access authentication, website password and configuration events remain available. App management events are listed in [2.3](#_2-3-app-management).
 
 ### 2.1 Access authentication
 
@@ -55,14 +57,42 @@ Records of sensitive configuration operations. This category is reserved for mor
 Config-change events record the **operator, target path and result**, so you can trace "who exported which certificate, where and when". For safety they contain **no** certificate or private-key material.
 :::
 
+### 2.3 App management
+
+Select **App management** (`app`) to view these events:
+
+| Event | Event identifier | Meaning |
+| --- | --- | --- |
+| Add app | `app_add` | Add an app configuration |
+| Edit app | `app_edit` | Edit an existing app configuration |
+| Delete app | `app_del` | Submit an app deletion command |
+| Start app | `app_start` | Submit a start command |
+| Stop app | `app_stop` | Submit a stop command |
+| Restart app | `app_restart` | Submit a restart command |
+| Upload app file | `app_upload` | Upload an app file |
+| Upgrade app | `app_upgrade` | Upload a file and perform an upgrade |
+| Roll back app | `app_rollback` | Roll back an app file |
+| Clear app logs | `app_clear_logs` | Clear app runtime logs |
+| App operation denied | `app_op_denied` | Reject an operation when the app operation credential check fails |
+
+App events record the management **operator account, source IP, API path and result**. The existing **Detail** (`Message`) field summarizes the app code (`app`, corresponding to the app's `code`), app name (`name`), safe filename (`file`, basename only, without directories) and stage (`stage`). Information not yet available may be empty; a rejection during the operation credential check primarily records the stage and reason. App auditing does not add separate app code, name or file filters.
+
+::: tip Asynchronous commands and recorded data
+**Result 1 is shown as Success; result 0 is shown as Failure.** For asynchronous commands such as delete, start, stop and restart, Success only means the command was submitted (`stage=submitted`). It does not confirm healthy operation or final completion. Check the running status, recent error and logs in [App Management](./Application.md).
+
+App auditing keeps operation summaries and does not store the **app operation credential, environment variable values or full commands**.
+:::
+
 ## 3 Steps
 
-The top-right corner filters by **Category** (Access auth / Config change), **Event**, **Account**, **Source IP** and **Site**; set your criteria and click **Search**.
+The top-right corner filters by **Category** (Access auth / Website password / Config change / App management), **Event**, **Account**, **Source IP** and **Site**; set your criteria and click **Search**.
+
+To find app operations, select **App management**, then choose a specific event above or enter the operator account and source IP. Read app information in the **Detail** column. App events usually have no associated site, so clear the Site filter when looking for them.
 
 In the list:
 
-- The **Result** column shows **Success / Failure** tags
-- High-risk events (Locked out, Ticket replay, Bad return address) are tagged red; sign-in failures are orange
+- The **Result** column shows **Success / Failure** tags for `1 / 0`; asynchronous commands only report the submission result
+- High-risk events (Locked out, Ticket replay, Bad return address) are tagged red; sign-in failures and denied app operations are orange
 - **Location** is resolved from the source IP
 
 ## 4 Throttling and retention
@@ -89,15 +119,15 @@ The audit table records everything; notifications only carry what is worth inter
 
 | Field | Description |
 | --- | --- |
-| Category | Access auth / Config change |
+| Category | Access auth / Website password / Config change / App management |
 | Event | Event type, see [2](#_2-event-types) |
-| Result | Success / Failure |
-| Account | The related access account (may be empty for unauthenticated events) |
-| Site | The domain being accessed |
-| Request URL | The full address being accessed |
+| Result | `1` means Success; `0` means Failure. Asynchronous app commands only report submission results |
+| Account | The related access account, or the management operator account for app operations (may be empty for unauthenticated events) |
+| Site | The domain being accessed; usually empty for app events |
+| Request URL | The business request address or the management API path for an app operation |
 | Source IP | The client IP that made the request |
 | Location | Country and region resolved from the source IP |
-| Detail | Event details, such as the failure reason |
+| Detail | Event details, such as the failure reason; app events include available summaries of the app code, name, safe filename and stage, see [2.3](#_2-3-app-management) |
 | Create time | When the event occurred |
 
 ## 7 FAQ
@@ -110,4 +140,10 @@ The audit table records everything; notifications only carry what is worth inter
 
 - **Will the audit log eat a lot of space?** High-frequency events are throttled and only 90 days are kept by default. Lower `access_audit_retain_days` if storage is tight.
 
-- **A record I expected is missing.** Check your time range and filters. Also note that "Denied" is throttled to 5 minutes, so repeated hits from the same IP on the same site leave only one entry.
+- **A record I expected is missing.** Check your filters. For app events, select App management and clear any Site condition that does not apply. Also note that "Denied" is throttled to 5 minutes, so repeated hits from the same IP on the same site leave only one entry.
+
+## 8 Update history
+
+| Applicable version | Changes |
+| --- | --- |
+| >v1.3.25-beta.9 (unreleased) | Added the App management category (`app`) and 11 event filters; documented operator and app summaries, asynchronous command submission results and the scope of sensitive data excluded from records. |

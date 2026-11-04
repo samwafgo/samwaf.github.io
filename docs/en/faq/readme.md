@@ -281,6 +281,8 @@ If you also changed the port by mistake, see [3.1 Change the Management Port](#_
 
 ## 4. Command-Line Tools
 
+See [Command-Line Management](../guide/CLI.md) for site automation, local API Keys, examples for every command and exit codes (new features are unreleased).
+
 SamWaf is a single executable. Besides running it directly, it supports the following subcommands (run from the program directory):
 
 | Command | Description |

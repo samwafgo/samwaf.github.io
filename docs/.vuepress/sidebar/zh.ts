@@ -105,6 +105,7 @@ export const zhSidebar = sidebar({
                 "/guide/OneKeyMod.md",
                 "/guide/Task.md",
                 "/guide/SqlQuery.md",
+                "/guide/CLI.md",
             ],
         },
         {

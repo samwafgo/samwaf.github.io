@@ -105,6 +105,7 @@ export const enSidebar = sidebar({
                 "/en/guide/OneKeyMod.md",
                 "/en/guide/Task.md",
                 "/en/guide/SqlQuery.md",
+                "/en/guide/CLI.md",
             ],
         },
         {
