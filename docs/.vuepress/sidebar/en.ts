@@ -105,7 +105,6 @@ export const enSidebar = sidebar({
                 "/en/guide/OneKeyMod.md",
                 "/en/guide/Task.md",
                 "/en/guide/SqlQuery.md",
-                "/en/guide/CLI.md",
             ],
         },
         {
@@ -153,6 +152,10 @@ export const enSidebar = sidebar({
         {
             text: "OpenAPI Cookbook",
             link: "/en/dev/openapi-cookbook.md",
+        },
+        {
+            text: "Command-Line Management",
+            link: "/en/dev/CLI.md",
         },
     ],
     "/en/api/": [

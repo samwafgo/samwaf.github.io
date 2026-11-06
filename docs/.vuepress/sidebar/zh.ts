@@ -105,7 +105,6 @@ export const zhSidebar = sidebar({
                 "/guide/OneKeyMod.md",
                 "/guide/Task.md",
                 "/guide/SqlQuery.md",
-                "/guide/CLI.md",
             ],
         },
         {
@@ -153,6 +152,10 @@ export const zhSidebar = sidebar({
         {
             text: "开放平台API场景手册",
             link: "/dev/openapi-cookbook.md",
+        },
+        {
+            text: "命令行管理",
+            link: "/dev/CLI.md",
         },
     ],
 });

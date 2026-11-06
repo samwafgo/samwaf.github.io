@@ -1,4 +1,4 @@
-# Command-Line Management
+﻿# Command-Line Management
 
 ## 1 When to use it
 
@@ -218,7 +218,7 @@ Both return `updated` or `unchanged`. `start_status` means `0` for started and `
 
 Each input needs either `code` or both `host` and `port`. Creating a new site also requires `host`, `port`, `remote_host` and `remote_port`. Use JSON numbers for integer fields, not strings. Where other `*_json` fields are used, retain the JSON string format emitted by get.
 
-This first CLI phase rejects `keyfile` and `certfile` input. Save certificates in [SSL Certificate Management](./SSL.md) first, then supply only `bind_ssl_id`; maintain access authentication accounts and passwords in the admin console. `http_auth_json` configures session lifetimes and similar options and can be supplied and exported. `custom_headers_json` and `custom_response_headers_json` are accepted as input, but get omits custom request/response headers and certificate/private key fields to avoid echoing credentials. Applying the export preserves those omitted fields. An export is not a full backup containing secrets.
+This first CLI phase rejects `keyfile` and `certfile` input. Save certificates in [SSL Certificate Management](../guide/SSL.md) first, then supply only `bind_ssl_id`; maintain access authentication accounts and passwords in the admin console. `http_auth_json` configures session lifetimes and similar options and can be supplied and exported. `custom_headers_json` and `custom_response_headers_json` are accepted as input, but get omits custom request/response headers and certificate/private key fields to avoid echoing credentials. Applying the export preserves those omitted fields. An export is not a full backup containing secrets.
 
 Export, edit, then apply:
 
@@ -285,7 +285,7 @@ Check both the process exit code and `ok`. Do not infer success solely from HTTP
 - A local Key works independently of the global Open Platform switch, but its enabled state, expiry and Key IP whitelist still apply. Ordinary remote Keys are not enabled as a side effect.
 - The CLI connects only to the admin port on `127.0.0.1`, disables HTTP system proxies and does not follow redirects. There is no remote server option. Admin HTTPS and the security entry are read automatically from configuration.
 - Local Key authentication requires a loopback connection source and rejects forwarding headers, including the configured management proxy headers. These checks cannot identify headers already removed by a proxy. Restrict access in admin proxy deployments and do not forward local Key requests through a public proxy.
-- Disable, delete or reset Keys in [Open Platform Key Management](./OpenPlatform.md). Run apikey init again after deletion or reset to refresh the local file; use --rotate to replace the Key explicitly. Init enables the local Key again; separately review its expiry and whitelist.
+- Disable, delete or reset Keys in [Open Platform Key Management](../guide/OpenPlatform.md). Run apikey init again after deletion or reset to refresh the local file; use --rotate to replace the Key explicitly. Init enables the local Key again; separately review its expiry and whitelist.
 - Manually created ordinary Keys can be supplied using `SAMWAF_API_KEY`; they still require the global Open Platform switch and their own access policies. A stale environment value overrides a file freshly written by init.
 
 For example, with a Key already supplied by your controlled environment:

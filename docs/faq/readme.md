@@ -1,4 +1,4 @@
-# 常见问题
+﻿# 常见问题
 
 > 下文命令示例中的可执行文件名（如 `SamWaf64` / `SamWaf64.exe`）以你实际下载的版本为准。
 
@@ -278,7 +278,7 @@ rm data/ssl/manager/domain.crt data/ssl/manager/domain.key
 
 ## 四、命令行工具
 
-网站自动化、本机 API Key、全部命令示例和退出码见[命令行管理](../guide/CLI.md)（新增功能未发布）。
+网站自动化、本机 API Key、全部命令示例和退出码见[命令行管理](../dev/CLI.md)（新增功能未发布）。
 
 SamWaf 是单个可执行文件，除直接运行外，还支持以下子命令（在程序所在目录执行）：
 
