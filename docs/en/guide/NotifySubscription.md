@@ -197,9 +197,9 @@ Available variables differ per message type; the "Available Variables" area list
 | Type | Description |
 |------|-------------|
 | User Login | Management console user login event. |
-| Rule Trigger | A protection rule was triggered. |
+| Rule Trigger | A block triggered by a request/response sensitive-word policy, custom rule, IP/URL blacklist or other protection policy. |
 | IP Ban | An IP ban event. |
-| Attack Info | Information about a detected attack. |
+| Attack Info | A block triggered by one of the six built-in detectors: Bot, SQL injection, XSS, scanner, RCE or directory traversal. |
 | SSL Certificate Expire | An SSL certificate is about to expire or has expired. |
 | Weekly Report | Periodic statistics report. |
 | System Error | A system runtime error. |
@@ -207,6 +207,8 @@ Available variables differ per message type; the "Available Variables" area list
 | Access Sign-in | A successful sign-in through unified access authentication. |
 | Access Alert | A security anomaly detected by unified access authentication. |
 | Admin Sign-in Source Changed | An admin account signed in from an IP or location different from its previous sign-in. See [Login History](./LoginHistory.md). |
+
+Notifications are classified by their source, with each match entering one category. Custom rules remain Rule Trigger even when their names contain SQL / XSS / RCE. Enable both subscription rows to receive both categories. If you previously enabled only Rule Trigger, check your Attack Info subscriptions after upgrading. This classification change does not add notifications for log-only, allow or sensitive-word replacement actions. Each category uses its own subscription's throttling, filters and templates.
 
 ## FAQ
 
@@ -236,3 +238,9 @@ Check the "Template Source" field of that record in [Notify Log](./NotifyLog.md)
 **I changed the global defaults, why is one cell unaffected?**
 
 That cell has its own configuration. Subscription-level settings take priority over the global defaults; set its "Throttle Mode" back to "Inherit Global Default" and clear the individual fields. Also note the global configuration is cached for about 30 seconds.
+
+## Version Applicability
+
+| Feature | Applicable version |
+|---------|--------------------|
+| Six built-in detectors use Attack Info; sensitive-word and other protection policies use Rule Trigger | Unreleased (not included in the current latest beta, v1.3.25-beta.10) |
