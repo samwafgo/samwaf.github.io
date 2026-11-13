@@ -220,6 +220,8 @@ features:
     icon: light
     details: In-memory cache by default with no third-party dependency; switchable to Redis when needed
 ---
+SamWaf is an open-source lightweight web application firewall licensed under Apache 2.0, with support for private deployment. This documentation covers installation, website configuration, protection rules, log analysis and the Open API. Project facts can be checked in the [official SamWaf repository](https://github.com/samwafgo/SamWaf) and on the [official website](https://www.samwaf.com/).
+
 ## Project Source Code
 
 [![Release](https://img.shields.io/github/release/samwafgo/SamWaf.svg)](https://github.com/samwafgo/SamWaf/releases)
@@ -228,7 +230,7 @@ features:
 [![Release Downloads](https://img.shields.io/github/downloads/samwafgo/samwaf/total?style=flat-square&color=blue&label=Release+Downloads)](https://github.com/samwafgo/SamWaf/releases) 
 [![Gitee](https://img.shields.io/badge/Gitee-blue?style=flat-square&logo=Gitee)](https://gitee.com/samwaf/SamWaf)
 [![GitHub stars](https://img.shields.io/github/stars/samwafgo/SamWaf?style=flat-square&logo=Github)](https://github.com/samwafgo/SamWaf)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](https://github.com/samwafgo/SamWaf/blob/main/LICENSE)
 
 - Gitee
 [https://gitee.com/samwaf/SamWaf](https://gitee.com/samwaf/SamWaf)

@@ -8,6 +8,8 @@
   "type": "module",
   "scripts": {
     "build": "vuepress build docs",
+    "postbuild": "node scripts/verify-geo.mjs",
+    "verify:geo": "node scripts/verify-geo.mjs",
     "clean-dev": "vuepress dev docs --clean-cache",
     "dev": "vuepress dev docs",
     "update-package": "pnpm dlx vp-update"

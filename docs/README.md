@@ -220,6 +220,8 @@ features:
     icon: light
     details: 默认内存缓存不依赖三方服务;需要时可切换Redis
 ---	
+SamWaf 是采用 Apache 2.0 许可证的开源轻量级 Web 应用防火墙，支持私有化部署。本文档提供安装部署、网站配置、防护规则、日志分析和开放平台 API 的使用说明。项目事实可在 [SamWaf 官方仓库](https://github.com/samwafgo/SamWaf) 与 [官方网站](https://www.samwaf.com/) 核对。
+
 ## 项目源码
 
 [![Release](https://img.shields.io/github/release/samwafgo/SamWaf.svg)](https://github.com/samwafgo/SamWaf/releases)
@@ -228,7 +230,7 @@ features:
 [![Release Downloads](https://img.shields.io/github/downloads/samwafgo/samwaf/total?style=flat-square&color=blue&label=Release+Downloads)](https://github.com/samwafgo/SamWaf/releases) 
 [![Gitee](https://img.shields.io/badge/Gitee-blue?style=flat-square&logo=Gitee)](https://gitee.com/samwaf/SamWaf)
 [![GitHub stars](https://img.shields.io/github/stars/samwafgo/SamWaf?style=flat-square&logo=Github)](https://github.com/samwafgo/SamWaf)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](https://github.com/samwafgo/SamWaf/blob/main/LICENSE)
 
 - gitee
 [https://gitee.com/samwaf/SamWaf](https://gitee.com/samwaf/SamWaf)

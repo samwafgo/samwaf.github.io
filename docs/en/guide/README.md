@@ -63,6 +63,7 @@ Every feature page in the admin console carries a blue info bar that explains in
 - [Security Audit](./AccessAudit.md)
 - [System Config](./SystemConfig.md)
 - [Key Management](./PrivateInfo.md)
+- [Security Operations Reports](./SecurityReport.md)
 - [Data Retention](./DataRetention.md)
 - [OWASP Ruleset](./Owasp.md)
 - [AI Detection](./AIDetection.md)

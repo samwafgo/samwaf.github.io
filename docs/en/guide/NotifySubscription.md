@@ -6,7 +6,7 @@ Notify subscriptions define **which event types are sent to which channels**. Th
 
 The page is presented as a matrix table: rows are **message types**, columns are **channel types** (DingTalk, Feishu, Email, ServerChan, WeChat Work, Custom Webhook), and each cell represents "whether this message type is sent through the corresponding channel".
 
-Supported message types include: User Login, Rule Trigger, IP Ban, Attack Info, SSL Certificate Expire, Weekly Report, System Error, Operation Notice, Access Sign-in, Access Alert, and Admin Sign-in Source Changed.
+Supported message types include: User Login, Rule Trigger, IP Ban, Attack Info, SSL Certificate Expire, Daily Report, Weekly Report, Monthly Report, System Error, Operation Notice, Access Sign-in, Access Alert, and Admin Sign-in Source Changed. See [Security Operations Reports](./SecurityReport.md) for generation settings and full HTML reports.
 
 <!-- Image: Notify subscription matrix table -->
 
@@ -143,6 +143,17 @@ There is also a **Notification Debug Log** switch: when enabled, every rate-cont
 
 <!-- Image: Global defaults dialog -->
 
+### 9. Subscribe to Daily, Weekly and Monthly Summaries
+
+1. Have a super administrator configure automatic generation in [Security Operations Reports](./SecurityReport.md).
+2. Find the **Daily Report / Weekly Report / Monthly Report** rows in the matrix. Add and enable the channels you need for each type.
+3. Recipients, templates, rate control and filters work as described on this page. Report notifications summarize the entire instance; check that domain or keyword filters do not exclude these events.
+4. Select the corresponding report type in [Notify Log](./NotifyLog.md) to review delivery results.
+
+Reports stay local by default, and no subscription is created automatically. Periodic summaries include fields such as report ID, period, generation status, requests and blocked requests, without the full HTML attachment. Super administrators download full reports from the report page. Manual generation does not send periodic summaries. Disabling a subscription does not stop local report generation.
+
+The Daily / Monthly Report options are available in Vue2 / Vue3 frontend v1.3.335. Generation and delivery also require a backend with report support; backend v1.3.25-beta.10 does not include this functionality.
+
 ## Field Reference
 
 | Field | Description |
@@ -201,7 +212,9 @@ Available variables differ per message type; the "Available Variables" area list
 | IP Ban | An IP ban event. |
 | Attack Info | A block triggered by one of the six built-in detectors: Bot, SQL injection, XSS, scanner, RCE or directory traversal. |
 | SSL Certificate Expire | An SSL certificate is about to expire or has expired. |
-| Weekly Report | Periodic statistics report. |
+| Daily Report | Summary notification for a scheduled report covering the previous calendar day. |
+| Weekly Report | Summary notification for a scheduled report covering the previous calendar week, Monday through Sunday. |
+| Monthly Report | Summary notification for a scheduled report covering the previous calendar month. |
 | System Error | A system runtime error. |
 | Operation Notice | Notifications related to management operations. |
 | Access Sign-in | A successful sign-in through unified access authentication. |
@@ -244,3 +257,12 @@ That cell has its own configuration. Subscription-level settings take priority o
 | Feature | Applicable version |
 |---------|--------------------|
 | Six built-in detectors use Attack Info; sensitive-word and other protection policies use Rule Trigger | Unreleased (not included in the current latest beta, v1.3.25-beta.10) |
+| Daily / weekly / monthly summaries linked to the report center | Backend > v1.3.25-beta.10 (unreleased); Vue2 / Vue3 frontend v1.3.335 |
+
+## Update History
+
+| Updated | Applicable version | Changes |
+|---------|--------------------|---------|
+| 2026-11-13 | Backend > v1.3.25-beta.10 (unreleased); Vue2 / Vue3 frontend v1.3.335 | Added daily / monthly message types, periodic summary subscriptions, manual-generation delivery behavior and full-report download guidance |
+
+`vX.Y.Z` means the feature is available starting with that version. `> vX.Y.Z` means it has been merged into the code but has not yet shipped. Check frontend entries and backend capabilities separately.

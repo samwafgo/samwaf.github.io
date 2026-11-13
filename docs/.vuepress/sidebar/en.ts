@@ -95,6 +95,7 @@ export const enSidebar = sidebar({
                 "/en/guide/AccessAudit.md",
                 "/en/guide/SystemConfig.md",
                 "/en/guide/PrivateInfo.md",
+                "/en/guide/SecurityReport.md",
                 "/en/guide/DataRetention.md",
                 "/en/guide/Owasp.md",
                 "/en/guide/AIDetection.md",

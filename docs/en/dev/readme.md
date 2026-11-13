@@ -1,3 +1,7 @@
+---
+description: SamWaf development manual covering source code, backend build requirements, frontend assets, running the service, frontend and backend debugging, and common compilation issues.
+---
+
 # Development Manual  
 
 ## Development Environment  

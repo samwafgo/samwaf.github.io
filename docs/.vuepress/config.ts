@@ -1,6 +1,7 @@
 import { defineUserConfig } from "vuepress";
 import { viteBundler } from "@vuepress/bundler-vite";
 import theme from "./theme.js";
+import { localSeoPlugin } from "./local-seo.js";
 
 export default defineUserConfig({
   bundler: viteBundler(),
@@ -22,6 +23,7 @@ export default defineUserConfig({
   },
 
   theme,
+  plugins: [localSeoPlugin()],
 
   // Enable it with pwa
   // shouldPrefetch: false,

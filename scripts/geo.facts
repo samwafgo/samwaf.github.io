@@ -1,0 +1,10 @@
+# Facts are sourced from the SamWaf repository and documentation home page.
+description: SamWaf 是可私有化部署的开源轻量级 Web 应用防火墙。
+category: SecurityApplication
+license: https://github.com/samwafgo/SamWaf/blob/main/LICENSE
+repo: https://github.com/samwafgo/SamWaf
+official: https://www.samwaf.com/
+docs: https://doc.samwaf.com/
+sameas: https://github.com/samwafgo/SamWaf, https://www.samwaf.com/
+features: 网站配置|防护规则|访问日志|开放平台 API
+os: Windows, Linux

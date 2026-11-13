@@ -95,6 +95,7 @@ export const zhSidebar = sidebar({
                 "/guide/AccessAudit.md",
                 "/guide/SystemConfig.md",
                 "/guide/PrivateInfo.md",
+                "/guide/SecurityReport.md",
                 "/guide/DataRetention.md",
                 "/guide/Owasp.md",
                 "/guide/AIDetection.md",

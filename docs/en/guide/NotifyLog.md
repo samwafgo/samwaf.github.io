@@ -14,7 +14,7 @@ It is the "result record" among the three parts of the notification feature: [No
 
 The top of the page provides filter conditions:
 
-- **Message Type**: filter by Rule Trigger, Operation Notice, User Login, Attack Info, Weekly Report, SSL Certificate Expire, System Error, IP Ban, Access Sign-in, Access Alert, or Admin Sign-in Source Changed.
+- **Message Type**: filter by Rule Trigger, Operation Notice, User Login, Attack Info, Daily Report, Weekly Report, Monthly Report, SSL Certificate Expire, System Error, IP Ban, Access Sign-in, Access Alert, or Admin Sign-in Source Changed.
 - **Send Status**: Success / Failed / Suppressed.
 - **Start Time / End Time**: filter by send-time range.
 
@@ -50,6 +50,14 @@ Suppressed records additionally show **Suppress Reason** and **Suppressed Count*
 ### 4. Delete a Log
 
 Click **Delete** on a log entry and confirm to remove that record.
+
+### 5. Troubleshoot Report Summary Delivery
+
+Filter by **Daily Report / Weekly Report / Monthly Report** to review delivery status, suppression reasons and message details for each channel. The report generation status inside a summary differs from the Send Status on this page: one describes report generation, the other describes notification delivery.
+
+Open [Security Operations Reports](./SecurityReport.md) for generation tasks and full HTML files. Manual generation does not send periodic summaries. Local generation without an enabled subscription does not create a normal delivery record for that report. Deleting a notify log removes the delivery record, not the report file.
+
+Daily / Monthly Report filters are available in Vue2 / Vue3 frontend v1.3.335. Actual periodic summary generation and delivery also require a compatible backend.
 
 ## Field Reference
 
@@ -95,3 +103,11 @@ Filter "Send Status" by **Suppressed**. When a notification is blocked by rate c
 **What does "Template failed, fell back" mean in Template Source?**
 
 It means the subscription has a custom template but rendering failed (for example a malformed variable), so the system sent the notification using the built-in format instead — the notification itself was not lost. Go to the **Message Template** tab in [Notify Subscription](./NotifySubscription.md) and use **Refresh Preview** to check the template syntax.
+
+## Update History
+
+| Updated | Applicable version | Changes |
+|---------|--------------------|---------|
+| 2026-11-13 | Backend > v1.3.25-beta.10 (unreleased); Vue2 / Vue3 frontend v1.3.335 | Added daily / monthly filters, distinguished report generation from notification delivery status, and linked the report center |
+
+`vX.Y.Z` means the feature is available starting with that version. `> vX.Y.Z` means it has been merged into the code but has not yet shipped. Check frontend entries and backend capabilities separately.

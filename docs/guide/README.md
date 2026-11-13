@@ -63,6 +63,7 @@
 - [安全审计](./AccessAudit.md)
 - [系统配置](./SystemConfig.md)
 - [密钥管理](./PrivateInfo.md)
+- [安全运营报告](./SecurityReport.md)
 - [数据留存](./DataRetention.md)
 - [OWASP规则集](./Owasp.md)
 - [AI智能检测](./AIDetection.md)
