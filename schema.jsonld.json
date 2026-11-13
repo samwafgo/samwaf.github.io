@@ -1,0 +1,43 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://doc.samwaf.com/#website",
+      "url": "https://doc.samwaf.com/",
+      "name": "SamWaf 文档",
+      "description": "SamWaf 的部署、配置、开发与开放平台 API 文档。",
+      "inLanguage": [
+        "zh-CN",
+        "en-US"
+      ],
+      "about": {
+        "@id": "https://www.samwaf.com/#samwaf"
+      }
+    },
+    {
+      "@type": [
+        "SoftwareApplication",
+        "SoftwareSourceCode"
+      ],
+      "@id": "https://www.samwaf.com/#samwaf",
+      "name": "SamWaf",
+      "url": "https://www.samwaf.com/",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "Windows, Linux",
+      "license": "https://github.com/samwafgo/SamWaf/blob/main/LICENSE",
+      "codeRepository": "https://github.com/samwafgo/SamWaf",
+      "sameAs": [
+        "https://github.com/samwafgo/SamWaf",
+        "https://www.samwaf.com/"
+      ],
+      "description": "SamWaf 是可私有化部署的开源轻量级 Web 应用防火墙。",
+      "featureList": [
+        "网站配置",
+        "防护规则",
+        "访问日志",
+        "开放平台 API"
+      ]
+    }
+  ]
+}

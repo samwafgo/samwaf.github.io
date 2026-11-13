@@ -1,0 +1,880 @@
+{
+  "pages": [
+    {
+      "url": "https://doc.samwaf.com/",
+      "title": "SamWaf Documentation",
+      "description": "SamWaf 文档：SamWaf 是采用 Apache 2.0 许可证的开源轻量级 Web 应用防火墙，支持私有化部署。本文档提供安装部署、网站配置、防护规则、日志分析和开放平台 API 的使用说明。项目事实可在 SamWaf 官方仓库 与 官方网站 核对。",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/api/",
+      "title": "API 文档",
+      "description": "SamWaf 开放平台 API 文档，说明 X-API-Key 认证、管理端调用约定，并提供原始 Swagger 规范、可读取的接口索引和场景手册。",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/api/operations.html",
+      "title": "API 接口索引",
+      "description": "API 接口索引：本索引从随站点发布的 Swagger 规范生成，按原文展示 HTTP 方法、接口路径、分类和摘要；参数与响应结构请查看原始规范或交互文档。 下列路径直接取自 swagger.json 的 paths 键，不再次拼接 basePath 。实际调用使用自行部署的 SamWaf 管理端地址。",
+      "lastmod": "2026-11-13T14:01:08.624Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/dev/",
+      "title": "开发手册",
+      "description": "SamWaf 开发手册，介绍源码获取、后端编译环境、前端构建产物放置、程序运行与前后端联调，并说明常见编译问题的排查步骤。",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/dev/CLI.html",
+      "title": "命令行管理",
+      "description": "命令行管理：命令行适合在本机虚拟机、离线环境或部署脚本中创建、更新、查询、启停和删除网站。 site apply 会先匹配已有网站：不存在则创建，存在则合并修改，内容相同则返回 unchanged ，可重复执行同一份配置。 站点操作通过运行中的 SamWaf 管理端完成，沿用网站管理的校验和热加载。 apikey…",
+      "lastmod": "2026-11-06T01:53:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/dev/openapi-cookbook.html",
+      "title": "开放平台 API 场景手册",
+      "description": "开放平台 API 场景手册：面向第三方系统/脚本对接者的场景化手册：不按接口清单罗列，而是按「我要做什么事」组织，每个场景给出可直接运行的 curl 示例。新场景会持续补充到本文，见文末的场景索引。 密钥的创建与管理见操作手册 开放平台 ；全量接口参数见 在线 Swagger 文档 。",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/donate.html",
+      "title": "支持一下",
+      "description": "支持一下：SamWaf 是一款完全开源、免费使用的网站应用防火墙，所有代码基于 Apache 2.0 协议开放， 不捐赠也不影响任何功能的使用 。 如果 SamWaf 帮到了你，欢迎请作者喝杯咖啡 ☕。你的支持将用于：",
+      "lastmod": "2026-10-12T06:45:13.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/",
+      "title": "SamWaf Documentation",
+      "description": "SamWaf documentation: SamWaf is an open-source lightweight web application firewall licensed under Apache 2.0, with support for private deployment. This documentation covers installation, website configuration, protection rules, log…",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/api/",
+      "title": "API Documentation",
+      "description": "SamWaf Open API reference covering X-API-Key authentication and management service conventions, with links to the raw Swagger specification, readable operation index and integration cookbook.",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/api/operations.html",
+      "title": "API operation index",
+      "description": "API operation index: This index lists HTTP methods, paths, tags and summaries from the bundled Swagger specification. Tags and summaries retain the original language of the specification; they are not English translations. Paths below are…",
+      "lastmod": "2026-11-13T14:01:08.624Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/dev/",
+      "title": "Development Manual",
+      "description": "SamWaf development manual covering source code, backend build requirements, frontend assets, running the service, frontend and backend debugging, and common compilation issues.",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/dev/CLI.html",
+      "title": "Command-Line Management",
+      "description": "Command-Line Management: Use the CLI to create, update, inspect, start, stop and delete websites on a local VM, in an offline environment or in deployment scripts. site apply matches an existing website first: it creates missing sites,…",
+      "lastmod": "2026-11-06T01:53:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/dev/openapi-cookbook.html",
+      "title": "OpenAPI Cookbook",
+      "description": "OpenAPI Cookbook: A scenario-based manual for third-party systems and scripts integrating with SamWaf. Instead of listing endpoints, it is organized by \"what do I want to do\", with ready-to-run curl examples. New scenarios will be…",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/donate.html",
+      "title": "Support Us",
+      "description": "Support Us: SamWaf is a completely open-source and free web application firewall. All code is released under the Apache 2.0 license, and every feature is available to everyone — no donation required . If SamWaf has helped you, consider…",
+      "lastmod": "2026-10-12T06:45:13.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/faq/",
+      "title": "Common Issues",
+      "description": "Common Issues: In the command examples below, the executable name (e.g. SamWaf64 / SamWaf64.exe ) depends on the build you actually downloaded. Common when SamWaf and the web application server run on the same machine. Move the existing…",
+      "lastmod": "2026-11-06T01:53:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/",
+      "title": "Main Features",
+      "description": "Main Features: Every page has an info bar at the top Every feature page in the admin console carries a blue info bar that explains in one sentence what the page is for. Pages with more to say show a Details link on the right: short…",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/AccessAccount.html",
+      "title": "Access Accounts",
+      "description": "Access Accounts: This page maintains the visitor accounts for Access Authentication — in other words, who is allowed through the gate. Notice at the top of the page: These accounts are for visitors signing in. They are entirely separate…",
+      "lastmod": "2026-08-05T03:36:27.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/AccessAudit.html",
+      "title": "Security Audit",
+      "description": "Security Audit: SamWaf's unified security audit stream : all kinds of security events collected into one table — who did what, when, from which IP, against which site, and whether it succeeded. All security logs will eventually land here.…",
+      "lastmod": "2026-11-04T05:42:25.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/AccessConfig.html",
+      "title": "Auth Settings",
+      "description": "Auth Settings: Access Authentication puts a single sign-in gate in front of every site proxied by the WAF: once enabled, visiting any site first requires signing in at the auth center ; after that, every other site is reachable without…",
+      "lastmod": "2026-09-23T01:58:34.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/AccessSession.html",
+      "title": "Active Sessions",
+      "description": "Active Sessions: Lists the visitors currently signed in through Access Authentication , and lets you force a single session — or all of them — offline. Notice at the top of the page: The visitors currently online. Kicking a session…",
+      "lastmod": "2026-08-05T03:36:27.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Account.html",
+      "title": "Account Management",
+      "description": "Account Management: Account Management is used to maintain the admin accounts that log in to the SamWaf console. From Account Management → Account List you can view all accounts and perform actions such as creating an account, editing an…",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/AccountLog.html",
+      "title": "Account Log",
+      "description": "Account Log: The Account Log records the operations performed by admin accounts, making auditing and tracing easier. From Account Management → Account Log you can view each operation record, including the operation account, operation…",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/AiAssistant.html",
+      "title": "AI Assistant",
+      "description": "AI Assistant: The AI Assistant is a chat entry that stays available across the admin console, via the floating AI button in the bottom-right corner (present in all three layouts: side, top and mix). You can use it to: The AI capability…",
+      "lastmod": "2026-08-06T03:34:48.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/AIDetection.html",
+      "title": "AI Intelligent Detection",
+      "description": "AI Intelligent Detection: AI Intelligent Detection uses a lightweight machine learning model to identify anomalous requests. It acts as a supplementary layer to the existing rule engine (SQL injection, XSS, OWASP, etc.), specifically…",
+      "lastmod": "2026-06-23T07:16:02.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Analysis.html",
+      "title": "Data Analysis (Access Analysis)",
+      "description": "Data Analysis (Access Analysis): The Data Analysis page visualizes the distribution of accesses by country/region within a selected time range using a world map and a word cloud , helping you intuitively understand where traffic comes…",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Application.html",
+      "title": "Application Management",
+      "description": "Application Management: Application Management lets SamWaf host and supervise local business processes (such as jar packages or executables). SamWaf can start, stop, and restart hosted applications, automatically relaunch them on abnormal…",
+      "lastmod": "2026-11-04T05:42:25.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/AttackLog.html",
+      "title": "Risk Log (Defense Log)",
+      "description": "Risk Log (Defense Log): The Risk Log (also called Defense Log / Attack Log) aggregates and summarizes accesses that triggered WAF protection rules, grouped by source IP . It helps you quickly spot attackers, view the set of rules they…",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/BatchTask.html",
+      "title": "Batch Tasks",
+      "description": "Batch Tasks: Batch tasks automatically run batch operations, executed sequentially at 5 AM every day, and can also be triggered manually. They import data from a local file or a remote URL into the system in bulk. Currently supported…",
+      "lastmod": "2026-08-11T03:04:32.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/BlockingPage.html",
+      "title": "Custom Blocking Response Page",
+      "description": "Custom Blocking Response Page: The custom blocking response page lets you customize what the WAF returns to a visitor when it blocks a request. You can configure a dedicated response code, response content, and response headers per…",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/CacheRule.html",
+      "title": "Cache Rule",
+      "description": "Cache Rule: Cache rules cache matching requests. When a request hits a rule, the cached content is returned directly, reducing backend load and speeding up access. Different rule types suit different scenarios. Cache rules require the…",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/CC.html",
+      "title": "CC Protection",
+      "description": "CC Protection: CC protection defends against CC (Challenge Collapsar) attacks - large volumes of requests sent to a site in a short time. A website can hold multiple rules , evaluated top-down by priority and stopping at the first match…",
+      "lastmod": "2026-09-03T03:26:24.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/CDNIP.html",
+      "title": "CDN Origin IP",
+      "description": "CDN Origin IP: CDN Origin IP is a central store SamWaf maintains for each CDN vendor's origin (回源) IP ranges. It keeps every vendor's origin ranges in one place, and both the site side (set Real-IP Source = CDN preset in the host…",
+      "lastmod": "2026-10-14T01:46:23.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/DataRetention.html",
+      "title": "Data Retention Policy",
+      "description": "Data Retention Policy: The Data Retention Policy lets you configure how long various statistics / log data are kept. SamWaf automatically cleans up historical data every day at 04:30 according to the policies set here, preventing the…",
+      "lastmod": "2026-10-09T02:14:04.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/FileManage.html",
+      "title": "File Management",
+      "description": "File Management: The File Management page lists files generated by SamWaf during operation (such as logs, databases, and certificates) and lets you delete those that are allowed to be removed, making it easier to manage disk space. Files…",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/FirewallIPBlock.html",
+      "title": "Firewall IP Block",
+      "description": "Firewall IP Block: Firewall IP Block provides OS-level IP blocking. It performs better than the application-layer blacklist and is suited to malicious IPs that should be completely blocked. Unlike the application-layer blacklist, Firewall…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Host.html",
+      "title": "Website Configuration",
+      "description": "Website Configuration: Please layout the SamWaf firewall according to the architecture below. Important: Deploying on the same server may encounter situations where ports 80 and 443 are already in use. Please perform operations when the…",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/HostGuard.html",
+      "title": "Remote Brute-force Guard",
+      "description": "Remote Brute-force Guard: Remote Brute-force Guard protects the SSH / RDP logins of the machine SamWaf itself runs on — not the websites you have configured inside SamWaf. It watches the operating system's login failure logs to detect…",
+      "lastmod": "2026-08-14T04:57:53.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/HttpAuthBase.html",
+      "title": "Website Access Authentication",
+      "description": "Website Access Authentication: Website access authentication lets you require a password to access a protected website. After a website password is enabled, visitors must access the site with the password. The authentication accounts…",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/HumanVerify.html",
+      "title": "Human verification",
+      "description": "Human verification: Human verification has three layers. They live in different places, and mixing them up is where most confusion comes from: The capability settings are independent of the site-wide switch. With the switch off,…",
+      "lastmod": "2026-09-03T03:32:41.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/IPBan.html",
+      "title": "IP Ban",
+      "description": "IP Ban: \"IP Ban\" merges the former Rule Ban and IP Failure Ban pages into a single entry, managing every client-IP ban by source: Each source keeps its own detection and storage semantics — nothing changes under the hood; the list is only…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/IPBlack.html",
+      "title": "IP Blacklist",
+      "description": "IP Blacklist: The protective wall will block access from IPs within the blacklist. See: Website Management -> Batch Tasks Batch Add Blacklist IP",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/IPGroup.html",
+      "title": "IP Group",
+      "description": "IP Group: An IP group is a reusable IP set shared across sites . Maintain a batch of IPs in one group, then have the IP Blacklist , IP Whitelist and Protection Rules reference that group — instead of re-entering the same IPs on every…",
+      "lastmod": "2026-08-05T09:10:57.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/IPLocation.html",
+      "title": "IP Database Management",
+      "description": "IP Database Management: IP Database Management configures and manages SamWaf's IP geolocation capability. Based on the offline IP databases you upload, SamWaf resolves the source IP of incoming visits into location information such as…",
+      "lastmod": "2026-07-14T01:29:47.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/IPLookup.html",
+      "title": "IP Policy Match Lookup",
+      "description": "IP Policy Match Lookup: A single IP can be governed by several places at once: the IP Blacklist, IP Allowlist, IP Groups, Threat Intelligence IP feeds, Rule Bans, Failure Counting, CC bans, Firewall IP Blocking — and it may also fall…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/IPWhite.html",
+      "title": "IP Whitelist",
+      "description": "IP Whitelist: The protective wall will ignore IPs within the whitelist. See: Website Management -> Batch Tasks Batch Add Whitelist IP",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Ldp.html",
+      "title": "URL Privacy Protection",
+      "description": "URL Privacy Protection: URL Privacy Protection (Data Desensitization) desensitizes the sensitive data returned by specific URLs. When users access a specified URL, sensitive data in the response is masked, for example partially hiding…",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/LogExport.html",
+      "title": "Log Export",
+      "description": "Log Export: Click Export Logs on the Visit Log page to export access logs and security events from SQLite, MySQL or PostgreSQL for a selected time range. Choose JSONL, CSV or encrypted SQLite. Exports run in the background; progress,…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/LogFileWrite.html",
+      "title": "Log File Write",
+      "description": "Log File Write: The Log File Write feature additionally outputs access logs as standard-format text files for analysis by third-party security tools such as CrowdSec, independent of the existing SQLite log storage. The page has four…",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/LoginHistory.html",
+      "title": "Login History",
+      "description": "Login History: Login History answers the question \"where was my admin account signed in from last time, and is this sign-in coming from the same place?\" It consists of two parts:",
+      "lastmod": "2026-08-06T08:36:45.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/NotifyChannel.html",
+      "title": "Notify Channel",
+      "description": "Notify Channel: Notify channels define where messages are sent . SamWaf uses the channels configured here to push system alerts and notifications to you. The notification feature works in three parts:",
+      "lastmod": "2026-09-04T06:08:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/NotifyLog.html",
+      "title": "Notify Log",
+      "description": "Notify Log: The notify log records the sending history of every notification, for troubleshooting and statistical analysis. It is the \"result record\" among the three parts of the notification feature: Notify Channel configures how…",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/NotifySubscription.html",
+      "title": "Notify Subscription",
+      "description": "Notify Subscription: Notify subscriptions define which event types are sent to which channels . They link the channels configured in Notify Channel with the system's various message types, enabling flexible notification strategies. The…",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/OneKeyMod.html",
+      "title": "One-Key Modify",
+      "description": "One-Key Modify: Since only one program can occupy a given web port (80, 443) on a single server, to make SamWaf the front-end proxy you need to change the port 80 occupied by BT Panel's Nginx to 81, and 443 to 444. To simplify deployment,…",
+      "lastmod": "2026-07-16T06:02:34.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/OpenPlatform.html",
+      "title": "Open Platform",
+      "description": "Open Platform: The Open Platform exposes SamWaf's management capabilities to third-party systems and scripts. Callers do not need to log in to the admin console — they only need to carry an X-API-Key in the HTTP header of each request for…",
+      "lastmod": "2026-10-09T02:14:04.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Otp.html",
+      "title": "Two-Factor Authentication (2FA)",
+      "description": "Two-Factor Authentication (2FA): Two-Factor Authentication (2FA) is a secure login verification technology. Once enabled, in addition to the password, users must enter a 6-digit dynamic security code generated by an authenticator app when…",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Owasp.html",
+      "title": "OWASP Rule Set Management",
+      "description": "OWASP Rule Set Management: The OWASP Core Rule Set (CRS) online management page manages SamWaf's built-in OWASP CRS rules (powered by the Coraza engine). It brings rule browsing, tuning, hit statistics, online upgrade, sandbox testing,…",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/PrivateInfo.html",
+      "title": "Key Management",
+      "description": "Key Management: Key Management centrally stores various sensitive credentials (such as DNS provider API keys / secrets) and lets you organize them by Key Group . All key values are stored encrypted locally — never persisted in plaintext,…",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Rule.html",
+      "title": "Protection Rules",
+      "description": "Protection Rules: Select the desired feature value, turn on the \"Quick Add Rule\" switch, and click on a blank space. Currently, the following data can be identified:",
+      "lastmod": "2026-10-21T03:26:36.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/RunDiagnostic.html",
+      "title": "Run Diagnostic",
+      "description": "Run Diagnostic: When SamWaf shows high CPU or memory usage, Run Diagnostic lets you inspect resource usage from the perspective of the SamWaf process itself (as opposed to whole-machine monitoring), and export a diagnostic package in one…",
+      "lastmod": "2026-08-27T06:47:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/RuntimeInfo.html",
+      "title": "Runtime Info",
+      "description": "Runtime Info: The Runtime Info (Runtime Parameters) page presents SamWaf's current runtime status and system environment as a \"name / value\" list. It is handy for troubleshooting, confirming the version, and observing operational metrics…",
+      "lastmod": "2026-08-06T03:34:48.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/SecurityReport.html",
+      "title": "Security Operations Reports",
+      "description": "Security Operations Reports: Security operations reports summarize all websites in the current instance by calendar day, week or month. They include request and block statistics, trends, TOP lists, operation audit summaries, and website…",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Sensitive.html",
+      "title": "Sensitive Word Management",
+      "description": "Sensitive Word Management: Sensitive word detection inspects request or response content for specific sensitive words and handles them. The SamWaf firewall blocks content containing sensitive words, or replaces sensitive words in the…",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/SourcePathAnalysis.html",
+      "title": "Source & Path Analysis",
+      "description": "Source & Path Analysis: Source & Path Analysis rolls up access logs per day and presents the traffic from two complementary angles: Both tables come from the same daily rollup with a different grouping dimension, so the two angles always…",
+      "lastmod": "2026-10-09T02:14:04.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Spider.html",
+      "title": "Spider (Crawler Identification Analysis)",
+      "description": "Spider (Crawler Identification Analysis): The Spider Analysis page counts the access share of various crawlers (spiders) / visitors within a selected time range, helping you identify the composition of search-engine crawlers, bots and…",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/SqlQuery.html",
+      "title": "SQL Query Tool",
+      "description": "SQL Query Tool: The SQL Query Tool runs read-only queries against SamWaf's local databases and lets you inspect the database table structure — handy for troubleshooting data, verifying statistics, or ad-hoc lookups. For security, the tool…",
+      "lastmod": "2026-07-07T00:29:54.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/SSL.html",
+      "title": "SSL Certificate Management",
+      "description": "SSL Certificate Management: All SSL certificate features are gathered here: the certificate folder (batch management), automatic application/renewal, bulk expiration check, and CA server configuration. Batch management of certificates.",
+      "lastmod": "2026-08-26T01:37:35.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/SysLog.html",
+      "title": "System Log",
+      "description": "System Log: The System Log records management-side operations for auditing and traceability. Each entry records the operation type, operation content, and the time it occurred. This page lists the system logs and lets you view the full…",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/SystemConfig.html",
+      "title": "System Configuration",
+      "description": "System Configuration: System Configuration maintains SamWaf's system-level settings as key-value pairs. Each entry consists of a Configuration Item (key), a Configuration Value (value), and Remarks. You can add, search, edit, and delete…",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Task.html",
+      "title": "Task Management",
+      "description": "Task Management: Task management lets you view and manage the system's built-in scheduled tasks (such as SSL certificate auto renewal, cleaning up expired firewall IP block rules, deleting historical data, etc.). Each task has a…",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/ThreatIP.html",
+      "title": "Threat Intelligence IP Subscription",
+      "description": "Threat Intelligence IP Subscription: Threat Intelligence IP Subscription lets you subscribe to multiple threat-intel IP feeds. It performs a daily full pull with automatic incremental landing into the WAF app layer and/or the system…",
+      "lastmod": "2026-10-14T01:46:23.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/Tunnel.html",
+      "title": "Tunnel Protection",
+      "description": "Tunnel Protection: Tunnel protection is currently an experimental feature designed to provide external protection for specific ports such as remote connections, database connections, and Redis connections. Tunnel Name Custom name of the…",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/UpgradeNotice.html",
+      "title": "Upgrade Notes",
+      "description": "Upgrade Notes: Upgrade Notes answers one question: \"I just upgraded - what actually changed in this version, and is there anything I should go and switch on?\" That information used to live only in the \"Important Notes\" section of the…",
+      "lastmod": "2026-08-26T01:38:56.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/UrlBlack.html",
+      "title": "URL Access Restriction",
+      "description": "URL Access Restriction: The URL Blocklist (URL Access Restriction) is used to block access to specific URLs. The firewall blocks access to URLs in the blocklist, and matched requests are intercepted. Typical use case: forbid access to…",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/UrlWhite.html",
+      "title": "URL Whitelist",
+      "description": "URL Whitelist: The URL Whitelist is used to allow specific URLs through during SamWaf protection. During detection, the firewall ignores URLs in the whitelist, so matched requests skip the related protection checks and pass directly.…",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/VisitLog.html",
+      "title": "Visit Log",
+      "description": "Visit Log: The Visit Log page records every raw access request that passes through the WAF. Whether allowed, blocked or forbidden, each request is logged individually, so you can search single accesses by many conditions — time, website,…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/VpConfig.html",
+      "title": "Parameter Settings",
+      "description": "Parameter Settings: Parameter Settings centrally manage SamWaf's own management console security and access configuration. They map to the related items in conf/config.yml and can be edited and saved from the UI. Menu path: System…",
+      "lastmod": "2026-09-06T07:35:23.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/guide/WebsiteDiagnostic.html",
+      "title": "Website Access Diagnostic",
+      "description": "Website Access Diagnostic: When a site is misconfigured (domain/port does not match real visits, the origin's HTTPS certificate is untrusted, or the origin is unreachable), the page usually shows nothing but \"cannot be opened\". Website…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/quickstart/",
+      "title": "Quick Start",
+      "description": "Quick Start: It is strongly recommended to fully test in a staging environment before deploying to production. Please report any issues promptly. Choose either channel and download the package for your operating system and architecture.…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/quickstart/Update.html",
+      "title": "Version Releases",
+      "description": "Version Releases: This section lists only changes and new upgrade notes since v1.3.25-beta.8 . The latest stable release remains v1.3.24 . Choose a version on the Quick Start page; when upgrading from an earlier version, also review the…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/en/quickstart/xppanel-install.html",
+      "title": "Deploy by XPPanel",
+      "description": "Deploy by XPPanel: Here is the Documentation for XPPanel, After completing the installation and deployment of XPPanel, open your browser and navigate to the URL provided in the prompts to access XPPanel, as shown in the interface below.",
+      "lastmod": "2025-11-21T01:32:31.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/faq/",
+      "title": "常见问题",
+      "description": "常见问题：下文命令示例中的可执行文件名（如 SamWaf64 / SamWaf64.exe ）以你实际下载的版本为准。 常见于 SamWaf 与 Web 应用服务器在同一台服务器的情况。需要把原 Web 服务占用的 80 / 443 改到其他端口，再让 SamWaf 监听 80 / 443 做前置代理。",
+      "lastmod": "2026-11-06T01:53:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/",
+      "title": "主要功能",
+      "description": "主要功能：管理端每个功能页顶部都有一条蓝色说明条，一句话讲清这个页面是做什么的。说明较多的页面右侧会有 详细说明 ：内容不多时原地展开，内容较多时从右侧滑出面板。面板里还有 查看完整文档 链接，直达本手册对应章节（界面切成英文时会自动打开英文文档）。",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/AccessAccount.html",
+      "title": "访问账号",
+      "description": "访问账号：这里维护的是 统一访问认证 的访客账号 ——也就是\"谁可以通过这道门\"。 页面顶部提示： 这里的账号是给访客登录用的，与管理端登录账号完全分开，也与站点的【网站密码访问】互不影响。密码采用 bcrypt 存储，无法读回。",
+      "lastmod": "2026-08-05T03:36:27.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/AccessAudit.html",
+      "title": "安全审计",
+      "description": "安全审计：SamWaf 的 统一安全审计流水 ：把各类安全事件汇总到同一张表——谁在什么时候、从哪个 IP、对哪个站点做了什么，成功还是失败。将来所有安全日志都会汇入这里。 当前包含以下 分类 （可在页面顶部按分类筛选）：",
+      "lastmod": "2026-11-04T05:42:25.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/AccessConfig.html",
+      "title": "认证配置",
+      "description": "认证配置：统一访问认证（Access 模式） 给所有被 WAF 代理的站点加一道统一的准入门槛：开启后，访问任何站点都要先在 认证中心 登录一次；登录成功后，访问其余站点无需再登。 出发点是很多自建的开源服务本身没有安全保障，直接暴露在公网上风险很高。有了这道门槛，只有你放行的账号才能碰到后端服务。",
+      "lastmod": "2026-09-23T01:58:34.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/AccessSession.html",
+      "title": "在线会话",
+      "description": "在线会话：列出当前通过 统一访问认证 登录的访客，并支持把某个会话或全部会话强制下线。 页面顶部提示： 这里列出当前在线的访客。踢下线后，该会话在所有站点上的登录状态同时失效，通常立即生效。默认只看「有效」，把状态筛选清空即可查看历史会话。",
+      "lastmod": "2026-08-05T03:36:27.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Account.html",
+      "title": "账号管理",
+      "description": "账号管理：账号管理用于维护登录 SamWaf 管理端的后台账号。在「账号管理 → 账号列表」中可以查看所有账号，并完成新建账号、编辑账号、重置密码、重置双因素认证（2FA）、删除账号等操作。每个账号可分配不同的角色，以区分管理权限。 编辑弹窗中不包含密码修改，修改密码请使用「重置密码」功能。",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/AccountLog.html",
+      "title": "账号日志",
+      "description": "账号日志：账号日志用于记录后台账号的操作行为，便于审计与追溯。在「账号管理 → 账号日志」中可以查看每条操作记录，包括操作账号、操作类型、操作内容及添加时间，并可查看单条记录的详情。",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/AiAssistant.html",
+      "title": "AI 助手",
+      "description": "AI 助手：AI 助手是管理端常驻的对话入口，位于界面 右下角的悬浮按钮「AI助手」 （侧边栏、顶部、混合三种布局下都有）。它可以用来： AI 能力由 你自己配置的大模型服务 提供，SamWaf 不内置模型、也不代你转发到任何官方服务。",
+      "lastmod": "2026-08-06T03:34:48.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/AIDetection.html",
+      "title": "AI 智能检测",
+      "description": "AI 智能检测：AI 智能检测用一个轻量机器学习模型识别异常请求，作为现有规则引擎（SQL 注入、XSS、OWASP 等）的 补充层 ，专门补规则的盲区：变形绕过、混淆、未知 payload。 模型用你 自己的日志在本地训练 ，训练数据不出本机，符合 SamWaf 私有化部署原则。推理在 SamWaf 内部用纯…",
+      "lastmod": "2026-06-23T07:03:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Analysis.html",
+      "title": "数据分析（访问分析）",
+      "description": "数据分析（访问分析）：数据分析页面以 世界地图 和 词云 两种可视化方式，展示选定时间范围内各国家/地区的访问分布情况，帮助你直观了解流量来源以及攻击/放行行为的地理分布。",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Application.html",
+      "title": "应用管理",
+      "description": "应用管理：应用管理用于在 SamWaf 中托管并守护本地业务进程（如 jar 包、可执行程序等）。SamWaf 可以启动、停止、重启被托管应用，按策略在异常退出时自动拉起，并提供日志查看、初始文件上传、升级/回滚以及网络监听信息查看等能力。 应用管理默认关闭。进入页面后，SamWaf…",
+      "lastmod": "2026-11-04T05:42:25.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/AttackLog.html",
+      "title": "风险日志（防护日志）",
+      "description": "风险日志（防护日志）：风险日志（也称防护日志 / 攻击日志）以 来源 IP 为维度，汇总统计触发了 WAF 防护规则的访问情况，帮助你快速发现攻击者、查看其触发的规则集合，并下钻到具体的访问明细。 页面顶部按「触发规则」分组展示标签页，可在不同规则之间快速切换查看；同时支持按规则、来源 IP 进行查询过滤。",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/BatchTask.html",
+      "title": "批量任务",
+      "description": "批量任务：批量任务用于自动执行一些批量化操作，每日凌晨 5 点依次执行，也支持手工触发。可将本地文件或远端 URL 中的数据批量导入系统，目前支持批量添加白名单 IP、黑名单 IP、导入到 IP组 和添加敏感词。 如果要维护的这批 IP 需要在 多个站点 上同时生效，推荐用「导入到IP组」而不是直接导进某个站点的黑/…",
+      "lastmod": "2026-08-11T03:04:32.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/BlockingPage.html",
+      "title": "自定义拦截响应界面",
+      "description": "自定义拦截响应界面：自定义拦截响应界面用于自定义 WAF 拦截请求时返回给访客的内容。你可以为不同网站、不同攻击类型配置专属的响应代码、响应内容和响应 Header，让拦截页面更友好或更贴合业务。 如需修改或删除，可在列表操作列点击 编辑 或 删除 。",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/CacheRule.html",
+      "title": "缓存规则",
+      "description": "缓存规则：缓存规则用于对匹配的请求进行缓存处理，对命中规则的请求直接返回缓存内容，从而降低后端压力、提升访问速度。不同的规则类型适用于不同场景。 缓存规则需要先在对应网站上开启 缓存 功能：进入网站编辑页，将「缓存」设置为开启，并选择缓存位置（内存 / 文件 / 全部）后，缓存规则才会生效。",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/CC.html",
+      "title": "CC防护",
+      "description": "CC防护：CC 防护用于抵御 CC（Challenge Collapsar）攻击，即短时间内对站点发起大量请求的攻击。 一个网站可以配置 多条规则 ，按优先级自上而下执行，命中即停止（「观察」类规则除外）。同一条规则由四部分组成：",
+      "lastmod": "2026-09-03T03:26:24.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/CDNIP.html",
+      "title": "CDN回源IP",
+      "description": "CDN回源IP：CDN回源IP 是 SamWaf 为每个 CDN 厂商维护的一份\"回源 IP 段中心库\"。它把各厂商的回源网段统一集中管理，站点侧（在网站配置里将「真实IP来源」设为 CDN厂商预设 ）与管理端都会自动引用这份中心库里的最新数据，无需手动同步。 CDN回源IP段统一在此管理，站点(真实IP来源=CDN…",
+      "lastmod": "2026-10-14T01:46:23.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/DataRetention.html",
+      "title": "数据保留策略",
+      "description": "数据保留策略：数据保留策略用于配置各类统计 / 日志数据的留存规则。SamWaf 会在 每天凌晨 04:30 按照这里设置的策略自动清理历史数据，避免数据库无限增长占用磁盘。 页面顶部提示：策略由系统预置， 只可编辑「保留天数 / 保留行数」和「启用状态」 ，不能新增或删除策略条目（目标表、归属库、时间字段等均为系统…",
+      "lastmod": "2026-10-09T02:14:04.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/FileManage.html",
+      "title": "文件管理",
+      "description": "文件管理：文件管理页面用于展示 SamWaf 系统运行过程中产生的文件信息（如日志、数据库、证书等），并支持删除其中允许删除的文件，方便管理磁盘空间。系统会对文件进行保护标记：标记为「不可删除」的文件无法在本页面删除，以避免误删关键数据。",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/FirewallIPBlock.html",
+      "title": "防火墙IP封禁",
+      "description": "防火墙IP封禁：防火墙IP封禁提供操作系统级别的 IP 封禁能力，性能优于应用层黑名单，适合需要完全屏蔽的恶意 IP。 与应用层黑名单不同，防火墙IP封禁直接在操作系统防火墙层面阻断流量，被封禁的 IP 在到达 WAF 应用之前即被拦截。",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Host.html",
+      "title": "网站配置",
+      "description": "网站配置：请依据下面的架构方式布局SamWaf防火墙 重要:部署在同台服务器会存在端口：80、443已经占用的情况 ，请在本机或者网站业务不繁忙得时候操作。关于端口修改，请查看 常见问题 。",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/HostGuard.html",
+      "title": "远程防爆破",
+      "description": "远程防爆破：远程防爆破保护的是 SamWaf 所在这台机器自身 的 SSH / RDP 远程登录，而不是你在 SamWaf 里配置的那些网站。 它通过读取操作系统的登录失败日志来发现爆破：某个 IP 在统计窗口内失败次数达到阈值，就调用系统防火墙把它挡在门外，到期自动解封。反复来犯的 IP…",
+      "lastmod": "2026-08-14T04:57:53.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/HttpAuthBase.html",
+      "title": "网站访问认证",
+      "description": "网站访问认证：网站访问认证用于为受保护网站开启密码访问。开启网站密码后，请使用密码访问该网站。认证账号由本页面统一管理（用户名 + 密码），认证方式与认证路径前缀在网站编辑页配置。 认证账号需要配合网站的「网站密码访问」开关一起使用：",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/HumanVerify.html",
+      "title": "人机验证",
+      "description": "人机验证：人机验证由三层组成，配置分散在不同位置，混在一起看最容易出问题： 验证能力与「站点常开人机验证」开关无关 ：开关关闭时，CC 规则触发的验证照样使用这些设置。 所以这些字段始终可见可改，不会因为开关关闭而消失。",
+      "lastmod": "2026-09-03T03:32:41.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/IPBan.html",
+      "title": "IP封禁",
+      "description": "IP封禁：「IP封禁」把原来分散的 规则封禁 与 IP失败封禁 合并成一个统一入口，按来源管理当前所有针对客户端 IP 的封禁： 三个来源各自沿用原有判定与存储机制，互不影响；列表只提供统一入口，不改变任何来源的封禁语义。",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/IPBlack.html",
+      "title": "IP黑名单",
+      "description": "IP黑名单：支持IP和网段形式 例如：127.0.0.1 , 0.0.0.0/0 见：网站管理->批量任务 批量添加黑名单IP",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/IPGroup.html",
+      "title": "IP组",
+      "description": "IP组：IP 组是 可跨站点复用的 IP 集合 。把一批 IP 维护在一个组里，再让 IP黑名单 、 IP白名单 和 防护规则 去引用这个组，就不必在每个站点上重复录入同一批 IP。 典型场景：公司出口 IP 段、运维跳板机、监控/巡检来源、已知扫描器网段——这些往往需要在多个站点上同时生效，一旦变动又要处处同步。",
+      "lastmod": "2026-08-05T09:10:57.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/IPLocation.html",
+      "title": "IP数据库管理",
+      "description": "IP数据库管理：IP数据库管理用于配置和管理 SamWaf 的 IP 归属地查询能力。SamWaf 会根据上传的离线 IP 数据库，对访问来源 IP 解析出国家、省份、城市、运营商等归属地信息。本页面支持分别为 IPv4 与 IPv6 配置数据来源，上传数据库文件，以及在线测试某个 IP 的查询结果。 SamWaf…",
+      "lastmod": "2026-07-14T01:29:47.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/IPLookup.html",
+      "title": "IP策略命中查询",
+      "description": "IP策略命中查询：一个 IP 可能同时被好几个地方管着：IP黑名单、IP白名单、IP组、威胁情报IP订阅、规则封禁、失败计数、CC封禁、防火墙IP封禁，还可能落在 CDN 回源段里。排查「这个 IP 为什么被拦了」或者「为什么没拦住」时，挨个页面翻既慢又容易漏。 IP策略命中查询 把这件事收敛成一次查询：输入一个…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/IPWhite.html",
+      "title": "IP白名单",
+      "description": "IP白名单：支持IP和网段形式 例如：127.0.0.1 , 0.0.0.0/0 见：网站管理->批量任务 批量添加白名单IP",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Ldp.html",
+      "title": "URL隐私防护",
+      "description": "URL隐私防护：URL 隐私防护（数据脱敏处理）用于对指定 URL 返回的敏感数据进行脱敏处理。用户在访问指定的 URL 时，返回内容中的敏感数据会被脱敏，例如手机号会隐藏部分字符。 适用场景：列表或详情接口返回了手机号、身份证号等个人隐私信息，需要在不改动后端代码的情况下对外做脱敏展示。",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/LogExport.html",
+      "title": "日志导出",
+      "description": "日志导出：在 访问日志 页点击 导出日志 ，可以把 SQLite、MySQL 或 PostgreSQL 中的访问日志与安全事件，按指定时间范围导出为 JSONL、CSV 或加密 SQLite。导出在后台执行，任务进度、取消、删除和下载都在同一个弹窗里完成。 导出内容仅限 access_log 和…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/LogFileWrite.html",
+      "title": "日志文件写入",
+      "description": "日志文件写入：日志文件写入功能将访问日志额外以 标准格式文本文件 的形式输出，供 CrowdSec 等第三方安全工具分析，与现有的 SQLite 日志存储互不影响。 页面包含四部分： 基础配置 （开关 / 路径 / 格式 / 自定义模板 / 输出预览）、 日志轮转配置 、 日志预览 和 历史文件列表 。",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/LoginHistory.html",
+      "title": "登录历史",
+      "description": "登录历史：登录历史用于回答「我的管理端账号上次是从哪里登录的、这次和上次是不是同一个地方」。 登录成功进入系统后，右下角会自动弹出提示框，无需任何操作：",
+      "lastmod": "2026-08-06T08:36:45.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/NotifyChannel.html",
+      "title": "通知渠道",
+      "description": "通知渠道：通知渠道用于配置「消息往哪里发」。SamWaf 通过这里配置好的渠道，将系统告警和通知推送给你。 本页负责第一部分。目前支持的渠道类型有：钉钉、飞书、企业微信、邮件、Server酱、自定义Webhook。",
+      "lastmod": "2026-09-04T06:08:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/NotifyLog.html",
+      "title": "通知日志",
+      "description": "通知日志：通知日志记录每一条通知的发送历史，便于问题排查和统计分析。 它是通知功能三部分中的「结果记录」： 通知渠道 配置怎么发， 通知订阅 配置什么事件发到哪里，而通知日志则展示实际的发送结果（成功或失败，以及失败原因）。",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/NotifySubscription.html",
+      "title": "通知订阅",
+      "description": "通知订阅：通知订阅用于配置「什么事件发送到哪个渠道」。它把 通知渠道 中配置好的渠道与系统的各类消息类型关联起来，从而实现灵活的通知策略。 页面以矩阵表格呈现：行是 消息类型 ，列是 渠道类型 （钉钉、飞书、邮箱、Server酱、企业微信、自定义Webhook），每个交叉单元格代表「该消息类型是否通过对应渠道发送」。",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/OneKeyMod.html",
+      "title": "一键修改",
+      "description": "一键修改：由于单台服务器同一个 Web 端口（80、443）只能被一个程序占用，若要让 SamWaf 作为前置代理，需要把宝塔 Nginx 占用的 80 端口改为 81、443 端口改为 444。为方便用户部署，SamWaf 提供一键修改宝塔 Web 端口的功能，并记录每次修改历史，支持一键还原。…",
+      "lastmod": "2026-07-16T06:02:34.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/OpenPlatform.html",
+      "title": "开放平台",
+      "description": "开放平台：开放平台用于向第三方系统/脚本开放 SamWaf 的管理能力。调用方无需登录管理后台，只需在每次 HTTP 请求的请求头中携带 X-API-Key 即可完成鉴权。 开放平台需先在「系统配置」中开启后方可使用。未启用时接口文档页面会提示「开放平台未启用，请在『系统配置』中开启开放平台后再查看 API 文档」。",
+      "lastmod": "2026-10-09T02:14:04.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Otp.html",
+      "title": "双因素认证（2FA）",
+      "description": "双因素认证（2FA）：双因素认证（Two-Factor Authentication，缩写 2FA）是一种安全的登录验证技术。开启后，用户登录管理端时除密码外，还需要输入由认证器应用生成的 6 位动态安全码，从而提升账号安全性。 可使用的认证器软件包括 1Password、Authy、Microsoft…",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Owasp.html",
+      "title": "OWASP 规则集管理",
+      "description": "OWASP 规则集管理：OWASP 核心规则集（CRS）在线管理页面，用于管理 SamWaf 内置的 OWASP CRS（基于 Coraza 引擎）规则。它把规则查看、调参、命中统计、在线升级、沙盒测试、变更记录和使用说明整合在一个页面，通过顶部的标签页（Tab）切换。 支持的能力包括：规则列表查看、启用 / 禁用…",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/PrivateInfo.html",
+      "title": "密钥管理",
+      "description": "密钥管理：密钥管理用于集中保存各类敏感凭据（如 DNS 服务商的 API Key / Secret 等），并支持按「密钥分组」进行归类。所有密钥值都在本地加密保存，不会明文落库，也不会上传到任何远端服务。 最典型的使用场景是 SSL 证书自动申请（DNS-01 验证方式） ：当你在「SSL 证书自动申请」中选择…",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Rule.html",
+      "title": "防护规则",
+      "description": "防护规则：选中需要处理的特征值，打开开关 ”快捷加入规则“，选择后点击空白处即可。 当前操作便捷性还不是太方便使用, 推荐使用脚本方式",
+      "lastmod": "2026-10-21T03:26:36.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/RunDiagnostic.html",
+      "title": "运行诊断",
+      "description": "运行诊断：当 SamWaf 出现 CPU 或内存占用偏高时，「运行诊断」可以从 SamWaf 进程自身视角 查看资源占用构成（区别于整机监控），并支持一键导出诊断包发给开发者协助定位问题。观测常驻部分（每 10 秒一次轻量采样）对性能无感知，深度采集均为手动触发。 进入 系统管理 → 运行诊断 ，页面包含五个标签页：",
+      "lastmod": "2026-08-27T06:47:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/RuntimeInfo.html",
+      "title": "运行信息",
+      "description": "运行信息：运行信息（运行参数）页面以「名称 / 值」列表的形式，集中展示 SamWaf 当前的运行状态与系统环境信息，便于排查问题、确认版本、观察队列与 QPS 等运行指标。 页面内容由后端实时生成，进入页面即自动加载，无需手动操作。",
+      "lastmod": "2026-08-06T03:34:48.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/SecurityReport.html",
+      "title": "安全运营报告",
+      "description": "安全运营报告：安全运营报告按自然日、自然周、自然月汇总当前实例全部网站的安全运营情况，提供请求与阻止统计、趋势、TOP 榜单、操作审计汇总和网站、证书快照。报告生成后保存在本机，可预览、下载为单文件 HTML，离线查看或通过浏览器打印为 PDF。 入口： 系统设置 → 安全运营报告 ，仅超级管理员可管理。Vue2…",
+      "lastmod": "2026-11-13T14:00:37.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Sensitive.html",
+      "title": "敏感词管理",
+      "description": "敏感词管理：敏感词检测用于对请求或返回内容中的特定敏感词进行检测与处理。SamWaf 防护墙会阻止包含敏感词的内容，或对返回内容中的敏感词进行替换，从而实现内容合规、防止敏感信息外泄。 每条敏感词可单独设置检测方向（请求 / 返回 / 所有）和执行动作（阻止 / 替换）。",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/SourcePathAnalysis.html",
+      "title": "来源与路径分析",
+      "description": "来源与路径分析：来源与路径分析把访问日志按 天 汇总后，从两个互补的视角呈现流量构成： 同一张按天汇总表，换一个聚合维度就是另一个视角，所以两张表的口径天然一致。",
+      "lastmod": "2026-10-09T02:14:04.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Spider.html",
+      "title": "蜘蛛（爬虫识别分析）",
+      "description": "蜘蛛（爬虫识别分析）：蜘蛛分析页面用于统计选定时间范围内各类 爬虫（蜘蛛）/访客 的访问占比，帮助你识别站点上搜索引擎爬虫、机器人与正常访客的构成情况。 页面以 饼图 直观展示各爬虫类型的访问占比，右侧配合 明细表格 列出每种类型的访问次数与占比，并可分页查看。",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/SqlQuery.html",
+      "title": "SQL 查询工具",
+      "description": "SQL 查询工具：SQL 查询工具用于在 SamWaf 的本地数据库上进行 只读查询 ，并查看数据库的表结构信息，方便排查数据、核对统计或临时检索记录。 出于安全考虑，本工具 不支持直接输入 SQL 语句 ，而是通过「选择表 → 选择列 → 设置条件」的方式构造查询（页面提示：出于安全考虑，本工具不支持直接输入…",
+      "lastmod": "2026-07-07T00:29:54.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/SSL.html",
+      "title": "SSL 证书管理",
+      "description": "SSL 证书管理：SamWaf 的 SSL 证书相关功能集中在此：证书夹（批量管理）、证书自动申请/续期、批量过期检测、CA 服务器配置。 证书夹的 新增、编辑、删除 属于系统级操作（可通过下方\"证书导出\"向服务器落盘），仅 系统管理员 角色可操作；其它管理员角色可查看列表与详情。",
+      "lastmod": "2026-08-26T01:37:35.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/SysLog.html",
+      "title": "系统日志",
+      "description": "系统日志：系统日志用于记录管理端的操作行为，便于审计与回溯。每条日志记录了操作类型、操作内容和发生时间。本页面以列表形式展示系统日志，并支持查看每条日志的详细内容。",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/SystemConfig.html",
+      "title": "系统配置",
+      "description": "系统配置：系统配置用于以「键值对」的形式维护 SamWaf 的系统级配置项。每个配置项由配置项（键）、配置值（值）和备注组成，可在本页面进行新建、查询、编辑和删除。 系统配置为高级功能，配置项会影响系统行为，请在了解含义后再进行修改。",
+      "lastmod": "2026-06-30T06:56:14.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Task.html",
+      "title": "任务管理",
+      "description": "任务管理：任务管理用于查看与管理系统内置的计划任务（如 SSL 证书自动续期、清理过期防火墙 IP 封禁规则、清理历史数据等）。每个任务可设置执行间隔与具体时刻，支持手工执行并查看任务运行日志。 进入页面后即可看到内置任务列表，包含任务名、间隔单位、值、具体时刻、内部标识、星期等信息。",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/ThreatIP.html",
+      "title": "威胁情报IP订阅",
+      "description": "威胁情报IP订阅：威胁情报IP订阅可以订阅多个渠道的威胁情报 IP， 每日全量拉取并自动增量落地 到 WAF 应用层和/或系统防火墙（ipset）。上万~十万条已针对性能做过优化。 页面顶部有一条说明条： 订阅多个渠道的威胁情报IP，每日全量拉取并自动增量落地到 WAF 应用层 / 系统防火墙…",
+      "lastmod": "2026-10-14T01:46:23.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/Tunnel.html",
+      "title": "隧道防护",
+      "description": "隧道防护：隧道防护当前为实验功能，主要是为了远程连接、数据库连接、Redis连接等特定端口提供一个外置防护。 隧道名称 隧道的自定义名称，用于标识此配置。",
+      "lastmod": "2026-10-19T06:52:38.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/UpgradeNotice.html",
+      "title": "升级须知",
+      "description": "升级须知：升级须知回答一个问题： 「我刚升完级，这一版到底变了什么？有没有什么是我该去点一下的？」 以往这些内容只写在 版本发布 的「重要说明」里，升级路径上没有任何一步会把你引到那儿。现在 SamWaf 启动时会自动比对「上次运行的版本」和「当前版本」，把这中间引入的须知事项列出来，并在首页给出提示。",
+      "lastmod": "2026-08-26T01:38:56.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/UrlBlack.html",
+      "title": "URL限制访问",
+      "description": "URL限制访问：URL 黑名单（URL 限制访问）用于阻止访问指定的 URL。防护墙会阻止访问在限制访问内的 URL，命中的请求将被拦截。 适用场景：禁止访问后台管理路径、调试接口、临时下线的页面等敏感或不希望对外开放的 URL。",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/UrlWhite.html",
+      "title": "URL白名单",
+      "description": "URL白名单：URL 白名单用于在 SamWaf 防护过程中放行指定的 URL。防护墙在进行检测时会忽略在白名单内的 URL，命中的请求将跳过相关防护检测直接放行。 适用场景：某些接口被规则误拦截（误报）时，可将其加入白名单，使其不再被防护规则拦截。",
+      "lastmod": "2026-06-30T03:33:05.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/VisitLog.html",
+      "title": "访问日志",
+      "description": "访问日志：访问日志页面记录每一次经过 WAF 的 原始访问请求 ，无论放行、阻止还是禁止都会逐条记录，便于按时间、网站、来源 IP、规则、状态码等多种条件检索单条访问，并下钻到完整的访问详情。 提示：访问日志按「逐条请求」展示；如需以 来源 IP 为维度 聚合查看触发规则的攻击情况，请使用「风险日志」。",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/VpConfig.html",
+      "title": "参数设置",
+      "description": "参数设置：参数设置用于集中管理 SamWaf 管理端自身 的安全与访问相关配置，对应 conf/config.yml 中的相关项，可在界面修改并即时保存。 限制可以访问 SamWaf 管理端的来源 IP，支持 CIDR。填写后点击「保存」生效。",
+      "lastmod": "2026-09-06T07:35:23.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/guide/WebsiteDiagnostic.html",
+      "title": "网站访问诊断",
+      "description": "网站访问诊断：网站配错（域名/端口与真实访问不匹配、源站 HTTPS 证书不被信任、源站不可达）时，页面上往往只有一个\"打不开\"。「网站访问诊断」从 SamWaf 服务器视角 分段模拟真实访问的每个环节，逐段展示请求/响应报文与连接细节，异常时给出对应的处理建议。 诊断是 服务器上的独立探测…",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/quickstart/",
+      "title": "快速上手",
+      "description": "快速上手：强烈建议您在测试环境测试充分在上生产，如遇到问题请及时反馈 请按需要自行选择正式版或测试版，并下载对应操作系统与架构的安装包。测试版的更新内容与升级注意事项见 版本发布 。已有部署升级前请备份配置与数据，并先在测试环境验证。",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/quickstart/Update.html",
+      "title": "版本发布",
+      "description": "版本发布：本节仅列出相对 v1.3.25-beta.8 的更新与新增升级须知。最新正式版仍为 v1.3.24 ，可在 快速上手 选择下载版本；从更早版本升级时，请一并查看中间各版本说明。 下载 SamWaf v1.3.25-beta.9 · 全部版本",
+      "lastmod": "2026-11-02T07:08:33.000Z"
+    },
+    {
+      "url": "https://doc.samwaf.com/quickstart/xppanel-install.html",
+      "title": "小皮面板部署",
+      "description": "小皮面板部署：关于 小皮面板 的安装部署与基础功能介绍，请参考 小皮面板 官方文档 。在完成了 小皮面板 的安装部署后，根据提示网址打开浏览器进入 小皮面板，如下界面。",
+      "lastmod": "2025-11-20T09:17:56.000Z"
+    }
+  ]
+}
