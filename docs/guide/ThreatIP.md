@@ -33,7 +33,7 @@
 
 在新建弹窗顶部的 **常用订阅源** 下拉框中选择一个内置渠道，系统会自动填入该渠道的名称、拉取地址、解析格式与阈值（填入后仍可修改）。
 
-内置 9 个常用源：
+内置 10 个常用源：
 
 | 短码 | 名称 | 拉取地址 | 解析格式 | 说明 |
 | --- | --- | --- | --- | --- |
@@ -46,6 +46,7 @@
 | `et_comp` | ET Compromised | `https://rules.emergingthreats.net/blockrules/compromised-ips.txt` | IP-CIDR | 已失陷主机 |
 | `spamhaus` | Spamhaus DROP | `https://www.spamhaus.org/drop/drop.txt` | 通用 | 被劫持网段，低误报 |
 | `feodo` | Feodo Tracker | `https://feodotracker.abuse.ch/downloads/ipblocklist.txt` | IP-CIDR | 僵尸网络C2 |
+| `netapi` | NetAPI Honeypot | `https://netapi.com/api2/?method=compromised&dataset_type=ip` | IP-CIDR | NetAPI 自有蜜罐网络捕获的攻击IP（最近48小时），每小时更新；CC BY 4.0，许可条款：[netapi.com/compromised-ips](https://netapi.com/compromised-ips/) |
 
 ::: warning 注意
 部分为境外源（github / abuse.ch / spamhaus 等），国内访问可能较慢或需自备网络；订阅内容与可用性由来源方负责，请自行评估后启用。落地层默认「仅WAF应用层」，如需系统防火墙拦截可改为「两者」或「系统层」。
