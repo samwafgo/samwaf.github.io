@@ -16,7 +16,7 @@
       "url": "https://doc.samwaf.com/api/operations.html",
       "title": "API 接口索引",
       "description": "API 接口索引：本索引从随站点发布的 Swagger 规范生成，按原文展示 HTTP 方法、接口路径、分类和摘要；参数与响应结构请查看原始规范或交互文档。 下列路径直接取自 swagger.json 的 paths 键，不再次拼接 basePath 。实际调用使用自行部署的 SamWaf 管理端地址。",
-      "lastmod": "2026-11-13T14:01:08.624Z"
+      "lastmod": "2026-11-17T05:59:38.007Z"
     },
     {
       "url": "https://doc.samwaf.com/dev/",
@@ -58,7 +58,7 @@
       "url": "https://doc.samwaf.com/en/api/operations.html",
       "title": "API operation index",
       "description": "API operation index: This index lists HTTP methods, paths, tags and summaries from the bundled Swagger specification. Tags and summaries retain the original language of the specification; they are not English translations. Paths below are…",
-      "lastmod": "2026-11-13T14:01:08.624Z"
+      "lastmod": "2026-11-17T05:59:38.007Z"
     },
     {
       "url": "https://doc.samwaf.com/en/dev/",
@@ -418,7 +418,7 @@
       "url": "https://doc.samwaf.com/en/guide/ThreatIP.html",
       "title": "Threat Intelligence IP Subscription",
       "description": "Threat Intelligence IP Subscription: Threat Intelligence IP Subscription lets you subscribe to multiple threat-intel IP feeds. It performs a daily full pull with automatic incremental landing into the WAF app layer and/or the system…",
-      "lastmod": "2026-10-14T01:46:23.000Z"
+      "lastmod": "2026-11-16T11:58:07.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/Tunnel.html",
@@ -814,7 +814,7 @@
       "url": "https://doc.samwaf.com/guide/ThreatIP.html",
       "title": "威胁情报IP订阅",
       "description": "威胁情报IP订阅：威胁情报IP订阅可以订阅多个渠道的威胁情报 IP， 每日全量拉取并自动增量落地 到 WAF 应用层和/或系统防火墙（ipset）。上万~十万条已针对性能做过优化。 页面顶部有一条说明条： 订阅多个渠道的威胁情报IP，每日全量拉取并自动增量落地到 WAF 应用层 / 系统防火墙…",
-      "lastmod": "2026-10-14T01:46:23.000Z"
+      "lastmod": "2026-11-16T11:58:07.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/Tunnel.html",
