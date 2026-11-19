@@ -16,7 +16,7 @@
       "url": "https://doc.samwaf.com/api/operations.html",
       "title": "API 接口索引",
       "description": "API 接口索引：本索引从随站点发布的 Swagger 规范生成，按原文展示 HTTP 方法、接口路径、分类和摘要；参数与响应结构请查看原始规范或交互文档。 下列路径直接取自 swagger.json 的 paths 键，不再次拼接 basePath 。实际调用使用自行部署的 SamWaf 管理端地址。",
-      "lastmod": "2026-11-17T05:59:38.007Z"
+      "lastmod": "2026-11-19T03:19:52.072Z"
     },
     {
       "url": "https://doc.samwaf.com/dev/",
@@ -28,7 +28,7 @@
       "url": "https://doc.samwaf.com/dev/CLI.html",
       "title": "命令行管理",
       "description": "命令行管理：命令行适合在本机虚拟机、离线环境或部署脚本中创建、更新、查询、启停和删除网站。 site apply 会先匹配已有网站：不存在则创建，存在则合并修改，内容相同则返回 unchanged ，可重复执行同一份配置。 站点操作通过运行中的 SamWaf 管理端完成，沿用网站管理的校验和热加载。 apikey…",
-      "lastmod": "2026-11-06T01:53:33.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/dev/openapi-cookbook.html",
@@ -58,7 +58,7 @@
       "url": "https://doc.samwaf.com/en/api/operations.html",
       "title": "API operation index",
       "description": "API operation index: This index lists HTTP methods, paths, tags and summaries from the bundled Swagger specification. Tags and summaries retain the original language of the specification; they are not English translations. Paths below are…",
-      "lastmod": "2026-11-17T05:59:38.007Z"
+      "lastmod": "2026-11-19T03:19:52.072Z"
     },
     {
       "url": "https://doc.samwaf.com/en/dev/",
@@ -70,7 +70,7 @@
       "url": "https://doc.samwaf.com/en/dev/CLI.html",
       "title": "Command-Line Management",
       "description": "Command-Line Management: Use the CLI to create, update, inspect, start, stop and delete websites on a local VM, in an offline environment or in deployment scripts. site apply matches an existing website first: it creates missing sites,…",
-      "lastmod": "2026-11-06T01:53:33.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/dev/openapi-cookbook.html",
@@ -88,7 +88,7 @@
       "url": "https://doc.samwaf.com/en/faq/",
       "title": "Common Issues",
       "description": "Common Issues: In the command examples below, the executable name (e.g. SamWaf64 / SamWaf64.exe ) depends on the build you actually downloaded. Common when SamWaf and the web application server run on the same machine. Move the existing…",
-      "lastmod": "2026-11-06T01:53:33.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/",
@@ -106,7 +106,7 @@
       "url": "https://doc.samwaf.com/en/guide/AccessAudit.html",
       "title": "Security Audit",
       "description": "Security Audit: SamWaf's unified security audit stream : all kinds of security events collected into one table — who did what, when, from which IP, against which site, and whether it succeeded. All security logs will eventually land here.…",
-      "lastmod": "2026-11-04T05:42:25.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/AccessConfig.html",
@@ -154,7 +154,7 @@
       "url": "https://doc.samwaf.com/en/guide/Application.html",
       "title": "Application Management",
       "description": "Application Management: Application Management lets SamWaf host and supervise local business processes (such as jar packages or executables). SamWaf can start, stop, and restart hosted applications, automatically relaunch them on abnormal…",
-      "lastmod": "2026-11-04T05:42:25.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/AttackLog.html",
@@ -304,13 +304,13 @@
       "url": "https://doc.samwaf.com/en/guide/NotifyLog.html",
       "title": "Notify Log",
       "description": "Notify Log: The notify log records the sending history of every notification, for troubleshooting and statistical analysis. It is the \"result record\" among the three parts of the notification feature: Notify Channel configures how…",
-      "lastmod": "2026-11-13T14:00:37.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/NotifySubscription.html",
       "title": "Notify Subscription",
       "description": "Notify Subscription: Notify subscriptions define which event types are sent to which channels . They link the channels configured in Notify Channel with the system's various message types, enabling flexible notification strategies. The…",
-      "lastmod": "2026-11-13T14:00:37.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/OneKeyMod.html",
@@ -364,7 +364,7 @@
       "url": "https://doc.samwaf.com/en/guide/SecurityReport.html",
       "title": "Security Operations Reports",
       "description": "Security Operations Reports: Security operations reports summarize all websites in the current instance by calendar day, week or month. They include request and block statistics, trends, TOP lists, operation audit summaries, and website…",
-      "lastmod": "2026-11-13T14:00:37.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/Sensitive.html",
@@ -448,7 +448,7 @@
       "url": "https://doc.samwaf.com/en/guide/VisitLog.html",
       "title": "Visit Log",
       "description": "Visit Log: The Visit Log page records every raw access request that passes through the WAF. Whether allowed, blocked or forbidden, each request is logged individually, so you can search single accesses by many conditions — time, website,…",
-      "lastmod": "2026-11-02T07:08:33.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/VpConfig.html",
@@ -466,13 +466,13 @@
       "url": "https://doc.samwaf.com/en/quickstart/",
       "title": "Quick Start",
       "description": "Quick Start: It is strongly recommended to fully test in a staging environment before deploying to production. Please report any issues promptly. Choose either channel and download the package for your operating system and architecture.…",
-      "lastmod": "2026-11-02T07:08:33.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/quickstart/Update.html",
       "title": "Version Releases",
-      "description": "Version Releases: This section lists only changes and new upgrade notes since v1.3.25-beta.8 . The latest stable release remains v1.3.24 . Choose a version on the Quick Start page; when upgrading from an earlier version, also review the…",
-      "lastmod": "2026-11-02T07:08:33.000Z"
+      "description": "Version Releases: Changes since v1.3.25-beta.11 . Download SamWaf v1.3.25-beta.12 · all releases",
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/quickstart/xppanel-install.html",
@@ -484,7 +484,7 @@
       "url": "https://doc.samwaf.com/faq/",
       "title": "常见问题",
       "description": "常见问题：下文命令示例中的可执行文件名（如 SamWaf64 / SamWaf64.exe ）以你实际下载的版本为准。 常见于 SamWaf 与 Web 应用服务器在同一台服务器的情况。需要把原 Web 服务占用的 80 / 443 改到其他端口，再让 SamWaf 监听 80 / 443 做前置代理。",
-      "lastmod": "2026-11-06T01:53:33.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/",
@@ -502,7 +502,7 @@
       "url": "https://doc.samwaf.com/guide/AccessAudit.html",
       "title": "安全审计",
       "description": "安全审计：SamWaf 的 统一安全审计流水 ：把各类安全事件汇总到同一张表——谁在什么时候、从哪个 IP、对哪个站点做了什么，成功还是失败。将来所有安全日志都会汇入这里。 当前包含以下 分类 （可在页面顶部按分类筛选）：",
-      "lastmod": "2026-11-04T05:42:25.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/AccessConfig.html",
@@ -550,7 +550,7 @@
       "url": "https://doc.samwaf.com/guide/Application.html",
       "title": "应用管理",
       "description": "应用管理：应用管理用于在 SamWaf 中托管并守护本地业务进程（如 jar 包、可执行程序等）。SamWaf 可以启动、停止、重启被托管应用，按策略在异常退出时自动拉起，并提供日志查看、初始文件上传、升级/回滚以及网络监听信息查看等能力。 应用管理默认关闭。进入页面后，SamWaf…",
-      "lastmod": "2026-11-04T05:42:25.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/AttackLog.html",
@@ -700,13 +700,13 @@
       "url": "https://doc.samwaf.com/guide/NotifyLog.html",
       "title": "通知日志",
       "description": "通知日志：通知日志记录每一条通知的发送历史，便于问题排查和统计分析。 它是通知功能三部分中的「结果记录」： 通知渠道 配置怎么发， 通知订阅 配置什么事件发到哪里，而通知日志则展示实际的发送结果（成功或失败，以及失败原因）。",
-      "lastmod": "2026-11-13T14:00:37.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/NotifySubscription.html",
       "title": "通知订阅",
       "description": "通知订阅：通知订阅用于配置「什么事件发送到哪个渠道」。它把 通知渠道 中配置好的渠道与系统的各类消息类型关联起来，从而实现灵活的通知策略。 页面以矩阵表格呈现：行是 消息类型 ，列是 渠道类型 （钉钉、飞书、邮箱、Server酱、企业微信、自定义Webhook），每个交叉单元格代表「该消息类型是否通过对应渠道发送」。",
-      "lastmod": "2026-11-13T14:00:37.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/OneKeyMod.html",
@@ -760,7 +760,7 @@
       "url": "https://doc.samwaf.com/guide/SecurityReport.html",
       "title": "安全运营报告",
       "description": "安全运营报告：安全运营报告按自然日、自然周、自然月汇总当前实例全部网站的安全运营情况，提供请求与阻止统计、趋势、TOP 榜单、操作审计汇总和网站、证书快照。报告生成后保存在本机，可预览、下载为单文件 HTML，离线查看或通过浏览器打印为 PDF。 入口： 系统设置 → 安全运营报告 ，仅超级管理员可管理。Vue2…",
-      "lastmod": "2026-11-13T14:00:37.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/Sensitive.html",
@@ -844,7 +844,7 @@
       "url": "https://doc.samwaf.com/guide/VisitLog.html",
       "title": "访问日志",
       "description": "访问日志：访问日志页面记录每一次经过 WAF 的 原始访问请求 ，无论放行、阻止还是禁止都会逐条记录，便于按时间、网站、来源 IP、规则、状态码等多种条件检索单条访问，并下钻到完整的访问详情。 提示：访问日志按「逐条请求」展示；如需以 来源 IP 为维度 聚合查看触发规则的攻击情况，请使用「风险日志」。",
-      "lastmod": "2026-11-02T07:08:33.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/VpConfig.html",
@@ -862,13 +862,13 @@
       "url": "https://doc.samwaf.com/quickstart/",
       "title": "快速上手",
       "description": "快速上手：强烈建议您在测试环境测试充分在上生产，如遇到问题请及时反馈 请按需要自行选择正式版或测试版，并下载对应操作系统与架构的安装包。测试版的更新内容与升级注意事项见 版本发布 。已有部署升级前请备份配置与数据，并先在测试环境验证。",
-      "lastmod": "2026-11-02T07:08:33.000Z"
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/quickstart/Update.html",
       "title": "版本发布",
-      "description": "版本发布：本节仅列出相对 v1.3.25-beta.8 的更新与新增升级须知。最新正式版仍为 v1.3.24 ，可在 快速上手 选择下载版本；从更早版本升级时，请一并查看中间各版本说明。 下载 SamWaf v1.3.25-beta.9 · 全部版本",
-      "lastmod": "2026-11-02T07:08:33.000Z"
+      "description": "版本发布：本节记录相对 v1.3.25-beta.11 的变化。 下载 SamWaf v1.3.25-beta.12 · 全部版本",
+      "lastmod": "2026-11-19T03:17:52.000Z"
     },
     {
       "url": "https://doc.samwaf.com/quickstart/xppanel-install.html",

@@ -98,7 +98,7 @@
 - [Parameter Settings](https://doc.samwaf.com/en/guide/VpConfig.html): Parameter Settings: Parameter Settings centrally manage SamWaf's own management console security and access configuration. They map to the related items in conf/config.yml and can be edited and saved from the UI. Menu path: System…
 - [Website Access Diagnostic](https://doc.samwaf.com/en/guide/WebsiteDiagnostic.html): Website Access Diagnostic: When a site is misconfigured (domain/port does not match real visits, the origin's HTTPS certificate is untrusted, or the origin is unreachable), the page usually shows nothing but "cannot be opened". Website…
 - [Quick Start](https://doc.samwaf.com/en/quickstart/): Quick Start: It is strongly recommended to fully test in a staging environment before deploying to production. Please report any issues promptly. Choose either channel and download the package for your operating system and architecture.…
-- [Version Releases](https://doc.samwaf.com/en/quickstart/Update.html): Version Releases: This section lists only changes and new upgrade notes since v1.3.25-beta.8 . The latest stable release remains v1.3.24 . Choose a version on the Quick Start page; when upgrading from an earlier version, also review the…
+- [Version Releases](https://doc.samwaf.com/en/quickstart/Update.html): Version Releases: Changes since v1.3.25-beta.11 . Download SamWaf v1.3.25-beta.12 · all releases
 - [Deploy by XPPanel](https://doc.samwaf.com/en/quickstart/xppanel-install.html): Deploy by XPPanel: Here is the Documentation for XPPanel, After completing the installation and deployment of XPPanel, open your browser and navigate to the URL provided in the prompts to access XPPanel, as shown in the interface below.
 - [常见问题](https://doc.samwaf.com/faq/): 常见问题：下文命令示例中的可执行文件名（如 SamWaf64 / SamWaf64.exe ）以你实际下载的版本为准。 常见于 SamWaf 与 Web 应用服务器在同一台服务器的情况。需要把原 Web 服务占用的 80 / 443 改到其他端口，再让 SamWaf 监听 80 / 443 做前置代理。
 - [主要功能](https://doc.samwaf.com/guide/): 主要功能：管理端每个功能页顶部都有一条蓝色说明条，一句话讲清这个页面是做什么的。说明较多的页面右侧会有 详细说明 ：内容不多时原地展开，内容较多时从右侧滑出面板。面板里还有 查看完整文档 链接，直达本手册对应章节（界面切成英文时会自动打开英文文档）。
@@ -164,7 +164,7 @@
 - [参数设置](https://doc.samwaf.com/guide/VpConfig.html): 参数设置：参数设置用于集中管理 SamWaf 管理端自身 的安全与访问相关配置，对应 conf/config.yml 中的相关项，可在界面修改并即时保存。 限制可以访问 SamWaf 管理端的来源 IP，支持 CIDR。填写后点击「保存」生效。
 - [网站访问诊断](https://doc.samwaf.com/guide/WebsiteDiagnostic.html): 网站访问诊断：网站配错（域名/端口与真实访问不匹配、源站 HTTPS 证书不被信任、源站不可达）时，页面上往往只有一个"打不开"。「网站访问诊断」从 SamWaf 服务器视角 分段模拟真实访问的每个环节，逐段展示请求/响应报文与连接细节，异常时给出对应的处理建议。 诊断是 服务器上的独立探测…
 - [快速上手](https://doc.samwaf.com/quickstart/): 快速上手：强烈建议您在测试环境测试充分在上生产，如遇到问题请及时反馈 请按需要自行选择正式版或测试版，并下载对应操作系统与架构的安装包。测试版的更新内容与升级注意事项见 版本发布 。已有部署升级前请备份配置与数据，并先在测试环境验证。
-- [版本发布](https://doc.samwaf.com/quickstart/Update.html): 版本发布：本节仅列出相对 v1.3.25-beta.8 的更新与新增升级须知。最新正式版仍为 v1.3.24 ，可在 快速上手 选择下载版本；从更早版本升级时，请一并查看中间各版本说明。 下载 SamWaf v1.3.25-beta.9 · 全部版本
+- [版本发布](https://doc.samwaf.com/quickstart/Update.html): 版本发布：本节记录相对 v1.3.25-beta.11 的变化。 下载 SamWaf v1.3.25-beta.12 · 全部版本
 - [小皮面板部署](https://doc.samwaf.com/quickstart/xppanel-install.html): 小皮面板部署：关于 小皮面板 的安装部署与基础功能介绍，请参考 小皮面板 官方文档 。在完成了 小皮面板 的安装部署后，根据提示网址打开浏览器进入 小皮面板，如下界面。
 
 ## 使用说明

@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/api/operations.html</loc>
-    <lastmod>2026-11-17T05:59:38.007Z</lastmod>
+    <lastmod>2026-11-19T03:19:52.072Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/dev/</loc>
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/dev/CLI.html</loc>
-    <lastmod>2026-11-06T01:53:33.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/dev/openapi-cookbook.html</loc>
@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/api/operations.html</loc>
-    <lastmod>2026-11-17T05:59:38.007Z</lastmod>
+    <lastmod>2026-11-19T03:19:52.072Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/dev/</loc>
@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/dev/CLI.html</loc>
-    <lastmod>2026-11-06T01:53:33.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/dev/openapi-cookbook.html</loc>
@@ -58,7 +58,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/faq/</loc>
-    <lastmod>2026-11-06T01:53:33.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/</loc>
@@ -70,7 +70,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/AccessAudit.html</loc>
-    <lastmod>2026-11-04T05:42:25.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/AccessConfig.html</loc>
@@ -102,7 +102,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/Application.html</loc>
-    <lastmod>2026-11-04T05:42:25.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/AttackLog.html</loc>
@@ -202,11 +202,11 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/NotifyLog.html</loc>
-    <lastmod>2026-11-13T14:00:37.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/NotifySubscription.html</loc>
-    <lastmod>2026-11-13T14:00:37.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/OneKeyMod.html</loc>
@@ -242,7 +242,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/SecurityReport.html</loc>
-    <lastmod>2026-11-13T14:00:37.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/Sensitive.html</loc>
@@ -298,7 +298,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/VisitLog.html</loc>
-    <lastmod>2026-11-02T07:08:33.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/VpConfig.html</loc>
@@ -310,11 +310,11 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/quickstart/</loc>
-    <lastmod>2026-11-02T07:08:33.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/quickstart/Update.html</loc>
-    <lastmod>2026-11-02T07:08:33.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/quickstart/xppanel-install.html</loc>
@@ -322,7 +322,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/faq/</loc>
-    <lastmod>2026-11-06T01:53:33.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/</loc>
@@ -334,7 +334,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/AccessAudit.html</loc>
-    <lastmod>2026-11-04T05:42:25.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/AccessConfig.html</loc>
@@ -366,7 +366,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/Application.html</loc>
-    <lastmod>2026-11-04T05:42:25.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/AttackLog.html</loc>
@@ -466,11 +466,11 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/NotifyLog.html</loc>
-    <lastmod>2026-11-13T14:00:37.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/NotifySubscription.html</loc>
-    <lastmod>2026-11-13T14:00:37.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/OneKeyMod.html</loc>
@@ -506,7 +506,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/SecurityReport.html</loc>
-    <lastmod>2026-11-13T14:00:37.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/Sensitive.html</loc>
@@ -562,7 +562,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/VisitLog.html</loc>
-    <lastmod>2026-11-02T07:08:33.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/VpConfig.html</loc>
@@ -574,11 +574,11 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/quickstart/</loc>
-    <lastmod>2026-11-02T07:08:33.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/quickstart/Update.html</loc>
-    <lastmod>2026-11-02T07:08:33.000Z</lastmod>
+    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/quickstart/xppanel-install.html</loc>
