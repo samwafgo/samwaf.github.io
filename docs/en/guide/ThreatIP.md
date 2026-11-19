@@ -33,7 +33,7 @@ For performance, subscribed IPs are **not** written into the IP Blacklist list r
 
 Selecting a built-in feed from the **Common Feeds** dropdown at the top of the Add dialog auto-fills that feed's name, URL, parser, and threshold (all still editable).
 
-The 9 built-in feeds:
+The 10 built-in feeds:
 
 | Code | Name | Fetch URL | Parser | Notes |
 | --- | --- | --- | --- | --- |
@@ -46,6 +46,7 @@ The 9 built-in feeds:
 | `et_comp` | ET Compromised | `https://rules.emergingthreats.net/blockrules/compromised-ips.txt` | IP-CIDR | Compromised hosts |
 | `spamhaus` | Spamhaus DROP | `https://www.spamhaus.org/drop/drop.txt` | Generic | Hijacked netblocks, low false positive |
 | `feodo` | Feodo Tracker | `https://feodotracker.abuse.ch/downloads/ipblocklist.txt` | IP-CIDR | Botnet C2 |
+| `netapi` | NetAPI Honeypot | `https://netapi.com/api2/?method=compromised&dataset_type=ip` | IP-CIDR | Attacking IPs seen by NetAPI's own honeypot network in the last 48 h, hourly; CC BY 4.0, terms: [netapi.com/compromised-ips](https://netapi.com/compromised-ips/) |
 
 ::: warning
 Some feeds are overseas (github / abuse.ch / spamhaus, etc.) and may be slow to reach from certain regions or require your own network. Feed content and availability are the source's responsibility — evaluate before enabling. Landing defaults to "WAF app layer only"; switch to "Both" or "System" for system-firewall blocking.
