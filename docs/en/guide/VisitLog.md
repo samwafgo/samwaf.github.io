@@ -68,7 +68,20 @@ Fill in the conditions in the top form as needed, click **Search** to run the qu
 
 ### 7. Log Settings (collapsible)
 
-- Click the "Log Settings" title at the top to expand the options, then click **Save Config** to apply. You can set whether to record response payloads, record the raw request BODY, the log recording type, max payload lengths, history retention days, log-archive parameters, log persistence, batch insert, IP Tag storage location, the **access log mode**, **access log retention days**, the **global exclude-IP list for logging**, and more.
+- Click the "Log Settings" title at the top to expand the options, then click **Save Config** to apply. You can set whether to record response payloads, record the raw request BODY, the log recording type, max payload lengths, history retention days, log-archive parameters, log persistence, batch insert, **fold repeated security events**, IP Tag storage location, the **access log mode**, **access log retention days**, the **global exclude-IP list for logging**, and more.
+
+::: tip About "Fold repeated security events"
+For security events sharing the same site + source IP + matched rule, at most **K** full records (with payload) are
+stored per minute; additional events skip the detail tables (0 = no folding, default 0).
+
+- Folded events are still counted in visit statistics, IP tags, CC counters and ban decisions, and file logging /
+  Kafka export are unaffected - dashboard numbers and blocking behave exactly as before; only the number of detail
+  rows in the log lists shrinks.
+- When investigating an attack, read the counts from statistics and IP tags, and the technique samples from the
+  retained details (up to K per source per minute, enough for analysis).
+- When facing mass identical requests or a log queue backlog, set it to a small value such as **5** to cap detail
+  writes at K records per minute per source. Keep it at 0 when you need per-event auditing.
+:::
 
 ::: tip About "Access log mode"
 It controls how narrow rows are written, which is a separate thing from "Log Recording Type" above:
@@ -174,13 +187,14 @@ and refreshes itself when it finishes. It applies immediately on save, with no r
 - **The Request filter disappeared after switching to the Access Log view.** That filter matches payload text and exists only in the Security Events view. In the Access Log view, use the User-Agent / Referer column filters instead.
 - **I excluded an IP, so why does it still show up in traffic statistics?** Exclusion applies to logs and request counts; inbound and outbound bytes are metered by the engine outside the log path, so they still appear on the traffic charts. That is expected.
 - **A partition shows "file missing" in the archive dropdown, or a query says some partitions were skipped.** The partition's record still exists but its archive file (an archive table on MySQL / PostgreSQL) is gone - usually because the file was deleted by hand. If the message says the file exists but contains no data, the file was replaced or emptied. All other partitions are queried as usual. Once you are sure you don't need it, delete the record under Partitions. History archive files are only ever read; queries never modify them.
-- **How do I cut log volume?** Set the access log mode to "Sampled" first, or list your office exit and probe machines in the global exclude-IP list. Use "Security events only" only when you really need the savings, accepting the loss of CC threshold recommendations and the rest.
+- **How do I cut log volume?** Under attack, when detail writes become the bottleneck, set "Fold repeated security events" to 5 (counts are unaffected). For everyday volume, set the access log mode to "Sampled" first, or list your office exit and probe machines in the global exclude-IP list. Use "Security events only" only when you really need the savings, accepting the loss of CC threshold recommendations and the rest.
 - **A visitor shows me the identifier from the block page - how do I look it up?** Paste it into the **Visit Identifier** field; no date or partition selection is needed. Every block during a CC ban window leaves a narrow row with the rule "CC ban", so each identifier on the page maps to a queryable record. These rows keep metadata only and do not store a duplicate copy of the request payload.
 
 ## Update History
 
 | Date | Applies to | Description |
 | --- | --- | --- |
+| 2026-11-18 | Backend v1.3.25-beta.12 / Vue2 and Vue3 frontend v1.3.336 | Added folding for repeated security events to cap detail records per minute. Folding is off by default. Statistics and blocking are unaffected. |
 | 2026-10-29 | v1.3.25-beta.9 | Background exports across three log database engines, JSONL/CSV/encrypted SQLite, short-lived tickets and manifest checks; only the two metadata tables are exported. |
 | 2026-10-20 | v1.3.25-beta.9 | Add a literal Access URL substring filter that combines with other conditions for access logs, security events and archives. Supported in both Vue2 and Vue3. |
 | 2026-10-13 | v1.3.25-beta.8 | Every block during a CC ban window is now recorded as a narrow row with rule "CC ban"; the identifier shown on the block page can be looked up directly by visit identifier (date and partition are ignored). These rows do not duplicate the request payload. |

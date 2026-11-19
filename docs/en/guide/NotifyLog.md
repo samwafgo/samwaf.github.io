@@ -108,6 +108,6 @@ It means the subscription has a custom template but rendering failed (for exampl
 
 | Updated | Applicable version | Changes |
 |---------|--------------------|---------|
-| 2026-11-13 | Backend > v1.3.25-beta.10 (unreleased); Vue2 / Vue3 frontend v1.3.335 | Added daily / monthly filters, distinguished report generation from notification delivery status, and linked the report center |
+| 2026-11-13 | Backend v1.3.25-beta.11, Vue2 / Vue3 frontend v1.3.335 | Added daily / monthly filters, distinguished report generation from notification delivery status, and linked the report center |
 
 `vX.Y.Z` means the feature is available starting with that version. `> vX.Y.Z` means it has been merged into the code but has not yet shipped. Check frontend entries and backend capabilities separately.

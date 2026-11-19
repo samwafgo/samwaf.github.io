@@ -278,7 +278,7 @@ rm data/ssl/manager/domain.crt data/ssl/manager/domain.key
 
 ## 四、命令行工具
 
-网站自动化、本机 API Key、全部命令示例和退出码见[命令行管理](../dev/CLI.md)（新增功能未发布）。
+本机 API Key 与网站自动化命令从后端 `v1.3.25-beta.10` 开始提供。命令示例和退出码见[命令行管理](../dev/CLI.md)。
 
 SamWaf 是单个可执行文件，除直接运行外，还支持以下子命令（在程序所在目录执行）：
 

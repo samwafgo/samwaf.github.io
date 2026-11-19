@@ -1,5 +1,95 @@
 # Version Releases
 
+## 20261118 (v1.3.25-beta.12)
+
+Changes since **v1.3.25-beta.11**.
+
+### Added
+
+- [Access log settings](../guide/VisitLog.md) can fold repeated security events. You can limit how many detail records are kept per minute for each site, source IP, and rule. Statistics and blocking continue to work as usual. Folding is off by default.
+- Backend Unavailable Response lets you customize the page shown when an origin request fails while preserving the actual HTTP status code. The editor is available in both Vue2 and Vue3 starting with `v1.3.339`.
+
+### Fixed
+
+- Allowed large uploads now arrive intact at the origin.
+- Custom origin Host settings and HTTPS redirects for bound domains now follow the site's configuration.
+- Fixed Linux release startup on some older x86-64 CPUs and restored rollback to the previous version when an in-app update fails.
+- Strengthened request body inspection and certificate management validation. Changing an administrator's password, role, or enabled status ends that account's active sessions and requires a fresh sign-in.
+
+<!-- upgrade-notes:v1.3.25-beta.12:start -->
+Download [SamWaf v1.3.25-beta.12](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.12) · [all releases](https://github.com/samwafgo/SamWaf/releases)
+
+Upgrade Notes
+
+- Request body inspection now covers chunked transfers and large bodies　[Important · Notice]
+- Allowed large uploads reach the origin intact　[Notice]
+- Custom origin Host settings take effect　[Check]
+- Bound domains follow the site's HTTPS redirect setting　[Check]
+- CA server and SSL order writes are limited to system admins; challenge file name validation tightened　[Notice]
+
+Full text of each item (what changes if you act, what it costs if you don't, how to revert) lives in the console under System - Upgrade Notes: [Upgrade Notes](https://doc.samwaf.com/en/guide/UpgradeNotice.html)
+
+Thanks for the feedback from @iq001 ([#1074](https://github.com/samwafgo/SamWaf/issues/1074)), @Magician-Sun ([#1071](https://github.com/samwafgo/SamWaf/issues/1071)), @Wu-Yulun, @wxf26054 ([#1062](https://github.com/samwafgo/SamWaf/issues/1062)), and @zuishuai-ziyi ([#1061](https://github.com/samwafgo/SamWaf/issues/1061)).
+<!-- upgrade-notes:v1.3.25-beta.12:end -->
+
+## 20261112 (v1.3.25-beta.11)
+
+Changes since **v1.3.25-beta.10**.
+
+### Added
+
+- Generate daily, weekly, or monthly [security operations reports](../guide/SecurityReport.md). You can preview, download, or print reports and subscribe to scheduled summaries.
+- Notification subscriptions can exclude messages by rule name. See [#1052](https://github.com/samwafgo/SamWaf/issues/1052).
+
+### Fixed
+
+- Built-in detection notifications use the Attack Info category. See [#1029](https://github.com/samwafgo/SamWaf/issues/1029).
+- Standardized log field length limits, fixed migration record lookups, and added a startup check that repairs missing unique indexes for IP tags.
+
+<!-- upgrade-notes:v1.3.25-beta.11:start -->
+Download [SamWaf v1.3.25-beta.11](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.11) · [all releases](https://github.com/samwafgo/SamWaf/releases)
+
+Upgrade Notes
+
+- Log payload storage uses actual content limits　[Check]
+- Built-in detection notifications use Attack Info　[Check]
+- IP tag table indexes are now checked and repaired at startup　[Notice]
+
+Full text of each item (what changes if you act, what it costs if you don't, how to revert) lives in the console under System - Upgrade Notes: [Upgrade Notes](https://doc.samwaf.com/en/guide/UpgradeNotice.html)
+
+Thanks to the following contributors (in no particular order)
+
+@chankey-7, @feihongxiansen (also see [#1057](https://github.com/samwafgo/SamWaf/issues/1057))
+<!-- upgrade-notes:v1.3.25-beta.11:end -->
+
+## 20261105 (v1.3.25-beta.10)
+
+Changes since **v1.3.25-beta.9**.
+
+### Added
+
+- The [command-line interface](../dev/CLI.md) can create and manage local sites, reapply the same configuration, and produce machine-readable output.
+- Application Management shows the working directory resolved by the server and explains why saving or starting failed. First uploads receive owner execute permission, and application file operations are recorded in the security audit log.
+
+### Fixed
+
+- Fixed database logging configuration and improved masking of sensitive information in logged request payloads.
+
+<!-- upgrade-notes:v1.3.25-beta.10:start -->
+Download [SamWaf v1.3.25-beta.10](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.10) · [all releases](https://github.com/samwafgo/SamWaf/releases)
+
+Upgrade Notes
+
+- Local CLI site management added; unknown commands now exit with code 2　[Notice]　[details](/en/dev/CLI.html)
+- First application uploads receive owner execute permission, with application operations audited　[Notice]
+- Application working directory now shows the server-resolved path, with direct save/start failure feedback　[Notice]
+
+Full text of each item (what changes if you act, what it costs if you don't, how to revert) lives in the console under System - Upgrade Notes: [Upgrade Notes](https://doc.samwaf.com/en/guide/UpgradeNotice.html)
+
+Thanks to @Ebxh for the feedback ([#1050](https://github.com/samwafgo/SamWaf/issues/1050)).
+<!-- upgrade-notes:v1.3.25-beta.10:end -->
+
+
 ## 20261030 (v1.3.25-beta.9)
 
 This section lists only changes and new upgrade notes since **v1.3.25-beta.8**. The latest stable release remains **v1.3.24**. Choose a version on the [Quick Start](./readme.md) page; when upgrading from an earlier version, also review the intervening release notes.

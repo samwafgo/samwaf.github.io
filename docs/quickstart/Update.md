@@ -1,5 +1,95 @@
 # 版本发布
 
+## 20261118 (v1.3.25-beta.12)
+
+本节记录相对 **v1.3.25-beta.11** 的变化。
+
+### 新增
+
+- [访问日志配置](../guide/VisitLog.md)支持折叠同类安全事件。可限制同一站点、来源 IP 和规则每分钟保留的明细条数，统计和封禁照常运行。默认关闭。
+- 「自定义拦截响应界面」新增「源站不可用响应」，可编辑回源失败页面，保留实际的 HTTP 状态码。管理界面从 Vue2 和 Vue3 `v1.3.339` 开始提供。
+
+### 修正
+
+- 修正放行的大文件上传转发，确保源站收到完整文件。
+- 修正自定义回源 Host 的应用行为，以及网站绑定域名的 HTTPS 跳转。
+- 修正部分旧款 x86-64 CPU 上 Linux 发布包启动失败的问题，以及应用内升级失败后未能恢复旧版本的问题。
+- 加强请求体检测和证书管理校验。管理员密码、角色或启用状态变更后，受影响账号的现有会话失效，需重新登录。
+
+<!-- upgrade-notes:v1.3.25-beta.12:start -->
+下载 [SamWaf v1.3.25-beta.12](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.12) · [全部版本](https://github.com/samwafgo/SamWaf/releases)
+
+升级须知
+
+- 请求体检测覆盖分块传输与大报文　[重要 · 知悉]
+- 放行的大文件上传完整回源　[知悉]
+- 网站自定义回源 Host 开始生效　[确认]
+- 绑定域名遵循本站的 HTTPS 跳转设置　[确认]
+- CA服务器与SSL证书订单的写操作限系统管理员，挑战文件名校验收紧　[知悉]
+
+每条的完整说明（做了 / 不做的区别、怎么撤销）见站内「系统设置 → 升级须知」： [升级须知](https://doc.samwaf.com/guide/UpgradeNotice.html)
+
+感谢 @iq001（[#1074](https://github.com/samwafgo/SamWaf/issues/1074)）、@Magician-Sun（[#1071](https://github.com/samwafgo/SamWaf/issues/1071)）、@Wu-Yulun、@wxf26054（[#1062](https://github.com/samwafgo/SamWaf/issues/1062)）和 @zuishuai-ziyi（[#1061](https://github.com/samwafgo/SamWaf/issues/1061)）的反馈。
+<!-- upgrade-notes:v1.3.25-beta.12:end -->
+
+## 20261112 (v1.3.25-beta.11)
+
+本节记录相对 **v1.3.25-beta.10** 的变化。
+
+### 新增
+
+- [安全运营报告](../guide/SecurityReport.md)支持按日、周、月生成，可预览、下载或打印，并可订阅定时生成的摘要。
+- 通知订阅支持按规则名排除消息。相关反馈见 [#1052](https://github.com/samwafgo/SamWaf/issues/1052)。
+
+### 修正
+
+- 内置检测通知使用「攻击信息」分类。相关反馈见 [#1029](https://github.com/samwafgo/SamWaf/issues/1029)。
+- 统一日志字段的长度限制，修正数据库迁移记录查询，并在启动时检查和修复缺失的 IP 标签唯一索引。
+
+<!-- upgrade-notes:v1.3.25-beta.11:start -->
+下载 [SamWaf v1.3.25-beta.11](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.11) · [全部版本](https://github.com/samwafgo/SamWaf/releases)
+
+升级须知
+
+- 日志报文按实际内容限长保存　[确认]
+- 内置检测通知归入攻击信息　[确认]
+- 启动时自动检查并修复 IP 标签表索引　[知悉]
+
+每条的完整说明（做了 / 不做的区别、怎么撤销）见站内「系统设置 → 升级须知」： [升级须知](https://doc.samwaf.com/guide/UpgradeNotice.html)
+
+感谢以下贡献者（排名不分先后）
+
+@chankey-7、@feihongxiansen（另见 [#1057](https://github.com/samwafgo/SamWaf/issues/1057)）
+<!-- upgrade-notes:v1.3.25-beta.11:end -->
+
+## 20261105 (v1.3.25-beta.10)
+
+本节记录相对 **v1.3.25-beta.9** 的变化。
+
+### 新增
+
+- [命令行管理](../dev/CLI.md)支持本机创建和管理网站，可重复应用同一配置，并提供机器可解析的输出。
+- 应用管理显示服务端解析的工作目录和保存或启动失败原因。首次上传应用文件会添加所有者执行权限，应用文件操作写入安全审计。
+
+### 修正
+
+- 修正数据库日志配置，改进请求报文中敏感信息的日志脱敏。
+
+<!-- upgrade-notes:v1.3.25-beta.10:start -->
+下载 [SamWaf v1.3.25-beta.10](https://github.com/samwafgo/SamWaf/releases/tag/v1.3.25-beta.10) · [全部版本](https://github.com/samwafgo/SamWaf/releases)
+
+升级须知
+
+- 新增本机命令行网站管理，未知命令退出码调整为 2　[知悉]　[查看](/dev/CLI.html)
+- 应用首次上传增加所有者执行权限，文件操作纳入审计　[知悉]
+- 应用管理工作目录显示服务端实际路径，保存与启动失败会直接提示　[知悉]
+
+每条的完整说明（做了 / 不做的区别、怎么撤销）见站内「系统设置 → 升级须知」： [升级须知](https://doc.samwaf.com/guide/UpgradeNotice.html)
+
+感谢 @Ebxh 的反馈（[#1050](https://github.com/samwafgo/SamWaf/issues/1050)）。
+<!-- upgrade-notes:v1.3.25-beta.10:end -->
+
+
 ## 20261030 (v1.3.25-beta.9)
 
 本节仅列出相对 **v1.3.25-beta.8** 的更新与新增升级须知。最新正式版仍为 **v1.3.24**，可在[快速上手](./readme.md)选择下载版本；从更早版本升级时，请一并查看中间各版本说明。

@@ -146,4 +146,4 @@ The audit table records everything; notifications only carry what is worth inter
 
 | Applicable version | Changes |
 | --- | --- |
-| >v1.3.25-beta.9 (unreleased) | Added the App management category (`app`) and 11 event filters; documented operator and app summaries, asynchronous command submission results and the scope of sensitive data excluded from records. |
+| Backend v1.3.25-beta.10, Vue2 / Vue3 frontend v1.3.333 | Added the App management category (`app`) and 11 event filters; documented operator and app summaries, asynchronous command submission results and the scope of sensitive data excluded from records. |

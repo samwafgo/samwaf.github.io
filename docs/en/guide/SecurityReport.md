@@ -7,7 +7,7 @@ Security operations reports summarize all websites in the current instance by ca
 Open **System Settings → Security operations reports**. Only super administrators can manage reports. The Vue2 and Vue3 consoles provide the same operations.
 
 ::: warning Version requirements
-The frontend entry is available in Vue2 / Vue3 `v1.3.335`. The report backend is not included in released backend versions through `v1.3.25-beta.10`. A backend with report support is required; updating only the frontend does not add backend report capabilities.
+Security operations reports require backend `v1.3.25-beta.11` or later. Both the Vue2 and Vue3 consoles include the report page starting with `v1.3.335`.
 :::
 
 ## Defaults and Reporting Periods
@@ -158,6 +158,6 @@ An existing completed task for the same period is reused, and historical HTML is
 
 | Updated | Applicable version | Changes |
 |---------|--------------------|---------|
-| 2026-11-13 | Backend > v1.3.25-beta.10 (unreleased); Vue2 / Vue3 frontend v1.3.335 | Documented daily, weekly and monthly settings, generation, preview, download / printing, deletion and cleanup; added certificate / audit display, metric definitions and summary notifications |
+| 2026-11-13 | Backend v1.3.25-beta.11, Vue2 / Vue3 frontend v1.3.335 | Documented daily, weekly and monthly settings, generation, preview, download / printing, deletion and cleanup; added certificate / audit display, metric definitions and summary notifications |
 
 `vX.Y.Z` means the feature is available starting with that version. `> vX.Y.Z` means it has been merged into the code but has not yet shipped. Check the backend and frontend versions separately.

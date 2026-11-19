@@ -152,7 +152,7 @@ There is also a **Notification Debug Log** switch: when enabled, every rate-cont
 
 Reports stay local by default, and no subscription is created automatically. Periodic summaries include fields such as report ID, period, generation status, requests and blocked requests, without the full HTML attachment. Super administrators download full reports from the report page. Manual generation does not send periodic summaries. Disabling a subscription does not stop local report generation.
 
-The Daily / Monthly Report options are available in Vue2 / Vue3 frontend v1.3.335. Generation and delivery also require a backend with report support; backend v1.3.25-beta.10 does not include this functionality.
+The Daily / Monthly Report options are available in both Vue2 and Vue3 starting with `v1.3.335`. Generating reports and sending summaries requires backend `v1.3.25-beta.11` or later.
 
 ## Field Reference
 
@@ -256,13 +256,13 @@ That cell has its own configuration. Subscription-level settings take priority o
 
 | Feature | Applicable version |
 |---------|--------------------|
-| Six built-in detectors use Attack Info; sensitive-word and other protection policies use Rule Trigger | Unreleased (not included in the current latest beta, v1.3.25-beta.10) |
-| Daily / weekly / monthly summaries linked to the report center | Backend > v1.3.25-beta.10 (unreleased); Vue2 / Vue3 frontend v1.3.335 |
+| Six built-in detectors use Attack Info; sensitive-word and other protection policies use Rule Trigger | Backend v1.3.25-beta.11 |
+| Daily / weekly / monthly summaries linked to the report center | Backend v1.3.25-beta.11, Vue2 / Vue3 frontend v1.3.335 |
 
 ## Update History
 
 | Updated | Applicable version | Changes |
 |---------|--------------------|---------|
-| 2026-11-13 | Backend > v1.3.25-beta.10 (unreleased); Vue2 / Vue3 frontend v1.3.335 | Added daily / monthly message types, periodic summary subscriptions, manual-generation delivery behavior and full-report download guidance |
+| 2026-11-13 | Backend v1.3.25-beta.11, Vue2 / Vue3 frontend v1.3.335 | Added daily / monthly message types, periodic summary subscriptions, manual-generation delivery behavior and full-report download guidance |
 
 `vX.Y.Z` means the feature is available starting with that version. `> vX.Y.Z` means it has been merged into the code but has not yet shipped. Check frontend entries and backend capabilities separately.

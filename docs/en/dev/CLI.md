@@ -6,7 +6,7 @@ Use the CLI to create, update, inspect, start, stop and delete websites on a loc
 
 Site operations go through the running SamWaf admin server and use the website management validation and hot reload. `apikey init` can create a local CLI Key offline; start the service before running `site` commands.
 
-This feature is unreleased and requires a backend build containing these commands. Run commands from the program directory. Linux examples use `./SamWafLinux64`; Windows examples use `.\SamWaf64.exe`. Replace these with your actual executable name. Installing and controlling system services requires the appropriate system privileges.
+Command-line site management is available starting with backend `v1.3.25-beta.10`. Run commands from the program directory. Linux examples use `./SamWafLinux64`; Windows examples use `.\SamWaf64.exe`. Replace these with your actual executable name. Installing and controlling system services requires the appropriate system privileges.
 
 ## 2 Quick start on a new VM
 
@@ -338,4 +338,4 @@ Groups affect `--help` display only. Command names remain unchanged: **do not pr
 
 | Date | Applicable version | Description |
 | --- | --- | --- |
-| 2026-11-04 | >v1.3.25-beta.9 (unreleased) | Local apikey/site commands, idempotent merging and machine-readable output; existing commands grouped in help; unknown commands now exit with code 2. |
+| 2026-11-04 | v1.3.25-beta.10 | Local apikey/site commands, idempotent merging and machine-readable output; existing commands grouped in help; unknown commands now exit with code 2. |

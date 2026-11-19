@@ -149,6 +149,6 @@ Operations such as create, edit, delete, start, restart, and upgrade require the
 
 | Applicable version | Changes |
 |--------------------|---------|
-| >v1.3.25-beta.9 (unreleased) | Linux first uploads add owner execute permission; overwrites and upgrades preserve existing ordinary permissions, while backups and rollback retain source permissions. Application operations appear under Application Management in Security Audit with results and processing stages. Added execute-permission recovery instructions. |
-| >v1.3.25-beta.9 (unreleased) | The working directory field now shows the server-resolved path, allowed directory roots and the relative-path base in real time; save or start failures show the specific reason directly; if the initial file upload fails, you can retry it in the same dialog without creating a duplicate application. |
+| v1.3.25-beta.10 | Linux first uploads add owner execute permission; overwrites and upgrades preserve existing ordinary permissions, while backups and rollback retain source permissions. Application operations appear under Application Management in Security Audit with results and processing stages. Added execute-permission recovery instructions. |
+| Backend v1.3.25-beta.10, Vue2 / Vue3 frontend v1.3.332 | The working directory field now shows the server-resolved path, allowed directory roots and the relative-path base in real time; save or start failures show the specific reason directly; if the initial file upload fails, you can retry it in the same dialog without creating a duplicate application. |
 | v1.3.25-beta.9 | Added setup guidance, feature status checks and retries, and instructions for finding the operation password in the configuration file. |
