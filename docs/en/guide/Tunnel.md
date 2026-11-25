@@ -101,7 +101,7 @@ Allow or deny access by source country/region:
 - **Preview draft** lets you pick a country and instantly see whether the current draft would allow or deny that source, so you can verify before saving.
 - Click **Save region settings** to apply.
 
-Connections denied by access protection are written to the runtime log in the format `[隧道防护] 拒绝访问：<reason>` (literally "[Tunnel Protection] Access denied: <reason>"), including the protocol, tunnel ID, source IP/port, and server port, which makes it easy to find out why a connection was blocked.
+Connections denied by access protection are written to the runtime log in the format `[隧道防护] 拒绝访问：<reason>` (literally `[Tunnel Protection] Access denied: <reason>`), including the protocol, tunnel ID, source IP/port, and server port, which makes it easy to find out why a connection was blocked.
 
 ### 1.4 Tunnel Connection Status
 
