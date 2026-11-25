@@ -16,7 +16,7 @@
       "url": "https://doc.samwaf.com/api/operations.html",
       "title": "API 接口索引",
       "description": "API 接口索引：本索引从随站点发布的 Swagger 规范生成，按原文展示 HTTP 方法、接口路径、分类和摘要；参数与响应结构请查看原始规范或交互文档。 下列路径直接取自 swagger.json 的 paths 键，不再次拼接 basePath 。实际调用使用自行部署的 SamWaf 管理端地址。",
-      "lastmod": "2026-11-19T03:19:52.072Z"
+      "lastmod": "2026-11-25T07:52:31.646Z"
     },
     {
       "url": "https://doc.samwaf.com/dev/",
@@ -58,7 +58,7 @@
       "url": "https://doc.samwaf.com/en/api/operations.html",
       "title": "API operation index",
       "description": "API operation index: This index lists HTTP methods, paths, tags and summaries from the bundled Swagger specification. Tags and summaries retain the original language of the specification; they are not English translations. Paths below are…",
-      "lastmod": "2026-11-19T03:19:52.072Z"
+      "lastmod": "2026-11-25T07:52:31.646Z"
     },
     {
       "url": "https://doc.samwaf.com/en/dev/",
@@ -424,7 +424,7 @@
       "url": "https://doc.samwaf.com/en/guide/Tunnel.html",
       "title": "Tunnel Protection",
       "description": "Tunnel Protection: Tunnel protection is currently an experimental feature designed to provide external protection for specific ports such as remote connections, database connections, and Redis connections. Tunnel Name Custom name of the…",
-      "lastmod": "2026-10-19T06:52:38.000Z"
+      "lastmod": "2026-11-25T07:52:09.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/UpgradeNotice.html",
@@ -820,7 +820,7 @@
       "url": "https://doc.samwaf.com/guide/Tunnel.html",
       "title": "隧道防护",
       "description": "隧道防护：隧道防护当前为实验功能，主要是为了远程连接、数据库连接、Redis连接等特定端口提供一个外置防护。 隧道名称 隧道的自定义名称，用于标识此配置。",
-      "lastmod": "2026-10-19T06:52:38.000Z"
+      "lastmod": "2026-11-25T06:09:58.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/UpgradeNotice.html",
