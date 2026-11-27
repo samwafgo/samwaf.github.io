@@ -16,7 +16,7 @@
       "url": "https://doc.samwaf.com/api/operations.html",
       "title": "API 接口索引",
       "description": "API 接口索引：本索引从随站点发布的 Swagger 规范生成，按原文展示 HTTP 方法、接口路径、分类和摘要；参数与响应结构请查看原始规范或交互文档。 下列路径直接取自 swagger.json 的 paths 键，不再次拼接 basePath 。实际调用使用自行部署的 SamWaf 管理端地址。",
-      "lastmod": "2026-11-25T07:52:31.646Z"
+      "lastmod": "2026-11-27T05:34:00.159Z"
     },
     {
       "url": "https://doc.samwaf.com/dev/",
@@ -58,7 +58,7 @@
       "url": "https://doc.samwaf.com/en/api/operations.html",
       "title": "API operation index",
       "description": "API operation index: This index lists HTTP methods, paths, tags and summaries from the bundled Swagger specification. Tags and summaries retain the original language of the specification; they are not English translations. Paths below are…",
-      "lastmod": "2026-11-25T07:52:31.646Z"
+      "lastmod": "2026-11-27T05:34:00.159Z"
     },
     {
       "url": "https://doc.samwaf.com/en/dev/",
@@ -88,7 +88,7 @@
       "url": "https://doc.samwaf.com/en/faq/",
       "title": "Common Issues",
       "description": "Common Issues: In the command examples below, the executable name (e.g. SamWaf64 / SamWaf64.exe ) depends on the build you actually downloaded. Common when SamWaf and the web application server run on the same machine. Move the existing…",
-      "lastmod": "2026-11-19T03:17:52.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/",
@@ -106,7 +106,7 @@
       "url": "https://doc.samwaf.com/en/guide/AccessAudit.html",
       "title": "Security Audit",
       "description": "Security Audit: SamWaf's unified security audit stream : all kinds of security events collected into one table — who did what, when, from which IP, against which site, and whether it succeeded. All security logs will eventually land here.…",
-      "lastmod": "2026-11-19T03:17:52.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/AccessConfig.html",
@@ -124,7 +124,7 @@
       "url": "https://doc.samwaf.com/en/guide/Account.html",
       "title": "Account Management",
       "description": "Account Management: Account Management is used to maintain the admin accounts that log in to the SamWaf console. From Account Management → Account List you can view all accounts and perform actions such as creating an account, editing an…",
-      "lastmod": "2026-06-30T06:56:14.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/AccountLog.html",
@@ -166,7 +166,7 @@
       "url": "https://doc.samwaf.com/en/guide/BatchTask.html",
       "title": "Batch Tasks",
       "description": "Batch Tasks: Batch tasks automatically run batch operations, executed sequentially at 5 AM every day, and can also be triggered manually. They import data from a local file or a remote URL into the system in bulk. Currently supported…",
-      "lastmod": "2026-08-11T03:04:32.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/BlockingPage.html",
@@ -213,8 +213,8 @@
     {
       "url": "https://doc.samwaf.com/en/guide/Host.html",
       "title": "Website Configuration",
-      "description": "Website Configuration: Please layout the SamWaf firewall according to the architecture below. Important: Deploying on the same server may encounter situations where ports 80 and 443 are already in use. Please perform operations when the…",
-      "lastmod": "2026-10-19T06:52:38.000Z"
+      "description": "Website Configuration: Role requirements for write operations Write operations for sites, path routes, load balancing, site groups and site import require the Security Administrator or Super Administrator role; the Audit Administrator is…",
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/HostGuard.html",
@@ -316,7 +316,7 @@
       "url": "https://doc.samwaf.com/en/guide/OneKeyMod.html",
       "title": "One-Key Modify",
       "description": "One-Key Modify: Since only one program can occupy a given web port (80, 443) on a single server, to make SamWaf the front-end proxy you need to change the port 80 occupied by BT Panel's Nginx to 81, and 443 to 444. To simplify deployment,…",
-      "lastmod": "2026-07-16T06:02:34.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/OpenPlatform.html",
@@ -394,7 +394,7 @@
       "url": "https://doc.samwaf.com/en/guide/SSL.html",
       "title": "SSL Certificate Management",
       "description": "SSL Certificate Management: All SSL certificate features are gathered here: the certificate folder (batch management), automatic application/renewal, bulk expiration check, and CA server configuration. Batch management of certificates.",
-      "lastmod": "2026-08-26T01:37:35.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/en/guide/SysLog.html",
@@ -484,7 +484,7 @@
       "url": "https://doc.samwaf.com/faq/",
       "title": "常见问题",
       "description": "常见问题：下文命令示例中的可执行文件名（如 SamWaf64 / SamWaf64.exe ）以你实际下载的版本为准。 常见于 SamWaf 与 Web 应用服务器在同一台服务器的情况。需要把原 Web 服务占用的 80 / 443 改到其他端口，再让 SamWaf 监听 80 / 443 做前置代理。",
-      "lastmod": "2026-11-19T03:17:52.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/",
@@ -502,7 +502,7 @@
       "url": "https://doc.samwaf.com/guide/AccessAudit.html",
       "title": "安全审计",
       "description": "安全审计：SamWaf 的 统一安全审计流水 ：把各类安全事件汇总到同一张表——谁在什么时候、从哪个 IP、对哪个站点做了什么，成功还是失败。将来所有安全日志都会汇入这里。 当前包含以下 分类 （可在页面顶部按分类筛选）：",
-      "lastmod": "2026-11-19T03:17:52.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/AccessConfig.html",
@@ -519,8 +519,8 @@
     {
       "url": "https://doc.samwaf.com/guide/Account.html",
       "title": "账号管理",
-      "description": "账号管理：账号管理用于维护登录 SamWaf 管理端的后台账号。在「账号管理 → 账号列表」中可以查看所有账号，并完成新建账号、编辑账号、重置密码、重置双因素认证（2FA）、删除账号等操作。每个账号可分配不同的角色，以区分管理权限。 编辑弹窗中不包含密码修改，修改密码请使用「重置密码」功能。",
-      "lastmod": "2026-06-30T06:56:14.000Z"
+      "description": "账号管理：账号管理用于维护登录 SamWaf 管理端的后台账号。在「账号管理 → 账号列表」中可以查看所有账号，并完成新建账号、编辑账号、重置密码、重置双因素认证（2FA）、删除账号等操作。每个账号可分配不同的角色，以区分管理权限。 账号角色决定该账号能在管理端执行哪些操作：",
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/AccountLog.html",
@@ -562,7 +562,7 @@
       "url": "https://doc.samwaf.com/guide/BatchTask.html",
       "title": "批量任务",
       "description": "批量任务：批量任务用于自动执行一些批量化操作，每日凌晨 5 点依次执行，也支持手工触发。可将本地文件或远端 URL 中的数据批量导入系统，目前支持批量添加白名单 IP、黑名单 IP、导入到 IP组 和添加敏感词。 如果要维护的这批 IP 需要在 多个站点 上同时生效，推荐用「导入到IP组」而不是直接导进某个站点的黑/…",
-      "lastmod": "2026-08-11T03:04:32.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/BlockingPage.html",
@@ -609,8 +609,8 @@
     {
       "url": "https://doc.samwaf.com/guide/Host.html",
       "title": "网站配置",
-      "description": "网站配置：请依据下面的架构方式布局SamWaf防火墙 重要:部署在同台服务器会存在端口：80、443已经占用的情况 ，请在本机或者网站业务不繁忙得时候操作。关于端口修改，请查看 常见问题 。",
-      "lastmod": "2026-10-19T06:52:38.000Z"
+      "description": "网站配置：网站、路径路由、负载均衡、网站分组与网站导入的写操作需要 安全管理员 或 超级管理员 角色， 审计管理员 只能查看。角色说明见 账号管理 。 请依据下面的架构方式布局SamWaf防火墙",
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/HostGuard.html",
@@ -712,7 +712,7 @@
       "url": "https://doc.samwaf.com/guide/OneKeyMod.html",
       "title": "一键修改",
       "description": "一键修改：由于单台服务器同一个 Web 端口（80、443）只能被一个程序占用，若要让 SamWaf 作为前置代理，需要把宝塔 Nginx 占用的 80 端口改为 81、443 端口改为 444。为方便用户部署，SamWaf 提供一键修改宝塔 Web 端口的功能，并记录每次修改历史，支持一键还原。…",
-      "lastmod": "2026-07-16T06:02:34.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/OpenPlatform.html",
@@ -790,7 +790,7 @@
       "url": "https://doc.samwaf.com/guide/SSL.html",
       "title": "SSL 证书管理",
       "description": "SSL 证书管理：SamWaf 的 SSL 证书相关功能集中在此：证书夹（批量管理）、证书自动申请/续期、批量过期检测、CA 服务器配置。 证书夹的 新增、编辑、删除 属于系统级操作（可通过下方\"证书导出\"向服务器落盘），仅 系统管理员 角色可操作；其它管理员角色可查看列表与详情。",
-      "lastmod": "2026-08-26T01:37:35.000Z"
+      "lastmod": "2026-11-27T05:33:34.000Z"
     },
     {
       "url": "https://doc.samwaf.com/guide/SysLog.html",

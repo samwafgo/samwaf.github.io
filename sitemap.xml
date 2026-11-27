@@ -10,7 +10,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/api/operations.html</loc>
-    <lastmod>2026-11-25T07:52:31.646Z</lastmod>
+    <lastmod>2026-11-27T05:34:00.159Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/dev/</loc>
@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/api/operations.html</loc>
-    <lastmod>2026-11-25T07:52:31.646Z</lastmod>
+    <lastmod>2026-11-27T05:34:00.159Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/dev/</loc>
@@ -58,7 +58,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/faq/</loc>
-    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/</loc>
@@ -70,7 +70,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/AccessAudit.html</loc>
-    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/AccessConfig.html</loc>
@@ -82,7 +82,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/Account.html</loc>
-    <lastmod>2026-06-30T06:56:14.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/AccountLog.html</loc>
@@ -110,7 +110,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/BatchTask.html</loc>
-    <lastmod>2026-08-11T03:04:32.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/BlockingPage.html</loc>
@@ -142,7 +142,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/Host.html</loc>
-    <lastmod>2026-10-19T06:52:38.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/HostGuard.html</loc>
@@ -210,7 +210,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/OneKeyMod.html</loc>
-    <lastmod>2026-07-16T06:02:34.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/OpenPlatform.html</loc>
@@ -262,7 +262,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/SSL.html</loc>
-    <lastmod>2026-08-26T01:37:35.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/en/guide/SysLog.html</loc>
@@ -322,7 +322,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/faq/</loc>
-    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/</loc>
@@ -334,7 +334,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/AccessAudit.html</loc>
-    <lastmod>2026-11-19T03:17:52.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/AccessConfig.html</loc>
@@ -346,7 +346,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/Account.html</loc>
-    <lastmod>2026-06-30T06:56:14.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/AccountLog.html</loc>
@@ -374,7 +374,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/BatchTask.html</loc>
-    <lastmod>2026-08-11T03:04:32.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/BlockingPage.html</loc>
@@ -406,7 +406,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/Host.html</loc>
-    <lastmod>2026-10-19T06:52:38.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/HostGuard.html</loc>
@@ -474,7 +474,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/OneKeyMod.html</loc>
-    <lastmod>2026-07-16T06:02:34.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/OpenPlatform.html</loc>
@@ -526,7 +526,7 @@
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/SSL.html</loc>
-    <lastmod>2026-08-26T01:37:35.000Z</lastmod>
+    <lastmod>2026-11-27T05:33:34.000Z</lastmod>
   </url>
   <url>
     <loc>https://doc.samwaf.com/guide/SysLog.html</loc>
