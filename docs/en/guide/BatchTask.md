@@ -8,6 +8,10 @@ Batch tasks automatically run batch operations, executed sequentially at 5 AM ev
 If the IPs you maintain need to take effect on **multiple websites**, prefer "Import into IP Group" over importing directly into one website's block/allow list: one source feeds one group, every website referencing that group takes effect at the same time, and you only maintain a single task when the source changes. See [Import into IP Group](#import-into-ip-group).
 :::
 
+::: tip Role requirements
+Creating, editing, deleting and manually triggering batch tasks require the **Security Administrator** or **Super Administrator** role; the **Audit Administrator** is read-only. See [Account Management](./Account.md) for role details.
+:::
+
 ![Batch Task Interface](/images/batchtask_1.png)
 
 ## Steps

@@ -6,6 +6,22 @@ Account Management is used to maintain the admin accounts that log in to the Sam
 
 <!-- Image: Account list page -->
 
+## Role Permissions
+
+The account role determines what the account can do in the console:
+
+| Role | Scope |
+| --- | --- |
+| Super Administrator | All features. |
+| Security Administrator | WAF protection policies (protection rules, block/allow lists, IP groups, CC protection, sensitive words, OWASP rule set, Access Authentication), plus read/write access to sites, path routes, load balancing, site groups, batch tasks and site import. |
+| System Administrator | System-level features such as system configuration, account management, two-factor authentication, Open Platform keys, SQL query, app management and AI models, plus notifications, firewall IP blocking, threat intelligence, tunnels and file management. Does **not** include write access to sites, path routes, load balancing, site groups, batch tasks or site import. |
+| Audit Administrator | Read-only. Can view system logs, account logs, login history and security audit, and cannot perform write operations. |
+
+- Read-only queries in shared features are available to every signed-in role; changing your own password, saving UI preferences and handling upgrade notices also work for any role.
+- A denied write operation shows "当前账号角色无权访问该功能" (the current account role cannot access this feature) and is recorded in [Security Audit](./AccessAudit.md) as a "Role denied" event; the same account and API are recorded at most once every 5 minutes.
+- Existing accounts with an empty role are treated as **Super Administrator**.
+- Calls made with an OpenAPI Key are not restricted by account role.
+
 ## Steps
 
 ### 1. Search Accounts
@@ -74,3 +90,9 @@ Account Management is used to maintain the admin accounts that log in to the Sam
 - **The passwords do not match?** When resetting a password, **New Password** and **Confirm Password** must be exactly the same.
 - **Cannot delete an account?** The default admin account is protected and cannot be deleted.
 - **Lost your authenticator and cannot log in?** Use **Reset 2FA** to clear the 2FA binding for the account and restore password-only login.
+
+## Update History
+
+| Applicable version | Changes |
+| --- | --- |
+| v1.3.26 (beta) | Added Role Permissions: write operations for sites, path routes, load balancing, site groups, batch tasks and site import require the Security Administrator or Super Administrator; the Audit Administrator is read-only; denials are recorded in Security Audit as "Role denied". |

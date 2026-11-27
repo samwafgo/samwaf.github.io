@@ -129,6 +129,23 @@ When "Application Method" is set to **File Verification**, the form automaticall
 
 > Note: The default number of days is 30. You can configure this setting within the system by adjusting `sslorder_expire_day`.
 
+### 2.5 Configure ACME Directory Timeouts and Retries
+
+SamWaf fetches the CA's ACME directory before requesting or renewing a certificate. If the directory request times out, adjust the following settings in the **SamWaf instance's `conf/config.yml`** and restart SamWaf. If the file already has an `acme:` section, add the settings to that section rather than creating a second one.
+
+```yaml
+acme:
+  directory_timeout_seconds: 30
+  directory_max_retries: 5
+```
+
+| Setting | Default | Valid range | Description |
+| --- | --- | --- | --- |
+| `directory_timeout_seconds` | 30 seconds | 5–120 seconds | Total timeout for one directory request, including connection setup, the TLS handshake, and reading the response. |
+| `directory_max_retries` | 5 retries | 0–5 retries | Additional attempts after the first one. The default allows up to six attempts in total; `0` allows only the initial attempt. |
+
+Both settings are optional. Missing or invalid values use their respective defaults. SamWaf retries directory fetches only on timeouts, other temporary network errors, or HTTP `502`, `503`, or `504`. It does not retry TLS certificate verification failures or HTTP `4xx` responses. These settings do **not** change the HTTP-01 or DNS-01 challenge timeout or retry the entire issuance or renewal.
+
 ## 3 SSL Certificate Bulk Expiration Check
 
 Supported since v1.3.9-beta.9, this feature automatically checks expiration status every day at 6 AM. It supports manually adding domains and ports, and allows one-click synchronization of SSL domains that are already under protection.
@@ -173,3 +190,11 @@ Manage CA server information used when requesting certificates (ACME). During au
 | CA Server Name | A label for the CA server. Required, used to identify and select it when requesting certificates |
 | CA Server Address | The ACME directory URL of the CA server; certificate requests are sent to this address |
 | Remarks | Optional additional notes |
+
+## Update History
+
+| Updated on | Applicable version | Changes |
+| --- | --- | --- |
+| 2026-11-27 | `> v1.3.25-beta.12` (unreleased) | Added ACME directory timeout and retry configuration. |
+
+`vX.Y.Z` means the feature is available from that version; `> vX.Y.Z` means the feature is implemented but not yet released.

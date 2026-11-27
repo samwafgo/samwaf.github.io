@@ -8,7 +8,7 @@ It currently covers these **categories** (filterable at the top of the page):
 
 - **Access authentication**: `access`, sign-in, kick, ticket and unauthenticated-block events from [Access Authentication](./AccessConfig.md).
 - **Website password**: `httpauth`, per-site password sign-in, lockout, kick, session expiration and unauthenticated-block events.
-- **Config change**: `config`, sensitive configuration operations, e.g. SSL certificate export to disk (see [SSL Certificate Management](./SSL.md)).
+- **Config change**: `config`, sensitive configuration operations, e.g. SSL certificate export to disk (see [SSL Certificate Management](./SSL.md)), management role denials, and static directory changes and startup reviews for sites and path routes.
 - **App management**: `app`, adding, editing, deleting, starting, stopping and restarting apps, plus file uploads, upgrades, rollbacks, log cleanup and denied operations in [App Management](./Application.md).
 
 ::: tip Menu location
@@ -52,6 +52,17 @@ Records of sensitive configuration operations. This category is reserved for mor
 | Event | Meaning | Attention |
 | --- | --- | --- |
 | SSL cert exported | Writing a certificate/key to a server file via "Certificate Export" in [SSL Certificate Management](./SSL.md) (both success and denial are recorded) | **Important** |
+| Role denied | A management write operation was rejected because the current account role is insufficient; recorded as failed. The same account and API are recorded at most once every 5 minutes | **Important** |
+| Static directory changed | When a site or path rule adds or changes a static directory, records the before and after directories and the result (saved, or rejected by the allowed-directory policy) | Routine |
+| Static directory review | At startup, checks existing static directories and static file lists; findings to review are recorded as failed. Only records, does not change configuration, and does not repeat the same finding | **Important** |
+
+::: tip
+What these three events cover:
+
+- **Role denied** records the account, source IP, request method and API, and does not record request parameters.
+- **Static directory changed** is recorded only when a static directory is added or changed; editing other site fields leaves no such record. The Detail column contains the before/after directories and the validation result.
+- **Static directory review** runs at startup; the account column shows a system task. It only records findings and never changes static configuration or affects service; the same object, directory and finding are not written twice.
+:::
 
 ::: tip
 Config-change events record the **operator, target path and result**, so you can trace "who exported which certificate, where and when". For safety they contain **no** certificate or private-key material.
@@ -122,7 +133,7 @@ The audit table records everything; notifications only carry what is worth inter
 | Category | Access auth / Website password / Config change / App management |
 | Event | Event type, see [2](#_2-event-types) |
 | Result | `1` means Success; `0` means Failure. Asynchronous app commands only report submission results |
-| Account | The related access account, or the management operator account for app operations (may be empty for unauthenticated events) |
+| Account | The related access account, or the management operator account for app operations (may be empty for unauthenticated events); startup review events show a system task |
 | Site | The domain being accessed; usually empty for app events |
 | Request URL | The business request address or the management API path for an app operation |
 | Source IP | The client IP that made the request |
@@ -142,8 +153,13 @@ The audit table records everything; notifications only carry what is worth inter
 
 - **A record I expected is missing.** Check your filters. For app events, select App management and clear any Site condition that does not apply. Also note that "Denied" is throttled to 5 minutes, so repeated hits from the same IP on the same site leave only one entry.
 
+- **What does "Role denied" mean?** The current account role is not sufficient for that write operation. Check the role permissions in [Account Management](./Account.md), use a Security Administrator or Super Administrator account, or adjust the account role as needed — do not routinely promote accounts to Super Administrator.
+
+- **What should I do about "Static directory review"?** Adjust the site or path rule as indicated by the directory or list hint in the Detail column. The review only records findings and never changes configuration; see [Website Configuration - Static Site and Static File Directories](./Host.md#_17-static-site-and-static-file-directories) for the directory restrictions and list defaults.
+
 ## 8 Update history
 
 | Applicable version | Changes |
 | --- | --- |
+| Backend v1.3.26 (beta) | Added three Config change events and filters: "Role denied", "Static directory changed" and "Static directory review"; documented what each records, throttling, and that reviews do not repeat findings. |
 | Backend v1.3.25-beta.10, Vue2 / Vue3 frontend v1.3.333 | Added the App management category (`app`) and 11 event filters; documented operator and app summaries, asynchronous command submission results and the scope of sensitive data excluded from records. |

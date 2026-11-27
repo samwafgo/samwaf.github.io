@@ -1,6 +1,10 @@
  
 # Website Configuration
 
+::: tip Role requirements for write operations
+Write operations for sites, path routes, load balancing, site groups and site import require the **Security Administrator** or **Super Administrator** role; the **Audit Administrator** is read-only. See [Account Management](./Account.md) for role details.
+:::
+
 ## 1 Deployment Architecture:
 Please layout the SamWaf firewall according to the architecture below.
 
@@ -297,6 +301,8 @@ There are two options for importing host information:
 - Import new host codes (for new data)
 - Import retained host codes (for old data)  
 ![Import Parameters](/images/import_host.png)
+
+> Import is a site import write operation and requires the **Security Administrator** or **Super Administrator** role. Rows with a static site enabled are treated as new sites and their static directories are validated row by row; see [17.2](#_17-2-static-file-directory-restrictions).
 
 PS: SamWaf is lightweight. For migrating old data, we recommend shutting down the service and directly copying all the data from the directories to the new server.
   
@@ -785,7 +791,7 @@ Serves matched requests directly from a local directory via SamWaf.
 
 | Field | Description |
 | --- | --- |
-| Static Files Root | Local server directory, e.g. `/var/www/html`, used for serving static files. |
+| Static Files Root | Local server directory used for serving static files. It must be under the built-in `data/static_site` directory or a directory declared in `security.static_site_allowed_dirs` in `conf/config.yml`; see [17.2](#_17-2-static-file-directory-restrictions). |
 | SPA Fallback Mode | When enabled, falls back to `index.html` if no matching file exists (for Vue/React Router history mode). |
 | Strip Path Prefix | Yes / No. Same as Backend Proxy — whether to strip the matched prefix before mapping to the static directory. |
 
@@ -892,10 +898,75 @@ Access Authentication keeps **unauthenticated** visitors out, but it does not pr
 | Allowed request headers | Request headers allowed when answering a preflight; empty inherits the global value |
 | Preflight cache | Seconds a browser may cache a preflight result; empty or 0 inherits the global value, capped at 7200 |
 
+## 17 Static Site and Static File Directories
+
+### 17.1 Steps
+
+1. Click **Edit** on the site row and switch to the **Static Site** tab.
+2. Set **Enable Static Site** to **On**, enter the **Static File Path**, and optionally the **URL Prefix**.
+3. In **Static File Security Settings** lower on the same tab, set sensitive paths, sensitive extensions, allowed extensions, sensitive patterns and security response headers as needed.
+4. Click **Confirm** to save.
+
+::: tip
+These security settings apply both to the host-level static site and to path rules whose target type is "Static Files"; when you only use static files through path rules, the host-level static site does not need to be enabled.
+:::
+
+### 17.2 Static File Directory Restrictions
+
+When you add a static site or change its static directory, the directory must:
+
+- be under the built-in **`data/static_site`** directory (relative to the SamWaf program directory; you can create it yourself if it does not exist), or
+- be declared in `security.static_site_allowed_dirs` in `conf/config.yml`.
+
+```yaml
+security:
+    static_site_allowed_dirs: /srv/www/a.com,/srv/www/b.com
+```
+
+- Paths must be **absolute**, multiple directories are separated by English commas, and SamWaf must be **restarted** after the change. Relative paths are ignored.
+- The list can **only be edited in `conf/config.yml`**. It is not maintained through the console and is not stored in the database. After upgrading, the key appears in the file automatically.
+- Directories may be symlinks, but the resolved real path is checked.
+- SamWaf's own **`conf/`** and **`data/`** directories cannot be used (except the built-in `data/static_site`), and directories must not point to key files.
+- A directory that does not exist yet does not block saving: you can save the configuration first and add the files later.
+
+Saved directories that are not changed keep working (for both sites and path rules): editing other site fields or saving other configuration does not reject an existing directory that is outside the allowed locations. The rules above are checked only when a directory is added or changed to a different path.
+
+Excel bulk import is treated as adding new sites and validates the static directory of every row; rows that fail are reported individually in the import result.
+
+### 17.3 Runtime Protection
+
+When a static site serves files, SamWaf checks the real path of each file about to be returned. Requests for files under SamWaf's own configuration directory (`conf/`), data directory (`data/`, except the built-in `data/static_site`) or key files return **403** and record a security event (rule name "静态文件安全检查: 访问程序自身文件").
+
+### 17.4 Field reference
+
+| Field | Description |
+| --- | --- |
+| Enable Static Site | When on, SamWaf serves static files from the directory directly. |
+| Static File Path | The directory on the server that holds the static files; must satisfy 17.2. |
+| URL Prefix | URL prefix for static files, e.g. `/static` serves them at `/static/xxx`. |
+| Sensitive Paths | Paths that need special protection, separated by English commas. |
+| Sensitive Extensions | File extensions that need special protection, separated by English commas. |
+| Allowed Extensions | Whitelist of file extensions that may be served, separated by English commas. |
+| Sensitive Patterns | Regular expressions for sensitive filenames, separated by English commas. |
+| Security Response Headers | Custom security response headers. Empty uses system defaults; an empty value falls back to its default; extra headers beyond the default set can also be added. |
+
+When the target type of a path rule is "Static Files", its **Static Files Root** is subject to the same directory restrictions (17.2) and runtime protection (17.3); see [15.4 Target Type: Static Files](#_15-4-target-type-static-files).
+
+### 17.5 Static Directory Review
+
+At startup, SamWaf reviews enabled static sites and static path routes:
+
+- whether each directory still satisfies 17.2;
+- whether sensitive paths, sensitive extensions or sensitive patterns have fewer entries than the built-in defaults, or allowed extensions have more entries than the built-in defaults.
+
+Findings are recorded in [Security Audit](./AccessAudit.md) as "Static directory review" events, with the account shown as a system task. The review **only records findings — it does not change configuration or affect service**, and the same object, directory and finding are not recorded again. After adjusting the configuration as suggested, check the results in Security Audit.
+
 ## Update History
 
 | Applicable version | Changes |
 | --- | --- |
+| v1.3.26 (beta) | Added "Static Site and Static File Directories": static sites and path rules (static files) must use a directory under the built-in `data/static_site` or one declared in `security.static_site_allowed_dirs` in `conf/config.yml`; saved directories that are not changed keep working. SamWaf's own configuration, data and key files are not served through static sites; startup reviews existing static directories and lists and records findings in Security Audit. |
+| v1.3.26 (beta) | Write operations for sites, path routes, load balancing, site groups and site import require the Security Administrator or Super Administrator role; the Audit Administrator is read-only. See the role permissions in [Account Management](./Account.md). |
 | v1.3.25-beta.8 | Documented the origin Host option's default, wildcard-domain examples, and custom request header configuration for `X-Forwarded-Host: ${host}`. |
 | v1.3.25-beta.8 | Added health tests before saving, per-backend diagnostics, outdated-result notices and cancellation on closing; manual tests leave saved configuration and runtime health unchanged, and never probe local SamWaf listening ports as origins. |
 | v1.3.25-beta.8 | Saving a change to health check settings (the toggle or any probe parameter) now clears that host's health status and restarts counting immediately: disabling the check shows "Check off" in the list without leftover data, and re-enabling starts from "No data yet". The dashboard's abnormal-host count also excludes hosts with the check disabled. |

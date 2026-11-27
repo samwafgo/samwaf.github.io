@@ -54,6 +54,10 @@ On the "Batch Import Sites" tab you can convert Nginx site configurations into S
 
 > This feature only reads and parses the configuration; it never modifies any Nginx file.
 
+::: tip Role requirements
+Clicking "Add Selected Hosts" creates protected hosts, which is a site import write operation and requires the **Security Administrator** or **Super Administrator** role; the **Audit Administrator** is read-only. See [Account Management](./Account.md) for role details.
+:::
+
 <!-- Image: Batch Import Sites interface -->
 
 ### 1. Choose the Config Source
